@@ -19,27 +19,33 @@
   --blue-bg: rgba(68,138,255,.12);
   --gold: #ffd740;
   --accent: #7c4dff;
+  --orange: #ff9100;
 }
 * { margin:0; padding:0; box-sizing:border-box; }
-body { font-family: 'Segoe UI','Microsoft JhengHei',system-ui,sans-serif; background:var(--bg); color:var(--text); min-height:100vh; }
+body { font-family:'Segoe UI','Microsoft JhengHei',system-ui,sans-serif; background:var(--bg); color:var(--text); min-height:100vh; }
 a { color:var(--blue); text-decoration:none; }
-
 .container { max-width:1100px; margin:0 auto; padding:24px 16px; }
-
-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:28px; flex-wrap:wrap; gap:12px; }
+header { display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; flex-wrap:wrap; gap:12px; }
 header h1 { font-size:22px; font-weight:700; }
 header h1 span { color:var(--accent); }
 .meta { font-size:13px; color:var(--text2); }
 .meta .time { color:var(--gold); font-weight:600; }
 
-.summary-row { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px; margin-bottom:28px; }
+.tabs { display:flex; gap:6px; margin-bottom:24px; flex-wrap:wrap; }
+.tab { padding:8px 20px; border-radius:8px; font-size:14px; font-weight:600; cursor:pointer; border:1px solid var(--border); background:var(--card); color:var(--text2); transition:all .2s; }
+.tab:hover { border-color:var(--accent); color:var(--text); }
+.tab.active { background:var(--accent); color:#fff; border-color:var(--accent); }
+.tab-content { display:none; }
+.tab-content.active { display:block; }
+
+.summary-row { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:14px; margin-bottom:28px; }
 .summary-card { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:18px 20px; }
 .summary-card .label { font-size:12px; color:var(--text2); text-transform:uppercase; letter-spacing:1px; margin-bottom:6px; }
-.summary-card .value { font-size:26px; font-weight:700; }
+.summary-card .value { font-size:24px; font-weight:700; }
 .summary-card .sub { font-size:13px; color:var(--text2); margin-top:4px; }
 
 .section-title { font-size:17px; font-weight:700; margin:28px 0 14px; display:flex; align-items:center; gap:8px; }
-.section-title .badge { font-size:11px; padding:3px 10px; border-radius:20px; font-weight:600; }
+.badge { font-size:11px; padding:3px 10px; border-radius:20px; font-weight:600; display:inline-block; }
 .badge-tw { background:#ff6f00; color:#fff; }
 .badge-us { background:#1565c0; color:#fff; }
 .badge-watch { background:#6a1b9a; color:#fff; }
@@ -52,36 +58,49 @@ header h1 span { color:var(--accent); }
 .stock-symbol { font-size:12px; color:var(--text2); }
 .stock-price { font-size:24px; font-weight:700; text-align:right; }
 .stock-change { font-size:13px; font-weight:600; text-align:right; }
-
 .stock-details { display:grid; grid-template-columns:1fr 1fr; gap:6px 16px; margin-top:12px; padding-top:12px; border-top:1px solid var(--border); }
 .detail-item { display:flex; justify-content:space-between; font-size:12px; }
 .detail-label { color:var(--text2); }
 .detail-value { font-weight:600; }
 
-.pnl-bar { margin-top:10px; height:6px; border-radius:3px; background:var(--border); overflow:hidden; position:relative; }
-.pnl-fill { height:100%; border-radius:3px; transition:width .6s; }
-
 .up { color:var(--red); }
 .down { color:var(--green); }
-.up-bg { background:var(--red-bg); }
-.down-bg { background:var(--green-bg); }
-
 .tag { display:inline-block; font-size:11px; padding:2px 8px; border-radius:6px; font-weight:600; margin-left:6px; }
 .tag-profit { background:var(--green-bg); color:var(--green); }
 .tag-loss { background:var(--red-bg); color:var(--red); }
 
 .loading { text-align:center; padding:60px; color:var(--text2); font-size:16px; }
 .spinner { display:inline-block; width:24px; height:24px; border:3px solid var(--border); border-top-color:var(--accent); border-radius:50%; animation:spin .8s linear infinite; margin-right:10px; vertical-align:middle; }
-@keyframes spin { to { transform:rotate(360deg); } }
-
+@keyframes spin { to{transform:rotate(360deg);} }
 .error-msg { background:var(--red-bg); color:var(--red); padding:16px; border-radius:8px; margin:20px 0; }
 
-.footer { text-align:center; padding:30px 0 10px; color:var(--text2); font-size:12px; border-top:1px solid var(--border); margin-top:40px; }
+/* Report styles */
+.report { line-height:1.8; }
+.report h2 { color:var(--accent); font-size:18px; margin:28px 0 12px; padding-bottom:8px; border-bottom:2px solid var(--accent); }
+.report h3 { color:var(--blue); font-size:15px; margin:20px 0 8px; }
+.report table { width:100%; border-collapse:collapse; margin:12px 0 20px; font-size:13px; }
+.report th { background:var(--accent); color:#fff; padding:10px 12px; text-align:left; font-size:12px; }
+.report td { padding:8px 12px; border-bottom:1px solid var(--border); }
+.report tr:hover { background:rgba(124,77,255,.06); }
+.report .callout { background:var(--card); border-left:4px solid var(--accent); padding:14px 18px; margin:14px 0; border-radius:0 8px 8px 0; }
+.report .callout-warn { border-left-color:var(--orange); }
+.report .callout-green { border-left-color:var(--green); }
+.report ul, .report ol { padding-left:20px; }
+.report li { margin-bottom:6px; }
+.r-up { color:var(--red); font-weight:700; }
+.r-dn { color:var(--green); font-weight:700; }
+.r-tag { display:inline-block; font-size:11px; padding:2px 10px; border-radius:10px; font-weight:700; }
+.r-tag-a { background:#7c4dff33; color:var(--accent); }
+.r-tag-b { background:var(--blue-bg); color:var(--blue); }
+.r-tag-c { background:var(--red-bg); color:var(--red); }
 
+.footer { text-align:center; padding:30px 0 10px; color:var(--text2); font-size:12px; border-top:1px solid var(--border); margin-top:40px; }
 @media(max-width:600px) {
   .stock-grid { grid-template-columns:1fr; }
   .summary-row { grid-template-columns:1fr 1fr; }
   header h1 { font-size:18px; }
+  .report table { font-size:11px; }
+  .report th, .report td { padding:6px 8px; }
 }
 </style>
 </head>
@@ -95,12 +114,22 @@ header h1 span { color:var(--accent); }
     </div>
   </header>
 
-  <div class="summary-row" id="summary-row">
-    <div class="summary-card"><div class="label">載入中</div><div class="value"><span class="spinner"></span></div></div>
+  <div class="tabs">
+    <div class="tab active" data-tab="dashboard">持股總覽</div>
+    <div class="tab" data-tab="report">策略報告</div>
   </div>
 
-  <div id="content">
-    <div class="loading"><span class="spinner"></span>正在載入股票數據...</div>
+  <div id="tab-dashboard" class="tab-content active">
+    <div class="summary-row" id="summary-row">
+      <div class="summary-card"><div class="label">載入中</div><div class="value"><span class="spinner"></span></div></div>
+    </div>
+    <div id="content">
+      <div class="loading"><span class="spinner"></span>正在載入股票數據...</div>
+    </div>
+  </div>
+
+  <div id="tab-report" class="tab-content">
+    <div class="report" id="report-content"></div>
   </div>
 
   <div class="footer">
@@ -112,128 +141,199 @@ header h1 span { color:var(--accent); }
 <script>
 const DATA_URL = 'data/stocks.json';
 
-function fmt(n, dec=2) {
-  if (n == null) return '—';
-  return Number(n).toLocaleString('en-US', {minimumFractionDigits:dec, maximumFractionDigits:dec});
-}
-function fmtInt(n) {
-  if (n == null) return '—';
-  return Number(n).toLocaleString('en-US');
-}
-function fmtCap(n) {
-  if (!n) return '—';
-  if (n >= 1e12) return (n/1e12).toFixed(2)+'T';
-  if (n >= 1e9) return (n/1e9).toFixed(2)+'B';
-  if (n >= 1e6) return (n/1e6).toFixed(0)+'M';
-  return fmtInt(n);
-}
-function sign(n) { return n > 0 ? '+' : ''; }
-function cls(n) { return n >= 0 ? 'up' : 'down'; }
+document.querySelectorAll('.tab').forEach(t => {
+  t.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(x => x.classList.remove('active'));
+    t.classList.add('active');
+    document.getElementById('tab-' + t.dataset.tab).classList.add('active');
+  });
+});
+
+function fmt(n,d=2){ return n==null?'—':Number(n).toLocaleString('en-US',{minimumFractionDigits:d,maximumFractionDigits:d}); }
+function fmtInt(n){ return n==null?'—':Number(n).toLocaleString('en-US'); }
+function fmtCap(n){ if(!n)return'—'; if(n>=1e12)return(n/1e12).toFixed(2)+'T'; if(n>=1e9)return(n/1e9).toFixed(2)+'B'; if(n>=1e6)return(n/1e6).toFixed(0)+'M'; return fmtInt(n); }
+function sign(n){ return n>0?'+':''; }
+function cls(n){ return n>=0?'up':'down'; }
 
 function renderSummary(data) {
   const s = data.summary;
-  const html = `
+  const usVal = s.us_total_value || 0;
+  const usCost = s.us_total_cost || 0;
+  const usPnl = s.us_total_pnl || 0;
+  document.getElementById('summary-row').innerHTML = `
     <div class="summary-card">
       <div class="label">台股持股</div>
       <div class="value ${cls(s.tw_avg_pnl_pct)}">${sign(s.tw_avg_pnl_pct)}${fmt(s.tw_avg_pnl_pct)}%</div>
       <div class="sub">獲利 ${s.tw_winners} / 虧損 ${s.tw_losers}</div>
     </div>
     <div class="summary-card">
-      <div class="label">美股持股</div>
+      <div class="label">美股損益</div>
       <div class="value ${cls(s.us_avg_pnl_pct)}">${sign(s.us_avg_pnl_pct)}${fmt(s.us_avg_pnl_pct)}%</div>
-      <div class="sub">獲利 ${s.us_winners} / 虧損 ${s.us_losers}</div>
+      <div class="sub">${sign(usPnl)}$${fmt(usPnl)} · 獲利 ${s.us_winners} / 虧損 ${s.us_losers}</div>
     </div>
     <div class="summary-card">
-      <div class="label">持股總數</div>
-      <div class="value">${data.tw_stocks.length + data.us_stocks.length}</div>
-      <div class="sub">台股 ${data.tw_stocks.length} + 美股 ${data.us_stocks.length}</div>
+      <div class="label">美股總成本</div>
+      <div class="value">$${fmt(usCost)}</div>
+      <div class="sub">現值 $${fmt(usVal)}</div>
     </div>
     <div class="summary-card">
-      <div class="label">觀察清單</div>
-      <div class="value">${data.watchlist.length}</div>
-      <div class="sub">追蹤中的潛力股</div>
-    </div>
-  `;
-  document.getElementById('summary-row').innerHTML = html;
+      <div class="label">持股／觀察</div>
+      <div class="value">${data.tw_stocks.length + data.us_stocks.length} / ${data.watchlist.length}</div>
+      <div class="sub">台${data.tw_stocks.length} + 美${data.us_stocks.length} + 觀察${data.watchlist.length}</div>
+    </div>`;
 }
 
 function stockCard(s) {
   const hasPnl = s.pnl != null;
-  const cur = s.currency === 'TWD' ? '' : '$';
-  const chgCls = s.change >= 0 ? 'up' : 'down';
-  const pnlCls = hasPnl ? (s.pnl >= 0 ? 'tag-profit' : 'tag-loss') : '';
-  const pnlTag = hasPnl
-    ? `<span class="tag ${pnlCls}">${sign(s.pnl_pct)}${fmt(s.pnl_pct)}%</span>`
-    : '';
+  const cur = s.currency==='TWD'?'':'$';
+  const chgCls = s.change>=0?'up':'down';
+  const pnlCls = hasPnl?(s.pnl>=0?'tag-profit':'tag-loss'):'';
+  const pnlTag = hasPnl?`<span class="tag ${pnlCls}">${sign(s.pnl_pct)}${fmt(s.pnl_pct)}%</span>`:'';
 
-  let detailsHtml = '';
-  if (hasPnl) {
-    detailsHtml += `
-      <div class="detail-item"><span class="detail-label">買入價</span><span class="detail-value">${cur}${fmt(s.buy_price)}</span></div>
-      <div class="detail-item"><span class="detail-label">損益</span><span class="detail-value ${cls(s.pnl)}">${sign(s.pnl)}${cur}${fmt(s.pnl)}</span></div>
-    `;
+  if(s.error) return `<div class="stock-card"><div class="stock-header"><div><div class="stock-name">${s.name}</div><div class="stock-symbol">${s.symbol}</div></div></div><div class="error-msg">無法取得: ${s.error}</div></div>`;
+
+  let d = '';
+  if(hasPnl) {
+    d += `<div class="detail-item"><span class="detail-label">買入價</span><span class="detail-value">${cur}${fmt(s.buy_price)}</span></div>`;
+    if(s.shares) d += `<div class="detail-item"><span class="detail-label">股數</span><span class="detail-value">${fmtInt(s.shares)}</span></div>`;
+    d += `<div class="detail-item"><span class="detail-label">成本</span><span class="detail-value">${cur}${fmt(s.cost||s.buy_price)}</span></div>`;
+    d += `<div class="detail-item"><span class="detail-label">總損益</span><span class="detail-value ${cls(s.pnl_total||s.pnl)}">${sign(s.pnl_total||s.pnl)}${cur}${fmt(s.pnl_total||s.pnl)}</span></div>`;
   }
-  detailsHtml += `
-    <div class="detail-item"><span class="detail-label">日區間</span><span class="detail-value">${cur}${fmt(s.low)} - ${cur}${fmt(s.high)}</span></div>
-    <div class="detail-item"><span class="detail-label">成交量</span><span class="detail-value">${fmtInt(s.volume)}</span></div>
-    <div class="detail-item"><span class="detail-label">EPS</span><span class="detail-value">${s.eps != null ? fmt(s.eps) : '—'}</span></div>
-    <div class="detail-item"><span class="detail-label">市值</span><span class="detail-value">${fmtCap(s.market_cap)}</span></div>
-  `;
+  d += `<div class="detail-item"><span class="detail-label">日區間</span><span class="detail-value">${cur}${fmt(s.low)}-${cur}${fmt(s.high)}</span></div>`;
+  d += `<div class="detail-item"><span class="detail-label">成交量</span><span class="detail-value">${fmtInt(s.volume)}</span></div>`;
+  d += `<div class="detail-item"><span class="detail-label">EPS</span><span class="detail-value">${s.eps!=null?fmt(s.eps):'—'}</span></div>`;
+  d += `<div class="detail-item"><span class="detail-label">市值</span><span class="detail-value">${fmtCap(s.market_cap)}</span></div>`;
 
-  if (s.error) {
-    return `<div class="stock-card"><div class="stock-header"><div><div class="stock-name">${s.name}</div><div class="stock-symbol">${s.symbol}</div></div></div><div class="error-msg">無法取得數據: ${s.error}</div></div>`;
-  }
-
-  return `
-    <div class="stock-card">
-      <div class="stock-header">
-        <div>
-          <div class="stock-name">${s.name} ${pnlTag}</div>
-          <div class="stock-symbol">${s.symbol} · ${s.last_date || ''}</div>
-        </div>
-        <div>
-          <div class="stock-price">${cur}${fmt(s.close)}</div>
-          <div class="stock-change ${chgCls}">${sign(s.change)}${cur}${fmt(s.change)} (${sign(s.change_pct)}${fmt(s.change_pct)}%)</div>
-        </div>
-      </div>
-      <div class="stock-details">${detailsHtml}</div>
+  return `<div class="stock-card">
+    <div class="stock-header">
+      <div><div class="stock-name">${s.name} ${pnlTag}</div><div class="stock-symbol">${s.symbol} · ${s.last_date||''}</div></div>
+      <div><div class="stock-price">${cur}${fmt(s.close)}</div><div class="stock-change ${chgCls}">${sign(s.change)}${cur}${fmt(s.change)} (${sign(s.change_pct)}${fmt(s.change_pct)}%)</div></div>
     </div>
-  `;
+    <div class="stock-details">${d}</div>
+  </div>`;
 }
 
 function renderStocks(data) {
-  let html = '';
+  let h = '';
+  h += `<div class="section-title"><span class="badge badge-tw">TW</span> 台股持股</div><div class="stock-grid">${data.tw_stocks.map(stockCard).join('')}</div>`;
+  h += `<div class="section-title"><span class="badge badge-us">US</span> 美股持股</div><div class="stock-grid">${data.us_stocks.map(stockCard).join('')}</div>`;
+  h += `<div class="section-title"><span class="badge badge-watch">WATCH</span> 觀察清單</div><div class="stock-grid">${data.watchlist.map(stockCard).join('')}</div>`;
+  document.getElementById('content').innerHTML = h;
+}
 
-  html += `<div class="section-title"><span class="badge badge-tw">TW</span> 台股持股</div>`;
-  html += `<div class="stock-grid">${data.tw_stocks.map(stockCard).join('')}</div>`;
+function renderReport(data) {
+  const rpt = `
+<h2>1. 大盤背景</h2>
+<div class="callout">
+<strong>4/8 美股盤中：</strong>S&P 500 ~6,620（連五漲）、NASDAQ ~22,100、費半全面大漲。<br>
+<strong>驅動：</strong>美伊兩週臨時停火 → 油價暴跌 13% → Relief Rally；半導體全面反彈（MU +8%、INTC +8%、AMD +3.7%）。<br>
+<strong>風險：</strong>停火僅兩週、Q1 財報季 4 月中旬開跑、關稅變數仍在。
+</div>
 
-  html += `<div class="section-title"><span class="badge badge-us">US</span> 美股持股</div>`;
-  html += `<div class="stock-grid">${data.us_stocks.map(stockCard).join('')}</div>`;
+<h2>2. 持倉完整掃描</h2>
+<table>
+<tr><th>代號</th><th>股數</th><th>成本</th><th>現價</th><th>市值</th><th>損益</th><th>損益%</th><th>占比</th></tr>
+${data.us_stocks.map(s => {
+  const mv = s.market_value||0; const c = s.cost||0; const pnl = s.pnl_total||0;
+  const totalVal = data.summary.us_total_value||1;
+  const pct = (mv/totalVal*100).toFixed(1);
+  return `<tr><td><strong>${s.symbol}</strong></td><td>${s.shares||'—'}</td><td>$${fmt(c)}</td><td>$${fmt(s.close)}</td><td>$${fmt(mv)}</td><td class="${cls(pnl)}">${sign(pnl)}$${fmt(pnl)}</td><td class="${cls(s.pnl_pct)}">${sign(s.pnl_pct)}${fmt(s.pnl_pct)}%</td><td>${pct}%</td></tr>`;
+}).join('')}
+<tr style="border-top:2px solid var(--accent);font-weight:700"><td>合計</td><td></td><td>$${fmt(data.summary.us_total_cost)}</td><td></td><td>$${fmt(data.summary.us_total_value)}</td><td class="${cls(data.summary.us_total_pnl)}">${sign(data.summary.us_total_pnl)}$${fmt(data.summary.us_total_pnl)}</td><td class="${cls(data.summary.us_avg_pnl_pct)}">${sign(data.summary.us_avg_pnl_pct)}${fmt(data.summary.us_avg_pnl_pct)}%</td><td>100%</td></tr>
+</table>
 
-  html += `<div class="section-title"><span class="badge badge-watch">WATCH</span> 觀察清單</div>`;
-  html += `<div class="stock-grid">${data.watchlist.map(stockCard).join('')}</div>`;
+<h2>3. 強弱診斷</h2>
+<table>
+<tr><th>標的</th><th>分類</th><th>說明</th></tr>
+<tr><td>SMH, AVGO, AMD</td><td><span class="r-tag r-tag-a">核心持有</span></td><td>半導體龍頭＋ETF，受惠 AI 資本支出與停火反彈</td></tr>
+<tr><td>ON</td><td><span class="r-tag r-tag-a">中高潛力</span></td><td>SiC 車用復甦，KeyBanc 目標 $75</td></tr>
+<tr><td>SOFI</td><td><span class="r-tag r-tag-b">成長衛星</span></td><td>JPM 升 Overweight，營收 +30% 指引，目標 ~$26</td></tr>
+<tr><td>ONDS</td><td><span class="r-tag r-tag-b">高成長但燒錢</span></td><td>營收指引翻倍至 $375M，國防無人機訂單</td></tr>
+<tr><td>UNH</td><td><span class="r-tag r-tag-a">防禦穩定</span></td><td>醫療龍頭，EPS 13.23，與科技低相關</td></tr>
+<tr><td>SIDU</td><td><span class="r-tag r-tag-c">高投機</span></td><td>營收僅 $3.4M、P/S ~50x，月球合約是長線故事</td></tr>
+<tr><td>AIXI</td><td><span class="r-tag r-tag-c">建議出場</span></td><td>已虧 47%，蘋果專利題材消退，市值極小</td></tr>
+</table>
 
-  document.getElementById('content').innerHTML = html;
+<h2>4. 操作建議</h2>
+<h3><span class="r-tag r-tag-a">A 首選</span> 核心持有＋加碼</h3>
+<div class="callout callout-green">
+<ul>
+<li><strong>SMH</strong>：最大部位，持有不動，逢低可加。目標 $450～480，停損 $360</li>
+<li><strong>AVGO</strong>：AI ASIC 龍頭＋有股息。目標 $380～400，停損 $290</li>
+<li><strong>ON</strong>：剛建倉耐心持有，等 SiC 復甦。目標 $75～80，停損 $54</li>
+</ul>
+</div>
+<h3><span class="r-tag r-tag-b">B 成長推薦</span></h3>
+<div class="callout">
+<ul>
+<li><strong>SOFI</strong>：可加碼 10～20 股。目標 $22～26，停損 $13</li>
+<li><strong>ONDS</strong>：持有但設停利 $12，到價減半鎖利。停損 $7.5</li>
+</ul>
+</div>
+<h3><span class="r-tag r-tag-c">C 高風險</span> 應減碼或出場</h3>
+<div class="callout callout-warn">
+<ul>
+<li><strong>AIXI</strong>：建議停損全數出場，回收資金轉 SOFI 或留現金</li>
+<li><strong>SIDU</strong>：減碼至 50 股，釋出 ~$395 給更有確定性的標的</li>
+</ul>
+</div>
+
+<h2>5. $100 以上值得關注</h2>
+<table>
+<tr><th>代號</th><th>說明</th><th>與你的互補</th></tr>
+<tr><td>NVDA $181</td><td>AI GPU 龍頭</td><td>SMH 已含 ~25% NVDA 權重</td></tr>
+<tr><td>MRVL $114</td><td>AI 客製 ASIC</td><td>與 AVGO 同題材，觀察即可</td></tr>
+<tr><td>INTC $57</td><td>已出清；轉型中</td><td>放觀察清單，不急回補</td></tr>
+</table>
+
+<h2>6. 資金配置建議</h2>
+<table>
+<tr><th>類別</th><th>目前占比</th><th>建議目標</th><th>行動</th></tr>
+<tr><td>半導體核心</td><td>~53%</td><td>50～55%</td><td>維持</td></tr>
+<tr><td>成長衛星</td><td>~5%</td><td>8～12%</td><td>加碼 SOFI</td></tr>
+<tr><td>投機</td><td>~32%</td><td>≤15%</td><td>砍 AIXI、減 SIDU</td></tr>
+<tr><td>防禦</td><td>~9%</td><td>10～15%</td><td>UNH 維持</td></tr>
+<tr><td>現金預備</td><td>0%</td><td>10～15%</td><td>5 月要用錢，必須保留</td></tr>
+</table>
+
+<h2>7. 個股預測（1～3 個月）</h2>
+<table>
+<tr><th>標的</th><th>樂觀</th><th>基本</th><th>悲觀</th><th>催化劑</th></tr>
+<tr><td>SMH</td><td class="r-up">$460</td><td>$420～440</td><td class="r-dn">$370</td><td>科技財報、FOMC</td></tr>
+<tr><td>AVGO</td><td class="r-up">$390</td><td>$350～370</td><td class="r-dn">$300</td><td>AI ASIC 訂單</td></tr>
+<tr><td>AMD</td><td class="r-up">$260</td><td>$230～245</td><td class="r-dn">$190</td><td>Q1 財報</td></tr>
+<tr><td>ON</td><td class="r-up">$80</td><td>$68～75</td><td class="r-dn">$54</td><td>SiC 復甦、9/16 分析師日</td></tr>
+<tr><td>SOFI</td><td class="r-up">$24</td><td>$18～20</td><td class="r-dn">$13</td><td>Q1 財報、會員數據</td></tr>
+<tr><td>ONDS</td><td class="r-up">$14</td><td>$10～11</td><td class="r-dn">$6</td><td>國防訂單</td></tr>
+</table>
+
+<h2>8. 總結</h2>
+<div class="callout callout-green">
+<strong>核心判斷：</strong>你的半導體核心（SMH+AVGO+AMD+ON）結構很好，佔 53%。<br>
+最大問題是<strong>投機股佔 32%</strong>（ONDS+SIDU+AIXI）。<br><br>
+<strong>行動順序：</strong>砍 AIXI → 減 SIDU → 加碼 SOFI → 留現金給 5 月。<br>
+你的組合「上半身很好、下半身太投機」——瘦身投機部位，就能讓整體風險報酬大幅改善。
+</div>
+<p style="color:var(--text2);font-size:12px;margin-top:20px;">免責聲明：本報告為公開資訊整理與情境分析，不構成投顧建議。報告日期：2026-04-08</p>`;
+
+  document.getElementById('report-content').innerHTML = rpt;
 }
 
 async function loadData() {
   try {
-    const cacheBuster = '?t=' + Date.now();
-    const resp = await fetch(DATA_URL + cacheBuster);
-    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+    const resp = await fetch(DATA_URL + '?t=' + Date.now());
+    if(!resp.ok) throw new Error('HTTP '+resp.status);
     const data = await resp.json();
-
     document.getElementById('update-time').textContent = data.updated_at + ' (台灣時間)';
     document.getElementById('update-utc').textContent = 'UTC: ' + data.updated_at_utc;
-
     renderSummary(data);
     renderStocks(data);
-  } catch (e) {
-    document.getElementById('content').innerHTML =
-      `<div class="error-msg">載入失敗：${e.message}<br>請確認 data/stocks.json 是否存在。首次部署需手動觸發一次 GitHub Action。</div>`;
+    renderReport(data);
+  } catch(e) {
+    document.getElementById('content').innerHTML = `<div class="error-msg">載入失敗：${e.message}<br>請確認 data/stocks.json 是否存在。首次部署需手動觸發一次 GitHub Action。</div>`;
   }
 }
-
 loadData();
 </script>
 </body>

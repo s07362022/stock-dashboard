@@ -28,17 +28,22 @@ PORTFOLIO = {
         {"symbol": "2312.TW", "name": "金寶",   "buy_price": 24.1, "currency": "TWD"},
     ],
     "us": [
-        {"symbol": "AMD",  "name": "AMD",            "buy_price": 222, "currency": "USD"},
-        {"symbol": "INTC", "name": "Intel",           "buy_price": 52,  "currency": "USD"},
-        {"symbol": "UNH",  "name": "UnitedHealth",    "buy_price": 309, "currency": "USD"},
+        {"symbol": "AIXI", "name": "Xiao-I 小i",      "buy_price": 2.46,   "shares": 100, "currency": "USD"},
+        {"symbol": "AMD",  "name": "AMD",               "buy_price": 222,    "shares": 2,   "currency": "USD"},
+        {"symbol": "AVGO", "name": "Broadcom",          "buy_price": 322.10, "shares": 2,   "currency": "USD"},
+        {"symbol": "ON",   "name": "ON Semiconductor",  "buy_price": 67.68,  "shares": 6,   "currency": "USD"},
+        {"symbol": "ONDS", "name": "Ondas Holdings",    "buy_price": 9,      "shares": 150, "currency": "USD"},
+        {"symbol": "SIDU", "name": "Sidus Space",       "buy_price": 4,      "shares": 150, "currency": "USD"},
+        {"symbol": "SMH",  "name": "VanEck半導體ETF",   "buy_price": 389,    "shares": 5,   "currency": "USD"},
+        {"symbol": "SOFI", "name": "SoFi Technologies", "buy_price": 16.70,  "shares": 20,  "currency": "USD"},
+        {"symbol": "UNH",  "name": "UnitedHealth",      "buy_price": 309.80, "shares": 2,   "currency": "USD"},
     ],
     "watchlist": [
         {"symbol": "2330.TW", "name": "台積電", "currency": "TWD"},
         {"symbol": "2317.TW", "name": "鴻海",   "currency": "TWD"},
-        {"symbol": "ON",      "name": "ON Semi", "currency": "USD"},
-        {"symbol": "SOFI",    "name": "SoFi",    "currency": "USD"},
-        {"symbol": "SMCI",    "name": "Super Micro", "currency": "USD"},
-        {"symbol": "MRVL",    "name": "Marvell",  "currency": "USD"},
+        {"symbol": "MRVL",    "name": "Marvell",      "currency": "USD"},
+        {"symbol": "INTC",    "name": "Intel",         "currency": "USD"},
+        {"symbol": "SMCI",    "name": "Super Micro",   "currency": "USD"},
     ]
 }
 
@@ -108,9 +113,14 @@ def build_stock_entry(stock_def: dict, data: dict) -> dict:
 
     if "buy_price" in stock_def:
         bp = stock_def["buy_price"]
+        shares = stock_def.get("shares", 1)
         entry["buy_price"] = bp
+        entry["shares"] = shares
+        entry["cost"] = round(bp * shares, 2)
+        entry["market_value"] = round(data["close"] * shares, 2)
         entry["pnl"] = round(data["close"] - bp, 2)
         entry["pnl_pct"] = round(((data["close"] - bp) / bp) * 100, 2)
+        entry["pnl_total"] = round((data["close"] - bp) * shares, 2)
 
     return entry
 
@@ -143,11 +153,16 @@ def main():
         data = fetch_stock_data(stock["symbol"])
         result["watchlist"].append(build_stock_entry(stock, data))
 
-    tw_total_pnl = sum(s.get("pnl_pct", 0) for s in result["tw_stocks"]) / len(result["tw_stocks"])
-    us_total_pnl = sum(s.get("pnl_pct", 0) for s in result["us_stocks"]) / len(result["us_stocks"])
+    tw_total_pnl = sum(s.get("pnl_pct", 0) for s in result["tw_stocks"]) / max(len(result["tw_stocks"]), 1)
+    us_total_cost = sum(s.get("cost", 0) for s in result["us_stocks"])
+    us_total_value = sum(s.get("market_value", 0) for s in result["us_stocks"])
+    us_total_pnl_pct = round((us_total_value - us_total_cost) / us_total_cost * 100, 2) if us_total_cost else 0
     result["summary"] = {
         "tw_avg_pnl_pct": round(tw_total_pnl, 2),
-        "us_avg_pnl_pct": round(us_total_pnl, 2),
+        "us_avg_pnl_pct": us_total_pnl_pct,
+        "us_total_cost": round(us_total_cost, 2),
+        "us_total_value": round(us_total_value, 2),
+        "us_total_pnl": round(us_total_value - us_total_cost, 2),
         "tw_winners": sum(1 for s in result["tw_stocks"] if s.get("pnl", 0) > 0),
         "tw_losers": sum(1 for s in result["tw_stocks"] if s.get("pnl", 0) <= 0),
         "us_winners": sum(1 for s in result["us_stocks"] if s.get("pnl", 0) > 0),
