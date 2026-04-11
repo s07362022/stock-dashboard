@@ -1,171 +1,165 @@
-<h2>1. 大盤背景</h2>
-<table>
-<tr><th>指數</th><th>收盤（4/10）</th><th>漲跌</th><th>連漲</th><th>重要訊號</th></tr>
-<tr><td>S&P 500</td><td>6,824.66</td><td class="r-up">+0.62%</td><td>連7紅</td><td>年線轉正，多頭格局確立</td></tr>
-<tr><td>NASDAQ</td><td>22,822.42</td><td class="r-up">+0.83%</td><td>連7紅</td><td>AI／科技領頭羊</td></tr>
-<tr><td>道瓊</td><td>48,185.80</td><td class="r-up">+0.58%</td><td>同步走高</td><td>年內由跌轉漲</td></tr>
-<tr><td>費城半導體</td><td>—</td><td class="r-up"><strong>+2.1%</strong></td><td>30成分股28家收漲</td><td>創新高，SMH 創歷史高</td></tr>
-</table>
-<div class="callout">
-<strong>🔑 關鍵驅動：</strong><br>
-• <strong>三大指數連漲 7 天</strong>：中東停火消息提振風險偏好，標普年線轉正<br>
-• <strong>半導體全面噴發</strong>：費半 +2.1%，MRVL +4.79%、INTC +4.7%、閃迪 +9%，SMH 創歷史新高<br>
-• <strong>AVGO 雙重利多</strong>：Google TPU 設計合約延長至 2031＋Anthropic 大型運算合約<br>
-• <strong>亞馬遜 AI 野心</strong>：密西西比 250 億美元資料中心＋自研晶片年化營收衝 200 億美元<br>
-• <strong>關稅效應</strong>：芯片價格漲 15–85%，分析師解讀為利潤率擴張信號，非需求衰退<br>
-• <strong>風險</strong>：Section 232 半導體關稅最終決議待定、Q1 財報季 4 月中開跑、估值處歷史高位
+<style>
+  .report-section{margin-bottom:28px}
+  .report-section h2{color:#1a73e8;border-bottom:2px solid #1a73e8;padding-bottom:6px;font-size:1.3em}
+  .report-section h3{color:#333;font-size:1.05em;margin-top:14px}
+  table.holdings{width:100%;border-collapse:collapse;font-size:0.92em;margin:10px 0}
+  table.holdings th{background:#1a73e8;color:#fff;padding:6px 8px;text-align:left}
+  table.holdings td{padding:5px 8px;border-bottom:1px solid #e0e0e0}
+  table.holdings tr:nth-child(even){background:#f8f9fa}
+  .tag-win{color:#2e7d32;font-weight:bold} .tag-loss{color:#c62828;font-weight:bold}
+  .badge{display:inline-block;padding:2px 10px;border-radius:10px;font-size:0.85em;font-weight:bold;margin-right:6px}
+  .badge-a{background:#c62828;color:#fff} .badge-b{background:#f9a825;color:#333} .badge-c{background:#2e7d32;color:#fff}
+  .summary-box{background:linear-gradient(135deg,#1a73e8,#0d47a1);color:#fff;padding:18px 22px;border-radius:10px;font-size:1.15em;line-height:1.6;margin-top:12px}
+  ul{padding-left:20px} li{margin-bottom:4px}
+</style>
+
+<div class="report-section">
+  <h2>1️⃣ 市場概況（Market Overview）</h2>
+  <p><b>報告日期：</b>2026-04-12（週六，依 4/11 收盤價）</p>
+  <p>美股在經歷 4 月初關稅恐慌後出現強勁反彈。川普宣布 90 天關稅暫緩後，S&P 500 單日暴漲 9.52%（史上第三大單日漲幅），帶動市場情緒急速回暖。半導體族群尤其受惠，SMH 一週從低點彈升逾 15%。然而，中國 145% 報復關稅仍是懸而未決的風險，市場波動性（VIX 仍在 30+）維持高檔。</p>
+  <p>台股方面，加權指數在 4/10 止跌反彈但力道偏弱，傳產與 DRAM 表現相對疲軟。聯發科、台玻、台塑化仍在下行趨勢中。</p>
 </div>
 
-<h2>2. 持倉完整掃描</h2>
-<p style="color:var(--text2);font-size:13px;">📅 2026-04-10 · 美股盤前/盤後 · 台股收盤</p>
+<div class="report-section">
+  <h2>2️⃣ 持股資料表（Holdings Table）</h2>
+  <h3>🇺🇸 美股持倉</h3>
+  <table class="holdings">
+    <tr><th>代號</th><th>名稱</th><th>股數</th><th>成本</th><th>現價</th><th>日漲跌</th><th>損益%</th><th>損益$</th></tr>
+    <tr><td>AVGO</td><td>Broadcom</td><td>5</td><td>$352.70</td><td>$371.55</td><td class="tag-win">+4.69%</td><td class="tag-win">+5.34%</td><td class="tag-win">+$94.25</td></tr>
+    <tr><td>SMH</td><td>VanEck 半導體 ETF</td><td>2</td><td>$386.68</td><td>$436.88</td><td class="tag-win">+1.53%</td><td class="tag-win">+12.98%</td><td class="tag-win">+$100.40</td></tr>
+    <tr><td>MRVL</td><td>Marvell Technology</td><td>8</td><td>$122.17</td><td>$128.49</td><td class="tag-win">+7.14%</td><td class="tag-win">+5.18%</td><td class="tag-win">+$50.60</td></tr>
+    <tr><td>ON</td><td>ON Semiconductor</td><td>6</td><td>$67.68</td><td>$68.65</td><td class="tag-win">+0.23%</td><td class="tag-win">+1.43%</td><td class="tag-win">+$5.82</td></tr>
+    <tr><td>ONDS</td><td>Ondas Holdings</td><td>150</td><td>$8.99</td><td>$9.13</td><td style="color:#888">-0.11%</td><td class="tag-win">+1.61%</td><td class="tag-win">+$21.63</td></tr>
+    <tr><td>SOFI</td><td>SoFi Technologies</td><td>35</td><td>$16.69</td><td>$16.22</td><td style="color:#888">-0.31%</td><td class="tag-loss">-2.84%</td><td class="tag-loss">-$16.60</td></tr>
+    <tr><td>UNH</td><td>UnitedHealth</td><td>2</td><td>$309.80</td><td>$304.33</td><td class="tag-loss">-0.84%</td><td class="tag-loss">-1.76%</td><td class="tag-loss">-$10.94</td></tr>
+    <tr><td>PLUG</td><td>Plug Power</td><td>100</td><td>$2.84</td><td>$2.74</td><td class="tag-loss">-3.52%</td><td class="tag-loss">-3.52%</td><td class="tag-loss">-$10.00</td></tr>
+    <tr><td>ONDL</td><td>2X Long ONDS ETF</td><td>50</td><td>$21.30</td><td>$15.17</td><td class="tag-loss">-2.76%</td><td class="tag-loss">-28.78%</td><td class="tag-loss">-$306.50</td></tr>
+    <tr><td>AIXI</td><td>Xiao-I 小i</td><td>100</td><td>$2.47</td><td>$1.22</td><td class="tag-loss">-12.23%</td><td class="tag-loss">-50.52%</td><td class="tag-loss">-$124.57</td></tr>
+  </table>
+  <p><b>美股合計：</b>成本 $8,067.60 → 市值 $7,871.69 → <span class="tag-loss">總損益 -$195.91（-2.43%）</span></p>
 
-<h3>🇺🇸 美股持倉（11 檔）</h3>
-<table>
-<tr><th>代號</th><th>股數</th><th>均價</th><th>現價</th><th>市值</th><th>損益</th><th>損益%</th><th>今日</th><th>占比</th></tr>
-<tr><td><strong>ONDS</strong></td><td>150</td><td>$8.99</td><td>$9.19</td><td>$1,379</td><td class="r-up">+$31</td><td class="r-up">+2.3%</td><td>+0.6%</td><td>19.2%</td></tr>
-<tr><td><strong>AMD</strong></td><td>4</td><td>$227.55</td><td>$236.75</td><td>$947</td><td class="r-up">+$37</td><td class="r-up">+4.0%</td><td>+0.05%</td><td>13.2%</td></tr>
-<tr><td><strong>SMH</strong></td><td>2</td><td>$386.68</td><td>$432.46</td><td>$865</td><td class="r-up">+$92</td><td class="r-up"><strong>+11.8%</strong></td><td>+0.5%</td><td>12.1%</td></tr>
-<tr><td><strong>ONDL</strong> ⚠️</td><td>50</td><td>$21.30</td><td>$15.82</td><td>$791</td><td class="r-dn">-$274</td><td class="r-dn"><strong>-25.7%</strong></td><td>+1.4%</td><td>11.0%</td></tr>
-<tr><td><strong>AVGO</strong></td><td>2</td><td>$322.10</td><td>$357.27</td><td>$715</td><td class="r-up">+$70</td><td class="r-up"><strong>+10.9%</strong></td><td>+0.7%</td><td>10.0%</td></tr>
-<tr><td><strong>UNH</strong></td><td>2</td><td>$309.80</td><td>$306.06</td><td>$612</td><td class="r-dn">-$7</td><td class="r-dn">-1.2%</td><td>-0.3%</td><td>8.5%</td></tr>
-<tr><td><strong>SOFI</strong></td><td>35</td><td>$16.69</td><td>$16.34</td><td>$572</td><td class="r-dn">-$12</td><td class="r-dn">-2.1%</td><td>+0.4%</td><td>8.0%</td></tr>
-<tr><td><strong>MRVL</strong></td><td>4</td><td>$119.10</td><td>$123.16</td><td>$493</td><td class="r-up">+$16</td><td class="r-up">+3.4%</td><td class="r-up"><strong>+2.7%</strong></td><td>6.9%</td></tr>
-<tr><td><strong>ON</strong></td><td>6</td><td>$67.68</td><td>$68.03</td><td>$408</td><td class="r-up">+$2</td><td class="r-up">+0.5%</td><td>-0.7%</td><td>5.7%</td></tr>
-<tr><td><strong>SIDU</strong></td><td>75</td><td>$4.00</td><td>$3.34</td><td>$251</td><td class="r-dn">-$50</td><td class="r-dn">-16.5%</td><td>0.0%</td><td>3.5%</td></tr>
-<tr><td><strong>AIXI</strong> 🚀</td><td>100</td><td>$2.47</td><td>$1.39</td><td>$139</td><td class="r-dn">-$108</td><td class="r-dn">-43.6%</td><td class="r-up"><strong>+40.2%</strong></td><td>1.9%</td></tr>
-<tr style="border-top:2px solid var(--accent);font-weight:700;">
-<td>美股合計</td><td>11 檔</td><td></td><td></td><td>$7,170</td><td class="r-dn">-$203</td><td class="r-dn">-2.8%</td><td></td><td>100%</td></tr>
-</table>
-
-<h3>🇹🇼 台股持倉（6 檔）</h3>
-<table>
-<tr><th>代號</th><th>買入價</th><th>現價</th><th>漲跌</th><th>損益%</th><th>EPS</th></tr>
-<tr><td><strong>聯發科</strong> 2454</td><td>1,741</td><td>1,575</td><td>0 (0%)</td><td class="r-dn">-9.5%</td><td>14.40</td></tr>
-<tr><td><strong>華邦電</strong> 2344</td><td>102</td><td>93.5</td><td class="r-up">+2.5 (+2.8%)</td><td class="r-dn">-8.3%</td><td>0.76</td></tr>
-<tr><td><strong>台玻</strong> 1802</td><td>64.5</td><td>57.7</td><td class="r-dn">-1.8 (-3.0%)</td><td class="r-dn">-10.5%</td><td>0.13</td></tr>
-<tr><td><strong>台塑化</strong> 6505</td><td>61.4</td><td>52</td><td class="r-dn">-0.7 (-1.3%)</td><td class="r-dn">-15.3%</td><td>0.54</td></tr>
-<tr><td><strong>永光</strong> 1711</td><td>43</td><td>38.7</td><td class="r-up">+2.05 (+5.6%)</td><td class="r-dn">-10.0%</td><td>-0.03</td></tr>
-<tr><td><strong>金寶</strong> 2312</td><td>24.1</td><td>22.45</td><td class="r-dn">-0.35 (-1.5%)</td><td class="r-dn">-6.9%</td><td>0.20</td></tr>
-</table>
-
-<div class="callout callout-warn">
-<strong>⚠️ 重點警示：</strong><br>
-• ONDS + ONDL 合計占比 <strong>30.2%</strong>，且 ONDL 為 2x 槓桿 ETF，YTD -42%，日度損耗嚴重<br>
-• AIXI 今日暴漲 +40.2%，但仍虧 -43.6%，市值僅 $138 萬，為典型投機反彈<br>
-• 台股 6 檔全數虧損，平均損益 -10.1%
+  <h3>🇹🇼 台股持倉</h3>
+  <table class="holdings">
+    <tr><th>代號</th><th>名稱</th><th>成本</th><th>現價</th><th>損益%</th></tr>
+    <tr><td>2454</td><td>聯發科</td><td>1,741</td><td>1,575</td><td class="tag-loss">-9.54%</td></tr>
+    <tr><td>2344</td><td>華邦電</td><td>102</td><td>93.5</td><td class="tag-loss">-8.33%</td></tr>
+    <tr><td>1802</td><td>台玻</td><td>64.5</td><td>57.7</td><td class="tag-loss">-10.54%</td></tr>
+    <tr><td>6505</td><td>台塑化</td><td>61.4</td><td>52</td><td class="tag-loss">-15.31%</td></tr>
+    <tr><td>1711</td><td>永光</td><td>43</td><td>38.7</td><td class="tag-loss">-10.00%</td></tr>
+    <tr><td>2312</td><td>金寶</td><td>24.1</td><td>22.45</td><td class="tag-loss">-6.85%</td></tr>
+  </table>
+  <p><b>台股全線虧損，平均損益 -10.10%。</b></p>
 </div>
 
-<h2>3. 強弱診斷</h2>
-<table>
-<tr><th>標的</th><th>分類</th><th>說明</th></tr>
-<tr><td>SMH</td><td><span class="r-tag r-tag-a">A 核心持有</span></td><td>半導體 ETF 創歷史新高，+11.8% 獲利最穩，風險分散最佳</td></tr>
-<tr><td>AVGO</td><td><span class="r-tag r-tag-a">A 核心持有</span></td><td>Google TPU + Anthropic 雙合約，Zacks Rank #1，Morgan Stanley 首選，+10.9%</td></tr>
-<tr><td>AMD</td><td><span class="r-tag r-tag-a">A 核心持有</span></td><td>AI GPU 雙雄，4 股均價 $227.55，回本中 +4.0%，等 MI400 催化劑</td></tr>
-<tr><td>MRVL</td><td><span class="r-tag r-tag-a">A 核心持有</span></td><td>今日 <strong>+2.69%</strong> 領漲持倉，AI 客製晶片 + Nvidia 投資加持，+3.4%</td></tr>
-<tr><td>ON</td><td><span class="r-tag r-tag-b">B 中高潛力</span></td><td>車用 SiC 半導體，+0.5% 微利，等 EV 需求復甦催化劑</td></tr>
-<tr><td>SOFI</td><td><span class="r-tag r-tag-b">B 成長衛星</span></td><td>金融科技，-2.1% 微虧，營收增速 +30%，等 Q1 財報確認方向</td></tr>
-<tr><td>UNH</td><td><span class="r-tag r-tag-b">B 防禦穩定</span></td><td>醫療龍頭 EPS $13.23，防禦型配置，-1.2% 穩定</td></tr>
-<tr><td>ONDS</td><td><span class="r-tag r-tag-b">B 高成長但燒錢</span></td><td>通訊／無人機題材 +2.3%，占比 19.2% 過高，需減碼鎖利</td></tr>
-<tr><td>AIXI</td><td><span class="r-tag r-tag-c">C 建議出場</span></td><td>⚡ 今日暴漲 +40% 但仍虧 -43.6%，市值僅 $138 萬，EPS -$2.52，逃命波</td></tr>
-<tr><td>SIDU</td><td><span class="r-tag r-tag-c">C 建議出場</span></td><td>太空微型股 -16.5%，EPS -$1.19，無催化劑，流動性差</td></tr>
-<tr><td>ONDL</td><td><span class="r-tag r-tag-c">C 建議出場</span></td><td>🚨 ONDS 的 2x 槓桿 ETF，已虧 -25.7%（-$274），YTD -42%，結構性損耗</td></tr>
-</table>
-
-<h2>4. 操作建議</h2>
-
-<h3><span class="r-tag r-tag-a">A 首選</span> 核心持有 — 不動如山</h3>
-<div class="callout callout-green">
-<ul>
-<li><strong>AVGO</strong>：AI ASIC 龍頭，Google + Anthropic 雙引擎。持有不動 → 目標 $400–420，停損 $320</li>
-<li><strong>SMH</strong>：半導體 ETF 創新高，壓艙石。持有不追高 → 目標 $460–480，停損 $400</li>
-<li><strong>AMD</strong>：AI GPU 市場穩步擴張，均價良好。持有觀察 → 目標 $260–270，停損 $215</li>
-<li><strong>MRVL</strong>：今日強勢 +2.69%，AI 客製晶片需求旺。持有設停損 $110 → 目標 $140–150</li>
-</ul>
+<div class="report-section">
+  <h2>3️⃣ 強弱診斷（Strength Diagnosis）</h2>
+  <table class="holdings">
+    <tr><th>代號</th><th>相對大盤</th><th>診斷</th></tr>
+    <tr><td>AVGO</td><td>S&P +9.5%，AVGO +4.7%</td><td>⚡ 跟漲，AI 伺服器龍頭基本面強</td></tr>
+    <tr><td>SMH</td><td>半導體反彈 +15%</td><td>🔥 強勢反彈，受惠關稅暫緩</td></tr>
+    <tr><td>MRVL</td><td>MRVL +7.1% 週漲</td><td>🔥 強勢反彈，ASIC 業務受矚目</td></tr>
+    <tr><td>ON</td><td>ON +0.2%，偏弱</td><td>⚠️ 跟盤偏弱，汽車半導體景氣不明</td></tr>
+    <tr><td>ONDS</td><td>+1.6%</td><td>😐 中性，低流動性小型股</td></tr>
+    <tr><td>SOFI</td><td>-0.3% vs 大盤 +9.5%</td><td>⚠️ 偏弱，金融科技反彈力道不足</td></tr>
+    <tr><td>UNH</td><td>-0.8%</td><td>⚠️ 偏弱，醫療防禦股反彈慢</td></tr>
+    <tr><td>PLUG</td><td>-3.5%</td><td>🔴 弱勢，氫能持續失血</td></tr>
+    <tr><td>ONDL</td><td>-2.8%</td><td>🔴 槓桿 ETF 深套，等待母股回升</td></tr>
+    <tr><td>AIXI</td><td>-12.2%</td><td>🔴 極弱，持續破底，幾乎歸零風險</td></tr>
+  </table>
 </div>
 
-<h3><span class="r-tag r-tag-b">B 成長推薦</span> 密切觀察</h3>
-<div class="callout">
-<ul>
-<li><strong>ONDS</strong>：占比 19.2% 過高 → <strong>建議減碼 50 股鎖利</strong>，回收 ~$460。若跌破 $8.5 停損</li>
-<li><strong>ON</strong>：車用 SiC，持有耐心等 → 目標 $78，若跌破 $63 停損</li>
-<li><strong>SOFI</strong>：不補不砍，等 Q1 財報（4 月底）→ 站穩 $18 偏多，跌破 $14.50 停損</li>
-<li><strong>UNH</strong>：防禦型持有，不需加碼 → 目標 $340，停損 $290</li>
-</ul>
+<div class="report-section">
+  <h2>4️⃣ 操作建議三級（Action Recommendations）</h2>
+
+  <h3><span class="badge badge-a">A 級</span> 立即處理</h3>
+  <ul>
+    <li><b>AIXI（-50.5%）</b>：已腰斬過半，建議認損出場。即使未來有反彈，每股僅 $1.22，反彈空間不如投入其他標的。</li>
+    <li><b>PLUG（-3.5%）</b>：氫能行業持續低迷，虧損公司前景不明。建議在 $2.7–$3.0 區間止損。</li>
+  </ul>
+
+  <h3><span class="badge badge-b">B 級</span> 密切觀察</h3>
+  <ul>
+    <li><b>ONDL（-28.8%）</b>：用戶決定放到損失 ≤ 10% 再賣。目前深套，觀察 ONDS 能否站穩 $10 以上帶動回升。<b>警戒線：ONDS 跌破 $8 考慮認損。</b></li>
+    <li><b>SOFI（-2.8%）</b>：Q1 財報前觀察，若跌破 $15 考慮減碼；若站穩 $17 以上可加碼。</li>
+    <li><b>UNH（-1.8%）</b>：防禦股回彈慢但穩，Q1 財報 4/15 公布，短線觀望。</li>
+    <li><b>ON（+1.4%）</b>：汽車半導體需求不確定，反彈力道弱。持有觀望，跌破 $65 減碼。</li>
+  </ul>
+
+  <h3><span class="badge badge-c">C 級</span> 持有 / 加碼</h3>
+  <ul>
+    <li><b>AVGO（+5.3%）</b>：AI 伺服器核心供應商，基本面最強。若回測 $345–$355 可加碼。目標 $400+。</li>
+    <li><b>SMH（+13.0%）</b>：半導體 ETF 分散風險，漲幅已大但趨勢向上。持有為主，拉回 $410 以下可加碼。</li>
+    <li><b>MRVL（+5.2%）</b>：ASIC + 資料中心雙引擎，週漲 7%。持有，目標 $140。回測 $118–$122 可加碼。</li>
+    <li><b>ONDS（+1.6%）</b>：Ondas 無人機業務有政策催化，低價投機持有。</li>
+  </ul>
 </div>
 
-<h3><span class="r-tag r-tag-c">C 高風險</span> 應減碼或出場</h3>
-<div class="callout callout-warn">
-<ul>
-<li><strong>ONDL</strong>：🚨 <strong>最優先處理！</strong>2x 槓桿 ETF 日度損耗不可逆，YTD -42%，已虧 $274。<strong>建議全數出清，回收 ~$791</strong></li>
-<li><strong>AIXI</strong>：⚡ <strong>趁今日暴漲 +40% 出場！</strong>從 $0.99 彈到 $1.39 是逃命波。市值僅 $138 萬，EPS -$2.52。<strong>出清回收 ~$139</strong></li>
-<li><strong>SIDU</strong>：太空微型股無基本面支撐，-16.5%。<strong>建議出清回收 ~$251</strong></li>
-</ul>
+<div class="report-section">
+  <h2>5️⃣ 觀察清單 & 新買進候選（Watchlist）</h2>
+  <p>以下為上次推薦的 10 檔科技飆股候選（短線交易）：</p>
+  <table class="holdings">
+    <tr><th>代號</th><th>名稱</th><th>收盤價</th><th>亮點</th><th>建議進場區間</th></tr>
+    <tr><td><b>ALAB</b></td><td>Astera Labs</td><td>$148.85</td><td>PCIe retimer AI 伺服器核心</td><td>$130–$140</td></tr>
+    <tr><td><b>NBIS</b></td><td>Nebius Group</td><td>$145.39</td><td>AI 雲算力，前 Yandex 分拆</td><td>$130–$140</td></tr>
+    <tr><td><b>PLTR</b></td><td>Palantir</td><td>$129.09</td><td>AI 企業軟體 + 國防合約</td><td>$120–$128</td></tr>
+    <tr><td>CRWV</td><td>CoreWeave</td><td>≈$51</td><td>GPU 雲端算力新 IPO</td><td>$45–$50</td></tr>
+    <tr><td>VRT</td><td>Vertiv Holdings</td><td>≈$98</td><td>資料中心散熱基建</td><td>$88–$95</td></tr>
+    <tr><td>SMCI</td><td>Super Micro</td><td>≈$43</td><td>AI 伺服器整機，低價反彈</td><td>$38–$42</td></tr>
+    <tr><td>IONQ</td><td>IonQ</td><td>≈$43</td><td>量子運算龍頭，長線想像</td><td>$38–$42</td></tr>
+    <tr><td>OKLO</td><td>Oklo</td><td>≈$25</td><td>小型核反應爐，能源 AI 題材</td><td>$22–$25</td></tr>
+    <tr><td>RKLB</td><td>Rocket Lab</td><td>≈$28</td><td>太空發射 + 衛星</td><td>$24–$27</td></tr>
+    <tr><td>RGTI</td><td>Rigetti Computing</td><td>≈$12</td><td>量子運算低價投機</td><td>$10–$12</td></tr>
+  </table>
+  <p>⚠️ 其中 <b>ALAB、NBIS、PLTR</b> 為用戶重點關注標的，建議 $1,000 預算分配方案見下方「資金配置」。</p>
 </div>
 
-<h2>5. $100 以上值得關注</h2>
-<table>
-<tr><th>代號</th><th>現價</th><th>說明</th><th>與你的關聯</th></tr>
-<tr><td>NVDA</td><td>~$136</td><td>AI GPU 絕對龍頭，今日 +1.01%</td><td>SMH 已含 ~25% NVDA 權重</td></tr>
-<tr><td>INTC</td><td>$61.68</td><td>與 Google 擴大合作，連漲中</td><td>觀察清單，曾持有，可低位回補</td></tr>
-<tr><td>TSM（台積電 ADR）</td><td>~$180+</td><td>全球晶圓代工龍頭</td><td>與 AVGO/AMD/MRVL 供應鏈互補</td></tr>
-<tr><td>QCOM</td><td>~$160</td><td>手機 AI 晶片、車用 IoT</td><td>與 ON 車用半導體互補</td></tr>
-</table>
+<div class="report-section">
+  <h2>6️⃣ 資金配置（Capital Allocation）</h2>
 
-<h2>6. 資金配置建議</h2>
-<p style="color:var(--orange);font-weight:700;">⏰ 核心約束：5 月底前需要用錢，優先保本！可用現金僅 $57.6</p>
-<table>
-<tr><th>類別</th><th>目前占比</th><th>建議目標</th><th>行動</th></tr>
-<tr><td>🔵 半導體核心（AVGO+AMD+SMH+MRVL+ON）</td><td><strong>47.9%</strong></td><td>50～55%</td><td>✅ 已接近目標，持有不動</td></tr>
-<tr><td>🟢 防禦／多元（UNH+SOFI）</td><td>16.5%</td><td>15～20%</td><td>✅ 維持</td></tr>
-<tr><td>🟡 高成長（ONDS）</td><td>19.2%</td><td>10～15%</td><td>⚠️ 減碼 50 股 → 降至 ~13%</td></tr>
-<tr><td>🔴 高投機（ONDL+SIDU+AIXI）</td><td><strong>16.4%</strong></td><td><strong>0%</strong></td><td>🚨 全數出清</td></tr>
-<tr><td>💵 現金</td><td>$57.6</td><td>$1,700+</td><td>清理後可達目標</td></tr>
-</table>
+  <h3>現有持倉配置建議</h3>
+  <ul>
+    <li><b>核心持有（60%）</b>：AVGO、SMH、MRVL — 半導體龍頭 + ETF，繼續持有並逢低加碼。</li>
+    <li><b>觀望（25%）</b>：ON、ONDS、SOFI、UNH — 靜待催化劑或財報確認。</li>
+    <li><b>止損候選（15%）</b>：AIXI、PLUG — 考慮認損，將資金轉入更強勢標的。ONDL 長期套牢但用戶決定持有。</li>
+  </ul>
 
-<div class="callout callout-warn">
-<strong>📋 行動計畫（依優先順序）：</strong><br>
-① 出清 <strong>ONDL</strong> 50 股 → 回收 ~$791<br>
-② 出清 <strong>AIXI</strong> 100 股（趁今日 +40%！）→ 回收 ~$139<br>
-③ 出清 <strong>SIDU</strong> 75 股 → 回收 ~$251<br>
-④ 減碼 <strong>ONDS</strong> 50 股 → 回收 ~$460<br>
-⑤ 以上合計回收 <strong>~$1,641</strong> + 現金 $57.6 ≈ <strong>可用 $1,699</strong><br>
-⑥ 保留 $1,500+ 作為 5 月底用款準備<br>
-⑦ 餘額視盤勢可小幅加碼核心標的（AVGO 回落 $340 或 AMD 回落 $225 可考慮）
+  <h3>$1,000 新資金分配（ALAB / NBIS / PLTR）</h3>
+  <table class="holdings">
+    <tr><th>方案</th><th>ALAB</th><th>NBIS</th><th>PLTR</th><th>總花費</th><th>剩餘</th></tr>
+    <tr><td><b>A 平均分配（推薦）</b></td><td>2 股 ≈$298</td><td>2 股 ≈$291</td><td>3 股 ≈$387</td><td>≈$976</td><td>≈$24</td></tr>
+    <tr><td>B 重壓 ALAB</td><td>3 股 ≈$447</td><td>2 股 ≈$291</td><td>2 股 ≈$258</td><td>≈$996</td><td>≈$4</td></tr>
+    <tr><td>C 重壓 PLTR</td><td>2 股 ≈$298</td><td>1 股 ≈$145</td><td>4 股 ≈$516</td><td>≈$959</td><td>≈$41</td></tr>
+  </table>
+  <p>🎯 推薦方案 A：三檔均衡佈局，分散風險最佳。週一（4/13）建議用<b>限價單</b>掛低 2–3% 等回檔接，避免追高。</p>
+
+  <h3>整體資金優先順序</h3>
+  <ol>
+    <li>🔴 先處理 AIXI / PLUG 止損 → 回收約 $396</li>
+    <li>🟡 靜待 SOFI / UNH 財報方向確認</li>
+    <li>🟢 回收資金 + $1,000 新資金 → 佈局 ALAB / NBIS / PLTR</li>
+    <li>🟢 5 月底前若需用錢，優先賣出已獲利標的（AVGO / SMH / MRVL）</li>
+  </ol>
 </div>
 
-<h2>7. 個股預測（1～3 個月）</h2>
-<table>
-<tr><th>標的</th><th>樂觀</th><th>基本</th><th>悲觀</th><th>催化劑</th></tr>
-<tr><td>AVGO</td><td class="r-up">$420</td><td>$370～390</td><td class="r-dn">$320</td><td>Google TPU 量產、Anthropic 運算合約、AI 基建持續</td></tr>
-<tr><td>AMD</td><td class="r-up">$270</td><td>$240～255</td><td class="r-dn">$200</td><td>MI400 出貨、資料中心營收、Q1 財報</td></tr>
-<tr><td>MRVL</td><td class="r-up">$150</td><td>$125～135</td><td class="r-dn">$100</td><td>AI 客製晶片訂單、Nvidia 整合、5G 基建</td></tr>
-<tr><td>SMH</td><td class="r-up">$480</td><td>$440～460</td><td class="r-dn">$400</td><td>半導體超級週期延續、Q1 財報季</td></tr>
-<tr><td>ON</td><td class="r-up">$80</td><td>$68～75</td><td class="r-dn">$58</td><td>EV 滲透率回升、SiC 車用復甦</td></tr>
-<tr><td>SOFI</td><td class="r-up">$22</td><td>$16～18</td><td class="r-dn">$13</td><td>Q1 財報、會員增長、S&P 500 納入</td></tr>
-<tr><td>UNH</td><td class="r-up">$340</td><td>$305～320</td><td class="r-dn">$280</td><td>醫療政策、Medicare Advantage 續約</td></tr>
-<tr><td>ONDS</td><td class="r-up">$14</td><td>$9～11</td><td class="r-dn">$7</td><td>國防無人機訂單、現金流轉正</td></tr>
-</table>
-
-<h2>8. 總結</h2>
-<div class="callout callout-green">
-<strong>📊 今日市場回顧：</strong><br>
-• 三大指數連漲 7 天，S&P 500 年線轉正，半導體費半 +2.1% 創新高<br>
-• AVGO 拿下 Google TPU 延長至 2031 + Anthropic 合約，位居半導體首選<br>
-• MRVL 今日 +2.69% 領漲你的持倉，AI 客製晶片需求旺盛<br><br>
-
-<strong>📈 組合現況：</strong><br>
-• 美股 11 檔，總成本 $7,374，現值 $7,170，整體虧損 <strong>-2.8%（-$203）</strong><br>
-• <strong>半導體核心占 47.9%</strong>（AVGO +10.9%、SMH +11.8%、AMD +4.0%、MRVL +3.4%、ON +0.5%）表現穩健<br>
-• <strong>投機股嚴重拖累</strong>：ONDL 虧 $274、AIXI 虧 $108、SIDU 虧 $50，合計 <strong>-$432</strong> 吃掉全部利潤<br>
-• ONDS + ONDL 合計占 <strong>30.2%</strong>，風險過度集中<br>
-• 台股 6 檔全部虧損，平均 -10.1%<br><br>
-
-<strong>🔥 AIXI 今日暴漲 +40% 是逃命機會：</strong><br>
-• 從 $0.99 反彈至 $1.39，但市值僅 $138 萬、EPS -$2.52<br>
-• 這是典型的投機炒作反彈，不是基本面改善<br>
-• <strong>務必趁此反彈出場，不要貪心等更高價</strong><br><br>
-
-<strong>🎯 一句話核心判斷：</strong><br>
-<span style="font-size:16px;font-weight:700;color:var(--gold);">半導體多頭格局未變，保留 AVGO/SMH/AMD/MRVL 核心不動；立刻砍掉 ONDL、AIXI、SIDU 三個燒錢黑洞，趁 AIXI +40% 逃命波出清，回收 ~$1,640 為 5 月底資金需求做好準備。</span>
+<div class="report-section">
+  <h2>7️⃣ 個股預測與價位參考</h2>
+  <table class="holdings">
+    <tr><th>代號</th><th>現價</th><th>短線目標</th><th>停損</th><th>催化劑</th></tr>
+    <tr><td>AVGO</td><td>$371.55</td><td>$400–$420</td><td>$335</td><td>AI 資本支出持續、Q2 財報</td></tr>
+    <tr><td>SMH</td><td>$436.88</td><td>$460–$480</td><td>$400</td><td>半導體週期復甦</td></tr>
+    <tr><td>MRVL</td><td>$128.49</td><td>$140–$150</td><td>$110</td><td>ASIC 訂單 + 資料中心</td></tr>
+    <tr><td>ON</td><td>$68.65</td><td>$75</td><td>$62</td><td>汽車半導體需求回暖</td></tr>
+    <tr><td>SOFI</td><td>$16.22</td><td>$18–$20</td><td>$14.5</td><td>Q1 財報、利率走向</td></tr>
+    <tr><td>UNH</td><td>$304.33</td><td>$330</td><td>$280</td><td>4/15 Q1 財報</td></tr>
+    <tr><td>ALAB</td><td>$148.85</td><td>$170–$180</td><td>$125</td><td>PCIe 6.0 + AI 伺服器擴張</td></tr>
+    <tr><td>NBIS</td><td>$145.39</td><td>$170–$185</td><td>$120</td><td>GPU 雲算力需求</td></tr>
+    <tr><td>PLTR</td><td>$129.09</td><td>$145–$155</td><td>$110</td><td>政府 AI 合約 + NATO</td></tr>
+  </table>
 </div>
-<p style="color:var(--text2);font-size:12px;margin-top:20px;">⚠️ 免責聲明：本報告為公開資訊整理與情境分析，不構成投顧建議。報價數據有時差，請以券商即時報價為準。報告日期：2026-04-10</p>
+
+<div class="report-section">
+  <h2>8️⃣ 一句總結</h2>
+  <div class="summary-box">
+    📊 關稅暫緩帶動半導體暴力反彈，AVGO / SMH / MRVL 三核心持倉轉正；建議止損 AIXI / PLUG 回收資金，搭配 $1,000 新資金平均佈局 ALAB / NBIS / PLTR，週一限價單低接，控好停損迎接 Q1 財報季。
+  </div>
+</div>
