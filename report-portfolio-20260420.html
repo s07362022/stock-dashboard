@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>持股與盤勢策略 — 2026/04/20 更新</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --card: #1a1d2e;
+    --border: #2a2d3e;
+    --green: #00e676;
+    --red: #ff5252;
+    --gold: #ffd740;
+    --blue: #448aff;
+    --text: #e0e0e0;
+    --muted: #9e9e9e;
+    --accent: #7c4dff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', 'Microsoft JhengHei', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.65;
+    padding: 20px;
+  }
+  .nav {
+    max-width: 960px;
+    margin: 0 auto 16px;
+    font-size: 14px;
+  }
+  .nav a {
+    color: var(--blue);
+    text-decoration: none;
+  }
+  .nav a:hover { text-decoration: underline; }
+  .container { max-width: 960px; margin: 0 auto; }
+  header {
+    text-align: center;
+    padding: 28px 0;
+    border-bottom: 2px solid var(--accent);
+    margin-bottom: 28px;
+  }
+  header h1 {
+    font-size: 1.75em;
+    background: linear-gradient(135deg, var(--blue), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  header .subtitle { color: var(--muted); font-size: 0.95em; margin-top: 10px; }
+  .section {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px 24px;
+    margin-bottom: 22px;
+  }
+  .section h2 {
+    font-size: 1.2em;
+    color: var(--gold);
+    margin-bottom: 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section h3 { font-size: 1.05em; color: var(--blue); margin: 16px 0 10px; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.86em;
+    margin-bottom: 12px;
+  }
+  th {
+    background: rgba(124,77,255,0.15);
+    color: var(--accent);
+    text-align: left;
+    padding: 10px 8px;
+    font-weight: 600;
+  }
+  td { padding: 8px; border-bottom: 1px solid var(--border); }
+  tr:hover td { background: rgba(255,255,255,0.03); }
+  .up { color: var(--green); font-weight: 600; }
+  .down { color: var(--red); font-weight: 600; }
+  .note { color: var(--muted); font-size: 0.88em; margin-top: 10px; }
+  .summary-box {
+    background: linear-gradient(135deg, rgba(124,77,255,0.12), rgba(68,138,255,0.08));
+    border: 1px solid var(--accent);
+    border-radius: 10px;
+    padding: 18px;
+    text-align: center;
+    font-size: 1.02em;
+    margin-top: 8px;
+  }
+  ul { margin-left: 1.2em; margin-top: 8px; }
+  li { margin-bottom: 6px; }
+  footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.82em;
+    padding: 24px 0;
+    border-top: 1px solid var(--border);
+    margin-top: 16px;
+  }
+  @media (max-width: 600px) {
+    table { font-size: 0.76em; }
+    th, td { padding: 6px 4px; }
+  }
+</style>
+</head>
+<body>
+<div class="nav">
+  <a href="index.html">← 返回 Stock Dashboard</a>
+</div>
+<div class="container">
+
+<header>
+  <h1>持股整理 · 週一操作策略 · 分析師目標價參考</h1>
+  <div class="subtitle">更新：2026 年 4 月 20 日｜現價基準：2026/4/17 收盤（歷史快照）｜僅供紀錄與討論，非投資建議</div>
+</header>
+
+<div class="section">
+  <h2>一、大盤與週一操作心法</h2>
+  <p>國際股市先前一段時間風險偏好偏強，但長假或週末前後常有跳空與補價，不宜把單一夜盤情緒直接外推到隔週一早。台股方面，權值電子與加權指數有時不同步；<strong>週一</strong>建議先看<strong>開盤位置與量能</strong>、再看<strong>台灣積體電路製造</strong>是否止穩，<strong>避免開盤後 30～60 分鐘追高</strong>。若持倉含<strong>注意股</strong>或<strong>財報事件</strong>，應先寫好停利停損再進場加碼。</p>
+</div>
+
+<div class="section">
+  <h2>二、持股數據（以公司名稱呈現）</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>公司名稱</th>
+        <th style="text-align:right">股數</th>
+        <th style="text-align:right">買入價</th>
+        <th style="text-align:right">參考現價*</th>
+        <th style="text-align:right">累計損益（約）</th>
+        <th style="text-align:right">累計報酬（約）</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>台達電</td><td style="text-align:right">10</td><td style="text-align:right">1,745</td><td style="text-align:right">1,840</td><td class="up" style="text-align:right">+950</td><td class="up" style="text-align:right">+5.4%</td></tr>
+      <tr><td>鴻海精密工業</td><td style="text-align:right">100</td><td style="text-align:right">201</td><td style="text-align:right">206</td><td class="up" style="text-align:right">+500</td><td class="up" style="text-align:right">+2.5%</td></tr>
+      <tr><td>國巨</td><td style="text-align:right">100</td><td style="text-align:right">307.29</td><td style="text-align:right">316.5</td><td class="up" style="text-align:right">+921</td><td class="up" style="text-align:right">+3.0%</td></tr>
+      <tr><td>台灣積體電路製造</td><td style="text-align:right">6</td><td style="text-align:right">1,918</td><td style="text-align:right">2,030</td><td class="up" style="text-align:right">+672</td><td class="up" style="text-align:right">+5.8%</td></tr>
+      <tr><td>聯發科技</td><td style="text-align:right">38</td><td style="text-align:right">1,707</td><td style="text-align:right">1,925</td><td class="up" style="text-align:right">+8,284</td><td class="up" style="text-align:right">+12.8%</td></tr>
+      <tr><td>欣興電子</td><td style="text-align:right">20</td><td style="text-align:right">638</td><td style="text-align:right">643</td><td class="up" style="text-align:right">+100</td><td class="up" style="text-align:right">+0.8%</td></tr>
+      <tr><td>日月光投資控股</td><td style="text-align:right">76</td><td style="text-align:right">416</td><td style="text-align:right">442</td><td class="up" style="text-align:right">+1,976</td><td class="up" style="text-align:right">+6.3%</td></tr>
+      <tr><td>信昌電子陶瓷</td><td style="text-align:right">100</td><td style="text-align:right">84</td><td style="text-align:right">92.2</td><td class="up" style="text-align:right">+820</td><td class="up" style="text-align:right">+9.8%</td></tr>
+      <tr><td>中國信託金融控股</td><td style="text-align:right">100</td><td style="text-align:right">53.1</td><td style="text-align:right">53.1</td><td style="text-align:right">0</td><td style="text-align:right">0%</td></tr>
+      <tr><td>京元電子</td><td style="text-align:right">100</td><td style="text-align:right">283</td><td style="text-align:right">275</td><td class="down" style="text-align:right">-800</td><td class="down" style="text-align:right">-2.8%</td></tr>
+      <tr><td>超微半導體（美股）</td><td style="text-align:right">未註明</td><td style="text-align:right">222 USD</td><td style="text-align:right">278.39</td><td colspan="2" class="note">每股約 +56.39 USD；總損益視股數而定</td></tr>
+    </tbody>
+  </table>
+  <p class="note">＊參考現價來源為歷史收盤快照；實際交易以券商即時報價為準。信昌電子陶瓷為注意股，波動與流動性風險較高。</p>
+</div>
+
+<div class="section">
+  <h2>三、操作策略（分級）</h2>
+  <h3>需優先控管風險</h3>
+  <ul>
+    <li><strong>信昌電子陶瓷（注意股）</strong>：若無法承受高波動，請事先設定停利／停損，避免盤中情緒追價。</li>
+    <li><strong>京元電子</strong>：成本與盤勢若背離，請用「時間停損」或「跌破關鍵整理區」等<strong>明確規則</strong>，避免攤平成重倉。</li>
+  </ul>
+  <h3>密切觀察</h3>
+  <ul>
+    <li><strong>台灣積體電路製造、日月光投資控股</strong>：留意法人籌碼與短天期均線；轉弱可分段調降權值比重。</li>
+    <li><strong>鴻海精密工業</strong>：若有財報／法說窗口，避免在消息前過度槓桿。</li>
+  </ul>
+  <h3>結構相對強者可續追蹤</h3>
+  <ul>
+    <li><strong>聯發科技、台達電</strong>：偏多時常見「拉回量縮」再思考加碼；停損請依個人風險承受度設定。</li>
+    <li><strong>中國信託金融控股</strong>：偏存股與利差／股息邏輯，短線不宜當強勢投機主軸。</li>
+  </ul>
+</div>
+
+<div class="section">
+  <h2>四、分析師目標價與共識方向（參考用）</h2>
+  <p class="note">下列為媒體與資料庫常見區間之整理，機構假設與日期不同時數字差異大；<strong>非買賣建議</strong>，亦無單一官方「投票表決賣出」。</p>
+  <table>
+    <thead>
+      <tr>
+        <th>公司名稱</th>
+        <th>常見目標價／區間（參考）</th>
+        <th>共識方向（概略）</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>台灣積體電路製造</td><td>約 2,288～3,030 元（外資區間並陳）</td><td>偏多為主</td></tr>
+      <tr><td>聯發科技</td><td>約 2,000～2,200 元</td><td>偏多、調升報導多</td></tr>
+      <tr><td>台達電</td><td>模型與戰術價位並陳（個案差異大）</td><td>偏多、估值敏感</td></tr>
+      <tr><td>鴻海精密工業</td><td>約 250～290 元（假設不同）</td><td>偏多、本益比修復敘述</td></tr>
+      <tr><td>國巨</td><td>約 330～362 元</td><td>偏多</td></tr>
+      <tr><td>日月光投資控股</td><td>約 368～420 元</td><td>偏多</td></tr>
+      <tr><td>欣興電子</td><td>區間分歧極大（媒體與模型並存）</td><td>方向常偏多、價位差異大</td></tr>
+      <tr><td>京元電子</td><td>共識約 330～349 元；曾有更高目標價報導</td><td>偏多</td></tr>
+      <tr><td>中國信託金融控股</td><td>約 56.7 元附近、區間約 48～60 元</td><td>偏多居多</td></tr>
+      <tr><td>信昌電子陶瓷</td><td>大型報告覆蓋相對少</td><td>不宜單靠法人共識</td></tr>
+      <tr><td>超微半導體</td><td>共識目標區間寬（美元）</td><td>多為買進／持有、賣出少</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="section">
+  <h2>五、一句話總結</h2>
+  <div class="summary-box">
+    週一先看量能與權值王是否止穩，不追開盤；法人目標價當趨勢參考即可，注意股與高波動標的務必事先訂好紀律。
+  </div>
+</div>
+
+<footer>
+  <p>本頁由個人持股紀錄整理，僅供參考，不構成投資建議。</p>
+  <p><a href="index.html">Stock Dashboard</a> · GitHub Pages</p>
+</footer>
+</div>
+</body>
+</html>

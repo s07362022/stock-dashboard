@@ -22,7 +22,6 @@ PORTFOLIO = {
     "tw": [
         {"symbol": "2454.TW", "name": "聯發科", "buy_price": 1741, "currency": "TWD"},
         {"symbol": "2344.TW", "name": "華邦電", "buy_price": 102,  "currency": "TWD"},
-        {"symbol": "1802.TW", "name": "台玻",   "buy_price": 64.5, "currency": "TWD"},
         {"symbol": "6505.TW", "name": "台塑化", "buy_price": 61.4, "currency": "TWD"},
         {"symbol": "1711.TW", "name": "永光",   "buy_price": 43,   "currency": "TWD"},
         {"symbol": "2312.TW", "name": "金寶",   "buy_price": 24.1, "currency": "TWD"},
