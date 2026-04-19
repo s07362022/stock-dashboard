@@ -55,32 +55,6 @@
       "pnl_total": -14.2
     },
     {
-      "symbol": "1802.TW",
-      "name": "台玻",
-      "currency": "TWD",
-      "close": 74.2,
-      "prev_close": 69.9,
-      "change": 4.3,
-      "change_pct": 6.15,
-      "open": 69.2,
-      "high": 76.6,
-      "low": 69.1,
-      "volume": 345186558,
-      "eps": -0.22,
-      "pe": null,
-      "market_cap": 215778115584,
-      "week52_high": 76.6,
-      "week52_low": 13.6,
-      "last_date": "2026-04-17",
-      "buy_price": 64.5,
-      "shares": 1,
-      "cost": 64.5,
-      "market_value": 74.2,
-      "pnl": 9.7,
-      "pnl_pct": 15.04,
-      "pnl_total": 9.7
-    },
-    {
       "symbol": "6505.TW",
       "name": "台塑化",
       "currency": "TWD",
@@ -493,12 +467,12 @@
     }
   ],
   "summary": {
-    "tw_avg_pnl_pct": 2.41,
+    "tw_avg_pnl_pct": -0.11,
     "us_avg_pnl_pct": 15.59,
     "us_total_cost": 6588.88,
     "us_total_value": 7616.08,
     "us_total_pnl": 1027.2,
-    "tw_winners": 4,
+    "tw_winners": 3,
     "tw_losers": 2,
     "us_winners": 8,
     "us_losers": 1
