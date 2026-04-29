@@ -1,7 +1,18 @@
 {
-  "updated_at": "2026-04-29 22:24",
-  "updated_at_utc": "2026-04-29 14:24",
+  "updated_at": "2026-04-29 22:45",
+  "updated_at_utc": "2026-04-29 14:45",
   "fx_rate": 31.56,
+  "user_strategy": {
+    "philosophy": "本金有限：用 2X 槓桿 ETF 代替買不起一股的高價底層股。00631L 視為 0050 長期持有。未來推薦只用個股。",
+    "leverage_map": [
+      { "etf": "00631L", "underlying": "0050", "multiplier": 2, "treat_as": "long_term_core" },
+      { "etf": "AVGU", "underlying": "AVGO", "multiplier": 2, "treat_as": "underlying_proxy" },
+      { "etf": "TSLT", "underlying": "TSLA", "multiplier": 2, "treat_as": "underlying_proxy" },
+      { "etf": "TSMG", "underlying": "TSM", "multiplier": 2, "treat_as": "underlying_proxy" },
+      { "etf": "SNDU", "underlying": "SNDK", "multiplier": 2, "treat_as": "underlying_proxy" },
+      { "etf": "ONDL", "underlying": "ONDS (已出清)", "multiplier": 2, "treat_as": "exit" }
+    ]
+  },
   "summary": {
     "total_market_value_twd": 770404,
     "total_cost_twd": 680043,
@@ -14,8 +25,8 @@
     "winners": 7,
     "losers": 8,
     "holdings_count": 15,
-    "leveraged_pct": 28.20,
-    "core_etf_pct": 47.60
+    "effective_exposure_twd": 978144,
+    "effective_leverage_ratio": 1.27
   },
   "indices": [
     { "name": "S&P 500", "code": "SPX", "value": 7138.80, "change": -35.11, "pct": -0.49 },
@@ -25,147 +36,124 @@
     { "name": "台股加權", "code": "TWII", "value": 39303.50, "change": -218.23, "pct": -0.55 }
   ],
   "tw_stocks": [
-    { "symbol": "0050.TW", "name": "元大台灣50", "shares": 3010, "buy_price": 64.10, "close": 90.75, "change": -1.25, "pct": -1.36, "market_value": 273158, "cost": 192941, "pnl": 80217, "pnl_pct": 41.58, "weight": 35.46, "tag": "core", "sector": "ETF（核心壓艙）" },
-    { "symbol": "00631L.TW", "name": "元大台灣50正2", "shares": 3150, "buy_price": 27.57, "close": 28.82, "change": -0.45, "pct": -1.54, "market_value": 90783, "cost": 86846, "pnl": 3937, "pnl_pct": 4.53, "weight": 11.78, "tag": "satellite", "sector": "槓桿 ETF (2X)" },
+    { "symbol": "0050.TW", "name": "元大台灣50", "shares": 3010, "buy_price": 64.10, "close": 90.75, "change": -1.25, "pct": -1.36, "market_value": 273158, "cost": 192941, "pnl": 80217, "pnl_pct": 41.58, "weight": 35.46, "tag": "core", "sector": "ETF（核心壓艙，長期）", "underlying": null },
+    { "symbol": "00631L.TW", "name": "元大台灣50正2", "shares": 3150, "buy_price": 27.57, "close": 28.82, "change": -0.45, "pct": -1.54, "market_value": 90783, "cost": 86846, "pnl": 3937, "pnl_pct": 4.53, "weight": 11.78, "tag": "core", "sector": "ETF (=0050 2X)", "underlying": "0050", "multiplier": 2 },
     { "symbol": "2330.TW", "name": "台積電", "shares": 25, "buy_price": 2145.60, "close": 2180, "change": -35, "pct": -1.58, "market_value": 54500, "cost": 53640, "pnl": 860, "pnl_pct": 1.60, "weight": 7.07, "tag": "core", "sector": "半導體" },
-    { "symbol": "2337.TW", "name": "旺宏電子", "shares": 100, "buy_price": 134.80, "close": 167, "change": 7.5, "pct": 4.70, "market_value": 16700, "cost": 13480, "pnl": 3220, "pnl_pct": 23.89, "weight": 2.17, "tag": "growth", "sector": "記憶體 (NOR)" },
+    { "symbol": "2337.TW", "name": "旺宏電子", "shares": 100, "buy_price": 134.80, "close": 167, "change": 7.5, "pct": 4.70, "market_value": 16700, "cost": 13480, "pnl": 3220, "pnl_pct": 23.89, "weight": 2.17, "tag": "growth", "sector": "記憶體 NOR" },
     { "symbol": "3231.TW", "name": "緯創", "shares": 100, "buy_price": 140, "close": 140.5, "change": 0, "pct": 0, "market_value": 14050, "cost": 14000, "pnl": 50, "pnl_pct": 0.36, "weight": 1.82, "tag": "growth", "sector": "AI 伺服器代工" },
     { "symbol": "3711.TW", "name": "日月光投控", "shares": 66, "buy_price": 464.52, "close": 488.5, "change": -7, "pct": -1.41, "market_value": 32241, "cost": 30658, "pnl": 1583, "pnl_pct": 5.16, "weight": 4.18, "tag": "core", "sector": "封裝測試" },
     { "symbol": "6173.TW", "name": "信昌電", "shares": 150, "buy_price": 86.30, "close": 84, "change": 1.3, "pct": 1.57, "market_value": 12600, "cost": 12945, "pnl": -345, "pnl_pct": -2.66, "weight": 1.64, "tag": "reduce", "sector": "被動元件（處置股）" }
   ],
   "us_stocks": [
-    { "symbol": "AIXI", "name": "Xiao-I Corp", "shares": 180, "buy_price": 1.595238, "close": 1.04, "change": 0, "pct": 0, "market_value_usd": 187.20, "market_value_twd": 5908, "cost_usd": 287.14, "pnl_usd": -99.94, "pnl_pct": -34.81, "weight": 0.77, "tag": "exit", "sector": "中資 AI 仙股（今日待賣）" },
-    { "symbol": "AVGO", "name": "Broadcom", "shares": 4, "buy_price": 373.32, "close": 398.97, "change": 0, "pct": 0, "market_value_usd": 1595.88, "market_value_twd": 50366, "cost_usd": 1493.29, "pnl_usd": 102.59, "pnl_pct": 6.87, "weight": 6.54, "tag": "core", "sector": "AI 半導體" },
-    { "symbol": "AVGU", "name": "Direxion 2X AVGO Bull (推測)", "shares": 25, "buy_price": 44.6692, "close": 42.22, "change": 0, "pct": 0, "market_value_usd": 1055.50, "market_value_twd": 33312, "cost_usd": 1116.73, "pnl_usd": -61.23, "pnl_pct": -5.48, "weight": 4.32, "tag": "satellite", "sector": "AVGO 2X 槓桿 ETF" },
-    { "symbol": "ONDL", "name": "Defiance 2X Long ONDS", "shares": 20, "buy_price": 21.30, "close": 15.25, "change": 0, "pct": 0, "market_value_usd": 305.00, "market_value_twd": 9626, "cost_usd": 426.00, "pnl_usd": -121.00, "pnl_pct": -28.40, "weight": 1.25, "tag": "exit", "sector": "ONDS 2X 槓桿（回檔待賣）" },
+    { "symbol": "AIXI", "name": "Xiao-I Corp", "shares": 180, "buy_price": 1.595238, "close": 1.04, "change": 0, "pct": 0, "market_value_usd": 187.20, "market_value_twd": 5908, "cost_usd": 287.14, "pnl_usd": -99.94, "pnl_pct": -34.81, "weight": 0.77, "tag": "exit", "sector": "中資 AI 仙股（今日清）" },
+    { "symbol": "AVGO", "name": "Broadcom", "shares": 4, "buy_price": 373.32, "close": 399.83, "change": 0, "pct": 0, "market_value_usd": 1595.88, "market_value_twd": 50366, "cost_usd": 1493.29, "pnl_usd": 102.59, "pnl_pct": 6.87, "weight": 6.54, "tag": "core", "sector": "AI 半導體" },
+    { "symbol": "AVGU", "name": "GraniteShares 2x AVGO Daily", "shares": 25, "buy_price": 44.6692, "close": 42.22, "change": 0, "pct": 0, "market_value_usd": 1055.50, "market_value_twd": 33312, "cost_usd": 1116.73, "pnl_usd": -61.23, "pnl_pct": -5.48, "weight": 4.32, "tag": "core", "sector": "AVGO 2X 槓桿（視為 AVGO）", "underlying": "AVGO", "multiplier": 2, "underlying_price": 399.83 },
+    { "symbol": "ONDL", "name": "Defiance 2X Long ONDS", "shares": 20, "buy_price": 21.30, "close": 15.25, "change": 0, "pct": 0, "market_value_usd": 305.00, "market_value_twd": 9626, "cost_usd": 426.00, "pnl_usd": -121.00, "pnl_pct": -28.40, "weight": 1.25, "tag": "exit", "sector": "ONDS 連動失效（回檔清）", "underlying": "ONDS (已清)", "multiplier": 2 },
     { "symbol": "SMH", "name": "VanEck Semiconductor ETF", "shares": 6, "buy_price": 439.213333, "close": 493.85, "change": 0, "pct": 0, "market_value_usd": 2963.10, "market_value_twd": 93515, "cost_usd": 2635.28, "pnl_usd": 327.82, "pnl_pct": 12.44, "weight": 12.14, "tag": "core", "sector": "半導體 ETF" },
-    { "symbol": "SNDU", "name": "2X 槓桿 ETF (推測 SNOW Bull)", "shares": 3, "buy_price": 57.6967, "close": 59.71, "change": 0, "pct": 0, "market_value_usd": 179.13, "market_value_twd": 5653, "cost_usd": 173.09, "pnl_usd": 6.04, "pnl_pct": 3.49, "weight": 0.73, "tag": "satellite", "sector": "雲端軟體 2X 槓桿 ETF" },
-    { "symbol": "TSLT", "name": "T-Rex 2X Long Tesla Daily", "shares": 84, "buy_price": 17.7813, "close": 16.63, "change": 0, "pct": 0, "market_value_usd": 1396.92, "market_value_twd": 44087, "cost_usd": 1493.63, "pnl_usd": -96.71, "pnl_pct": -6.47, "weight": 5.72, "tag": "satellite", "sector": "TSLA 2X 槓桿 ETF" },
-    { "symbol": "TSMG", "name": "GraniteShares 2X TSM", "shares": 30, "buy_price": 36.843334, "close": 35.81, "change": 0, "pct": 0, "market_value_usd": 1074.30, "market_value_twd": 33905, "cost_usd": 1105.30, "pnl_usd": -31.00, "pnl_pct": -2.80, "weight": 4.40, "tag": "satellite", "sector": "TSMC ADR 2X 槓桿 ETF" }
+    { "symbol": "SNDU", "name": "T-Rex 2X Long SNDK Daily", "shares": 3, "buy_price": 57.6967, "close": 59.71, "change": 0, "pct": 0, "market_value_usd": 179.13, "market_value_twd": 5653, "cost_usd": 173.09, "pnl_usd": 6.04, "pnl_pct": 3.49, "weight": 0.73, "tag": "growth", "sector": "SanDisk 2X（NAND/AI）", "underlying": "SNDK", "multiplier": 2, "underlying_price": 1086.81, "underlying_change_today": 8.43, "note": "SNDK 今日 +8.43%！SNDU 預估盤中已 +15–17%" },
+    { "symbol": "TSLT", "name": "T-Rex 2X Long Tesla Daily", "shares": 84, "buy_price": 17.7813, "close": 16.63, "change": 0, "pct": 0, "market_value_usd": 1396.92, "market_value_twd": 44087, "cost_usd": 1493.63, "pnl_usd": -96.71, "pnl_pct": -6.47, "weight": 5.72, "tag": "satellite", "sector": "TSLA 2X（視為 Tesla）", "underlying": "TSLA", "multiplier": 2, "underlying_price": 372.96 },
+    { "symbol": "TSMG", "name": "GraniteShares 2x TSM Daily", "shares": 30, "buy_price": 36.843334, "close": 35.81, "change": 0, "pct": 0, "market_value_usd": 1074.30, "market_value_twd": 33905, "cost_usd": 1105.30, "pnl_usd": -31.00, "pnl_pct": -2.80, "weight": 4.40, "tag": "core", "sector": "TSM 2X（視為 TSMC）", "underlying": "TSM", "multiplier": 2, "underlying_price": 395.17 }
   ],
-  "capital_plan": {
-    "title": "2026-04-29 新資金部署策略",
-    "sources": [
-      { "src": "AIXI 賣出 (今日)", "amount_twd": 5908, "amount_usd": 187.20, "status": "immediate", "note": "認賠 -34.8%；釋放小型仙股部位" },
-      { "src": "ONDL 賣出 (回檔時)", "amount_twd": 9626, "amount_usd": 305.00, "status": "conditional", "note": "ONDS 已出清，連動失效；回檔反彈時清倉" },
-      { "src": "新投入資金", "amount_twd": 10000, "amount_usd": 316.84, "status": "immediate", "note": "使用者新投入 NT$ 10,000" }
-    ],
-    "totals": {
-      "immediate": 15908,
-      "conditional": 9626,
-      "total": 25534
+  "effective_exposure": [
+    { "name": "0050（台股大盤）", "icon": "🇹🇼", "components": ["0050 NT$273,158", "00631L NT$90,783 × 2"], "exposure_twd": 454724, "pct_effective": 46.49, "long_term": true },
+    { "name": "台積電 TSMC", "icon": "🏭", "components": ["2330 NT$54,500", "TSMG NT$33,905 × 2"], "exposure_twd": 122310, "pct_effective": 12.51, "long_term": true },
+    { "name": "Broadcom AVGO", "icon": "💎", "components": ["AVGO NT$50,366", "AVGU NT$33,312 × 2"], "exposure_twd": 116990, "pct_effective": 11.96, "long_term": true },
+    { "name": "VanEck 半導體 SMH", "icon": "🔌", "components": ["SMH NT$93,515"], "exposure_twd": 93515, "pct_effective": 9.56, "long_term": true },
+    { "name": "Tesla TSLA", "icon": "🚗", "components": ["TSLT NT$44,087 × 2"], "exposure_twd": 88174, "pct_effective": 9.01, "long_term": false },
+    { "name": "其他台股個股", "icon": "🇹🇼", "components": ["旺宏 16,700", "緯創 14,050", "日月光 32,241", "信昌電 12,600"], "exposure_twd": 75591, "pct_effective": 7.73, "long_term": false },
+    { "name": "高風險（待出清）", "icon": "⚠️", "components": ["AIXI 5,908", "ONDL 9,626"], "exposure_twd": 15534, "pct_effective": 1.59, "long_term": false },
+    { "name": "SanDisk SNDK", "icon": "💾", "components": ["SNDU NT$5,653 × 2"], "exposure_twd": 11306, "pct_effective": 1.16, "long_term": false }
+  ],
+  "underlying_analysis": [
+    {
+      "ticker": "AVGO",
+      "name": "Broadcom",
+      "price": 399.83,
+      "in_portfolio_twd": 116990,
+      "thesis": "AI 客製加速器 + AI 網路雙引擎；Q2 指引營收 +47% YoY、AI +140% YoY；CEO Hock Tan 預期 2027 AI 晶片收入 >$100B。",
+      "pros": ["AI 客製 ASIC 龍頭（Google TPU、Anthropic、Meta MTIA）", "客戶數從 5 增至 6 個", "Q2 AI 收入指引 $10.7B（+140% YoY）", "現金流強勁，可持續派息", "與 SMH/2330 同向但客戶結構互補"],
+      "cons": ["P/E ~ 35x 估值偏高", "客戶集中度（5 家客戶 = 大多數 AI 收入）", "若 OpenAI 變現質疑擴散，AI 整體 capex 可能放緩"],
+      "consensus_target": "$440–500",
+      "rating": "Buy",
+      "next_catalyst": "下次法說會（約 2026/06）",
+      "user_action": "🟢 持有；下修至 $360 為加碼點；目標 $480"
     },
-    "context": [
-      "目前核心 ETF（0050 + SMH）已占 47.6%",
-      "槓桿 / 單押 ETF 合計達 28.2%（00631L + AVGU + ONDL + SNDU + TSLT + TSMG）— 已偏高",
-      "美股占比 35.87%，但其中槓桿/單押占 21.4% — 真正的個股/ETF 多元性不足",
-      "5 月底用錢需求未變 → 現金回補仍應為首要",
-      "AI 結構多頭未變，但 OpenAI 變現質疑 + 油價推升 CPI 在短期帶來震盪"
-    ],
-    "options": [
-      {
-        "id": "A",
-        "name": "穩健派（推薦 ⭐）",
-        "philosophy": "降槓桿、加核心、留現金；面對 5 月用錢與短期波動",
-        "actions": [
-          { "step": 1, "fund": "AIXI 5,908 + 新投入 10,000 = 15,908", "use": "全部加碼 0050 約 175 股 @90.75（成本 NT$ 15,881，殘 27 元留現金）", "rationale": "0050 為核心壓艙；可快速變現；分散風險" },
-          { "step": 2, "fund": "ONDL 9,626（條件式）", "use": "全留現金（5 月用錢備用）", "rationale": "拉高現金水位；避免再加碼下跌標的" }
-        ],
-        "result": {
-          "post_tw_pct": 65.5,
-          "post_us_pct": 33.2,
-          "post_cash_pct": 1.3,
-          "post_leveraged_pct": 27.0,
-          "summary": "投組更穩定；0050 提升至 ~37.5%；現金準備充足"
-        }
-      },
-      {
-        "id": "B",
-        "name": "平衡派",
-        "philosophy": "兼顧核心 ETF 與 AI 個股，但避免再加槓桿",
-        "actions": [
-          { "step": 1, "fund": "AIXI 5,908 + 新投入 10,000 = 15,908", "use": "AVGO 加碼 1 股 (~NT$ 12,594) + 0050 約 36 股 (~NT$ 3,267)", "rationale": "AVGO Q2 指引 +47%、AI 客製贏家；同時兼顧核心" },
-          { "step": 2, "fund": "ONDL 9,626（條件式）", "use": "100 股 0050 (~NT$ 9,075) + 殘 NT$ 551 留現金", "rationale": "繼續加厚核心壓艙" }
-        ],
-        "result": {
-          "post_tw_pct": 64.7,
-          "post_us_pct": 34.0,
-          "post_cash_pct": 1.3,
-          "post_leveraged_pct": 27.0,
-          "summary": "AVGO 從 4→5 股；個股 AI 主軸更穩固"
-        }
-      },
-      {
-        "id": "C",
-        "name": "去槓桿激進派",
-        "philosophy": "趁此次調整大幅降槓桿；留更多現金面對 5 月與不確定性",
-        "actions": [
-          { "step": 1, "fund": "AIXI 5,908 + 新投入 10,000 = 15,908", "use": "全部留現金", "rationale": "現金為王；5 月用錢時程確定" },
-          { "step": 2, "fund": "ONDL 9,626（條件式）", "use": "全留現金", "rationale": "等待換股或變現需求" },
-          { "step": 3, "fund": "額外建議：減碼 00631L（目前 3,150 股）約 1,000 股 ≈ NT$ 28,820", "use": "全留現金", "rationale": "槓桿 ETF 風險過高；5 月用錢前應先去風險" }
-        ],
-        "result": {
-          "post_tw_pct": 60.5,
-          "post_us_pct": 33.4,
-          "post_cash_pct": 6.1,
-          "post_leveraged_pct": 23.0,
-          "summary": "現金水位拉至 ~6%；面對 5 月或地緣風險更游刃有餘"
-        }
-      }
-    ],
-    "recommendation": {
-      "primary": "A",
-      "reason": "5 月底用錢需求 + 槓桿類已偏高 + 美股短期 AI 變現質疑震盪 → 加碼 0050 是最穩健的選擇；ONDL 賣出後資金優先進現金",
-      "secondary_if_aggressive": "B（若使用者風險承受度仍高，可換 1 股 AVGO）"
+    {
+      "ticker": "TSLA",
+      "name": "Tesla",
+      "price": 372.96,
+      "in_portfolio_twd": 88174,
+      "thesis": "Q1 2026 EPS $0.41 vs $0.37 預期勝；但營收 $22.39B 略低預期，且 Capex 上修至 $25B+，2026 年自由現金流為負。Robotaxi、Optimus、能源是長期變數。",
+      "pros": ["Robotaxi 商業化（已小規模上路）", "能源與 Megapack 加速放量", "Wedbush Dan Ives 目標 $600（仍有 +60% 空間）", "短期動能：盤中跌，但 Capex 投入長期"],
+      "cons": ["2026 自由現金流為負", "Capex 上修引市場疑慮", "Morningstar 公允價 $400（已接近）", "中國市場壓力（BYD 競爭）", "管理層注意力分散（X、政治）"],
+      "consensus_target": "$420–600（Wedbush $600、Baird $538、Tigress $550、Morningstar $400）",
+      "rating": "Hold / Mixed",
+      "next_catalyst": "Robotaxi 商用、Optimus 量產進度",
+      "user_action": "🟡 TSLT 已虧 -6.47%；建議減 30–50% 鎖風險（5 月用錢前），保留少量續抱博 Robotaxi 題材"
     },
-    "risks": [
-      "0050 短線壓力來自台積電財報後賣壓與 4 萬點關卡",
-      "AVGO 雖有 Q2 指引利多，但客戶集中度與 4/29 後 4 巨頭財報雜訊可能帶來短線回檔",
-      "槓桿 ETF（00631L、AVGU、TSLT、TSMG、SNDU）若大盤拉回 5–10%，組合損失放大近 2 倍",
-      "ONDL 流動性極低，變現可能不及最新報價"
-    ]
-  },
+    {
+      "ticker": "TSM",
+      "name": "TSMC ADR",
+      "price": 395.17,
+      "in_portfolio_twd": 122310,
+      "thesis": "Q1 2026：營收 NT$1.134 兆 (+35.1%)、EPS 22.08 元 (+58.3%)、毛利 66.2%；HPC 占 61%、3nm 占 25%；全年營收上修至 +30%；外資目標價 $230–305（=NT 2,330–3,030）。",
+      "pros": ["AI 製造主軸無對手", "毛利 66.2% 創高", "外資全面上修（大摩、高盛、里昂、花旗）", "ADR 與 2330 同邊，與 TSMG/2330 重疊正向"],
+      "cons": ["ADR 對 TWD 匯率敏感（匯損風險）", "川普 301 調查 7 月底定案是隱憂", "3nm/N2 良率與資本支出壓力（毛利稀釋 2-3%）"],
+      "consensus_target": "$300–390（外資目標 NT 2,330–3,030 換算）",
+      "rating": "加碼 / Strong Buy",
+      "next_catalyst": "5 月營收公告、川普 301 結果（7 月）",
+      "user_action": "🟢 核心持有；2330 + TSMG 雙邊保留，視為長期結構標的"
+    },
+    {
+      "ticker": "SNDK",
+      "name": "SanDisk",
+      "price": 1086.81,
+      "in_portfolio_twd": 11306,
+      "thesis": "2025/02 從 Western Digital spinoff 獨立的純 NAND 記憶體公司；AI NAND 需求暴增，ASP Q1 +90%、全年 +70–75%；2026 EPS Morgan Stanley 模型 $127.92（vs 共識 $77.55，+65%）；YTD +295%。",
+      "pros": ["AI NAND 純 Pure Play（差異於 MU/WDC 仍有 HDD/DRAM）", "ASP 暴漲 +90%，2027 年前無新產能", "外資目標 $1,000–1,250（仍有 +10–15% 上行空間）", "今日 +8.43% 強勢", "SNDU 2X 同步放大"],
+      "cons": ["YTD 已 +295%，估值已大幅 re-rate", "NAND 週期性公司，景氣反轉時跌幅劇烈", "SNDU 流動性偏低"],
+      "consensus_target": "$1,000–1,250（Bernstein $1,250、Morgan Stanley $1,100、BoA $1,080、Jefferies $1,000）",
+      "rating": "Buy / Outperform",
+      "next_catalyst": "NAND ASP 持續上修、AI 訂單能見度",
+      "user_action": "🟢 SNDU 今日已 +15–17%；可分批鎖利 1 股、保留 2 股續抱；或全保留 + 等回檔加碼至 5 股"
+    }
+  ],
   "news": [
-    { "date": "2026-04-28", "category": "美股大盤", "title": "OpenAI 內部用戶與營收未達標 → AI 資本支出泡沫疑慮，NASDAQ -0.90%、SOX -4%", "impact": "negative", "source": "WSJ" },
+    { "date": "2026-04-29", "category": "持倉催化劑", "title": "SanDisk SNDK 今日盤中 +8.43% 至 $1,086！外資 Bernstein 上看 $1,250", "impact": "positive", "source": "BigGo / IBT" },
+    { "date": "2026-04-29", "category": "持倉催化劑", "title": "Tesla TSLA 盤中 -0.82% 至 $372.96；Capex 上修引市場疑慮", "impact": "negative", "source": "BigGo / Morningstar" },
+    { "date": "2026-04-22", "category": "持倉催化劑", "title": "Tesla Q1 EPS $0.41 vs $0.37 預期勝；營收 $22.39B 略低預期", "impact": "neutral", "source": "CNBC" },
+    { "date": "2026-04-29", "category": "持倉催化劑", "title": "TSMC ADR $395.17 (+0.72%)；外資全面上修目標", "impact": "positive", "source": "BigGo" },
+    { "date": "2026-04-28", "category": "美股大盤", "title": "OpenAI 內部用戶與營收未達標 → AI 資本支出泡沫疑慮", "impact": "negative", "source": "WSJ" },
     { "date": "2026-04-29", "category": "美股大盤", "title": "MSFT/GOOGL/META/AMZN 4 巨頭密集財報；AAPL 4/30 接力", "impact": "neutral", "source": "TradingView" },
-    { "date": "2026-04-29", "category": "美聯準會", "title": "FOMC 維持利率 3.50–3.75%，鮑爾最後一場主席記者會", "impact": "neutral", "source": "AP" },
-    { "date": "2026-04-29", "category": "美聯準會", "title": "Trump 提名 Kevin Warsh 接任 Fed 主席，5/15 鮑爾任期屆滿", "impact": "neutral", "source": "USA Today" },
-    { "date": "2026-04-28", "category": "通膨/能源", "title": "美國 CPI 升至 3.3%（兩年高），主因伊朗戰爭推升油價", "impact": "negative", "source": "CBS" },
-    { "date": "2026-04-26", "category": "地緣政治", "title": "伊朗重申封鎖荷莫茲海峽，全球 1/5 原油流量受阻", "impact": "negative", "source": "CNN" },
-    { "date": "2026-04-28", "category": "油價", "title": "Dated Brent $120/桶；美汽油 $4.10/加侖", "impact": "negative", "source": "Reuters" },
-    { "date": "2026-04-28", "category": "美台貿易", "title": "USTR 對台 301 調查，公開聽證 4/28、5/5；7 月底定案", "impact": "neutral", "source": "UDN" },
-    { "date": "2026-04-29", "category": "美台貿易", "title": "卓榮泰：保住 15% 不堆疊關稅 ART 協議為最高優先", "impact": "neutral", "source": "Taipei Times" },
-    { "date": "2026-04-28", "category": "美台貿易", "title": "英業達赴美投資 $85M 設廠以對沖關稅", "impact": "positive", "source": "Reuters" },
-    { "date": "2026-04-29", "category": "美台貿易", "title": "伊利諾州在台北設辦事處，台灣升至美國第 4 大貿易夥伴", "impact": "positive", "source": "Taipei Times" },
-    { "date": "2026-04-28", "category": "半導體", "title": "費城半導體指數單日重挫逾 4%，NVDA -4.4%", "impact": "negative", "source": "Yahoo Finance" },
+    { "date": "2026-04-29", "category": "美聯準會", "title": "FOMC 維持利率 3.50–3.75%；鮑爾最後一場主席記者會", "impact": "neutral", "source": "AP" },
+    { "date": "2026-04-29", "category": "美聯準會", "title": "Trump 提名 Kevin Warsh 接任 Fed 主席", "impact": "neutral", "source": "USA Today" },
+    { "date": "2026-04-28", "category": "通膨/能源", "title": "美國 CPI 升至 3.3%（兩年高），主因伊朗戰爭", "impact": "negative", "source": "CBS" },
+    { "date": "2026-04-26", "category": "地緣政治", "title": "伊朗封鎖荷莫茲海峽，全球 1/5 原油流量受阻", "impact": "negative", "source": "CNN" },
+    { "date": "2026-04-28", "category": "美台貿易", "title": "USTR 對台 301 調查；7 月底定案", "impact": "neutral", "source": "UDN" },
+    { "date": "2026-04-29", "category": "美台貿易", "title": "卓榮泰：保住 15% 不堆疊關稅 ART 為最高優先", "impact": "neutral", "source": "Taipei Times" },
+    { "date": "2026-04-28", "category": "半導體", "title": "費城半導體指數單日重挫逾 4%；NVDA -4.4%", "impact": "negative", "source": "Yahoo" },
     { "date": "2026-04-16", "category": "半導體", "title": "台積電 Q1 EPS 22.08 元 (+58.3%)、毛利 66.2%", "impact": "positive", "source": "數位時代" },
-    { "date": "2026-04-29", "category": "半導體", "title": "大摩、高盛、里昂將 TSMC 目標價調至 2,588 / 2,750 / 3,030 元", "impact": "positive", "source": "科技新報" },
-    { "date": "2026-04-中", "category": "半導體", "title": "工業富聯 Q1 淨利 +102%；AI GPU 機櫃 +3.8 倍", "impact": "positive", "source": "經濟日報" },
-    { "date": "2026-04-中", "category": "半導體", "title": "國巨 Q1 營收 381.66 億 (+22.7%) 創新高；EPS 預估 3.88 元", "impact": "positive", "source": "Yahoo TW" },
-    { "date": "2026-04-29", "category": "美股科技", "title": "微軟 FY26 Q1 營收 $77.7B (+18%)、Azure +40%；4 巨頭 AI Capex $630B", "impact": "positive", "source": "Microsoft IR" },
-    { "date": "2026-04-中", "category": "AI 雲", "title": "CoreWeave 與 Meta $21B 至 2032 合約；Jane Street $7B 注資", "impact": "positive", "source": "Seeking Alpha" },
+    { "date": "2026-04-29", "category": "半導體", "title": "外資將 TSMC 目標價調至 2,588 / 2,750 / 3,030 元", "impact": "positive", "source": "科技新報" },
+    { "date": "2026-04-中", "category": "AI 算力", "title": "Broadcom Q1 AI 收入 $8.4B (+106%)；Q2 指引 $10.7B (+140%)", "impact": "positive", "source": "Broadcom IR" },
+    { "date": "2026-04-29", "category": "美股科技", "title": "微軟 FY26 Q1 營收 $77.7B (+18%)、Azure +40%", "impact": "positive", "source": "MSFT IR" },
     { "date": "2026-04-中", "category": "AI 算力", "title": "NVIDIA Q4 FY26 營收 $68B (+73%)；Q1 FY27 指引 $78B", "impact": "positive", "source": "Motley Fool" },
-    { "date": "2026-04-29", "category": "電動車/Tesla", "title": "TSLA 4/29 盤中波動，4 巨頭財報與關稅成短期變數", "impact": "neutral", "source": "綜合外電" },
+    { "date": "2026-04-中", "category": "記憶體/AI", "title": "SanDisk YTD +295%；NAND ASP Q1 +90%；2027 前無新產能", "impact": "positive", "source": "IBT" },
+    { "date": "2026-04-27", "category": "記憶體/AI", "title": "Morgan Stanley 將 SNDK 目標價上修至 $1,100（自 $690）", "impact": "positive", "source": "TheStreet" },
     { "date": "2026-04-29", "category": "台股大盤", "title": "加權指數 39,303 點 (-218, -0.55%)；台積電 -35 至 2,180", "impact": "negative", "source": "Yahoo TW" },
-    { "date": "2026-04-28", "category": "台股", "title": "加權盤中觸 40,101 史高，台積電盤尾摜壓收 2,215 (-2.21%)", "impact": "neutral", "source": "中央社" },
-    { "date": "2026-04-中", "category": "雲端/SaaS", "title": "Snowflake AI 工作負載成長帶動 SNOW 相關 ETF（含 SNDU）關注度", "impact": "positive", "source": "綜合外電" },
-    { "date": "2026-04-中", "category": "電動車/Tesla", "title": "Tesla 對 2X 槓桿 ETF（如 TSLT）波動度同步放大", "impact": "neutral", "source": "綜合外電" }
+    { "date": "2026-04-28", "category": "台股", "title": "加權盤中觸 40,101 史高，台積電盤尾摜壓收 2,215", "impact": "neutral", "source": "中央社" },
+    { "date": "2026-04-中", "category": "AI 雲", "title": "CoreWeave 與 Meta $21B 至 2032 合約；Jane Street $7B 注資", "impact": "positive", "source": "Seeking Alpha" },
+    { "date": "2026-04-中", "category": "電動車", "title": "Tesla Robotaxi 已小規模上路；2026 自由現金流轉負", "impact": "neutral", "source": "Morningstar" }
   ],
   "earnings": [
-    { "ticker": "TSM/2330", "name": "台積電", "period": "2026 Q1", "revenue": "NT$1.134 兆 (+35.1% YoY)", "eps": "22.08 元 (+58.3% YoY)", "highlight": "毛利 66.2%；HPC 占 61%；3nm 占 25%", "rating": "加碼" },
-    { "ticker": "AVGO", "name": "Broadcom", "period": "2026 Q1", "revenue": "$19.3B (+29% YoY)", "eps": "$2.05 (Non-GAAP)", "highlight": "AI 收入 $8.4B (+106%)；Q2 指引 AI $10.7B", "rating": "Buy" },
-    { "ticker": "NVDA", "name": "NVIDIA", "period": "FY26 Q4", "revenue": "$68B (+73% YoY)", "eps": "—", "highlight": "DC $62.3B；Q1 FY27 指引 $78B", "rating": "Strong Buy" },
+    { "ticker": "AVGO", "name": "Broadcom", "period": "2026 Q1", "revenue": "$19.3B (+29%)", "eps": "$2.05", "highlight": "AI +106%；Q2 指引 +47%", "rating": "Buy" },
+    { "ticker": "TSLA", "name": "Tesla", "period": "2026 Q1 (4/22)", "revenue": "$22.39B (+16%)", "eps": "$0.41 (vs $0.37E)", "highlight": "Capex 上修至 $25B+；2026 FCF 為負", "rating": "Hold" },
+    { "ticker": "TSM/2330", "name": "台積電 / TSMC", "period": "2026 Q1", "revenue": "NT$1.134 兆 (+35.1%)", "eps": "22.08 元", "highlight": "毛利 66.2%；HPC 61%", "rating": "Strong Buy" },
+    { "ticker": "SNDK", "name": "SanDisk", "period": "2026 Q1 (預期)", "revenue": "—", "eps": "—（2026E EPS $127.92）", "highlight": "ASP +90%；YTD +295%", "rating": "Buy / Outperform" },
+    { "ticker": "NVDA", "name": "NVIDIA", "period": "FY26 Q4", "revenue": "$68B (+73%)", "eps": "—", "highlight": "DC $62.3B；Q1 FY27 指引 $78B", "rating": "Strong Buy" },
     { "ticker": "MSFT", "name": "Microsoft", "period": "FY26 Q1", "revenue": "$77.7B (+18%)", "eps": "—", "highlight": "Azure +40%", "rating": "Buy" },
-    { "ticker": "META", "name": "Meta", "period": "2026 Q1 (預期)", "revenue": "$53.5–56.5B (+31%)", "eps": "—", "highlight": "全年 Capex $115–135B", "rating": "Buy" },
-    { "ticker": "GOOGL", "name": "Alphabet", "period": "2026 Q1 (預期)", "revenue": "$92.2B (+17–18%)", "eps": "—", "highlight": "Search 韌性、TPU Ironwood", "rating": "Buy" },
-    { "ticker": "AMZN", "name": "Amazon", "period": "2026 Q1 (預期)", "revenue": "—", "eps": "—", "highlight": "AWS $36.8B (+25.6%)", "rating": "Buy" },
-    { "ticker": "AAPL", "name": "Apple", "period": "FY26 Q2 (4/30)", "revenue": "$108.9B (+13–16%)", "eps": "$1.91–1.94", "highlight": "iPhone 17 強勁", "rating": "Moderate Buy" },
-    { "ticker": "TSLA", "name": "Tesla", "period": "2026 Q1", "revenue": "—", "eps": "—", "highlight": "Robotaxi、能源；TSLT/2X ETF 同步放大", "rating": "Hold" },
-    { "ticker": "2317", "name": "鴻海/工業富聯", "period": "2026 Q1", "revenue": "RMB 2,510.78 億 (+56.5%)", "eps": "—", "highlight": "AI 機櫃 +3.8 倍", "rating": "Buy 目標 400" },
-    { "ticker": "2327", "name": "國巨", "period": "2026 Q1", "revenue": "NT$381.66 億 (+22.7%)", "eps": "3.88 元", "highlight": "鉭電容供不應求", "rating": "Buy 目標 330–362" },
-    { "ticker": "3017", "name": "奇鋐", "period": "Q1 累計", "revenue": "NT$490.4 億 (+110%)", "eps": "16.92 元 (Q4)", "highlight": "2026 EPS 估 54.8–96.5 元", "rating": "Strong Buy" },
-    { "ticker": "CRWV", "name": "CoreWeave", "period": "2026 Q1", "revenue": "—", "eps": "—", "highlight": "$66.8B 訂單；Meta $21B", "rating": "Buy 目標 130–185" },
-    { "ticker": "SNOW", "name": "Snowflake", "period": "FY26", "revenue": "—", "eps": "—", "highlight": "AI 工作負載驅動，與 SNDU 連動", "rating": "Buy" }
+    { "ticker": "META", "name": "Meta", "period": "2026 Q1 預期", "revenue": "$53.5–56.5B", "eps": "—", "highlight": "全年 Capex $115–135B", "rating": "Buy" },
+    { "ticker": "GOOGL", "name": "Alphabet", "period": "2026 Q1 預期", "revenue": "$92.2B", "eps": "—", "highlight": "TPU Ironwood + Search 韌性", "rating": "Buy" },
+    { "ticker": "AAPL", "name": "Apple", "period": "FY26 Q2 (4/30)", "revenue": "$108.9B", "eps": "$1.91–1.94", "highlight": "iPhone 17 強勁", "rating": "Moderate Buy" }
   ],
   "analysts": {
     "panel": [
@@ -175,89 +163,193 @@
       "風控長", "產業專家", "量化派", "ESG"
     ],
     "votes": [
-      { "symbol": "0050.TW", "name": "元大台灣50", "sell": 1, "hold": 11, "buy": 7, "label": "壓艙石" },
-      { "symbol": "00631L.TW", "name": "台灣50正2", "sell": 7, "hold": 9, "buy": 3, "label": "槓桿 ETF（已偏高）" },
+      { "symbol": "0050.TW", "name": "元大台灣50", "sell": 0, "hold": 11, "buy": 8, "label": "壓艙石（長期）" },
+      { "symbol": "00631L.TW", "name": "台灣50正2 (=0050 2X)", "sell": 2, "hold": 11, "buy": 6, "label": "用戶長期持有" },
       { "symbol": "2330.TW", "name": "台積電", "sell": 0, "hold": 6, "buy": 13, "label": "AI 主軸" },
       { "symbol": "2337.TW", "name": "旺宏電子", "sell": 4, "hold": 11, "buy": 4, "label": "反彈動能" },
       { "symbol": "3231.TW", "name": "緯創", "sell": 2, "hold": 9, "buy": 8, "label": "AI 伺服器" },
       { "symbol": "3711.TW", "name": "日月光投控", "sell": 0, "hold": 7, "buy": 12, "label": "封測領袖" },
       { "symbol": "6173.TW", "name": "信昌電", "sell": 11, "hold": 7, "buy": 1, "label": "處置股" },
-      { "symbol": "AIXI", "name": "Xiao-I", "sell": 16, "hold": 3, "buy": 0, "label": "今日待賣" },
-      { "symbol": "AVGO", "name": "Broadcom", "sell": 1, "hold": 6, "buy": 12, "label": "AI 客製贏家" },
-      { "symbol": "AVGU", "name": "AVGU 2X", "sell": 8, "hold": 8, "buy": 3, "label": "AVGO 2X 槓桿" },
-      { "symbol": "ONDL", "name": "ONDL 2X", "sell": 13, "hold": 6, "buy": 0, "label": "回檔待賣" },
-      { "symbol": "SMH", "name": "SMH 半導體 ETF", "sell": 1, "hold": 8, "buy": 10, "label": "核心 ETF" },
-      { "symbol": "SNDU", "name": "SNDU 2X", "sell": 6, "hold": 10, "buy": 3, "label": "SNOW 2X 槓桿" },
-      { "symbol": "TSLT", "name": "TSLA 2X", "sell": 9, "hold": 8, "buy": 2, "label": "Tesla 2X" },
-      { "symbol": "TSMG", "name": "TSM 2X", "sell": 5, "hold": 9, "buy": 5, "label": "TSMC ADR 2X" }
+      { "symbol": "AIXI", "name": "Xiao-I", "sell": 16, "hold": 3, "buy": 0, "label": "今日待清" },
+      { "symbol": "AVGO+AVGU", "name": "Broadcom（直+槓桿）", "sell": 1, "hold": 6, "buy": 12, "label": "AI 客製贏家" },
+      { "symbol": "ONDL", "name": "ONDS 連動失效", "sell": 13, "hold": 6, "buy": 0, "label": "回檔清" },
+      { "symbol": "SMH", "name": "VanEck 半導體 ETF", "sell": 1, "hold": 8, "buy": 10, "label": "核心 ETF" },
+      { "symbol": "SNDU→SNDK", "name": "SanDisk 2X", "sell": 2, "hold": 6, "buy": 11, "label": "AI NAND Pure Play" },
+      { "symbol": "TSLT→TSLA", "name": "Tesla 2X", "sell": 7, "hold": 8, "buy": 4, "label": "Tesla 2X 高 Beta" },
+      { "symbol": "TSMG→TSM", "name": "TSMC 2X", "sell": 0, "hold": 7, "buy": 12, "label": "與 2330 同邊" }
     ]
   },
   "picks": [
-    { "rank": 1, "ticker": "3443", "name": "創意", "market": "TW", "price": 3800, "target_low": 4500, "target_high": 5000, "upside_pct": 25, "thesis": "Google CPU + 特斯拉 AI5；2027 EPS 預估 149 元" },
-    { "rank": 2, "ticker": "6669", "name": "緯穎", "market": "TW", "price": 4800, "target_low": 5500, "target_high": 6500, "upside_pct": 25, "thesis": "AI 伺服器主機板 / 整機代工龍頭；CSP 訂單滿載" },
-    { "rank": 3, "ticker": "2454", "name": "聯發科", "market": "TW", "price": 1450, "target_low": 1700, "target_high": 1950, "upside_pct": 25, "thesis": "旗艦 SoC、Google TPU 合作" },
-    { "rank": 4, "ticker": "AMD", "name": "AMD", "market": "US", "price": 220, "target_low": 290, "target_high": 375, "upside_pct": 50, "thesis": "NVIDIA 唯一結構性對手；MI350 + 2nm Venice CPU；股價 ≤300" },
-    { "rank": 5, "ticker": "CRWV", "name": "CoreWeave", "market": "US", "price": 118, "target_low": 150, "target_high": 185, "upside_pct": 35, "thesis": "Meta $21B + Jane Street $7B；FY26 ARR $17–19B" }
+    { "rank": 1, "ticker": "3443", "name": "創意", "market": "TW", "price": 3800, "target_low": 4500, "target_high": 5000, "upside_pct": 25, "thesis": "Google CPU + 特斯拉 AI5 ASIC；2027 EPS 預估 149 元；Pure Play ASIC 設計", "type": "個股" },
+    { "rank": 2, "ticker": "6669", "name": "緯穎", "market": "TW", "price": 4800, "target_low": 5500, "target_high": 6500, "upside_pct": 25, "thesis": "AI 伺服器整機代工龍頭；CSP 訂單滿載", "type": "個股" },
+    { "rank": 3, "ticker": "2454", "name": "聯發科", "market": "TW", "price": 1450, "target_low": 1700, "target_high": 1950, "upside_pct": 25, "thesis": "旗艦 SoC + Google TPU 合作", "type": "個股" },
+    { "rank": 4, "ticker": "AMD", "name": "AMD", "market": "US", "price": 220, "target_low": 290, "target_high": 375, "upside_pct": 50, "thesis": "NVIDIA 唯一結構性對手；MI350 + 2nm Venice CPU；股價 ≤$300", "type": "個股" },
+    { "rank": 5, "ticker": "CRWV", "name": "CoreWeave", "market": "US", "price": 118, "target_low": 150, "target_high": 185, "upside_pct": 35, "thesis": "Meta $21B + Jane Street $7B；FY26 ARR $17–19B", "type": "個股" }
   ],
   "actions": {
     "A": [
-      { "symbol": "2330.TW", "name": "台積電", "price": 2180, "target": "2,500–2,750", "stop": 1950, "strategy": "外資多家上修目標；分批承接，挑戰 2,100 為加碼點" },
-      { "symbol": "3711.TW", "name": "日月光投控", "price": 488.5, "target": "560–600", "stop": 440, "strategy": "後段封測獨家題材；CoWoS 受惠" },
+      { "symbol": "2330.TW", "name": "台積電", "price": 2180, "target": "2,500–2,750", "stop": 1950, "strategy": "外資多家上修；分批承接，挑戰 2,100 為加碼點" },
+      { "symbol": "3711.TW", "name": "日月光投控", "price": 488.5, "target": "560–600", "stop": 440, "strategy": "後段封測；CoWoS 受惠" },
       { "symbol": "0050.TW", "name": "元大台灣50", "price": 90.75, "target": "96–100", "stop": 86, "strategy": "壓艙石；新資金優先加碼" },
-      { "symbol": "AVGO", "name": "Broadcom", "price": 398.97, "target": "$460–500", "stop": 360, "strategy": "AI 客製加速器爆發；Q2 +47% YoY" },
-      { "symbol": "SMH", "name": "VanEck 半導體", "price": 493.85, "target": "$540–580", "stop": 450, "strategy": "半導體大盤代理；地緣避震" }
+      { "symbol": "AVGO+AVGU", "name": "Broadcom (直+2X)", "price": 399.83, "target": "$460–500", "stop": 360, "strategy": "AI 客製加速器爆發；現價可加碼底層 AVGO" },
+      { "symbol": "SMH", "name": "VanEck 半導體", "price": 493.85, "target": "$540–580", "stop": 450, "strategy": "半導體大盤代理" },
+      { "symbol": "TSMG→TSM", "name": "TSMC 2X", "price": 35.81, "target": "$42–46", "stop": 32, "strategy": "與台積電同向，外資全面上修" }
     ],
     "B": [
+      { "symbol": "SNDU→SNDK", "name": "SanDisk 2X", "price": 59.71, "target": "$72–80（盤中可能已達）", "stop": 52, "strategy": "今日 SNDK +8.43%！可分批鎖利 1 股，保留 2 股續抱" },
       { "symbol": "3231.TW", "name": "緯創", "price": 140.5, "target": "165–185", "stop": 125, "strategy": "AI 伺服器代工；月營收續強" },
-      { "symbol": "2337.TW", "name": "旺宏電子", "price": 167, "target": "195–220", "stop": 150, "strategy": "NOR 反彈；注意股留意波動，可鎖利" },
-      { "symbol": "00631L.TW", "name": "台灣50正2", "price": 28.82, "target": "33–35", "stop": 26, "strategy": "槓桿已偏高；建議減碼 1,000 股以降風險" },
-      { "symbol": "AVGU", "name": "AVGU 2X", "price": 42.22, "target": "$48–52", "stop": 38, "strategy": "AVGO 多頭工具，注意 Beta 高" },
-      { "symbol": "TSMG", "name": "TSM 2X", "price": 35.81, "target": "$42–46", "stop": 32, "strategy": "與台積電多頭同向；可作衛星" },
-      { "symbol": "SNDU", "name": "SNOW 2X", "price": 59.71, "target": "$72–80", "stop": 52, "strategy": "AI 雲工作負載成長；流動性偏低" }
+      { "symbol": "2337.TW", "name": "旺宏電子", "price": 167, "target": "195–220", "stop": 150, "strategy": "NOR 反彈；可鎖利" },
+      { "symbol": "00631L.TW", "name": "台灣50正2", "price": 28.82, "target": "33–35", "stop": 26, "strategy": "用戶心智 = 0050 長期；除非缺錢不動" }
     ],
     "C": [
-      { "symbol": "AIXI", "name": "Xiao-I", "price": 1.04, "action": "今日全出 (180 股)", "reason": "已虧 -34.8%；仙股無基本面" },
-      { "symbol": "ONDL", "name": "ONDL 2X", "price": 15.25, "action": "回檔反彈時清倉", "reason": "ONDS 已出清，連動失效；流動性極低" },
-      { "symbol": "6173.TW", "name": "信昌電", "price": 84, "action": "逢 88–90 全出", "reason": "處置股、流動性差；近一週逆勢" },
-      { "symbol": "TSLT", "name": "TSLA 2X", "price": 16.63, "action": "減碼 30–50%", "reason": "Tesla 短期波動；2X 槓桿風險加倍" }
+      { "symbol": "AIXI", "name": "Xiao-I", "price": 1.04, "action": "今日全清 (180 股)", "reason": "已虧 -34.8%；仙股無基本面" },
+      { "symbol": "ONDL", "name": "ONDL 2X", "price": 15.25, "action": "回檔反彈時清", "reason": "ONDS 已出清；連動失效；流動性極低" },
+      { "symbol": "6173.TW", "name": "信昌電", "price": 84, "action": "逢 88–90 全出", "reason": "處置股、流動性差" },
+      { "symbol": "TSLT→TSLA", "name": "Tesla 2X", "price": 16.63, "action": "減碼 30–50%", "reason": "Tesla Capex 上修、2026 FCF 為負；2X 槓桿風險加倍" }
     ]
   },
+  "next_buy_recommendations": [
+    {
+      "scenario": "立即可下單（美股交易中）",
+      "tickers": [
+        { "ticker": "AVGO", "name": "Broadcom", "price": 399.83, "rationale": "AI 客製贏家；Q2 指引 +47%；持有 4 股可加 1 股至 5 股", "size_suggest": "1 股 ≈ NT$ 12,623", "confidence": "🟢 高" },
+        { "ticker": "AMD", "name": "AMD", "price": 220, "rationale": "NV 唯一對手；MI350 出貨；目標 $290–375", "size_suggest": "1 股 ≈ NT$ 6,943", "confidence": "🟢 高" },
+        { "ticker": "CRWV", "name": "CoreWeave", "price": 118, "rationale": "Meta $21B + Jane Street $7B；ARR 跳升", "size_suggest": "1–2 股 ≈ NT$ 3,724–7,448", "confidence": "🟡 中（高 Beta）" },
+        { "ticker": "ANET", "name": "Arista Networks", "price": 122, "rationale": "AI 網路 Ethernet 與 AVGO 結構互補", "size_suggest": "1 股 ≈ NT$ 3,850", "confidence": "🟡 中" }
+      ]
+    },
+    {
+      "scenario": "台股 4/30 開盤後可下單",
+      "tickers": [
+        { "ticker": "3443", "name": "創意", "price": 3800, "rationale": "ASIC 設計龍頭；Google CPU + 特斯拉 AI5", "size_suggest": "1 股 ≈ NT$ 3,800", "confidence": "🟢 高（AI 結構）" },
+        { "ticker": "2454", "name": "聯發科", "price": 1450, "rationale": "Google TPU 合作；旗艦 SoC", "size_suggest": "1 股 ≈ NT$ 1,450", "confidence": "🟢 高" },
+        { "ticker": "6669", "name": "緯穎", "price": 4800, "rationale": "AI 伺服器整機代工龍頭", "size_suggest": "1 股 ≈ NT$ 4,800", "confidence": "🟡 中（價位高）" }
+      ]
+    }
+  ],
   "allocation": {
     "current": [
-      { "label": "核心 ETF (0050+SMH)", "value": 47.6 },
-      { "label": "槓桿/單押 ETF", "value": 28.2 },
-      { "label": "個股 (台積/AVGO/日月光等)", "value": 22.6 },
-      { "label": "高風險（仙股+待出清）", "value": 2.0 },
+      { "label": "0050+00631L 核心台股", "value": 47.6 },
+      { "label": "其他半導體 (SMH+2330+TSMG+AVGU+AVGO)", "value": 29.6 },
+      { "label": "Tesla (TSLT)", "value": 5.7 },
+      { "label": "其他台股個股", "value": 9.8 },
+      { "label": "SanDisk (SNDU)", "value": 0.7 },
+      { "label": "高風險（待出清）", "value": 2.0 },
       { "label": "現金", "value": 0.0 }
     ],
     "target": [
-      { "label": "核心 ETF (0050+SMH)", "value": 50 },
-      { "label": "槓桿/單押 ETF", "value": 22 },
-      { "label": "個股 (台積/AVGO/日月光等)", "value": 22 },
-      { "label": "高風險（仙股+待出清）", "value": 0 },
+      { "label": "0050+00631L 核心台股", "value": 50 },
+      { "label": "其他半導體", "value": 30 },
+      { "label": "Tesla (減碼)", "value": 3 },
+      { "label": "其他台股個股", "value": 10 },
+      { "label": "SanDisk", "value": 1 },
+      { "label": "高風險（待出清）", "value": 0 },
       { "label": "現金", "value": 6 }
     ]
   },
   "consensus": [
-    { "symbol": "2330.TW", "name": "台積電", "rating": "加碼", "target": "2,330–3,030", "date": "2026-04" },
-    { "symbol": "3711.TW", "name": "日月光", "rating": "加碼", "target": "540–600", "date": "2026-04" },
-    { "symbol": "3231.TW", "name": "緯創", "rating": "Buy", "target": "165–185", "date": "2026-04" },
-    { "symbol": "AVGO", "name": "Broadcom", "rating": "Buy", "target": "$440–500", "date": "2026-03" },
-    { "symbol": "AAPL", "name": "Apple", "rating": "Moderate Buy", "target": "$295", "date": "2026-04" },
+    { "symbol": "AVGO", "name": "Broadcom", "rating": "Buy", "target": "$440–500", "date": "2026-04" },
+    { "symbol": "TSLA", "name": "Tesla", "rating": "Hold/Buy", "target": "$420–600", "date": "2026-04" },
+    { "symbol": "TSM", "name": "TSMC ADR", "rating": "Strong Buy", "target": "$300–390", "date": "2026-04" },
+    { "symbol": "SNDK", "name": "SanDisk", "rating": "Buy", "target": "$1,000–1,250", "date": "2026-04" },
+    { "symbol": "2330.TW", "name": "台積電", "rating": "加碼", "target": "NT$2,330–3,030", "date": "2026-04" },
+    { "symbol": "3711.TW", "name": "日月光", "rating": "加碼", "target": "NT$540–600", "date": "2026-04" },
     { "symbol": "AMD", "name": "AMD", "rating": "Buy", "target": "$290–375", "date": "2026-04" },
     { "symbol": "CRWV", "name": "CoreWeave", "rating": "Buy", "target": "$130–185", "date": "2026-04" },
-    { "symbol": "TSLA", "name": "Tesla", "rating": "Hold", "target": "$240–320", "date": "2026-04" },
-    { "symbol": "SNOW", "name": "Snowflake", "rating": "Buy", "target": "$200–250", "date": "2026-04" }
+    { "symbol": "ANET", "name": "Arista Networks", "rating": "Buy", "target": "$145–165", "date": "2026-04" },
+    { "symbol": "AAPL", "name": "Apple", "rating": "Moderate Buy", "target": "$295", "date": "2026-04" }
   ],
   "forecast": [
-    { "symbol": "2330.TW", "name": "台積電", "bull": 2400, "base": 2250, "bear": 2000, "catalyst": "外資 2,588；風險：N3 良率、匯率、關稅" },
-    { "symbol": "3711.TW", "name": "日月光投控", "bull": 555, "base": 510, "bear": 460, "catalyst": "CoWoS 加速；風險：匯率" },
-    { "symbol": "3231.TW", "name": "緯創", "bull": 175, "base": 150, "bear": 125, "catalyst": "AI 伺服器訂單；風險：毛利" },
-    { "symbol": "2337.TW", "name": "旺宏電子", "bull": 200, "base": 170, "bear": 145, "catalyst": "NOR 反彈；注意股波動" },
-    { "symbol": "0050.TW", "name": "元大台灣50", "bull": 100, "base": 92, "bear": 84, "catalyst": "權值股表現決定" },
-    { "symbol": "AVGO", "name": "Broadcom", "bull": 480, "base": 420, "bear": 360, "catalyst": "Q2 指引 +47%；風險：客戶集中" },
-    { "symbol": "SMH", "name": "VanEck 半導體", "bull": 560, "base": 500, "bear": 440, "catalyst": "半導體大盤；風險：總體" },
-    { "symbol": "TSLT", "name": "TSLA 2X", "bull": 22, "base": 16, "bear": 12, "catalyst": "Tesla 走勢 × 2；風險：槓桿放大" },
-    { "symbol": "TSMG", "name": "TSM 2X", "bull": 44, "base": 36, "bear": 30, "catalyst": "TSMC ADR × 2" }
-  ]
+    { "symbol": "AVGO", "name": "Broadcom", "bull": 480, "base": 420, "bear": 360, "catalyst": "Q2 +47%；客戶集中" },
+    { "symbol": "TSLA", "name": "Tesla", "bull": 480, "base": 380, "bear": 300, "catalyst": "Robotaxi、Optimus；Capex 風險" },
+    { "symbol": "TSM", "name": "TSMC ADR", "bull": 460, "base": 410, "bear": 360, "catalyst": "AI 製造主軸；匯率/關稅" },
+    { "symbol": "SNDK", "name": "SanDisk", "bull": 1300, "base": 1100, "bear": 850, "catalyst": "ASP 持續+；估值修正" },
+    { "symbol": "2330.TW", "name": "台積電", "bull": 2400, "base": 2250, "bear": 2000, "catalyst": "外資 2,588" },
+    { "symbol": "3711.TW", "name": "日月光", "bull": 555, "base": 510, "bear": 460, "catalyst": "CoWoS" },
+    { "symbol": "0050.TW", "name": "元大台灣50", "bull": 100, "base": 92, "bear": 84, "catalyst": "權值股表現" },
+    { "symbol": "SMH", "name": "VanEck 半導體", "bull": 560, "base": 500, "bear": 440, "catalyst": "半導體大盤" }
+  ],
+  "capital_plan": {
+    "title": "2026-04-29 新資金部署策略（個股優先版）",
+    "sources": [
+      { "src": "AIXI 賣出 (今日)", "amount_twd": 5908, "amount_usd": 187.20, "status": "immediate", "note": "認賠 -34.8%" },
+      { "src": "ONDL 賣出 (回檔時)", "amount_twd": 9626, "amount_usd": 305.00, "status": "conditional", "note": "ONDS 連動失效；回檔反彈清倉" },
+      { "src": "新投入資金", "amount_twd": 10000, "amount_usd": 316.84, "status": "immediate", "note": "使用者新投入 NT$ 10,000" }
+    ],
+    "totals": {
+      "immediate": 15908,
+      "conditional": 9626,
+      "total": 25534
+    },
+    "context": [
+      "投資哲學更新：2X ETF 視為底層個股；00631L 視為 0050 長期持有；推薦只用個股",
+      "實質曝險 NT$ 978,144（含 2X 放大），槓桿率 1.27",
+      "Tesla 短期偏弱（FCF 為負）→ TSLT 是當前最該減碼的部位",
+      "SNDK 今日 +8.43%，SNDU 順勢放大；AI NAND 結構性多頭",
+      "AVGO 仍是核心 AI 受惠者；可加 1 股直接持有"
+    ],
+    "options": [
+      {
+        "id": "A",
+        "name": "個股強化派（推薦 ⭐）",
+        "philosophy": "用 AIXI 賣出 + 新資金，加買 1 股 AVGO；ONDL 賣出後留現金。同時減 TSLT 一半。",
+        "actions": [
+          { "step": 1, "fund": "AIXI 5,908 + 新投入 10,000 = 15,908", "use": "加買 AVGO 1 股（≈ NT$ 12,623）+ 殘 NT$ 3,285 留現金", "rationale": "AVGO Q2 +47% YoY，是當前最確定的 AI 個股；現價 $400 仍有 +20% 空間至 $480" },
+          { "step": 2, "fund": "ONDL 9,626（條件式）", "use": "全留現金（5 月用錢備用）", "rationale": "ONDS 已清，連動失效；換現金最理性" },
+          { "step": 3, "fund": "額外建議：TSLT 84 股 → 減 40 股（≈ NT$ 21,000）", "use": "全留現金", "rationale": "Tesla 2026 FCF 為負；Capex 上修；TSLT 已虧 -6.47%；現金水位拉至 ~5%" }
+        ],
+        "result": {
+          "post_tw_pct": 64.0,
+          "post_us_pct": 31.0,
+          "post_cash_pct": 5.0,
+          "post_leveraged_pct": 23.5,
+          "summary": "AVGO 從 4→5 股；TSLT 半倉；現金升至 5%；組合更聚焦 AI 結構性贏家"
+        }
+      },
+      {
+        "id": "B",
+        "name": "AI 雙引擎派",
+        "philosophy": "AVGO + AMD 雙引擎；繼續持有 TSLT 不動",
+        "actions": [
+          { "step": 1, "fund": "AIXI 5,908 + 新投入 10,000 = 15,908", "use": "AVGO 1 股 + AMD 1 股 (≈ NT$ 12,623 + NT$ 6,943 = 略超預算)", "rationale": "兼顧 AI 客製（AVGO）與 AI GPU 第二供應（AMD）" },
+          { "step": 2, "fund": "ONDL 9,626（條件式）", "use": "再加 1 股 AMD 或加 1 股 0050 + 留現金", "rationale": "AMD 仍 ≤300，目標 $290–375" }
+        ],
+        "result": {
+          "post_tw_pct": 64.5,
+          "post_us_pct": 33.5,
+          "post_cash_pct": 1.0,
+          "post_leveraged_pct": 27.0,
+          "summary": "AI 算力雙引擎；但現金水位低，需注意 5 月用錢"
+        }
+      },
+      {
+        "id": "C",
+        "name": "去槓桿穩健派",
+        "philosophy": "趁勢全去槓桿；現金備用",
+        "actions": [
+          { "step": 1, "fund": "AIXI 5,908 + 新投入 10,000 = 15,908", "use": "全部加碼 0050 約 175 股", "rationale": "0050 為核心壓艙；可快速變現" },
+          { "step": 2, "fund": "ONDL 9,626（條件式）", "use": "全留現金", "rationale": "5 月用錢備用" },
+          { "step": 3, "fund": "TSLT 全清（84 股 ≈ NT$ 44,087）", "use": "全留現金", "rationale": "Tesla 短期偏弱；2X 風險放大" }
+        ],
+        "result": {
+          "post_tw_pct": 67.0,
+          "post_us_pct": 27.0,
+          "post_cash_pct": 7.0,
+          "post_leveraged_pct": 19.0,
+          "summary": "現金充裕；Tesla 風險完全退出；組合更穩"
+        }
+      }
+    ],
+    "recommendation": {
+      "primary": "A",
+      "reason": "個股強化派 — 加買 AVGO 1 股（5 股總部位）+ 減 TSLT 一半 + ONDL 留現金。完美對齊用戶『推薦只用個股 + 槓桿視為底層』的策略。",
+      "secondary_if_aggressive": "B（AVGO + AMD 雙引擎，但需承受現金水位低）"
+    },
+    "risks": [
+      "AVGO 4/29 盤中與底層走勢 $399.83；若 4 巨頭財報雜訊導致 NASDAQ 進一步回檔，AVGO 可能跌至 $360",
+      "AMD 仍未公布 Q1（5/6 法說），財報前後波動大",
+      "TSLT 減半時若 TSLA 反彈會少賺，但 5 月用錢需求下降風險優先",
+      "0050 視為長期，但若 5 月需 NT$ 5 萬以上現金，仍需階段減碼"
+    ]
+  }
 }

@@ -210,6 +210,61 @@ th.num{text-align:right}
 .report-frame ul,.report-frame ol{padding-left:20px;margin:8px 0}
 .report-frame .meta{display:block;font-size:12px;color:var(--text-2)}
 
+/* ======== leverage mapping ======== */
+.lev-hero{background:var(--card);border:1px solid var(--border-strong);border-radius:20px;padding:24px;margin-bottom:18px;background-image:linear-gradient(135deg,rgba(124,92,255,.12),rgba(67,231,255,.06))}
+.lev-hero h2{font-size:20px;font-weight:800;margin-bottom:6px}
+.lev-pill-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.lev-pill{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.04);border:1px solid var(--border);font-size:12px;font-weight:600}
+.lev-pill b{color:var(--accent);font-family:'JetBrains Mono',monospace}
+
+.expo-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-bottom:18px}
+.expo-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px;position:relative;overflow:hidden;transition:all .25s}
+.expo-card:hover{border-color:var(--border-strong);transform:translateY(-2px)}
+.expo-card.long-term{border-color:rgba(52,211,153,.4)}
+.expo-card.long-term::before{content:"🔒 長期";position:absolute;top:10px;right:10px;font-size:10px;font-weight:700;padding:3px 8px;border-radius:999px;background:rgba(52,211,153,.18);color:#7af0c5}
+.expo-card .ico{font-size:28px;margin-bottom:6px}
+.expo-card .nm{font-size:15px;font-weight:800;margin-bottom:6px}
+.expo-card .ex{font-size:22px;font-weight:800;font-family:'JetBrains Mono',monospace;background:var(--grad-1);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:4px}
+.expo-card .pp{font-size:12px;color:var(--text-2);margin-bottom:10px}
+.expo-card .comp{font-size:11.5px;color:var(--text-3);line-height:1.65}
+.expo-card .comp span{display:block}
+
+.under-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(420px,1fr));gap:16px}
+.under-card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:22px;position:relative;overflow:hidden}
+.under-card.bull{border-color:rgba(52,211,153,.32)}
+.under-card.mixed{border-color:rgba(255,209,102,.32)}
+.under-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px}
+.under-head .left h3{font-size:18px;font-weight:800;margin:0}
+.under-head .left .tk{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--text-2);margin-top:2px}
+.under-head .right{text-align:right}
+.under-head .right .pr{font-size:24px;font-weight:800;font-family:'JetBrains Mono',monospace;background:var(--grad-1);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.under-head .right .ex{font-size:11.5px;color:var(--text-2);margin-top:2px}
+.under-thesis{font-size:13px;color:var(--text-2);line-height:1.7;padding:12px 14px;background:rgba(124,92,255,.06);border-radius:10px;margin:10px 0}
+.under-pc{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}
+.under-pc .pros,.under-pc .cons{font-size:12px;line-height:1.65;padding:12px;border-radius:10px}
+.under-pc .pros{background:rgba(52,211,153,.06);border:1px solid rgba(52,211,153,.2)}
+.under-pc .cons{background:rgba(251,113,133,.06);border:1px solid rgba(251,113,133,.2)}
+.under-pc h5{font-size:12px;font-weight:800;margin-bottom:6px}
+.under-pc .pros h5{color:#7af0c5}
+.under-pc .cons h5{color:#ff9aaa}
+.under-pc ul{padding-left:16px;color:var(--text-2)}
+.under-pc li{margin-bottom:3px}
+.under-meta{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.under-meta .pill{font-size:11px;padding:4px 10px;border-radius:7px;background:rgba(67,231,255,.12);color:#7feaff;border:1px solid rgba(67,231,255,.3)}
+.under-meta .pill.warn{background:rgba(255,209,102,.14);color:#ffd166;border-color:rgba(255,209,102,.32)}
+.under-action{padding:12px 14px;background:linear-gradient(135deg,rgba(124,92,255,.18),rgba(67,231,255,.10));border:1px solid var(--border-strong);border-radius:10px;font-size:13px;font-weight:700;line-height:1.6}
+
+.next-buy{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;margin-top:18px}
+.nb-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:8px;transition:all .25s}
+.nb-card:hover{border-color:var(--border-strong);transform:translateY(-2px)}
+.nb-card .tk{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-2);font-weight:700;letter-spacing:.5px}
+.nb-card .nm{font-size:17px;font-weight:800}
+.nb-card .pr{font-size:22px;font-weight:800;font-family:'JetBrains Mono',monospace}
+.nb-card .ra{font-size:12.5px;color:var(--text-2);line-height:1.6;flex:1}
+.nb-card .footer-row{display:flex;justify-content:space-between;align-items:center;margin-top:8px;padding-top:10px;border-top:1px solid var(--border)}
+.nb-card .sz{font-size:11.5px;color:var(--text-3);font-family:'JetBrains Mono',monospace}
+.nb-card .cf{font-size:12px;font-weight:700}
+
 /* ======== capital plan ======== */
 .cap-hero{
   background:var(--card);border:1px solid var(--border-strong);border-radius:20px;padding:24px;margin-bottom:18px;
@@ -301,6 +356,7 @@ footer{margin-top:48px;text-align:center;color:var(--text-3);font-size:12px;line
     <button class="tab" data-tab="analyst">🗳️ 分析師</button>
     <button class="tab" data-tab="actions">🎯 操作</button>
     <button class="tab" data-tab="picks">⭐ 推薦</button>
+    <button class="tab" data-tab="leverage">⚙️ 槓桿映射</button>
     <button class="tab" data-tab="report">📄 完整報告</button>
     <button class="tab" data-tab="capital">💰 資金部署</button>
     <button class="tab" data-tab="backtest">🔬 回測</button>
@@ -425,6 +481,11 @@ footer{margin-top:48px;text-align:center;color:var(--text-3);font-size:12px;line
     </div>
   </section>
 
+  <!-- ===== Panel: Leverage Mapping ===== -->
+  <section class="panel" data-panel="leverage">
+    <div id="leverage-host"></div>
+  </section>
+
   <!-- ===== Panel: Report ===== -->
   <section class="panel" data-panel="report">
     <div id="report-host"><div class="card"><div style="color:var(--text-2)">報告載入中...</div></div></div>
@@ -537,6 +598,7 @@ async function boot(){
   renderPicks();
   renderReport();
   renderCapital();
+  renderLeverage();
   buildCharts();
   initBacktest();
   bindTabs();
@@ -750,6 +812,101 @@ function renderPicks(){
       <div class="tg"><span>目標 ${p.market==='US'?'$':''}${p.target_low}–${p.target_high}</span><b>+${p.upside_pct}%</b></div>
       <div class="ths">${p.thesis}</div>
     </div>`).join('');
+}
+
+/* === leverage mapping & underlying analysis === */
+function renderLeverage(){
+  const us = DATA.user_strategy;
+  const ee = DATA.effective_exposure || [];
+  const ua = DATA.underlying_analysis || [];
+  const nb = DATA.next_buy_recommendations || [];
+
+  const mapHTML = us && us.leverage_map ? us.leverage_map.map(m=>`
+    <span class="lev-pill">
+      <b>${m.etf}</b> = ${m.underlying} × <b>${m.multiplier}X</b>
+      ${m.treat_as==='long_term_core'?'<span style="color:#7af0c5;font-weight:800">‧ 長期</span>':m.treat_as==='exit'?'<span style="color:#ff9aaa;font-weight:800">‧ 待出清</span>':''}
+    </span>`).join('') : '';
+
+  const expoHTML = ee.map(e=>`
+    <div class="expo-card ${e.long_term?'long-term':''}">
+      <div class="ico">${e.icon}</div>
+      <div class="nm">${e.name}</div>
+      <div class="ex">NT$ ${fmtTWD(e.exposure_twd)}</div>
+      <div class="pp">實質曝險占比 ${e.pct_effective.toFixed(2)}%</div>
+      <div class="comp">${e.components.map(c=>`<span>• ${c}</span>`).join('')}</div>
+    </div>
+  `).join('');
+
+  const underHTML = ua.map(u=>{
+    const cls = u.rating.includes('Strong')||u.rating==='Buy' ? 'bull' : 'mixed';
+    return `<div class="under-card ${cls}">
+      <div class="under-head">
+        <div class="left">
+          <h3>${u.name}</h3>
+          <div class="tk">${u.ticker}</div>
+        </div>
+        <div class="right">
+          <div class="pr">$${u.price.toLocaleString(undefined,{maximumFractionDigits:2})}</div>
+          <div class="ex">本人實質曝險 NT$ ${fmtTWD(u.in_portfolio_twd)}</div>
+        </div>
+      </div>
+      <div class="under-thesis">${u.thesis}</div>
+      <div class="under-meta">
+        <span class="pill">共識 ${u.consensus_target}</span>
+        <span class="pill ${u.rating.includes('Hold')||u.rating.includes('Mixed')?'warn':''}">${u.rating}</span>
+        <span class="pill warn">催化：${u.next_catalyst}</span>
+      </div>
+      <div class="under-pc">
+        <div class="pros"><h5>👍 看多理由</h5><ul>${u.pros.map(x=>`<li>${x}</li>`).join('')}</ul></div>
+        <div class="cons"><h5>⚠️ 看空風險</h5><ul>${u.cons.map(x=>`<li>${x}</li>`).join('')}</ul></div>
+      </div>
+      <div class="under-action">📍 我的行動：${u.user_action}</div>
+    </div>`;
+  }).join('');
+
+  const nbHTML = nb.map(scn=>`
+    <div class="card" style="margin-top:16px">
+      <h3><span class="dot"></span>🎯 ${scn.scenario}</h3>
+      <div class="next-buy">${scn.tickers.map(t=>`
+        <div class="nb-card">
+          <div class="tk">${t.ticker}</div>
+          <div class="nm">${t.name}</div>
+          <div class="pr">$${t.price.toLocaleString()}</div>
+          <div class="ra">${t.rationale}</div>
+          <div class="footer-row"><span class="sz">${t.size_suggest}</span><span class="cf">${t.confidence}</span></div>
+        </div>
+      `).join('')}</div>
+    </div>
+  `).join('');
+
+  document.getElementById('leverage-host').innerHTML = `
+    <div class="lev-hero">
+      <h2>⚙️ 槓桿映射 ‧ 實質曝險視角</h2>
+      <p style="color:var(--text-2);font-size:13.5px;line-height:1.7">
+        ${us ? us.philosophy : '本金有限：用 2X 槓桿 ETF 代替買不起一股的高價底層股。'}
+      </p>
+      <div class="lev-pill-row">${mapHTML}</div>
+    </div>
+
+    <div class="card">
+      <h3><span class="dot"></span>📊 實質曝險分佈（含 2X 放大）</h3>
+      <p style="color:var(--text-2);font-size:13px;margin-bottom:14px">
+        實質曝險總計 <b style="color:var(--accent)">NT$ ${fmtTWD(DATA.summary.effective_exposure_twd)}</b>，槓桿率 <b style="color:var(--gold)">${DATA.summary.effective_leverage_ratio}x</b>（投組市值 NT$ ${fmtTWD(DATA.summary.total_market_value_twd)}）。
+      </p>
+      <div class="expo-grid">${expoHTML}</div>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <h3><span class="dot"></span>🔬 4 大底層公司深度分析</h3>
+      <p style="color:var(--text-2);font-size:13px;margin-bottom:14px">
+        以下分析直接針對 <b>底層公司</b>（非 ETF 包裝）。每張卡顯示「我的實質曝險」與具體行動建議。
+      </p>
+      <div class="under-grid">${underHTML}</div>
+    </div>
+
+    <h3 style="margin:24px 0 8px;font-size:17px">🛒 個股級下單推薦（不再推 ETF）</h3>
+    ${nbHTML}
+  `;
 }
 
 /* === capital plan === */
