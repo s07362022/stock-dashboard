@@ -210,6 +210,50 @@ th.num{text-align:right}
 .report-frame ul,.report-frame ol{padding-left:20px;margin:8px 0}
 .report-frame .meta{display:block;font-size:12px;color:var(--text-2)}
 
+/* ======== capital plan ======== */
+.cap-hero{
+  background:var(--card);border:1px solid var(--border-strong);border-radius:20px;padding:24px;margin-bottom:18px;
+  background-image:linear-gradient(135deg,rgba(124,92,255,.10),rgba(67,231,255,.06));
+}
+.cap-hero h2{font-size:20px;font-weight:800;margin-bottom:6px}
+.cap-hero p{color:var(--text-2);font-size:13.5px;line-height:1.7}
+.cap-sources{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:18px}
+.cap-src{position:relative;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px;overflow:hidden}
+.cap-src::before{content:"";position:absolute;inset:0;opacity:.08}
+.cap-src.immediate::before{background:var(--grad-2)}
+.cap-src.conditional::before{background:linear-gradient(135deg,#ffd166,#fb923c)}
+.cap-src.invest::before{background:var(--grad-1)}
+.cap-src .lbl{font-size:11px;color:var(--text-2);font-weight:700;text-transform:uppercase;letter-spacing:.5px;position:relative}
+.cap-src .amt{font-size:24px;font-weight:800;font-family:'JetBrains Mono',monospace;margin-top:6px;position:relative}
+.cap-src .nt{font-size:12px;color:var(--text-2);margin-top:8px;line-height:1.55;position:relative}
+.cap-src .stat-pill{display:inline-block;font-size:10.5px;padding:2px 8px;border-radius:999px;font-weight:700;margin-top:6px;position:relative}
+.cap-src.immediate .stat-pill{background:rgba(52,211,153,.18);color:#7af0c5}
+.cap-src.conditional .stat-pill{background:rgba(255,209,102,.18);color:#ffd166}
+.cap-src.invest .stat-pill{background:rgba(124,92,255,.18);color:#bfa9ff}
+
+.cap-totals{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:22px}
+.cap-tot{padding:16px;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:14px;text-align:center}
+.cap-tot .l{color:var(--text-2);font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase}
+.cap-tot .v{font-size:22px;font-weight:800;font-family:'JetBrains Mono',monospace;margin-top:4px}
+
+.cap-options{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:16px;margin-top:22px}
+.cap-opt{position:relative;background:var(--card);border:1px solid var(--border);border-radius:18px;padding:22px;overflow:hidden;transition:all .25s}
+.cap-opt:hover{border-color:var(--border-strong);transform:translateY(-2px)}
+.cap-opt.recommended{border-color:rgba(67,231,255,.5);box-shadow:0 0 0 1px rgba(67,231,255,.32) inset,0 22px 60px rgba(67,231,255,.10)}
+.cap-opt.recommended::after{content:"⭐ 推薦";position:absolute;top:12px;right:12px;font-size:11px;font-weight:800;padding:4px 10px;border-radius:999px;background:var(--grad-2);color:#001618}
+.cap-opt h4{font-size:18px;font-weight:800;margin-bottom:6px}
+.cap-opt .pf{color:var(--text-2);font-size:12.5px;line-height:1.6;margin-bottom:14px;font-style:italic}
+.cap-opt ol{padding-left:20px;margin:8px 0}
+.cap-opt ol li{font-size:12.5px;line-height:1.7;margin-bottom:8px;color:var(--text-2)}
+.cap-opt ol li b{color:var(--text)}
+.cap-opt .res{margin-top:14px;padding-top:14px;border-top:1px solid var(--border);font-size:12px;color:var(--text-2);line-height:1.65}
+.cap-opt .res-row{display:flex;justify-content:space-between;padding:3px 0}
+.cap-opt .res-row b{color:var(--accent);font-family:'JetBrains Mono',monospace}
+
+.cap-risks{margin-top:22px;padding:16px 18px;background:rgba(251,113,133,.08);border:1px solid rgba(251,113,133,.32);border-radius:14px}
+.cap-risks h4{font-size:14px;font-weight:800;color:#ff9aaa;margin-bottom:8px}
+.cap-risks ul{padding-left:20px;font-size:12.5px;line-height:1.7;color:var(--text-2)}
+
 /* ======== summary text ======== */
 .callout{padding:16px 18px;background:linear-gradient(135deg,rgba(124,92,255,.14),rgba(67,231,255,.10));border:1px solid var(--border-strong);border-radius:14px;font-size:14px;line-height:1.7}
 .callout .lbl{font-weight:800;background:var(--grad-1);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;display:inline-block;margin-right:6px}
@@ -258,6 +302,7 @@ footer{margin-top:48px;text-align:center;color:var(--text-3);font-size:12px;line
     <button class="tab" data-tab="actions">🎯 操作</button>
     <button class="tab" data-tab="picks">⭐ 推薦</button>
     <button class="tab" data-tab="report">📄 完整報告</button>
+    <button class="tab" data-tab="capital">💰 資金部署</button>
     <button class="tab" data-tab="backtest">🔬 回測</button>
   </nav>
 
@@ -385,6 +430,11 @@ footer{margin-top:48px;text-align:center;color:var(--text-3);font-size:12px;line
     <div id="report-host"><div class="card"><div style="color:var(--text-2)">報告載入中...</div></div></div>
   </section>
 
+  <!-- ===== Panel: Capital Plan ===== -->
+  <section class="panel" data-panel="capital">
+    <div id="capital-host"></div>
+  </section>
+
   <!-- ===== Panel: Backtest ===== -->
   <section class="panel" data-panel="backtest">
     <div class="bt-grid">
@@ -486,6 +536,7 @@ async function boot(){
   renderActions();
   renderPicks();
   renderReport();
+  renderCapital();
   buildCharts();
   initBacktest();
   bindTabs();
@@ -699,6 +750,80 @@ function renderPicks(){
       <div class="tg"><span>目標 ${p.market==='US'?'$':''}${p.target_low}–${p.target_high}</span><b>+${p.upside_pct}%</b></div>
       <div class="ths">${p.thesis}</div>
     </div>`).join('');
+}
+
+/* === capital plan === */
+function renderCapital(){
+  const cp = DATA.capital_plan;
+  if(!cp){ document.getElementById('capital-host').innerHTML = '<div class="card"><p style="color:var(--text-2)">尚未設定資金部署計畫。</p></div>'; return; }
+
+  const sourcesHTML = cp.sources.map(s=>{
+    const cls = s.status==='immediate' ? 'immediate' : s.status==='conditional' ? 'conditional' : 'invest';
+    const stat = s.status==='immediate' ? '立即可用' : s.status==='conditional' ? '條件可用' : '新投入';
+    return `<div class="cap-src ${cls}">
+      <div class="lbl">${s.src}</div>
+      <div class="amt">NT$ ${fmtTWD(s.amount_twd)}</div>
+      <div class="stat-pill">${stat}</div>
+      <div class="nt">${s.note}${s.amount_usd?'<br>≈ $'+s.amount_usd.toFixed(2)+' USD':''}</div>
+    </div>`;
+  }).join('');
+
+  const optsHTML = cp.options.map(o=>{
+    const isRec = cp.recommendation && cp.recommendation.primary===o.id;
+    const actsHTML = o.actions.map(a=>`
+      <li><b>步驟 ${a.step}：${a.fund}</b><br><span style="color:var(--accent)">→ ${a.use}</span><br><span style="font-size:11.5px;color:var(--text-3)">理由：${a.rationale}</span></li>
+    `).join('');
+    const r = o.result;
+    return `<div class="cap-opt ${isRec?'recommended':''}">
+      <h4>方案 ${o.id} ‧ ${o.name}</h4>
+      <div class="pf">${o.philosophy}</div>
+      <ol>${actsHTML}</ol>
+      <div class="res">
+        <div class="res-row"><span>調整後 台股占比</span><b>${r.post_tw_pct}%</b></div>
+        <div class="res-row"><span>調整後 美股占比</span><b>${r.post_us_pct}%</b></div>
+        <div class="res-row"><span>調整後 現金占比</span><b>${r.post_cash_pct}%</b></div>
+        <div class="res-row"><span>調整後 槓桿占比</span><b>${r.post_leveraged_pct}%</b></div>
+        <div style="margin-top:10px;padding:10px 12px;background:rgba(67,231,255,.06);border-radius:8px;font-size:12px;color:var(--text)">${r.summary}</div>
+      </div>
+    </div>`;
+  }).join('');
+
+  const ctxHTML = cp.context.map(c=>`<li>${c}</li>`).join('');
+  const risksHTML = cp.risks.map(r=>`<li>${r}</li>`).join('');
+
+  document.getElementById('capital-host').innerHTML = `
+    <div class="cap-hero">
+      <h2>${cp.title}</h2>
+      <p style="color:var(--text-2);margin-bottom:12px">將 <b style="color:#7af0c5">AIXI 賣出</b>（今日）、<b style="color:#ffd166">ONDL 條件式賣出</b>（回檔），與新投入 NT$ 10,000 三筆資金進行配置。下方提供 3 個方案，已根據目前持倉結構（核心 ETF 47.6% / 槓桿 ETF 28.2%）量身設計。</p>
+      <ul style="padding-left:20px;color:var(--text-2);font-size:13px;line-height:1.7">${ctxHTML}</ul>
+    </div>
+
+    <div class="card">
+      <h3><span class="dot"></span>💵 資金來源</h3>
+      <div class="cap-sources">${sourcesHTML}</div>
+      <div class="cap-totals">
+        <div class="cap-tot"><div class="l">立即可用</div><div class="v" style="color:#7af0c5">NT$ ${fmtTWD(cp.totals.immediate)}</div></div>
+        <div class="cap-tot"><div class="l">條件可用 (ONDL)</div><div class="v" style="color:#ffd166">NT$ ${fmtTWD(cp.totals.conditional)}</div></div>
+        <div class="cap-tot"><div class="l">合計可用</div><div class="v" style="background:var(--grad-1);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent">NT$ ${fmtTWD(cp.totals.total)}</div></div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <h3><span class="dot"></span>🎯 三套部署方案（含推薦）</h3>
+      <div class="cap-options">${optsHTML}</div>
+
+      <div class="callout" style="margin-top:18px">
+        <span class="lbl">✅ 推薦方案 ${cp.recommendation.primary}</span>
+        ${cp.recommendation.reason}<br>
+        <span style="color:var(--text-2);font-size:12.5px">次選：方案 ${cp.recommendation.secondary_if_aggressive}</span>
+      </div>
+
+      <div class="cap-risks">
+        <h4>⚠️ 主要風險提醒</h4>
+        <ul>${risksHTML}</ul>
+      </div>
+    </div>
+  `;
 }
 
 /* === report === */
