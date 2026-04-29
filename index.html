@@ -839,6 +839,10 @@ function renderLeverage(){
 
   const underHTML = ua.map(u=>{
     const cls = u.rating.includes('Strong')||u.rating==='Buy' ? 'bull' : 'mixed';
+    const todayPct = (typeof u.today_pct === 'number') ? u.today_pct : null;
+    const todayHTML = todayPct !== null
+      ? `<div class="dy" style="font-size:13px;margin-top:2px;color:${todayPct>=0?'var(--green)':'var(--red)'};font-weight:700">今日 ${todayPct>=0?'+':''}${todayPct.toFixed(2)}%</div>`
+      : '';
     return `<div class="under-card ${cls}">
       <div class="under-head">
         <div class="left">
@@ -847,6 +851,7 @@ function renderLeverage(){
         </div>
         <div class="right">
           <div class="pr">$${u.price.toLocaleString(undefined,{maximumFractionDigits:2})}</div>
+          ${todayHTML}
           <div class="ex">本人實質曝險 NT$ ${fmtTWD(u.in_portfolio_twd)}</div>
         </div>
       </div>
@@ -897,9 +902,9 @@ function renderLeverage(){
     </div>
 
     <div class="card" style="margin-top:16px">
-      <h3><span class="dot"></span>🔬 4 大底層公司深度分析</h3>
+      <h3><span class="dot"></span>🔬 ${ua.length} 大底層公司深度分析（盤中即時）</h3>
       <p style="color:var(--text-2);font-size:13px;margin-bottom:14px">
-        以下分析直接針對 <b>底層公司</b>（非 ETF 包裝）。每張卡顯示「我的實質曝險」與具體行動建議。
+        以下分析直接針對 <b>底層公司</b>（非 ETF 包裝）。每張卡顯示「我的實質曝險」、今日漲跌與具體行動建議。
       </p>
       <div class="under-grid">${underHTML}</div>
     </div>
