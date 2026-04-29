@@ -265,6 +265,29 @@ th.num{text-align:right}
 .nb-card .sz{font-size:11.5px;color:var(--text-3);font-family:'JetBrains Mono',monospace}
 .nb-card .cf{font-size:12px;font-weight:700}
 
+/* ======== horizon (short / long / peak) ======== */
+.hz-index-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin:14px 0}
+.hz-idx-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px;text-align:center;transition:all .2s}
+.hz-idx-card:hover{transform:translateY(-2px);border-color:var(--border-strong)}
+.hz-idx-card.hz-bull{border-color:rgba(52,211,153,.42);background:rgba(52,211,153,.06)}
+.hz-idx-card.hz-bear{border-color:rgba(251,113,133,.42);background:rgba(251,113,133,.06)}
+.hz-idx-card .lbl{font-size:11.5px;color:var(--text-2);font-weight:600;margin-bottom:4px}
+.hz-idx-card .val{font-size:22px;font-weight:800;font-family:'JetBrains Mono',monospace}
+.hz-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px;margin-top:6px}
+.hz-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px;transition:all .2s}
+.hz-card:hover{transform:translateY(-2px);border-color:var(--border-strong)}
+.hz-card.hz-bull{border-left:4px solid var(--green);background:rgba(52,211,153,.04)}
+.hz-card.hz-mid{border-left:4px solid var(--gold);background:rgba(255,209,102,.04)}
+.hz-card.hz-bear{border-left:4px solid var(--red);background:rgba(251,113,133,.04)}
+.hz-card .hz-tk{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-2);font-weight:700;letter-spacing:.5px;margin-bottom:2px}
+.hz-card .hz-nm{font-size:15px;font-weight:800;margin-bottom:6px}
+.hz-card .hz-vw{font-size:12.5px;color:var(--text-2);line-height:1.6}
+.hz-act-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin-top:14px}
+.hz-act-block{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px}
+.hz-act-block h4{font-size:14px;font-weight:800;margin-bottom:8px;color:var(--accent)}
+.hz-act-block ul{padding-left:18px;line-height:1.85;font-size:12.5px;color:var(--text-2)}
+.hz-act-block li{margin-bottom:3px}
+
 /* ======== capital plan ======== */
 .cap-hero{
   background:var(--card);border:1px solid var(--border-strong);border-radius:20px;padding:24px;margin-bottom:18px;
@@ -357,6 +380,8 @@ footer{margin-top:48px;text-align:center;color:var(--text-3);font-size:12px;line
     <button class="tab" data-tab="actions">🎯 操作</button>
     <button class="tab" data-tab="picks">⭐ 推薦</button>
     <button class="tab" data-tab="leverage">⚙️ 槓桿映射</button>
+    <button class="tab" data-tab="horizon">🔭 預測</button>
+    <button class="tab" data-tab="tomorrow">📆 明日台股</button>
     <button class="tab" data-tab="report">📄 完整報告</button>
     <button class="tab" data-tab="capital">💰 資金部署</button>
     <button class="tab" data-tab="backtest">🔬 回測</button>
@@ -486,6 +511,16 @@ footer{margin-top:48px;text-align:center;color:var(--text-3);font-size:12px;line
     <div id="leverage-host"></div>
   </section>
 
+  <!-- ===== Panel: Horizon Views (Short / Long / Peak) ===== -->
+  <section class="panel" data-panel="horizon">
+    <div id="horizon-host"></div>
+  </section>
+
+  <!-- ===== Panel: Tomorrow TW Strategy ===== -->
+  <section class="panel" data-panel="tomorrow">
+    <div id="tomorrow-host"></div>
+  </section>
+
   <!-- ===== Panel: Report ===== -->
   <section class="panel" data-panel="report">
     <div id="report-host"><div class="card"><div style="color:var(--text-2)">報告載入中...</div></div></div>
@@ -599,6 +634,8 @@ async function boot(){
   renderReport();
   renderCapital();
   renderLeverage();
+  renderHorizon();
+  renderTomorrow();
   buildCharts();
   initBacktest();
   bindTabs();
@@ -629,11 +666,13 @@ function renderRibbon(){
 /* === kpi === */
 function renderKPI(){
   const s = DATA.summary;
+  const twCls = (s.tw_pnl_twd||0)>=0?'green':'red';
+  const usCls = (s.us_pnl_twd||0)>=0?'green':'red';
   document.getElementById('kpi-grid').innerHTML = `
-    <div class="card kpi-card"><div class="lbl">總市值</div><div class="val">NT$ ${fmtTWD(s.total_market_value_twd)}</div><div class="sub">總成本 NT$ ${fmtTWD(s.total_cost_twd)}</div></div>
-    <div class="card kpi-card ${s.total_pnl_twd>=0?'green':'red'}"><div class="lbl">未實現損益</div><div class="val">${s.total_pnl_twd>=0?'+':''}NT$ ${fmtTWD(s.total_pnl_twd)}</div><div class="sub">報酬率 ${s.total_pnl_pct>=0?'+':''}${s.total_pnl_pct.toFixed(2)}%</div></div>
-    <div class="card kpi-card"><div class="lbl">台股 / 美股</div><div class="val mono">${s.tw_pct.toFixed(0)}% / ${s.us_pct.toFixed(0)}%</div><div class="sub">TW NT$${fmtTWD(s.tw_market_value_twd)} ‧ US NT$${fmtTWD(s.us_market_value_twd)}</div></div>
-    <div class="card kpi-card"><div class="lbl">獲利檔數</div><div class="val">${s.winners}<span style="font-size:18px;color:var(--text-2)"> / ${s.holdings_count}</span></div><div class="sub">虧損 ${s.losers} 檔</div></div>
+    <div class="card kpi-card"><div class="lbl">總市值</div><div class="val">NT$ ${fmtTWD(s.total_market_value_twd)}</div><div class="sub">總成本 NT$ ${fmtTWD(s.total_cost_twd)} ‧ 報酬 ${s.total_pnl_pct>=0?'+':''}${s.total_pnl_pct.toFixed(2)}%</div></div>
+    <div class="card kpi-card ${twCls}"><div class="lbl">🇹🇼 台股損益</div><div class="val">${(s.tw_pnl_twd||0)>=0?'+':''}NT$ ${fmtTWD(s.tw_pnl_twd||0)}</div><div class="sub">${(s.tw_pnl_pct||0)>=0?'+':''}${(s.tw_pnl_pct||0).toFixed(2)}% ‧ 市值 NT$${fmtTWD(s.tw_market_value_twd)}</div></div>
+    <div class="card kpi-card ${usCls}"><div class="lbl">🇺🇸 美股損益</div><div class="val">${(s.us_pnl_twd||0)>=0?'+':''}NT$ ${fmtTWD(s.us_pnl_twd||0)}</div><div class="sub">${(s.us_pnl_pct||0)>=0?'+':''}${(s.us_pnl_pct||0).toFixed(2)}% (USD ${(s.us_pnl_usd||0)>=0?'+':''}$${(s.us_pnl_usd||0).toFixed(2)})</div></div>
+    <div class="card kpi-card"><div class="lbl">獲利檔數 / 槓桿率</div><div class="val">${s.winners}<span style="font-size:18px;color:var(--text-2)">/${s.holdings_count}</span></div><div class="sub">實質曝險 NT$${fmtTWD(s.effective_exposure_twd||0)} ‧ ${(s.effective_leverage_ratio||1).toFixed(2)}x</div></div>
   `;
 }
 
@@ -911,6 +950,183 @@ function renderLeverage(){
 
     <h3 style="margin:24px 0 8px;font-size:17px">🛒 個股級下單推薦（不再推 ETF）</h3>
     ${nbHTML}
+  `;
+}
+
+/* === horizon (short / long / peak) === */
+function renderHorizon(){
+  const host = document.getElementById('horizon-host');
+  if(!host){ return; }
+  const hv = DATA.horizon_views;
+  if(!hv){ host.innerHTML = '<div class="card"><p style="color:var(--text-2)">尚未設定預測。</p></div>'; return; }
+  const st = hv.short_term_1m;
+  const lt = hv.long_term;
+  const pk = hv.peak_decision;
+
+  const stRows = (st.forecasts || []).map(f => {
+    const upPct = ((f.bull - f.current) / f.current * 100);
+    const dnPct = ((f.bear - f.current) / f.current * 100);
+    return `<tr>
+      <td><b>${f.symbol}</b><div style="font-size:11px;color:var(--text-3)">${f.name}</div></td>
+      <td class="num mono">${f.current}</td>
+      <td class="num mono up">${f.bull}<div style="font-size:10px;color:var(--text-3)">+${upPct.toFixed(1)}%</div></td>
+      <td class="num mono">${f.base}</td>
+      <td class="num mono down">${f.bear}<div style="font-size:10px;color:var(--text-3)">${dnPct.toFixed(1)}%</div></td>
+      <td style="font-size:12.5px;color:var(--text-2)">${f.view}</td>
+    </tr>`;
+  }).join('');
+
+  const ltCore = (lt.core_long_term_buys || []).map(c=>`
+    <div class="hz-card hz-bull">
+      <div class="hz-tk">${c.symbol}</div>
+      <div class="hz-nm">${c.name}</div>
+      <div class="hz-vw">${c.view}</div>
+    </div>`).join('');
+  const ltSat = (lt.satellite_growth || []).map(c=>`
+    <div class="hz-card hz-mid">
+      <div class="hz-tk">${c.symbol}</div>
+      <div class="hz-nm">${c.name}</div>
+      <div class="hz-vw">${c.view}</div>
+    </div>`).join('');
+  const ltExit = (lt.exit_or_reduce || []).map(c=>`
+    <div class="hz-card hz-bear">
+      <div class="hz-tk">${c.symbol}</div>
+      <div class="hz-nm">${c.name}</div>
+      <div class="hz-vw">${c.view}</div>
+    </div>`).join('');
+
+  const pkActions = (pk.actions || []).map(a=>`
+    <div class="hz-act-block">
+      <h4>${a.type}</h4>
+      <ul>${a.items.map(i=>`<li>${i}</li>`).join('')}</ul>
+    </div>`).join('');
+
+  host.innerHTML = `
+    <div class="card">
+      <h3><span class="dot"></span>${st.title}</h3>
+      <p style="color:var(--text-2);font-size:13px;margin-bottom:10px">${st.intro}</p>
+      <div class="hz-index-row">
+        <div class="hz-idx-card">
+          <div class="lbl">台股加權現值</div>
+          <div class="val">${st.tw_index.current.toLocaleString()}</div>
+        </div>
+        <div class="hz-idx-card hz-bull">
+          <div class="lbl">多頭情境（${st.tw_index.p_bull}%）</div>
+          <div class="val">${st.tw_index.bull.toLocaleString()}</div>
+        </div>
+        <div class="hz-idx-card">
+          <div class="lbl">基本情境（${st.tw_index.p_base}%）</div>
+          <div class="val">${st.tw_index.base.toLocaleString()}</div>
+        </div>
+        <div class="hz-idx-card hz-bear">
+          <div class="lbl">空頭情境（${st.tw_index.p_bear}%）</div>
+          <div class="val">${st.tw_index.bear.toLocaleString()}</div>
+        </div>
+      </div>
+      <p style="color:var(--text-3);font-size:12.5px;margin:8px 0 14px">${st.tw_index.scenario}</p>
+      <div style="overflow-x:auto">
+      <table style="font-size:13px">
+        <thead><tr>
+          <th>標的</th><th class="num">現價</th><th class="num">多頭</th><th class="num">基本</th><th class="num">空頭</th><th>觀點</th>
+        </tr></thead>
+        <tbody>${stRows}</tbody>
+      </table>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <h3><span class="dot"></span>${lt.title}</h3>
+      <p style="color:var(--text-2);font-size:13px;margin-bottom:14px">${lt.intro}</p>
+      <h4 style="margin:12px 0 8px;font-size:14px;color:var(--green)">🟢 核心長期持有（不賣，回檔加）</h4>
+      <div class="hz-grid">${ltCore}</div>
+      <h4 style="margin:18px 0 8px;font-size:14px;color:var(--gold)">🟡 衛星成長（看催化）</h4>
+      <div class="hz-grid">${ltSat}</div>
+      <h4 style="margin:18px 0 8px;font-size:14px;color:var(--red)">🔴 不長期持有（賣 / 減）</h4>
+      <div class="hz-grid">${ltExit}</div>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <h3><span class="dot"></span>${pk.title}</h3>
+      <p style="background:rgba(255,209,102,.08);border-left:4px solid var(--gold);padding:10px 14px;border-radius:6px;color:var(--text);font-size:13.5px;line-height:1.7">
+        <b>當前狀況</b>：${pk.current_status}<br/>
+        <b>📍 我的判斷</b>：${pk.verdict}
+      </p>
+      <div class="hz-act-grid">${pkActions}</div>
+      <p style="margin-top:14px;color:var(--accent);font-size:13.5px;font-weight:700">💵 ${pk.cash_target}</p>
+    </div>
+  `;
+}
+
+/* === tomorrow tw strategy === */
+function renderTomorrow(){
+  const host = document.getElementById('tomorrow-host');
+  if(!host){ return; }
+  const tm = (DATA.horizon_views || {}).tomorrow_tw_strategy;
+  if(!tm){ host.innerHTML = '<div class="card"><p style="color:var(--text-2)">尚未設定明日策略。</p></div>'; return; }
+
+  const macroHTML = (tm.macro_context || []).map(m=>`<li>${m}</li>`).join('');
+  const planHTML = (tm.morning_plan || []).map(p=>`
+    <tr>
+      <td class="mono" style="white-space:nowrap"><b>${p.step}. ${p.action}</b></td>
+      <td style="font-size:13px;color:var(--text-2)">${p.detail}</td>
+    </tr>`).join('');
+  const watchHTML = (tm.watch_list_for_tomorrow || []).map(w=>`
+    <tr>
+      <td class="mono"><b>${w.symbol}</b> <span style="color:var(--text-3);font-size:12px">${w.name}</span></td>
+      <td class="num mono" style="color:var(--accent)">${w.buy_zone}</td>
+      <td class="num mono up">${w.target}</td>
+      <td style="font-size:12.5px;color:var(--text-2)">${w.action}</td>
+    </tr>`).join('');
+  const avoidHTML = (tm.avoid_list || []).map(a=>`
+    <div class="hz-card hz-bear">
+      <div class="hz-tk">${a.symbol}</div>
+      <div class="hz-nm">${a.name}</div>
+      <div class="hz-vw">${a.reason}</div>
+    </div>`).join('');
+  const riskHTML = (tm.risk_alerts || []).map(r=>`<li style="color:#ffb3c1">${r}</li>`).join('');
+
+  host.innerHTML = `
+    <div class="card">
+      <h3><span class="dot"></span>${tm.title}</h3>
+      <h4 style="margin:14px 0 8px;font-size:14px">📍 重點事件</h4>
+      <ul style="line-height:1.85;font-size:13.5px;color:var(--text-2);padding-left:18px">${macroHTML}</ul>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <h3><span class="dot"></span>⏰ 明日盤中操作（時間軸）</h3>
+      <div style="overflow-x:auto">
+      <table style="font-size:13.5px">
+        <tbody>${planHTML}</tbody>
+      </table>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <h3><span class="dot"></span>🎯 觀察清單</h3>
+      <div style="overflow-x:auto">
+      <table style="font-size:13.5px">
+        <thead><tr>
+          <th>標的</th><th class="num">買區</th><th class="num">1 個月目標</th><th>動作</th>
+        </tr></thead>
+        <tbody>${watchHTML}</tbody>
+      </table>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px">
+      <h3><span class="dot"></span>⛔ 不要追的標的</h3>
+      <div class="hz-grid">${avoidHTML}</div>
+    </div>
+
+    <div class="card" style="margin-top:16px;border-left:4px solid var(--red)">
+      <h3><span class="dot"></span>🚨 風險警示</h3>
+      <ul style="line-height:1.85;font-size:13.5px;padding-left:18px">${riskHTML}</ul>
+    </div>
+
+    <div class="card" style="margin-top:16px;background:linear-gradient(135deg,rgba(124,92,255,.18),rgba(67,231,255,.10));border:1px solid rgba(124,92,255,.42)">
+      <h3 style="margin-bottom:6px"><span class="dot"></span>明日一句總結</h3>
+      <p style="font-size:14.5px;font-weight:700;line-height:1.65">${tm.one_line}</p>
+    </div>
   `;
 }
 
