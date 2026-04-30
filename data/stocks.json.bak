@@ -1,0 +1,40 @@
+{
+  "updated_at": "2026-04-10 21:00:00",
+  "updated_at_utc": "2026-04-10 13:00:00",
+  "tw_stocks": [
+    {"symbol":"2454.TW","name":"聯發科","currency":"TWD","close":1575,"prev_close":1575,"change":0,"change_pct":0,"open":1600,"high":1605,"low":1570,"volume":5738781,"eps":14.4,"pe":null,"market_cap":2500000000000,"week52_high":null,"week52_low":null,"last_date":"2026-04-10","buy_price":1741,"pnl":-166,"pnl_pct":-9.54},
+    {"symbol":"2344.TW","name":"華邦電","currency":"TWD","close":93.5,"prev_close":91,"change":2.5,"change_pct":2.75,"open":93,"high":97.5,"low":92.3,"volume":166460245,"eps":0.76,"pe":null,"market_cap":420750000000,"week52_high":null,"week52_low":null,"last_date":"2026-04-10","buy_price":102,"pnl":-8.5,"pnl_pct":-8.33},
+    {"symbol":"1802.TW","name":"台玻","currency":"TWD","close":57.7,"prev_close":59.5,"change":-1.8,"change_pct":-3.03,"open":62.1,"high":62.5,"low":57.4,"volume":76142508,"eps":0.13,"pe":null,"market_cap":167800000000,"week52_high":null,"week52_low":null,"last_date":"2026-04-10","buy_price":64.5,"pnl":-6.8,"pnl_pct":-10.54},
+    {"symbol":"6505.TW","name":"台塑化","currency":"TWD","close":52,"prev_close":52.7,"change":-0.7,"change_pct":-1.33,"open":53.4,"high":53.4,"low":51.5,"volume":10999996,"eps":0.54,"pe":null,"market_cap":495350000000,"week52_high":null,"week52_low":null,"last_date":"2026-04-10","buy_price":61.4,"pnl":-9.4,"pnl_pct":-15.31},
+    {"symbol":"1711.TW","name":"永光","currency":"TWD","close":38.7,"prev_close":36.65,"change":2.05,"change_pct":5.59,"open":39,"high":40.3,"low":37.85,"volume":64447625,"eps":-0.03,"pe":null,"market_cap":21200000000,"week52_high":null,"week52_low":null,"last_date":"2026-04-10","buy_price":43,"pnl":-4.3,"pnl_pct":-10.0},
+    {"symbol":"2312.TW","name":"金寶","currency":"TWD","close":22.45,"prev_close":22.8,"change":-0.35,"change_pct":-1.54,"open":23.1,"high":23.15,"low":22.3,"volume":12325310,"eps":0.2,"pe":null,"market_cap":33800000000,"week52_high":null,"week52_low":null,"last_date":"2026-04-10","buy_price":24.1,"pnl":-1.65,"pnl_pct":-6.85}
+  ],
+  "us_stocks": [
+    {"symbol":"AIXI","name":"Xiao-I 小i","currency":"USD","close":1.39,"prev_close":0.99,"change":0.40,"change_pct":40.18,"open":1.39,"high":1.39,"low":1.39,"volume":53886384,"eps":-2.52,"pe":null,"market_cap":1382000,"week52_high":4.02,"week52_low":0.081,"last_date":"2026-04-10","buy_price":2.4657,"shares":100,"cost":246.57,"market_value":139.00,"pnl":-1.08,"pnl_pct":-43.64,"pnl_total":-107.57},
+    {"symbol":"AMD","name":"AMD","currency":"USD","close":236.75,"prev_close":236.64,"change":0.11,"change_pct":0.05,"open":236.75,"high":236.75,"low":236.75,"volume":26922527,"eps":2.67,"pe":null,"market_cap":354610000000,"week52_high":null,"week52_low":null,"last_date":"2026-04-10","buy_price":227.55,"shares":4,"cost":910.20,"market_value":947.00,"pnl":9.20,"pnl_pct":4.04,"pnl_total":36.80},
+    {"symbol":"AVGO","name":"Broadcom","currency":"USD","close":357.27,"prev_close":354.91,"change":2.36,"change_pct":0.66,"open":357.27,"high":357.27,"low":357.27,"volume":19304897,"eps":1.55,"pe":null,"market_cap":1500000000000,"week52_high":null,"week52_low":null,"last_date":"2026-04-10","buy_price":322.10,"shares":2,"cost":644.20,"market_value":714.54,"pnl":35.17,"pnl_pct":10.91,"pnl_total":70.34},
+    {"symbol":"MRVL","name":"Marvell Technology","currency":"USD","close":123.16,"prev_close":119.93,"change":3.23,"change_pct":2.69,"open":123.16,"high":123.16,"low":123.16,"volume":32309456,"eps":0.47,"pe":null,"market_cap":93650000000,"week52_high":null,"week52_low":null,"last_date":"2026-04-10","buy_price":119.10,"shares":4,"cost":476.40,"market_value":492.64,"pnl":4.06,"pnl_pct":3.41,"pnl_total":16.24},
+    {"symbol":"ON","name":"ON Semiconductor","currency":"USD","close":68.03,"prev_close":68.49,"change":-0.46,"change_pct":-0.67,"open":68.03,"high":68.03,"low":68.03,"volume":5761501,"eps":0.29,"pe":null,"market_cap":25020000000,"week52_high":null,"week52_low":null,"last_date":"2026-04-10","buy_price":67.68,"shares":6,"cost":406.08,"market_value":408.18,"pnl":0.35,"pnl_pct":0.52,"pnl_total":2.10},
+    {"symbol":"ONDL","name":"2X Long ONDS ETF","currency":"USD","close":15.82,"prev_close":15.60,"change":0.22,"change_pct":1.41,"open":15.82,"high":15.82,"low":15.82,"volume":null,"eps":null,"pe":null,"market_cap":1597000,"week52_high":59.29,"week52_low":11.22,"last_date":"2026-04-10","buy_price":21.30,"shares":50,"cost":1065.00,"market_value":791.00,"pnl":-5.48,"pnl_pct":-25.73,"pnl_total":-274.00},
+    {"symbol":"ONDS","name":"Ondas Holdings","currency":"USD","close":9.19,"prev_close":9.14,"change":0.05,"change_pct":0.57,"open":9.19,"high":9.19,"low":9.19,"volume":37513475,"eps":-0.62,"pe":null,"market_cap":4450000000,"week52_high":null,"week52_low":null,"last_date":"2026-04-10","buy_price":8.9858,"shares":150,"cost":1347.87,"market_value":1378.50,"pnl":0.20,"pnl_pct":2.27,"pnl_total":30.63},
+    {"symbol":"SIDU","name":"Sidus Space","currency":"USD","close":3.34,"prev_close":3.34,"change":0,"change_pct":-0.01,"open":3.34,"high":3.34,"low":3.34,"volume":20244229,"eps":-1.19,"pe":null,"market_cap":110000000,"week52_high":null,"week52_low":null,"last_date":"2026-04-10","buy_price":4.00,"shares":75,"cost":300.00,"market_value":250.50,"pnl":-0.66,"pnl_pct":-16.50,"pnl_total":-49.50},
+    {"symbol":"SMH","name":"VanEck半導體ETF","currency":"USD","close":432.46,"prev_close":430.31,"change":2.15,"change_pct":0.50,"open":432.46,"high":432.46,"low":432.46,"volume":59570,"eps":null,"pe":null,"market_cap":41950000000,"week52_high":null,"week52_low":null,"last_date":"2026-04-10","buy_price":386.68,"shares":2,"cost":773.36,"market_value":864.92,"pnl":45.78,"pnl_pct":11.84,"pnl_total":91.56},
+    {"symbol":"SOFI","name":"SoFi Technologies","currency":"USD","close":16.34,"prev_close":16.27,"change":0.07,"change_pct":0.43,"open":16.34,"high":16.34,"low":16.34,"volume":43224357,"eps":0.14,"pe":null,"market_cap":20210000000,"week52_high":null,"week52_low":null,"last_date":"2026-04-10","buy_price":16.6943,"shares":35,"cost":584.30,"market_value":571.90,"pnl":-0.35,"pnl_pct":-2.12,"pnl_total":-12.40},
+    {"symbol":"UNH","name":"UnitedHealth","currency":"USD","close":306.06,"prev_close":306.91,"change":-0.85,"change_pct":-0.28,"open":306.06,"high":306.06,"low":306.06,"volume":5728693,"eps":13.23,"pe":null,"market_cap":251660000000,"week52_high":null,"week52_low":null,"last_date":"2026-04-10","buy_price":309.80,"shares":2,"cost":619.60,"market_value":612.12,"pnl":-3.74,"pnl_pct":-1.21,"pnl_total":-7.48}
+  ],
+  "watchlist": [
+    {"symbol":"2330.TW","name":"台積電","currency":"TWD","close":2000,"prev_close":1955,"change":45,"change_pct":2.30,"open":1975,"high":2000,"low":1970,"volume":32365242,"eps":19.51,"pe":null,"market_cap":51900000000000,"week52_high":null,"week52_low":null,"last_date":"2026-04-10"},
+    {"symbol":"INTC","name":"Intel","currency":"USD","close":61.68,"prev_close":61.72,"change":-0.04,"change_pct":-0.06,"open":61.68,"high":61.68,"low":61.68,"volume":154727306,"eps":-0.06,"pe":null,"market_cap":251650000000,"week52_high":null,"week52_low":null,"last_date":"2026-04-10"}
+  ],
+  "summary": {
+    "tw_avg_pnl_pct": -10.10,
+    "us_avg_pnl_pct": -2.75,
+    "us_total_cost": 7373.58,
+    "us_total_value": 7170.30,
+    "us_total_pnl": -203.28,
+    "tw_winners": 0,
+    "tw_losers": 6,
+    "us_winners": 6,
+    "us_losers": 5
+  }
+}

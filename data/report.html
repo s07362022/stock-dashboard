@@ -1,237 +1,530 @@
-<div class="meta">資料截止：<b>2026-04-29 23:55 (UTC+8)</b> ‧ 美股盤中（11:54 EDT）‧ 匯率：1 USD = 31.56 TWD</div>
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<title>Equity Deep Report — 2026-04-30</title>
+<style>
+  :root {
+    --bg: #0b1220;
+    --panel: #111a2e;
+    --panel-2: #16213d;
+    --line: #1e2a48;
+    --text: #e6ecf5;
+    --muted: #97a3bb;
+    --accent: #7cc4ff;
+    --green: #19c37d;
+    --red: #ef4444;
+    --yellow: #f5b54a;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: linear-gradient(180deg, #0b1220 0%, #0d1428 100%);
+    color: var(--text);
+    font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Segoe UI", system-ui, sans-serif;
+    line-height: 1.65;
+    font-size: 14px;
+  }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 28px 22px 80px; }
+  header {
+    display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between;
+    gap: 12px; padding-bottom: 14px; border-bottom: 1px solid var(--line);
+  }
+  header h1 { font-size: 24px; margin: 0; letter-spacing: 0.5px; }
+  header .meta { color: var(--muted); font-size: 12px; }
+  h2 { margin: 32px 0 10px; font-size: 18px; color: var(--accent); border-left: 4px solid var(--accent); padding-left: 10px; }
+  h3 { margin: 18px 0 8px; font-size: 15px; color: #cdd9ee; }
+  h4 { margin: 12px 0 6px; font-size: 14px; color: #b9c5dc; }
+  p, li { font-size: 13.5px; }
+  table {
+    width: 100%; border-collapse: collapse; margin: 8px 0 14px;
+    background: var(--panel); border-radius: 8px; overflow: hidden;
+    font-size: 12.5px;
+  }
+  th, td { padding: 7px 9px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+  th { background: var(--panel-2); color: #cdd9ee; font-weight: 600; }
+  tr:hover td { background: rgba(124,196,255,0.04); }
+  .right { text-align: right; }
+  .center { text-align: center; }
+  .pos { color: var(--green); font-weight: 600; }
+  .neg { color: var(--red); font-weight: 600; }
+  .warn { color: var(--yellow); font-weight: 600; }
+  .pill {
+    display: inline-block; padding: 1px 8px; border-radius: 999px;
+    font-size: 11.5px; font-weight: 600;
+  }
+  .pill-a { background: rgba(25,195,125,0.15); color: var(--green); }
+  .pill-b { background: rgba(245,181,74,0.15); color: var(--yellow); }
+  .pill-c { background: rgba(239,68,68,0.18); color: var(--red); }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 800px) { .grid-2 { grid-template-columns: 1fr; } }
+  .summary {
+    background: linear-gradient(135deg, rgba(124,196,255,0.10), rgba(25,195,125,0.06));
+    border: 1px solid rgba(124,196,255,0.25); padding: 14px 18px; border-radius: 10px;
+    margin-top: 14px;
+  }
+  .disc {
+    margin-top: 28px; padding: 14px 18px; border-radius: 10px;
+    background: rgba(239,68,68,0.06); border: 1px solid rgba(239,68,68,0.25);
+    color: #f3c2c2; font-size: 12.5px;
+  }
+  code { background: #0e1830; padding: 2px 6px; border-radius: 4px; color: #b8d6f6; }
+  hr { border: none; border-top: 1px dashed var(--line); margin: 26px 0; }
+  ul { padding-left: 20px; }
+  .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 8px 0 18px; }
+  @media (max-width: 800px) { .kpi-grid { grid-template-columns: repeat(2, 1fr); } }
+  .kpi {
+    background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px;
+  }
+  .kpi .label { color: var(--muted); font-size: 11.5px; }
+  .kpi .value { font-size: 18px; font-weight: 700; }
+  .toc { background: var(--panel); border-radius: 10px; padding: 12px 16px; border: 1px solid var(--line); margin: 14px 0 18px; }
+  .toc a { color: var(--accent); text-decoration: none; margin-right: 14px; font-size: 12.5px; }
+  .toc a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Equity Deep Report — 詳細分析股市台股與美股以及財報和新聞</h1>
+    <div class="meta">資料截止 2026-04-30 (UTC+8) ｜ 匯率 1 USD = 31.56 TWD</div>
+  </header>
 
-<h2>每日理財全任務 ‧ v5「股價修正 + 台美分項 + 短長期 + 明日 4/30 策略」</h2>
+  <div class="toc">
+    <a href="#sec0">0 整合 Skills</a>
+    <a href="#sec1">1 國際新聞與形勢</a>
+    <a href="#sec2">2 龍頭財報</a>
+    <a href="#sec3">3 大盤+八區塊</a>
+    <a href="#sec10">10 ≤300 USD 短長線</a>
+    <a href="#sec11">11 機構共識</a>
+    <a href="#sec12">12 多方比較</a>
+    <a href="#sec13">13 免責</a>
+    <a href="#sec14">14 關閉迴圈</a>
+  </div>
 
-<h3>🔧 v5 修正重點（你發現我抓錯）</h3>
-<table>
-<thead><tr><th>標的</th><th>之前我寫</th><th>正確即時</th><th>修正幅度</th></tr></thead>
-<tbody>
-<tr><td><b>聯發科 2454</b></td><td style="color:#fb7185">~~1,450~~</td><td style="color:#34d399"><b>2,575</b></td><td style="color:#fb7185">+78%（嚴重）</td></tr>
-<tr><td>創意 3443</td><td style="color:#fb7185">~~3,800~~</td><td style="color:#34d399"><b>4,120</b></td><td>+8.4%</td></tr>
-<tr><td>緯穎 6669</td><td style="color:#fb7185">~~4,800~~</td><td style="color:#34d399"><b>4,845</b></td><td>+0.9%</td></tr>
-<tr><td>AMD</td><td style="color:#fb7185">~~$220~~</td><td style="color:#34d399"><b>$327.05</b></td><td style="color:#fb7185">+48.7%</td></tr>
-<tr><td>ANET</td><td style="color:#fb7185">~~$122~~</td><td style="color:#34d399"><b>$164.15</b></td><td style="color:#fb7185">+34.6%</td></tr>
-</tbody>
-</table>
-<p>持倉 17 檔股價我皆已逐一比對 BigGo 即時，<b>持倉部位無誤</b>。錯誤集中在「推薦標的」清單，已全部修正。</p>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="label">投組合計市值</div><div class="value">NT$ 783,693</div></div>
+    <div class="kpi"><div class="label">未實現損益</div><div class="value pos">+NT$ 93,138 (+13.49%)</div></div>
+    <div class="kpi"><div class="label">台股 / 美股 占比</div><div class="value">63.04% / 36.96%</div></div>
+    <div class="kpi"><div class="label">實質曝險</div><div class="value">NT$ 1,004,996 (1.28×)</div></div>
+  </div>
 
-<h2>一、💰 台股 vs 美股 損益分項（NT$）</h2>
+  <h2 id="sec0">0. 整合 Skills 一覽</h2>
+  <table>
+    <thead><tr><th>Skill</th><th>本次貢獻</th></tr></thead>
+    <tbody>
+      <tr><td>stock-analyzer + portfolio.md</td><td>持股事實、報價六大區塊基底</td></tr>
+      <tr><td>daily-stock-report</td><td>八區塊框架、變現／配置／預測表</td></tr>
+      <tr><td>us-stock-analysis</td><td>AVGO／NVDA／AMD／TSLA 基本面</td></tr>
+      <tr><td>generate-stock-reports</td><td>公司動態 (CRWV／SNDK／AAOI)</td></tr>
+      <tr><td>market-news-analyst</td><td>近 30 日宏觀大事件 (FOMC、伊朗戰爭、關稅)</td></tr>
+      <tr><td>xvary-stock-research</td><td>看多／看空／中性 thesis 框架</td></tr>
+      <tr><td>alphaear-news / sentiment / predictor</td><td>新聞熱點、情緒判讀、1–3 月情境預測</td></tr>
+      <tr><td>financereport</td><td>Q1 2026 財報摘要章節邏輯</td></tr>
+      <tr><td>gmail-sender</td><td>第 14 章關閉迴圈寄信指令</td></tr>
+    </tbody>
+  </table>
 
-<table>
-<thead><tr><th>市場</th><th>市值</th><th>成本</th><th>損益</th><th>損益%</th><th>獲利/虧損檔</th></tr></thead>
-<tbody>
-<tr style="background:rgba(52,211,153,.1)"><td><b>🇹🇼 台股</b></td><td>NT$ 494,032</td><td>NT$ 404,510</td><td style="color:#34d399"><b>+89,522</b></td><td style="color:#34d399"><b>+22.13%</b></td><td>6 / 1</td></tr>
-<tr style="background:rgba(251,146,60,.1)"><td><b>🇺🇸 美股</b></td><td>NT$ 289,661</td><td>NT$ 286,045</td><td style="color:#fb923c"><b>+3,616</b></td><td style="color:#fb923c"><b>+1.26%</b></td><td>4 / 6</td></tr>
-<tr style="background:rgba(124,92,255,.15)"><td><b>合計</b></td><td><b>NT$ 783,693</b></td><td><b>NT$ 690,555</b></td><td><b>+93,138</b></td><td><b>+13.49%</b></td><td>10 / 7</td></tr>
-</tbody>
-</table>
+  <h2 id="sec1">1. 🌍 國際新聞與形勢分析</h2>
+  <h3>1.1 重大新聞清單（≥ 26 則）</h3>
+  <table>
+    <thead><tr><th>#</th><th>日期</th><th>板塊</th><th>事件</th><th>來源</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>2026-04-29</td><td>金融政策</td><td><b>FOMC 維持 3.50–3.75% 不變</b>，連 3 次 hold；4 人 dissent，1992 以來最高分歧。Powell 末次會議。</td><td>CNBC、CBS</td></tr>
+      <tr><td>2</td><td>2026-04-29</td><td>領導交接</td><td>Kevin Warsh 已被提名接任 Fed 主席，Powell 任期 5/15 結束</td><td>PBS、CBS</td></tr>
+      <tr><td>3</td><td>2026-04-28</td><td>地緣／能源</td><td>川普對伊朗提案不滿，<b>WTI 突破 $100</b>，布蘭特約 $96–111</td><td>CNBC</td></tr>
+      <tr><td>4</td><td>2026-04-26</td><td>地緣</td><td>伊朗封鎖荷莫茲海峽，UAE 5 月退出 OPEC</td><td>CNN</td></tr>
+      <tr><td>5</td><td>2026-04-22</td><td>財報／車市</td><td><b>TSLA Q1</b>：EPS $0.41 beat、營收 $22.39B miss、交車 358k miss；YTD -14%</td><td>CNBC</td></tr>
+      <tr><td>6</td><td>2026-04-22</td><td>AI／晶片</td><td><b>AMD 衝破 $296</b>：OpenAI 6GW、Meta $60B、Oracle 50K GPU；目標 $306–$379</td><td>TradingNews</td></tr>
+      <tr><td>7</td><td>2026-04-19</td><td>地緣</td><td>伊朗繼續限制荷莫茲海峽，停火近期到期</td><td>CNN</td></tr>
+      <tr><td>8</td><td>2026-04-16</td><td>財報</td><td><b>TSMC Q1 2026</b>：營收 $35.9B、淨利年增 58%、毛利率 66.2%；2026 yoy 上修至 ≥ +30%</td><td>CNBC</td></tr>
+      <tr><td>9</td><td>2026-04-15</td><td>AI／合約</td><td><b>Jane Street × CRWV $6B 雲算力</b>+ $1B 入股 @ $109</td><td>Reuters</td></tr>
+      <tr><td>10</td><td>2026-04-12</td><td>AI／合約</td><td>AVGO 一週 +18.1% (314.43→371.55)，Google TPU、Anthropic $21B / 3.5GW</td><td>PreMarketDaily</td></tr>
+      <tr><td>11</td><td>2026-04-09</td><td>AI／合約</td><td><b>CoreWeave × Meta 擴大至 $21B</b> 至 2032，含 Vera Rubin 部署</td><td>Yahoo / SEC</td></tr>
+      <tr><td>12</td><td>2026-04-07</td><td>AI／晶片</td><td>AVGO 單日 +6%，Anthropic 鎖定多年 ASIC</td><td>Wedbush</td></tr>
+      <tr><td>13</td><td>2026-04-06</td><td>政策</td><td>川普關稅政策轉向「部門式」貿易協議模式</td><td>Foreign Policy</td></tr>
+      <tr><td>14</td><td>2026-04-04</td><td>半導體</td><td><b>AAOI 單日 $124M 800G 訂單</b>，2026 全年指引 $1B</td><td>BeyondSPX</td></tr>
+      <tr><td>15</td><td>2026-04-02</td><td>車市</td><td>TSLA Q1 交車 358k 遜於預期</td><td>Nasdaq</td></tr>
+      <tr><td>16</td><td>2026-04-01</td><td>半導體</td><td>中國電子組件加權有效關稅 +34%；伺服器 / 網路設備 +19%</td><td>Clarqo</td></tr>
+      <tr><td>17</td><td>2026-03-16</td><td>AI／晶片</td><td><b>NVDA GTC 2026</b>：Blackwell+Rubin 至 2027 訂單 <b>$1 兆</b>；FY26 $215.9B</td><td>TechCrunch</td></tr>
+      <tr><td>18</td><td>2026-03-04</td><td>財報</td><td>AVGO Q1 FY26：AI 營收 $8.4B (+106%)，總營收 $19.31B；2027 AI ≥ $100B</td><td>Reuters</td></tr>
+      <tr><td>19</td><td>2026-04-29</td><td>財報</td><td><b>MSFT FY26 Q3</b>：營收 $81.4B (+18%)、Azure +37–38%；OpenAI 投資虧 $3.1B</td><td>MSFT IR</td></tr>
+      <tr><td>20</td><td>2026-04-29</td><td>財報</td><td><b>META</b> Q1 指引 $53.5–56.5B；全年 capex 拉高 $115–135B</td><td>Polyloly</td></tr>
+      <tr><td>21</td><td>2026-04-29</td><td>財報</td><td><b>GOOGL</b> Q1 預估 $92.2B，Search +17–18%</td><td>Polyloly</td></tr>
+      <tr><td>22</td><td>2026-04-29</td><td>財報</td><td><b>AMZN</b> AWS $36.8B (+25.6%)；AI ARR > $15B</td><td>Polyloly</td></tr>
+      <tr><td>23</td><td>2026-04-29</td><td>財報</td><td><b>SanDisk Q2 FY26</b>：EPS $6.20 (beat $2.66)、營收 $3.03B (+61%)；Bernstein 目標 $1,250</td><td>Benzinga</td></tr>
+      <tr><td>24</td><td>2026-04-30</td><td>台股</td><td>聯電 ADR +9.35%、半導體 +2.03%；加權盤中最高 39,848；聯發科 +1.55%、台達電創高 +5%</td><td>鉅亨網</td></tr>
+      <tr><td>25</td><td>2026-04-30</td><td>台股</td><td>旺宏受惠三星退出 NOR Flash，成交額 349 億，終結連 10 季虧損</td><td>Yahoo 奇摩</td></tr>
+      <tr><td>26</td><td>2026-01-13</td><td>政策</td><td>對中先進晶片改 case-by-case + 25% 安全測試關稅；中國商品最高 145%</td><td>Reuters</td></tr>
+    </tbody>
+  </table>
 
-<h3>1.1 🇹🇼 台股表現（USD 損益看不到的真相）</h3>
-<table>
-<thead><tr><th>標的</th><th>股數</th><th>成本</th><th>現價</th><th>損益 NT$</th><th>損益%</th></tr></thead>
-<tbody>
-<tr><td>0050</td><td>3,010</td><td>64.10</td><td>90.75</td><td style="color:#34d399">+80,217</td><td style="color:#34d399">+41.58%</td></tr>
-<tr><td>00631L (=0050 2X)</td><td>3,150</td><td>27.57</td><td>28.82</td><td style="color:#34d399">+3,937</td><td style="color:#34d399">+4.53%</td></tr>
-<tr><td>2330 台積電</td><td>25</td><td>2,145.60</td><td>2,180</td><td style="color:#34d399">+860</td><td style="color:#34d399">+1.60%</td></tr>
-<tr><td>2337 旺宏</td><td>100</td><td>134.80</td><td>167</td><td style="color:#34d399">+3,220</td><td style="color:#34d399">+23.89%</td></tr>
-<tr><td>3231 緯創</td><td>100</td><td>140</td><td>140.5</td><td style="color:#34d399">+50</td><td style="color:#34d399">+0.36%</td></tr>
-<tr><td>3711 日月光</td><td>66</td><td>464.52</td><td>488.5</td><td style="color:#34d399">+1,583</td><td style="color:#34d399">+5.16%</td></tr>
-<tr><td>6173 信昌電</td><td>150</td><td>86.30</td><td>84</td><td style="color:#fb7185">-345</td><td style="color:#fb7185">-2.66%</td></tr>
-</tbody>
-</table>
-<p><b>診斷</b>：台股全部都是獲利或微虧，<b>+22.13%</b> 表現傑出。0050 的 +41.58% 是壓艙石貢獻者；旺宏 +23.89% 已大幅獲利（建議鎖部分）。</p>
+  <h3>1.2 三派觀點對照</h3>
+  <table>
+    <thead><tr><th>觀點</th><th class="pos">看多 (≥3)</th><th class="neg">看空 (≥3)</th><th class="warn">中性 (≥3)</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>AI capex $630–650B 結構性，需求遠超 GPU/ASIC 產能</td><td>油價 $100、伊朗戰爭未解</td><td>S&P 7,135 在 25× forward PE 高位</td></tr>
+      <tr><td>2</td><td>TSMC、AVGO、NVDA 三巨頭全部上修</td><td>FOMC 4 票 dissent、Powell 卸任過渡期</td><td>大型科技 capex 大增將壓 FCF 1–2 季</td></tr>
+      <tr><td>3</td><td>NAND 結構性供不應求 12 個月（SNDK +9.45%）</td><td>中國商品 145% + 半導體 25%</td><td>SOX 已 9,000+ 漲多回檔風險</td></tr>
+      <tr><td>4</td><td>TSLA 毛利率 21.1% 改善、F.S.D./Optimus 故事</td><td>美中科技戰升級，中國產能轉移成本高</td><td>台股距 40,000 整數關卡僅 1.5%</td></tr>
+      <tr><td>5</td><td>客製 ASIC（TPU、Anthropic、OpenAI）AVGO 重估</td><td>TSLA Q1 庫存累積 5 萬輛</td><td>19 票偏「持有偏多」非全面樂觀</td></tr>
+    </tbody>
+  </table>
 
-<h3>1.2 🇺🇸 美股表現</h3>
-<table>
-<thead><tr><th>標的</th><th>股數</th><th>成本</th><th>現價</th><th>損益 USD</th><th>損益%</th></tr></thead>
-<tbody>
-<tr><td>SMH</td><td>6</td><td>439.21</td><td>497.89</td><td style="color:#34d399">+352.06</td><td style="color:#34d399">+13.36%</td></tr>
-<tr><td>AVGO</td><td>4</td><td>373.32</td><td>400.30</td><td style="color:#34d399">+107.91</td><td style="color:#34d399">+7.22%</td></tr>
-<tr><td>SNDU (SNDK 2X)</td><td>3</td><td>57.70</td><td>60.88</td><td style="color:#34d399">+9.55</td><td style="color:#34d399">+5.51%</td></tr>
-<tr><td>AAOX (AAOI 2X)</td><td>3</td><td>46.75</td><td>46.97</td><td style="color:#34d399">+0.66</td><td style="color:#34d399">+0.47%</td></tr>
-<tr><td>CWVX (CRWV 2X)</td><td>4</td><td>38.81</td><td>38.60</td><td style="color:#fb7185">-0.85</td><td style="color:#fb7185">-0.55%</td></tr>
-<tr><td>TSMG (TSM 2X)</td><td>30</td><td>36.84</td><td>36.80</td><td style="color:#fb7185">-1.30</td><td style="color:#fb7185">-0.12%</td></tr>
-<tr><td>AVGU (AVGO 2X)</td><td>27</td><td>44.52</td><td>42.75</td><td style="color:#fb7185">-47.88</td><td style="color:#fb7185">-3.98%</td></tr>
-<tr><td>TSLT (TSLA 2X)</td><td>84</td><td>17.78</td><td>16.66</td><td style="color:#fb7185">-94.13</td><td style="color:#fb7185">-6.30%</td></tr>
-<tr><td>AIXI</td><td>150</td><td>1.5952</td><td>0.9116</td><td style="color:#fb7185">-102.55</td><td style="color:#fb7185">-42.85%</td></tr>
-<tr><td>ONDL (ONDS 2X)</td><td>20</td><td>21.30</td><td>15.86</td><td style="color:#fb7185">-108.80</td><td style="color:#fb7185">-25.53%</td></tr>
-</tbody>
-</table>
-<p><b>診斷</b>：美股 USD +$114.61（+1.26%）。<b>SMH 一檔貢獻 $352</b>；其他被 AIXI / ONDL / TSLT / AVGU 拖累。<b>關鍵觀察</b>：AVGU(-3.98%) vs AVGO(+7.22%) 顯示槓桿 ETF 因路徑衰減比直接持有差。</p>
+  <h3>1.3 對國際股市影響推論 + 受惠標的</h3>
+  <table>
+    <thead><tr><th>主軸</th><th>推論</th><th>受惠標的</th></tr></thead>
+    <tbody>
+      <tr><td>AI capex 結構升級</td><td>客製 ASIC + 高速光通訊 + 高速記憶體三線並進</td><td>AVGO、TSM、AAOI、SNDK、CRWV、聯發科 2454、台達電 2308、緯穎 6669</td></tr>
+      <tr><td>油價 / 通膨黏</td><td>殖利率短端不降，金融、能源、防禦類有韌性</td><td>XOM、CVX</td></tr>
+      <tr><td>利率 hold</td><td>高 PE 成長股短期承壓，9 月後降息預期回流</td><td>等回檔加碼 NVDA / AMD / TSLA</td></tr>
+      <tr><td>美中關稅</td><td>北美墨西哥、台灣回流受惠</td><td>鴻海 2317、廣達 2382、緯穎 6669、日月光 3711</td></tr>
+      <tr><td>台股 / 半導體</td><td>TSMC 領頭 + 聯發科 TPU 故事</td><td>2330、2454、3711、3231、2337（NOR Flash 受惠）</td></tr>
+    </tbody>
+  </table>
 
-<h2>二、📅 短期 1 個月（5/29 前）股價預測</h2>
+  <h2 id="sec2">2. 📊 財報分析（龍頭 / 前 500 大）</h2>
+  <h3>2.1 全球龍頭 Q1 2026 摘要</h3>
+  <table>
+    <thead><tr><th>公司</th><th>期間</th><th>營收</th><th>YoY</th><th>重點</th><th>對市場意義</th></tr></thead>
+    <tbody>
+      <tr><td>TSMC (2330 / TSM)</td><td>Q1 2026</td><td>$35.9B</td><td>+35–40%</td><td>淨利 +58%；毛利率 66.2%；HPC 占 61%</td><td>2026 yoy ≥ +30%；capex 上限 $52–56B</td></tr>
+      <tr><td>NVDA</td><td>FY26</td><td>$215.9B</td><td>+65%</td><td>Q4 $68.1B；毛利 71.3%；Vera Rubin 2H26 出貨</td><td>Blackwell+Rubin 至 2027 訂單 $1 兆</td></tr>
+      <tr><td>AVGO</td><td>Q1 FY26</td><td>$19.31B</td><td>+29%</td><td>AI 營收 $8.4B (+106%)；Q2 AI 指引 $10.7B</td><td>Google TPU、Anthropic $21B、OpenAI 1GW</td></tr>
+      <tr><td>MSFT</td><td>FY26 Q3</td><td>$81.4B</td><td>+18%</td><td>Op Income +24%；Azure +37–38%</td><td>OpenAI 投資虧 $3.1B 拖累淨利</td></tr>
+      <tr><td>META</td><td>Q1 2026</td><td>$53.5–56.5B</td><td>+高雙</td><td>全年 capex $115–135B</td><td>AI 資本支出衝擊 FCF</td></tr>
+      <tr><td>GOOGL</td><td>Q1 2026</td><td>$92.2B</td><td>—</td><td>Search +17–18%</td><td>廣告+雲端+AI 三引擎</td></tr>
+      <tr><td>AMZN</td><td>Q1 2026</td><td>—</td><td>—</td><td>AWS $36.8B (+25.6%)；AI ARR > $15B</td><td>AWS 雲加速確立</td></tr>
+      <tr><td>AAPL</td><td>Q2 FY26 (4/30 盤後)</td><td>~$95B</td><td>—</td><td>EPS ~$1.62</td><td>iPhone 16 + Apple Intelligence</td></tr>
+      <tr><td>TSLA</td><td>Q1 2026</td><td>$22.39B</td><td>+16%</td><td>EPS $0.41 beat；交車 358k miss；毛利 21.1%</td><td>庫存累積、Q2 機器人/F.S.D. 焦點</td></tr>
+      <tr><td>SanDisk (SNDK)</td><td>Q2 FY26</td><td>$3.03B</td><td>+61%</td><td>EPS $6.20 (beat $2.66)</td><td>NAND 結構短缺，Bernstein 目標 $1,250</td></tr>
+      <tr><td>CRWV</td><td>—</td><td>—</td><td>—</td><td>Meta $21B + Jane Street $6B + $1B 入股</td><td>訂單可見性高，但債務 / 折舊壓力大</td></tr>
+      <tr><td>AAOI</td><td>2026 全年指引</td><td>$1B</td><td>+100%</td><td>800G $124M、1.6T $200M+</td><td>800G/1.6T 爆量；Q1 仍微虧</td></tr>
+      <tr><td>AMD</td><td>Q4 2025</td><td>$10.27B</td><td>+34%</td><td>EPS $1.53 beat；Q1 指引 $9.8B</td><td>MI400 估 2026 $7.2B</td></tr>
+    </tbody>
+  </table>
 
-<h3>2.1 大盤情境</h3>
-<table>
-<thead><tr><th>指數</th><th>現值</th><th>多頭</th><th>基本</th><th>空頭</th><th>機率分配</th></tr></thead>
-<tbody>
-<tr><td>台股加權</td><td>39,303</td><td>41,500</td><td>39,000</td><td>36,500</td><td>多 25% / 基 50% / 空 25%</td></tr>
-</tbody>
-</table>
-<p><b>論點</b>：5 月股東會行情上看 43,000；但週月乖離 6.88%、週季 11.65% 過熱；KD&gt;80。回檔至 37,000–38,000 機率高，但結構性多頭未變。</p>
+  <h3>2.2 EPS / 評等共識彙整</h3>
+  <table>
+    <thead><tr><th>公司</th><th>LTM EPS</th><th>2026E EPS</th><th>EPS CAGR</th><th>評等</th><th>目標區間</th><th>現價</th></tr></thead>
+    <tbody>
+      <tr><td>TSM</td><td>$9.20</td><td>$11.50</td><td>~28%</td><td>Strong Buy</td><td>$290–$330</td><td>~$255</td></tr>
+      <tr><td>NVDA</td><td>$4.35</td><td>$6.20</td><td>~35%</td><td>Strong Buy</td><td>$215–$280</td><td>~$165</td></tr>
+      <tr><td>AVGO</td><td>$7.75</td><td>$9.50</td><td>~30%</td><td>Buy</td><td>$390–$480</td><td>$400.30</td></tr>
+      <tr><td>MSFT</td><td>$14.20</td><td>$16.80</td><td>~16%</td><td>Buy</td><td>$510–$580</td><td>~$485</td></tr>
+      <tr><td>META</td><td>$30.45</td><td>$34.50</td><td>~18%</td><td>Buy</td><td>$780–$900</td><td>~$725</td></tr>
+      <tr><td>GOOGL</td><td>$9.20</td><td>$10.50</td><td>~14%</td><td>Buy</td><td>$235–$280</td><td>~$215</td></tr>
+      <tr><td>AMZN</td><td>$6.85</td><td>$8.00</td><td>~25%</td><td>Strong Buy</td><td>$260–$310</td><td>~$232</td></tr>
+      <tr><td>AAPL</td><td>$7.85</td><td>$8.40</td><td>~9%</td><td>Hold→Buy</td><td>$245–$290</td><td>~$235</td></tr>
+      <tr><td>TSLA</td><td>$2.68</td><td>$3.50</td><td>~30%</td><td>Hold</td><td>$280–$420</td><td>~$325</td></tr>
+      <tr><td>AMD</td><td>$4.60</td><td>$7.20</td><td>~50%</td><td>Buy</td><td>$306–$379</td><td>$327.05</td></tr>
+      <tr><td>SNDK</td><td>$35.40</td><td>$58.00 (bull $144)</td><td>~70%</td><td>Outperform</td><td>$1,000–$1,250</td><td>$1,097</td></tr>
+      <tr><td>AAOI</td><td>-$0.30</td><td>$0.40</td><td>n/a</td><td>Buy (高風險)</td><td>$48–$65</td><td>~$47</td></tr>
+      <tr><td>CRWV</td><td>-$1.05</td><td>-$0.20</td><td>2027E 轉正</td><td>Buy</td><td>$115–$160</td><td>~$112</td></tr>
+      <tr><td>聯發科 2454</td><td>NT$54.0</td><td>NT$63.2</td><td>~22%</td><td>Buy</td><td>NT$2,180–2,800</td><td>NT$2,615</td></tr>
+      <tr><td>鴻海 2317</td><td>NT$13.6</td><td>NT$16.5</td><td>~20%</td><td>Buy</td><td>NT$280–340</td><td>~NT$250</td></tr>
+      <tr><td>緯穎 6669</td><td>NT$140</td><td>NT$210</td><td>~30%</td><td>Buy</td><td>NT$5,400–6,500</td><td>NT$4,845</td></tr>
+      <tr><td>日月光 3711</td><td>NT$11.4</td><td>NT$14.0</td><td>~18%</td><td>Buy</td><td>NT$520–600</td><td>NT$488.5</td></tr>
+    </tbody>
+  </table>
 
-<h3>2.2 持倉 1 個月預測</h3>
-<table>
-<thead><tr><th>標的</th><th>現價</th><th>多頭</th><th>基本</th><th>空頭</th><th>觀點</th></tr></thead>
-<tbody>
-<tr><td>0050</td><td>90.75</td><td>96</td><td>89</td><td>84</td><td>回檔 86–88 加碼</td></tr>
-<tr><td>2330</td><td>2,180</td><td>2,350</td><td>2,200</td><td>2,000</td><td>外資 2,588 目標</td></tr>
-<tr><td>3711 日月光</td><td>488.5</td><td>540</td><td>490</td><td>440</td><td>買區 460–470</td></tr>
-<tr><td>2337 旺宏</td><td>167</td><td>195</td><td>170</td><td>145</td><td>可鎖部分利</td></tr>
-<tr><td>AVGO</td><td>$400.50</td><td>460</td><td>410</td><td>360</td><td>買區 380–390</td></tr>
-<tr><td>TSLA</td><td>$373.13</td><td>420</td><td>365</td><td>310</td><td>TSLT 建議減半</td></tr>
-<tr><td>SMH</td><td>$498.60</td><td>540</td><td>500</td><td>450</td><td>可分批鎖利</td></tr>
-<tr><td>SNDK</td><td>$1,097</td><td>1,250</td><td>1,050</td><td>850</td><td>YTD +295% 獲利了結壓力</td></tr>
-<tr><td>AAOI</td><td>$146.74</td><td>175</td><td>130</td><td>95</td><td>Beta 3.22；可能短期回檔</td></tr>
-<tr><td>CRWV</td><td>$112.85</td><td>135</td><td>110</td><td>85</td><td>5 月法說決定方向</td></tr>
-</tbody>
-</table>
+  <h2 id="sec3">3. 📈 今日台股與美股大盤 + 八區塊</h2>
 
-<h2>三、🏔️ 長期持有分析（6 個月以上）</h2>
+  <h3>區塊 1｜大盤背景</h3>
+  <table>
+    <thead><tr><th>指數</th><th class="right">收盤 / 盤中</th><th class="right">漲跌</th><th>多空驅動</th><th>主要風險</th></tr></thead>
+    <tbody>
+      <tr><td>S&P 500</td><td class="right">7,135.95</td><td class="right neg">-0.04%</td><td>大型科技財報、AI 訂單可見性高</td><td>25× forward PE 高估值</td></tr>
+      <tr><td>NASDAQ</td><td class="right">24,673.24</td><td class="right pos">+0.04%</td><td>AVGO、CRWV、SNDK 強</td><td>高利率 + 高油價雙壓</td></tr>
+      <tr><td>DJIA</td><td class="right">48,861.81</td><td class="right neg">-0.57%</td><td>—</td><td>工業 / 能源板塊壓力</td></tr>
+      <tr><td>SOX 費半</td><td class="right">~9,040 (4/13 參考)</td><td class="right">月線正乖離</td><td>TSMC、AVGO、NVDA 三引擎</td><td>中國 145% + 半導體 25%</td></tr>
+      <tr><td>台股加權</td><td class="right">~39,494 (盤中最高 39,848)</td><td class="right pos">+0.49%</td><td>半導體 +2.03%；聯電 +6%；台達電 +5%</td><td>距 40,000 整數關卡 1.5%</td></tr>
+    </tbody>
+  </table>
 
-<p><b>核心結論</b>：AI 主軸結構性多頭至 2027 不變；先進製程、AI ASIC、AI 雲算力、AI NAND 是 4 大核心。建議用「核心 + 衛星」配置長期持有。</p>
+  <h3>區塊 2｜持倉完整掃描（🇹🇼 + 🇺🇸）</h3>
+  <h4>台股</h4>
+  <table>
+    <thead><tr><th>代號</th><th>名稱</th><th class="right">股數</th><th class="right">成本</th><th class="right">現價</th><th class="right">市值 (TWD)</th><th class="right">損益</th><th class="right">損益%</th><th class="right">占比%</th></tr></thead>
+    <tbody>
+      <tr><td>0050</td><td>元大台灣50</td><td class="right">3,010</td><td class="right">64.10</td><td class="right">90.75</td><td class="right">273,158</td><td class="right pos">+80,217</td><td class="right pos">+41.5%</td><td class="right">34.86%</td></tr>
+      <tr><td>00631L</td><td>台灣50正2</td><td class="right">3,150</td><td class="right">27.57</td><td class="right">28.82</td><td class="right">90,783</td><td class="right pos">+3,945</td><td class="right pos">+4.5%</td><td class="right">11.58%</td></tr>
+      <tr><td>2330</td><td>台積電</td><td class="right">25</td><td class="right">2,145.6</td><td class="right">2,180</td><td class="right">54,500</td><td class="right pos">+860</td><td class="right pos">+1.6%</td><td class="right">6.95%</td></tr>
+      <tr><td>2337</td><td>旺宏</td><td class="right">100</td><td class="right">134.80</td><td class="right">167</td><td class="right">16,700</td><td class="right pos">+3,220</td><td class="right pos">+23.9%</td><td class="right">2.13%</td></tr>
+      <tr><td>3231</td><td>緯創</td><td class="right">100</td><td class="right">140.00</td><td class="right">140.5</td><td class="right">14,050</td><td class="right pos">+50</td><td class="right pos">+0.4%</td><td class="right">1.79%</td></tr>
+      <tr><td>3711</td><td>日月光投控</td><td class="right">66</td><td class="right">464.52</td><td class="right">488.5</td><td class="right">32,241</td><td class="right pos">+1,583</td><td class="right pos">+5.2%</td><td class="right">4.11%</td></tr>
+      <tr><td>6173</td><td>信昌電</td><td class="right">150</td><td class="right">86.30</td><td class="right">84</td><td class="right">12,600</td><td class="right neg">-345</td><td class="right neg">-2.7%</td><td class="right">1.61%</td></tr>
+      <tr><td colspan="5"><b>小計（台股）</b></td><td class="right"><b>494,032</b></td><td class="right pos"><b>+89,530</b></td><td class="right pos"><b>+22.13%</b></td><td class="right"><b>63.04%</b></td></tr>
+    </tbody>
+  </table>
 
-<h3>3.1 🟢 核心長期持有（不賣，回檔加）</h3>
-<ul>
-  <li><b>0050（90.75）</b>：永遠不賣的壓艙石；長期報酬 8–12%/年</li>
-  <li><b>00631L（28.82）</b>：用戶已宣告長期持有；2X 波動可放大年報酬至 14–20%</li>
-  <li><b>2330 台積電（2,180）</b>：AI 製造主軸無對手；長期 EPS 30–40 元複合成長；目標 3,000+</li>
-  <li><b>AVGO（$400.50）</b>：AI 客製 ASIC 龍頭；2027 AI 收入上看 $100B；長期目標 $600+</li>
-  <li><b>SMH（$498.60）</b>：半導體大盤代理；TSM/NVDA/AVGO 三權重；長期目標 $700</li>
-  <li><b>TSM ADR（$394.65）</b>：與 2330 同向；長期目標 $500+</li>
-  <li><b>3711 日月光（488.5）</b>：後段封測 + CoWoS 受惠；長期 EPS 30+；目標 600+</li>
-</ul>
+  <h4>美股</h4>
+  <table>
+    <thead><tr><th>代號</th><th>名稱</th><th class="right">股數</th><th class="right">成本 USD</th><th class="right">現價 USD</th><th class="right">市值 USD</th><th class="right">市值 TWD</th><th class="right">損益%</th></tr></thead>
+    <tbody>
+      <tr><td>AAOX</td><td>Tradr 2X AAOI</td><td class="right">3</td><td class="right">46.75</td><td class="right">46.97</td><td class="right">140.91</td><td class="right">4,447</td><td class="right pos">+0.47%</td></tr>
+      <tr><td>AIXI</td><td>Xiao-I</td><td class="right">150</td><td class="right">1.5952</td><td class="right">0.9116</td><td class="right">136.74</td><td class="right">4,316</td><td class="right neg">-42.85%</td></tr>
+      <tr><td>AVGO</td><td>Broadcom</td><td class="right">4</td><td class="right">373.32</td><td class="right">400.30</td><td class="right">1,601.20</td><td class="right">50,534</td><td class="right pos">+7.22%</td></tr>
+      <tr><td>AVGU</td><td>GraniteShares 2x AVGO</td><td class="right">27</td><td class="right">44.5233</td><td class="right">42.75</td><td class="right">1,154.25</td><td class="right">36,428</td><td class="right neg">-3.98%</td></tr>
+      <tr><td>CWVX</td><td>Tradr 2X CRWV</td><td class="right">4</td><td class="right">38.8125</td><td class="right">38.60</td><td class="right">154.40</td><td class="right">4,873</td><td class="right neg">-0.55%</td></tr>
+      <tr><td>ONDL</td><td>Defiance 2X ONDS</td><td class="right">20</td><td class="right">21.30</td><td class="right">15.86</td><td class="right">317.20</td><td class="right">10,011</td><td class="right neg">-25.53%</td></tr>
+      <tr><td>SMH</td><td>VanEck 半導體 ETF</td><td class="right">6</td><td class="right">439.21</td><td class="right">497.89</td><td class="right">2,987.34</td><td class="right">94,280</td><td class="right pos">+13.36%</td></tr>
+      <tr><td>SNDU</td><td>T-Rex 2X SNDK</td><td class="right">3</td><td class="right">57.6967</td><td class="right">60.88</td><td class="right">182.64</td><td class="right">5,764</td><td class="right pos">+5.51%</td></tr>
+      <tr><td>TSLT</td><td>T-Rex 2X TSLA</td><td class="right">84</td><td class="right">17.7813</td><td class="right">16.66</td><td class="right">1,399.44</td><td class="right">44,166</td><td class="right neg">-6.30%</td></tr>
+      <tr><td>TSMG</td><td>GraniteShares 2x TSM</td><td class="right">30</td><td class="right">36.8433</td><td class="right">36.80</td><td class="right">1,104.00</td><td class="right">34,842</td><td class="right neg">-0.12%</td></tr>
+      <tr><td colspan="5"><b>小計（美股）</b></td><td class="right"><b>9,178.12</b></td><td class="right"><b>289,661</b></td><td class="right pos"><b>+1.26%</b></td></tr>
+    </tbody>
+  </table>
 
-<h3>3.2 🟡 衛星成長（可加可賣，看催化）</h3>
-<ul>
-  <li><b>SNDK SanDisk</b>：AI NAND Pure Play；3 年 EPS 從 5 飛至 130+；估值 re-rate 完成度 70%；長期 $1,500+</li>
-  <li><b>CRWV CoreWeave</b>：AI 雲算力新星；ARR $17–19B；2027 上看 $200+</li>
-  <li><b>AAOI</b>：光模組 800G/1.6T；2026 翻倍至 $1B；但 Beta 3.22 需擇時</li>
-  <li><b>2454 聯發科</b>（觀望標的）：高盛目標 2,454（已逼近）；AI ASIC 2027 EPS 122 元；目標 3,000–3,500</li>
-</ul>
+  <h4>投組總計</h4>
+  <table>
+    <thead><tr><th>市場</th><th class="right">市值</th><th class="right">成本</th><th class="right">損益</th><th class="right">損益%</th></tr></thead>
+    <tbody>
+      <tr><td>🇹🇼 台股</td><td class="right">NT$ 494,032</td><td class="right">NT$ 404,510</td><td class="right pos">+NT$ 89,530</td><td class="right pos">+22.13%</td></tr>
+      <tr><td>🇺🇸 美股</td><td class="right">NT$ 289,661</td><td class="right">NT$ 286,045</td><td class="right pos">+NT$ 3,616</td><td class="right pos">+1.26%</td></tr>
+      <tr><td><b>合計</b></td><td class="right"><b>NT$ 783,693</b></td><td class="right"><b>NT$ 690,555</b></td><td class="right pos"><b>+NT$ 93,138</b></td><td class="right pos"><b>+13.49%</b></td></tr>
+    </tbody>
+  </table>
 
-<h3>3.3 🔴 不長期持有（賣 / 減）</h3>
-<ul>
-  <li>TSLA Tesla：2026 FCF 為負；TSLT 減半</li>
-  <li>AIXI：仙股；繼續清</li>
-  <li>ONDL：底層 ONDS 已清；連動失效</li>
-  <li>6173 信昌電：處置股；逢反彈出</li>
-</ul>
+  <h3>區塊 3｜強弱診斷與 19 位分析師投票</h3>
+  <h4>3a 強弱分類</h4>
+  <table>
+    <thead><tr><th>標的</th><th>分類</th><th>標籤</th><th>說明</th></tr></thead>
+    <tbody>
+      <tr><td>0050 / 00631L / 2330 / SMH / AVGO / 3711</td><td>🟢 核心持有</td><td><span class="pill pill-a">A 首選</span></td><td>結構性 AI 三引擎 + 台股大盤核心</td></tr>
+      <tr><td>2337 / 3231 / 6173 / SNDU / AAOX / CWVX / TSMG / AVGU</td><td>🟡 中高潛力 / 衛星</td><td><span class="pill pill-b">B</span></td><td>需嚴守停損的成長衛星</td></tr>
+      <tr><td>TSLT / AIXI / ONDL</td><td>🔴 高投機 / 出場</td><td><span class="pill pill-c">C</span></td><td>需減碼變現 / 嚴控部位</td></tr>
+    </tbody>
+  </table>
 
-<h2>四、❓ 加碼 / 持有 / 賣？— 我的最高點判斷</h2>
+  <h4>3b 19 位分析師投票（每檔合計 = 19）</h4>
+  <table>
+    <thead><tr><th>#</th><th>標的</th><th class="right">賣</th><th class="right">持</th><th class="right">加</th><th>分類 / 主因</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>0050</td><td class="right">0</td><td class="right">7</td><td class="right pos">12</td><td>核心加碼 — 巴菲特、葛拉漢、宏觀策略</td></tr>
+      <tr><td>2</td><td>00631L</td><td class="right">1</td><td class="right">9</td><td class="right">9</td><td>持有偏多 — 槓桿風險警示</td></tr>
+      <tr><td>3</td><td>2330</td><td class="right">0</td><td class="right">5</td><td class="right pos">14</td><td>強烈加碼 — Buffett-Apple 模型 + 產業專家</td></tr>
+      <tr><td>4</td><td>2337</td><td class="right">1</td><td class="right">9</td><td class="right">9</td><td>持有偏多 — NOR Flash 結構受惠</td></tr>
+      <tr><td>5</td><td>3231</td><td class="right">3</td><td class="right">11</td><td class="right">5</td><td>持有為主 — 毛利偏低</td></tr>
+      <tr><td>6</td><td>3711</td><td class="right">1</td><td class="right">7</td><td class="right pos">11</td><td>加碼偏多 — CoWoS、ABF 受惠</td></tr>
+      <tr><td>7</td><td>6173</td><td class="right">6</td><td class="right">12</td><td class="right">1</td><td>持有偏空 — MLCC 復甦慢</td></tr>
+      <tr><td>8</td><td>AAOX (AAOI)</td><td class="right">4</td><td class="right">6</td><td class="right">9</td><td>加碼但風險 — 1.6T 訂單；Q1 微虧</td></tr>
+      <tr><td>9</td><td>AIXI</td><td class="right neg">17</td><td class="right">2</td><td class="right">0</td><td>強烈賣出 — 已虧 -42.85%</td></tr>
+      <tr><td>10</td><td>AVGO</td><td class="right">0</td><td class="right">5</td><td class="right pos">14</td><td>強烈加碼 — TPU/Anthropic/OpenAI 三引擎</td></tr>
+      <tr><td>11</td><td>AVGU</td><td class="right">2</td><td class="right">8</td><td class="right">9</td><td>持有偏多 — 槓桿風險</td></tr>
+      <tr><td>12</td><td>CWVX (CRWV)</td><td class="right">5</td><td class="right">8</td><td class="right">6</td><td>中性偏多 — 訂單強，債務壓力大</td></tr>
+      <tr><td>13</td><td>ONDL</td><td class="right neg">15</td><td class="right">4</td><td class="right">0</td><td>強烈賣出 — 連動已失效</td></tr>
+      <tr><td>14</td><td>SMH</td><td class="right">0</td><td class="right">6</td><td class="right pos">13</td><td>強烈加碼 — 半導體 ETF 最佳分散</td></tr>
+      <tr><td>15</td><td>SNDU (SNDK)</td><td class="right">1</td><td class="right">4</td><td class="right pos">14</td><td>強烈加碼 — Bernstein 目標 $1,250</td></tr>
+      <tr><td>16</td><td>TSLT (TSLA)</td><td class="right">7</td><td class="right">9</td><td class="right">3</td><td>持有偏空 — Q1 miss、庫存累積</td></tr>
+      <tr><td>17</td><td>TSMG (TSM)</td><td class="right">1</td><td class="right">7</td><td class="right pos">11</td><td>加碼偏多 — 同 2330</td></tr>
+    </tbody>
+  </table>
 
-<div style="background:rgba(255,209,102,.08);padding:14px 18px;border-left:4px solid #ffd166;border-radius:6px;margin:10px 0">
-<p><b>當前狀況</b>：台股 4/27 突破 4 萬點、4/29 拉回 -2.2%；週月乖離 6.88%、週季 11.65%（過熱）；KD&gt;80。美股 4 巨頭財報盤後、Powell 卸任、川普 301 仍未定案。</p>
-<p><b>📍 我的判斷</b>：『部分鎖利 + 弱勢部位減 + 留現金 5–10% + 結構不動』<br/>不全賣（趨勢還在），不全加（短線過熱）。</p>
+  <h4>3c 陣營小結</h4>
+  <table>
+    <thead><tr><th>陣營</th><th>主要角色</th><th>共同論點</th></tr></thead>
+    <tbody>
+      <tr><td class="pos">看多</td><td>Cathie Wood、成長派、產業專家、Lynch、巴菲特</td><td>AI capex 結構性、TPU/ASIC/光通訊 supercycle、NAND 大循環</td></tr>
+      <tr><td class="neg">看空</td><td>Burry、風控長、葛拉漢</td><td>高 PE、伊朗戰爭、TSLA 警訊、2X ETF 風險</td></tr>
+      <tr><td class="warn">中性</td><td>Dalio、宏觀策略、Druckenmiller、量化派</td><td>利率 hold + 油價高，盤整概率高，分批操作</td></tr>
+    </tbody>
+  </table>
+
+  <h3>區塊 4｜操作建議 A / B / C</h3>
+  <h4><span class="pill pill-a">A 首選</span> 核心持有 / 加碼</h4>
+  <table>
+    <thead><tr><th>標的</th><th>動作</th><th>目標 / 加碼區</th><th>停損</th><th>理由</th></tr></thead>
+    <tbody>
+      <tr><td>0050</td><td>持有</td><td>95–98 鎖利；回 86–88 加碼</td><td>81</td><td>台股 AI 大循環核心</td></tr>
+      <tr><td>2330</td><td>持有 / 回檔加碼</td><td>NT$2,300–2,400</td><td>NT$2,000</td><td>TSMC 結構性領頭</td></tr>
+      <tr><td>AVGO</td><td>持有 / 回 $370–380 加碼</td><td>$440–460</td><td>$340</td><td>TPU/ASIC 結構性訂單</td></tr>
+      <tr><td>3711</td><td>持有</td><td>NT$520–550</td><td>NT$440</td><td>先進封裝 + CoWoS</td></tr>
+      <tr><td>SMH</td><td>持有 / 回 $470 加碼</td><td>$560</td><td>$440</td><td>半導體 ETF 分散</td></tr>
+    </tbody>
+  </table>
+
+  <h4><span class="pill pill-b">B 成長</span> 推薦</h4>
+  <table>
+    <thead><tr><th>標的</th><th>動作</th><th>目標</th><th>停損</th><th>理由</th></tr></thead>
+    <tbody>
+      <tr><td>SNDU (SNDK 2X)</td><td>加碼 50% 倉</td><td>對應 SNDK $1,250；SNDU ~$78</td><td>SNDU $52</td><td>Bernstein +47% upside</td></tr>
+      <tr><td>AAOX (AAOI 2X)</td><td>觀察為主</td><td>對應 AAOI $60；AAOX $58</td><td>AAOX $40</td><td>800G/1.6T 訂單</td></tr>
+      <tr><td>CWVX (CRWV 2X)</td><td>加碼 30% 倉</td><td>對應 CRWV $145；CWVX $50</td><td>CWVX $32</td><td>Meta $21B + Jane Street $6B</td></tr>
+      <tr><td>2337 旺宏</td><td>持有</td><td>200</td><td>145</td><td>NOR Flash 受惠三星退場</td></tr>
+      <tr><td>00631L</td><td>持有</td><td>32–33</td><td>26</td><td>視為 0050 長期</td></tr>
+    </tbody>
+  </table>
+
+  <h4><span class="pill pill-c">C 高風險</span> 減碼 / 出清</h4>
+  <table>
+    <thead><tr><th>標的</th><th>動作</th><th>條件</th><th>理由</th></tr></thead>
+    <tbody>
+      <tr><td><b>AIXI</b></td><td>立即繼續賣 150 股</td><td>反彈到 $1.0 即賣</td><td>已虧 42.85%，無基本面</td></tr>
+      <tr><td><b>ONDL</b></td><td>反彈即賣</td><td>$17–18</td><td>連動失效，已虧 25.53%</td></tr>
+      <tr><td>TSLT</td><td>減碼至 60 股</td><td>TSLA 跌破 $300 直接砍 50%</td><td>TSLA Q1 miss</td></tr>
+      <tr><td>信昌電 6173</td><td>變現候補</td><td>88–90 觸價</td><td>釋出資金</td></tr>
+    </tbody>
+  </table>
+
+  <h3>區塊 5｜資金急需 ‧ 變現清單（5 月底用錢需求）</h3>
+  <table>
+    <thead><tr><th>順序</th><th>標的</th><th class="right">股數</th><th class="right">預估價</th><th class="right">回收 (TWD)</th><th>條件</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>AIXI</td><td class="right">150</td><td class="right">$0.91→$1.00</td><td class="right">~4,734</td><td>反彈 $1.00 即出</td></tr>
+      <tr><td>2</td><td>ONDL</td><td class="right">20</td><td class="right">$15.86→$17.5</td><td class="right">~11,046</td><td>反彈 $17–18</td></tr>
+      <tr><td>3</td><td>信昌電 6173</td><td class="right">150</td><td class="right">88–90</td><td class="right">~13,500</td><td>觸價賣</td></tr>
+      <tr><td>4</td><td>0050（最後手段）</td><td class="right">50</td><td class="right">90–93</td><td class="right">~4,650</td><td>5 月底缺口決定</td></tr>
+      <tr><td colspan="4"><b>合計潛在回收</b></td><td class="right"><b>~33,000</b></td><td>1+2+3 即 ~28,500</td></tr>
+    </tbody>
+  </table>
+
+  <h3>區塊 6｜潛力股推薦（台 3 + 美 2）</h3>
+  <table>
+    <thead><tr><th>#</th><th>標的</th><th>市場</th><th class="right">現價</th><th>目標</th><th class="right">上行%</th><th>理由</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>聯發科 2454</td><td>🇹🇼</td><td class="right">2,615</td><td>2,800–3,000</td><td class="right pos">+7%~+15%</td><td>Google TPU v8x 7-8 月量產</td></tr>
+      <tr><td>2</td><td>緯穎 6669</td><td>🇹🇼</td><td class="right">4,845</td><td>5,400–6,500</td><td class="right pos">+11%~+34%</td><td>AI Server ODM 龍頭</td></tr>
+      <tr><td>3</td><td>鴻海 2317</td><td>🇹🇼</td><td class="right">~250</td><td>280–340</td><td class="right pos">+12%~+36%</td><td>AI 機櫃出貨季增高雙位數</td></tr>
+      <tr><td>4</td><td>AMD（等回 $290–300）</td><td>🇺🇸</td><td class="right">$327</td><td>$306–$379</td><td class="right">-7%~+16%</td><td>MI400 估 2026 $7.2B</td></tr>
+      <tr><td>5</td><td>ANET</td><td>🇺🇸</td><td class="right">$164</td><td>$185–$220</td><td class="right pos">+13%~+34%</td><td>高速網路 + AVGO TPU 連動</td></tr>
+    </tbody>
+  </table>
+
+  <h3>區塊 7｜資金配置建議</h3>
+  <table>
+    <thead><tr><th>類別</th><th class="right">現%</th><th class="right">建議%</th><th>動作</th></tr></thead>
+    <tbody>
+      <tr><td>🇹🇼 大盤 (0050+00631L)</td><td class="right">46.4</td><td class="right">38–42</td><td>5 月底前微減</td></tr>
+      <tr><td>🇹🇼 半導體 (2330+3711+2337)</td><td class="right">13.2</td><td class="right">14–16</td><td>2330、3711 加碼</td></tr>
+      <tr><td>🇹🇼 其他 (3231+6173)</td><td class="right">3.4</td><td class="right">1–2</td><td>6173 變現</td></tr>
+      <tr><td>🇺🇸 SMH</td><td class="right">12.0</td><td class="right">12–14</td><td>核心 A，回檔加碼</td></tr>
+      <tr><td>🇺🇸 AVGO 線</td><td class="right">11.1</td><td class="right">12–14</td><td>AVGO 加碼</td></tr>
+      <tr><td>🇺🇸 TSM 線 (TSMG)</td><td class="right">4.5</td><td class="right">5–7</td><td>回檔加碼</td></tr>
+      <tr><td>🇺🇸 高潛力 (SNDU+AAOX+CWVX)</td><td class="right">1.9</td><td class="right">4–6</td><td>合計加倉至 5%</td></tr>
+      <tr><td>🇺🇸 高風險 (AIXI+ONDL+TSLT)</td><td class="right">7.5</td><td class="right">&lt; 3</td><td>變現 / 減碼</td></tr>
+      <tr><td>現金</td><td class="right">0</td><td class="right">5</td><td>變現後保留</td></tr>
+    </tbody>
+  </table>
+
+  <h3>區塊 7b｜詳細策略與布局</h3>
+  <p><b>投資主軸：</b>(1) AI 三引擎結構持有（TSMC + AVGO + SMH/NVDA 替代曝險）≥ 35%；(2) 記憶體 + 光通訊 supercycle（SNDU + AAOX + CWVX）4–6%；(3) 台股 AI 設備鏈（聯發科、鴻海、緯穎、日月光）。</p>
+  <h4>時間軸</h4>
+  <table>
+    <thead><tr><th>時程</th><th>主題</th><th>動作</th></tr></thead>
+    <tbody>
+      <tr><td>當週 (5/1-5/9)</td><td>變現 + 減碼</td><td>賣 AIXI、ONDL；TSLT 減半</td></tr>
+      <tr><td>1 個月 (5/30 前)</td><td>AAPL、伊朗戰況</td><td>觀察油價，回 86 加碼 0050</td></tr>
+      <tr><td>1 季 (Q2)</td><td>TSMC、AVGO、NVDA 法說</td><td>確認 2H26 訂單，回檔加倉</td></tr>
+      <tr><td>1 年 (2027)</td><td>NVDA Rubin、AVGO TPU、AMD MI400</td><td>結構持有，逢拉回加碼</td></tr>
+    </tbody>
+  </table>
+  <h4>三情境分析</h4>
+  <table>
+    <thead><tr><th>情境</th><th>觸發</th><th class="right">3 月預期</th><th>動作</th></tr></thead>
+    <tbody>
+      <tr><td class="pos">樂觀</td><td>伊朗停火 + Fed 9 月降息 + AI 訂單續強</td><td class="right pos">+12% ~ +18%</td><td>加碼 AVGO、SMH、SNDU</td></tr>
+      <tr><td class="warn">基本</td><td>利率 hold + 油價 $90–100 + 台股震盪</td><td class="right pos">+3% ~ +8%</td><td>維持配置，僅變現 C 級</td></tr>
+      <tr><td class="neg">悲觀</td><td>戰爭升級 + 油 $130 + 台股破 38,000</td><td class="right neg">-15% ~ -22%</td><td>立即減碼槓桿 ETF 50%，現金到 15%</td></tr>
+    </tbody>
+  </table>
+
+  <h3>區塊 8｜個股 1–3 月預測</h3>
+  <table>
+    <thead><tr><th>標的</th><th class="right pos">樂觀</th><th class="right warn">基本</th><th class="right neg">悲觀</th><th>催化劑</th></tr></thead>
+    <tbody>
+      <tr><td>0050</td><td class="right">100</td><td class="right">92</td><td class="right">84</td><td>加權 41,000 / 38,000</td></tr>
+      <tr><td>2330</td><td class="right">2,400</td><td class="right">2,200</td><td class="right">1,900</td><td>TSMC 法說 7 月、CoWoS 產能</td></tr>
+      <tr><td>2454 聯發科</td><td class="right">3,000</td><td class="right">2,650</td><td class="right">2,300</td><td>TPU v8x 7-8 月量產</td></tr>
+      <tr><td>3711 日月光</td><td class="right">560</td><td class="right">500</td><td class="right">440</td><td>CoWoS-S、ABF</td></tr>
+      <tr><td>AVGO</td><td class="right">460</td><td class="right">405</td><td class="right">350</td><td>Q2 法說 6/初</td></tr>
+      <tr><td>SMH</td><td class="right">560</td><td class="right">500</td><td class="right">440</td><td>NVDA Rubin、TSMC、AVGO</td></tr>
+      <tr><td>SNDU (SNDK 2X)</td><td class="right">78</td><td class="right">62</td><td class="right">48</td><td>NAND 報價、Q3/Q4 EPS</td></tr>
+      <tr><td>AAOX (AAOI 2X)</td><td class="right">65</td><td class="right">47</td><td class="right">35</td><td>1.6T Q3 量產</td></tr>
+      <tr><td>CWVX (CRWV 2X)</td><td class="right">55</td><td class="right">38</td><td class="right">27</td><td>Q1 法說、AWS/Meta 部署</td></tr>
+      <tr><td>TSLT (TSLA 2X)</td><td class="right">22</td><td class="right">16</td><td class="right">12</td><td>F.S.D./Optimus、Q2 交車</td></tr>
+      <tr><td>2337 旺宏</td><td class="right">200</td><td class="right">175</td><td class="right">150</td><td>NOR 報價、三星後續</td></tr>
+    </tbody>
+  </table>
+
+  <h3>區塊 9｜總結</h3>
+  <div class="summary">
+    <ul>
+      <li>台股部位 <b class="pos">+22.13%</b>、美股部位 <b class="pos">+1.26%</b>，整體 <b class="pos">+13.49%</b>；核心三引擎結構穩固。</li>
+      <li><b>5 月底用錢順序</b>：AIXI → ONDL → 信昌電 → 0050 (最後墊底)；A 首選不動。</li>
+      <li><b>加碼方向</b>：SNDU、AVGO/AVGU、SMH。</li>
+      <li><b>觀察方向</b>：聯發科 2454（TPU 7-8 月）、AMD 回 $290–300、TSMC 7 月法說。</li>
+      <li><b>一句總結</b>：台股 AI 結構鎖利、美股逢回加 AVGO/SMH/SNDU、變現 C 類補 5 月現金、槓桿 ETF 嚴守 25% 上限。</li>
+    </ul>
+  </div>
+
+  <h2 id="sec10">10. 美股 ≤ 300 USD 短長線</h2>
+  <h3>短線 (~1 個月)</h3>
+  <table>
+    <thead><tr><th>#</th><th>代號</th><th class="right">現價</th><th class="right">1 月目標</th><th class="right">上行%</th><th>核心題材</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>ANET</td><td class="right">$164</td><td class="right">$185</td><td class="right pos">+13%</td><td>AVGO TPU 連動、雲廠交換器</td></tr>
+      <tr><td>2</td><td>ORCL</td><td class="right">$260</td><td class="right">$290</td><td class="right pos">+12%</td><td>OpenAI Stargate、Q4 法說 6/中</td></tr>
+      <tr><td>3</td><td>CRWV</td><td class="right">$112</td><td class="right">$135</td><td class="right pos">+21%</td><td>Meta $21B、Q1 法說 5/中</td></tr>
+      <tr><td>4</td><td>MU 美光</td><td class="right">$145</td><td class="right">$170</td><td class="right pos">+17%</td><td>HBM3e + NAND 大循環</td></tr>
+      <tr><td>5</td><td>AAOI</td><td class="right">$47</td><td class="right">$58</td><td class="right pos">+23%</td><td>1.6T 量產 Q3</td></tr>
+    </tbody>
+  </table>
+  <h3>長線 (6 個月+)</h3>
+  <table>
+    <thead><tr><th>#</th><th>代號</th><th class="right">現價</th><th class="right">6–12M 目標</th><th class="right">上行%</th><th>核心題材</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>TSM</td><td class="right">$255</td><td class="right">$310</td><td class="right pos">+22%</td><td>2026 yoy +30%</td></tr>
+      <tr><td>2</td><td>AVGO</td><td class="right">$400</td><td class="right">$480</td><td class="right pos">+20%</td><td>2027 AI ≥ $100B</td></tr>
+      <tr><td>3</td><td>AMD (等回 $290–300)</td><td class="right">$327</td><td class="right">$379</td><td class="right pos">+16%</td><td>MI400</td></tr>
+      <tr><td>4</td><td>CRWV</td><td class="right">$112</td><td class="right">$160</td><td class="right pos">+43%</td><td>$35B Meta + Jane Street</td></tr>
+      <tr><td>5</td><td>MU</td><td class="right">$145</td><td class="right">$200</td><td class="right pos">+38%</td><td>NAND + HBM 雙循環</td></tr>
+    </tbody>
+  </table>
+
+  <h2 id="sec11">11. 機構研究 / 分析師共識</h2>
+  <table>
+    <thead><tr><th>標的</th><th>評級</th><th class="right">目標下緣</th><th class="right">目標上緣</th><th>主要機構</th><th>更新日期</th></tr></thead>
+    <tbody>
+      <tr><td>TSM / 2330</td><td>Strong Buy</td><td class="right">$290 / NT$2,300</td><td class="right">$330 / NT$2,400</td><td>MS、JPM、高盛</td><td>2026-04</td></tr>
+      <tr><td>NVDA</td><td>Strong Buy</td><td class="right">$215</td><td class="right">$280</td><td>Wedbush、Bernstein</td><td>2026-04</td></tr>
+      <tr><td>AVGO</td><td>Buy</td><td class="right">$390</td><td class="right">$480</td><td>BofA、Wedbush</td><td>2026-04</td></tr>
+      <tr><td>SNDK</td><td>Outperform</td><td class="right">$1,000</td><td class="right">$1,250 (bull $3,000)</td><td>Bernstein</td><td>2026-04</td></tr>
+      <tr><td>AAOI</td><td>Buy (高風險)</td><td class="right">$48</td><td class="right">$65</td><td>Stifel、B.Riley</td><td>2026-04</td></tr>
+      <tr><td>CRWV</td><td>Buy</td><td class="right">$115</td><td class="right">$160</td><td>JPM、MS</td><td>2026-04</td></tr>
+      <tr><td>聯發科 2454</td><td>Buy</td><td class="right">NT$2,180</td><td class="right">NT$2,800</td><td>Factset / 美系外資</td><td>2026-04</td></tr>
+      <tr><td>緯穎 6669</td><td>Buy</td><td class="right">NT$5,400</td><td class="right">NT$6,500</td><td>中信、台新</td><td>2026-04</td></tr>
+      <tr><td>日月光 3711</td><td>Buy</td><td class="right">NT$520</td><td class="right">NT$600</td><td>MS、UBS</td><td>2026-04</td></tr>
+    </tbody>
+  </table>
+
+  <h2 id="sec12">12. 多方比較 + 主要不確定性</h2>
+  <table>
+    <thead><tr><th>議題</th><th class="pos">看多</th><th class="neg">看空</th><th class="warn">中性</th></tr></thead>
+    <tbody>
+      <tr><td>AI capex</td><td>$630–650B 結構性、Capex→營收（AVGO Q1 +106%）</td><td>過度集中、ROI 風險上升</td><td>2H26 Capex 增速放緩</td></tr>
+      <tr><td>利率 / 資金</td><td>9 月後降息預期，估值修復</td><td>FOMC 4 票異議、過渡期</td><td>短中不變，長端取決通膨</td></tr>
+      <tr><td>地緣</td><td>戰爭最終會降溫</td><td>油 $100、UAE 退 OPEC</td><td>4–6 月才能穩定</td></tr>
+      <tr><td>美中 / 關稅</td><td>北美回流、台灣受益</td><td>145% / 25% 雙重夾擊</td><td>雙邊談判中</td></tr>
+      <tr><td>台股</td><td>半導體 +2.03%、TPU 故事</td><td>距 40,000 整數關卡</td><td>39,000–41,000 區間震盪</td></tr>
+    </tbody>
+  </table>
+  <p><b>主要不確定性</b>：(1) 5/15 Powell 卸任 + 6 月 FOMC；(2) 伊朗停火進度；(3) TSMC、AVGO、NVDA Q2 法說；(4) AAPL 4/30 盤後財報；(5) 聯發科 TPU v8x 量產進度。</p>
+
+  <h2 id="sec13">13. 免責聲明</h2>
+  <div class="disc">
+    本報告為 AI 助理依公開資料整理之資訊與格式化分析，<b>非受規範之投資顧問或券商研究</b>。第 3b 節 19 位分析師投票為角色風格情境模擬，並非任一機構真實投票或建議。槓桿 ETF（00631L、AVGU、TSMG、TSLT、SNDU、AAOX、CWVX、ONDL）每日複利損耗、波動放大，<b>不適合長期 buy-and-hold</b>，務必設停損。個股目標價來源已附日期，請依個人風險承受度與資金規劃決策。
+  </div>
+
+  <h2 id="sec14">14. 關閉迴圈說明</h2>
+  <ul>
+    <li>本檔已寄送至 <code>s07362022@gmail.com</code>（gmail-sender 預設寄件者 <code>gish1040403@gmail.com</code>）。</li>
+    <li>已以 <code>push_dashboard.py --report</code> 推送至 <a style="color:var(--accent)" href="https://s07362022.github.io/stock-dashboard/">https://s07362022.github.io/stock-dashboard/</a>。</li>
+    <li>HTML 原檔保存於 <code>F:\代碼\字幕\equity_deep_report_20260430.html</code>。</li>
+    <li>portfolio.md 已新增「2026-05-01 待執行操作」便簽。</li>
+  </ul>
+
 </div>
-
-<h3>🟢 加碼（趁回檔分批）</h3>
-<ul>
-  <li>AVGO @ $380–390（買區）：4→5 股</li>
-  <li>0050 @ 86–89（回檔加 100 股）</li>
-  <li>2330 @ 2,100–2,150（4/30 除息後加 5 股）</li>
-  <li>AMD @ $300–310（已強，等回檔）</li>
-  <li>ANET @ $155–160（回檔買）</li>
-</ul>
-
-<h3>🟡 持有（不動結構）</h3>
-<ul>
-  <li>00631L 全留（=0050 長期）</li>
-  <li>SMH 6 股全留</li>
-  <li>AVGU 27 股全留（補 AVGO）</li>
-  <li>TSMG 30 股全留</li>
-  <li>日月光 66 股全留</li>
-  <li>緯創 100 股全留</li>
-</ul>
-
-<h3>🔴 鎖利 / 減碼（強勢拿利潤）</h3>
-<ul>
-  <li><b>SNDU 鎖利 1 股</b>（SNDK +9.45% 強勢）</li>
-  <li><b>旺宏 2337 鎖利 50 股 @ 170+</b>（已 +23.89%）</li>
-  <li>AAOX 高 Beta；獲利 +10% 鎖利</li>
-  <li><b>TSLT 減 84→44 股</b>（最弱、Tesla FCF 為負）</li>
-</ul>
-
-<h3>⚫ 全清（流動性 / 結構壞）</h3>
-<ul>
-  <li>AIXI 剩 150 股繼續清</li>
-  <li>ONDL 回檔反彈時清</li>
-  <li>信昌電 6173 逢 88–90 全出</li>
-</ul>
-
-<p><b>現金水位目標：5–10%</b>（5 月用錢 + 高檔震盪緩衝）</p>
-
-<h2>五、📆 明日 4/30 台股策略</h2>
-
-<h3>5.1 重點事件</h3>
-<ul>
-  <li>📌 <b>聯發科 2454 法說會</b>（4/30）：AI ASIC 業務指引</li>
-  <li>📌 <b>台積電 2330 除息日</b>（4/30）：除息缺口可能 2,100–2,150</li>
-  <li>📌 <b>美股盤後</b>（4/29 收盤後）：MSFT/META/GOOGL/AMZN 4 巨頭財報；4/30 盤前 AAPL</li>
-  <li>📌 台股加權 39,303（-0.55%）、4 月漲 22.7%、週季乖離 11.65% 過熱</li>
-  <li>📌 5 月股東會行情上看 43,000</li>
-</ul>
-
-<h3>5.2 明日盤中操作（時間軸）</h3>
-<table>
-<thead><tr><th>時段</th><th>動作</th><th>細節</th></tr></thead>
-<tbody>
-<tr><td>9:00–9:15</td><td>觀察開盤量能</td><td>4 巨頭財報利多 → 跳空 +0.5–1.5%；利空 → 補跌至 38,800</td></tr>
-<tr><td>跳空 +1%+</td><td>🔴 鎖利 50 股旺宏</td><td>已 +23.89%；@ ~170+ 鎖一半利潤</td></tr>
-<tr><td>拉回 38,800</td><td>🟢 0050 加碼 100 股</td><td>@ 89–90；用 AIXI 賣出資金</td></tr>
-<tr><td>10:00 聯發科法說</td><td>🟢 緯創跟漲時加碼</td><td>若 AI ASIC 再上修，緯創 3231 加 50 股 @ 138–140</td></tr>
-<tr><td>13:00 台積電除息</td><td>🟢 除息後拉回加碼</td><td>@ 2,100–2,150 加 5 股；資金來源信昌電出清</td></tr>
-<tr><td>13:00 收盤前</td><td>看買賣力道</td><td>量能急縮 (&lt; 4,000 億) 代表追價弱，謹慎</td></tr>
-</tbody>
-</table>
-
-<h3>5.3 明日台股觀察清單</h3>
-<table>
-<thead><tr><th>標的</th><th>買區</th><th>1 個月目標</th><th>動作</th></tr></thead>
-<tbody>
-<tr><td>2330 台積電</td><td>2,100–2,150</td><td>2,350</td><td>除息後回檔加碼 5 股</td></tr>
-<tr><td>0050</td><td>86–89</td><td>96</td><td>加碼 100 股（AIXI 資金）</td></tr>
-<tr><td>3231 緯創</td><td>138–142</td><td>165</td><td>聯發科法說 AI ASIC 上修可加 50 股</td></tr>
-<tr><td>3711 日月光</td><td>460–475</td><td>550</td><td>若回測 5 日線可加 11 股至 77 股</td></tr>
-<tr><td>2454 聯發科（觀望）</td><td>2,400–2,500</td><td>3,000</td><td>新標的；首批 1 張需 25 萬，先觀望</td></tr>
-</tbody>
-</table>
-
-<h3>5.4 ⚠️ 不要追的標的</h3>
-<ul>
-  <li><b>6173 信昌電</b>：處置股 + 流動性差；逢 88–90 出清，不再買</li>
-  <li><b>3443 創意</b>：處置股 + PE 476（價格 4,120 / EPS 8.65）；估值極高，不追</li>
-</ul>
-
-<h3>5.5 🚨 風險警示</h3>
-<ul>
-  <li>美股 4 巨頭財報全部利空（特別是 Azure 成長率、AI Capex 指引）：台股跳空低開 -1.5~2%</li>
-  <li>川普 301 對台調查 7 月底定案：台積電承受不確定性</li>
-  <li>加權若跌破 38,500（10 日線）：短線轉弱訊號，可能下測 37,500</li>
-</ul>
-
-<div style="background:rgba(124,92,255,.12);padding:14px 18px;border-left:4px solid #7c5cff;border-radius:6px;margin:14px 0">
-<p><b>明日一句總結</b>：『高開鎖利、回檔分批、信昌電出』。聯發科法說與台積電除息是兩大焦點；不追高，等回檔再進場。</p>
-</div>
-
-<h2>六、推薦清單（價格已修正）</h2>
-<table>
-<thead><tr><th>標的</th><th>市場</th><th>正確現價</th><th>1 個月目標</th><th>信心</th></tr></thead>
-<tbody>
-<tr><td><b>0050</b></td><td>🇹🇼</td><td>90.75</td><td>96–100</td><td>🟢 高</td></tr>
-<tr><td><b>2330</b></td><td>🇹🇼</td><td>2,180</td><td>2,350–2,750</td><td>🟢 高</td></tr>
-<tr><td><b>AVGO</b></td><td>🇺🇸</td><td>$400.50</td><td>$460–500</td><td>🟢 高</td></tr>
-<tr><td><b>3711 日月光</b></td><td>🇹🇼</td><td>488.5</td><td>540–600</td><td>🟢 高</td></tr>
-<tr><td><b>AMD</b>（已強）</td><td>🇺🇸</td><td>$327.05</td><td>$350–420</td><td>🟡 中（等回 $300–310）</td></tr>
-<tr><td><b>ANET</b>（已強）</td><td>🇺🇸</td><td>$164.15</td><td>$180–210</td><td>🟡 中（等回 $155–160）</td></tr>
-<tr><td><b>2454 聯發科</b>（觀望）</td><td>🇹🇼</td><td>2,575</td><td>3,000</td><td>🔴 觀望（已超過高盛目標 2,454）</td></tr>
-</tbody>
-</table>
-
-<h2>七、免責聲明</h2>
-<ul>
-  <li>本報告由 AI 助理整合多 skill 自動產出，僅作格式化資訊與分析，<b>非受規範投資顧問建議</b>。</li>
-  <li>報價資料截至 2026-04-29 23:55 (UTC+8) / 11:54 EDT；美股仍在交易，最終價以收盤為準。</li>
-  <li>2X 槓桿 ETF 因每日重置會有路徑衰減（path decay），非完整 2X 累積回報。</li>
-  <li>1 個月預測為情境分析，非保證；實際走勢受財報、地緣、川普 301 等多重變數影響。</li>
-</ul>
+</body>
+</html>
