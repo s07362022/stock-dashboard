@@ -2,6 +2,60 @@
 
 > 每次更新網頁皆記錄於此，按日期倒序排列。
 > Live: https://s07362022.github.io/stock-dashboard/
+> Schema 規範：[SCHEMA.md](SCHEMA.md)
+> 唯一產生器：[scripts/build_stocks_json.py](scripts/build_stocks_json.py)
+
+---
+
+## 2026-05-02 22:55 — 結構固化（v3.1，模板化）
+
+**Commit**: `(待 push)` — `chore: lock schema into scripts/build_stocks_json.py + SCHEMA.md`
+
+### 🔒 結構固化內容
+
+依使用者要求「**之後更新只換值，不要動結構**」，建立三層保護：
+
+1. **官方產生器** — `scripts/build_stocks_json.py`
+   - 頂部明確分為「**1. 可變值區**」與「**2. 結構區**」
+   - 可變值區：FX、TW 持倉、US 持倉、新聞、財報、picks 等
+   - 結構區：所有 23 個頂層欄位 + 子結構，**禁止更動 key 名稱**
+
+2. **Schema 規範** — [`SCHEMA.md`](SCHEMA.md)
+   - 23 個頂層欄位完整 TypeScript 類型定義
+   - 6 個最容易踩雷的子結構（actions / horizon_views / picks / next_buy / allocation / capital_plan）詳細範例
+   - 已知雷區對照表
+
+3. **Cursor Rule** — `f:\代碼\202602\.cursor\rules\stock-dashboard-update.mdc`
+   - `alwaysApply: true`：每次助理被要求更新 dashboard 都會自動套用
+   - 嚴禁清單 + 唯一正確流程
+   - 引用 SCHEMA.md 與 build_stocks_json.py
+
+### 📋 標準更新流程
+
+```powershell
+# 1. 編輯模板「可變值區」
+code F:\代碼\stock-dashboard\scripts\build_stocks_json.py
+
+# 2. 重建（含 14 項 schema 自動驗證）
+$env:PYTHONIOENCODING='utf-8'
+python F:\代碼\stock-dashboard\scripts\build_stocks_json.py
+
+# 3. 補 UPDATE_LOG.md（必做）
+
+# 4. 提交推送
+cd F:\代碼\stock-dashboard
+git add data/stocks.json UPDATE_LOG.md scripts/build_stocks_json.py
+git commit -m "update: portfolio YYYY-MM-DD HH:MM"
+git push origin master
+
+# 5. 驗證 live
+python F:\代碼\字幕\check_live_dashboard.py
+```
+
+### 🚫 禁止事項
+- ❌ `python push_dashboard.py --fetch`（用 update_data.py 內建錯誤舊持倉覆寫）
+- ❌ 從零寫 stocks.json
+- ❌ 更動 stocks.json key 名稱
 
 ---
 
