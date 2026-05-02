@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-05-02 22:53",
-  "updated_at_utc": "2026-05-02 14:53",
+  "updated_at": "2026-05-02 23:01",
+  "updated_at_utc": "2026-05-02 15:01",
   "fx_rate": 31.66,
   "user_strategy": {
     "philosophy": "本金有限：用 2X 槓桿 ETF 代替買不起一股的高價底層股。00631L 視為 0050 長期持有。未來推薦只用個股。5/2 出清 AVGU/AAOX，新建倉 WDCX。",
@@ -909,44 +909,50 @@
       "cash_target": "現金水位拉至 7%（5 月用錢需求 + 高檔震盪緩衝；目標 NT$ 56,000）"
     },
     "tomorrow_tw_strategy": {
-      "title": "📆 星期一（5/5）台股開盤策略",
+      "title": "📆 星期一（5/4）台股開盤策略",
       "macro_context": [
-        "📌 5/2 美股盤後：S&P 500 7,230 (+0.29%)、NASDAQ 25,114 (+0.89%)、SOX +0.87% — 連六週新高；VIX 16.89 低位",
-        "📌 Apple 5/1 公布 Q2：營收 $111.2B (+17%)、EPS $2.01 (+22%)、Q3 指引 +14-17% 大幅超預期；$100B 回購",
-        "📌 AVGO Q1 AI +106% / Q2 $22B 指引；CEO 視 2027 AI $100B+",
-        "📌 台股 5/2 開盤 +400 點（+1.97%）受惠外圍跳高，週一料延續強勢",
-        "📌 旺宏 4/30 投信連 8 賣超暴跌 -7.78% 至 154，Q1 EPS 0.9 基本面轉佳"
+        "📌 5/1 美股盤後：S&P 500 7,230.12 (+0.29%)、NASDAQ 25,114.45 (+0.89%) — 雙雙連 6 週新高、4 月為 2020 來最佳月份；Dow -0.31% 至 49,499；VIX 16.89 低位",
+        "📌 Apple Q2 FY26（4/30 公布）：營收 $111.2B (+17%)、EPS $2.01 (+22%)、iPhone +22%、服務 +16% 創高；Q3 指引 $110B (+14-17%) 遠優於市場 +9.5%；宣告 $100B 回購 + 季息 +4%",
+        "📌 AVGO 預期 Q2 FY26 營收 $22B (+47% YoY)、AI 半導 $10.7B (+140%)；CEO Hock Tan：2027 AI 晶片營收 >$100B，產能已鎖至 2028",
+        "📌 TSMC CoWoS 全年滿載至 2027，2026 底拉至 13-15 萬片/月；NVDA 取走約 60% 配額；2026 全年營收成長率上修至 >30%",
+        "📌 SanDisk 企業 NAND Q1 合約價單季漲 55-60%，5 年期合約鎖定 $42B 出貨；Bernstein 目標 $1,250 (+47% upside)",
+        "📌 台股 5/2 收盤前 +400 點 (+1.97%)，受外圍連 6 週新高 + Apple/AVGO 雙利多帶動；旺宏 Q1 EPS 0.9 終結連 10 季虧損但被投信連 8 賣，4/30 -7.78% 至 154 已止跌"
       ],
       "morning_plan": [
         {
           "step": 1,
           "action": "9:00-9:15 觀察開盤量能",
-          "detail": "若跳空高開 +1.5% 以上，先觀察是否一日反轉；若中性開高 +0.5-1%，正常順勢"
+          "detail": "美股 5/1 連 6 週新高，台股 5/4 預期開高；若跳空 +1.5% 以上 → 先觀察一日反轉；若中性開高 +0.5-1% → 正常順勢操作"
         },
         {
           "step": 2,
-          "action": "9:00 立即執行 AIXI 賣單",
-          "detail": "🔴 AIXI 50 股 Market 賣出，止血 -48.91%（已等不到 GTC $1.00）"
+          "action": "9:00 立即執行 AIXI 賣單（美股）",
+          "detail": "🔴 AIXI 50 股 Market 賣出，止血 -48.91% （已等不到 GTC $1.00）；估回收 ~NT$1,290"
         },
         {
           "step": 3,
-          "action": "9:30 設定 ONDL GTC",
-          "detail": "🔴 ONDL 30 股 GTC $18.50 限價賣（美股盤前掛單）"
+          "action": "9:30 設定 ONDL GTC（美股）",
+          "detail": "🔴 ONDL 30 股 GTC $18.50 限價賣（盤前掛單）；估回收 ~NT$17,500"
         },
         {
           "step": 4,
-          "action": "10:00 觀察台積電",
-          "detail": "🟢 若站穩 2,150 → 持有；若跌破 2,100 → 暫不加碼，靜待 5 日線"
+          "action": "10:00 觀察台積電 2330",
+          "detail": "🟢 若站穩 2,150 → 持有；若回 2,000-2,050 → 加 1 股（外資最低目標 2,288，現價已折讓 7%+）"
         },
         {
           "step": 5,
-          "action": "10:30 觀察日月光",
-          "detail": "🟢 若回 470 以下 → 加 1 股至 67 股（凱基目標 588）"
+          "action": "10:30 觀察日月光 3711",
+          "detail": "🟢 若回 ≤470 → 加 1 股至 67 股（凱基目標 588、Factset 中位數 408、歐系最高 660；LEAP 全年目標 +35 億美元）"
         },
         {
           "step": 6,
+          "action": "11:00 觀察緯穎 6669（新標的）",
+          "detail": "🆕 若回 4,700-4,800 → 試單 1 股（野村目標 6,670；2026E EPS 326-350）；上半年蹲下半年跳"
+        },
+        {
+          "step": 7,
           "action": "13:00 收盤前評估",
-          "detail": "信昌電 6173 若衝至 88-90 → 立即出清 150 股，回收 NT$13,500 補資金"
+          "detail": "信昌電 6173 若衝至 88-90 → 立即出清 150 股，回收 NT$13,500 補 5 月用錢缺口"
         }
       ],
       "watch_list_for_tomorrow": [
@@ -1014,20 +1020,27 @@
         "🚨 加權若跌破 20,000（10 日線）：短線轉弱訊號",
         "🚨 旺宏若跌破 150 → 投信賣壓未止，技術面再弱"
       ],
-      "one_line": "週一順著美股 6 連紅，重點是『AIXI/ONDL 必清、日月光/AVGO 逢回加』；台積電站穩 2,150 才是動能恢復訊號。"
+      "one_line": "5/4 週一順著美股『連 6 週新高 + Apple/AVGO 雙引擎』，操作主軸：『AIXI/ONDL 必清、日月光/AVGO/台積逢回加、緯穎試單』；台積電站穩 2,150 才是台股動能恢復訊號。"
     }
   },
   "news": [
     {
       "date": "2026-05-01",
       "category": "財報",
-      "title": "Apple Q2 FY26：營收 $111.2B (+17%)、EPS $2.01 (+22%)；Q3 指引 +14-17%",
+      "title": "Apple Q2 FY26：營收 $111.2B (+17%)、EPS $2.01 (+22%)、iPhone +22%、服務 $30.98B 創高",
       "impact": "positive",
       "source": "Apple Newsroom"
     },
     {
       "date": "2026-05-01",
-      "category": "財報",
+      "category": "財報指引",
+      "title": "Apple Q3 FY26 指引：營收 ~$110B (+14-17%)，遠優於市場 +9.5%；毛利率 47.5-48.5%",
+      "impact": "positive",
+      "source": "AppleInsider"
+    },
+    {
+      "date": "2026-05-01",
+      "category": "資本回饋",
       "title": "Apple 宣布 $100B 股票回購 + 季息提高 4% 至 $0.27",
       "impact": "positive",
       "source": "Apple Newsroom"
@@ -1035,9 +1048,23 @@
     {
       "date": "2026-05-01",
       "category": "美股大盤",
-      "title": "S&P 500 7,230 (+0.29%)、NASDAQ 25,114 (+0.89%) — 連六週新高",
+      "title": "S&P 500 7,230.12 (+0.29%)、NASDAQ 25,114.45 (+0.89%) — 雙雙連 6 週新高、4 月為 2020 來最佳月份",
       "impact": "positive",
-      "source": "Yahoo Finance"
+      "source": "Schaeffer's / Motley Fool"
+    },
+    {
+      "date": "2026-05-01",
+      "category": "財報集",
+      "title": ">80% S&P 500 公司 Q1 EPS 超預期；Mag-7 帶頭（Apple、AMZN、GOOGL、CAT 全勝）",
+      "impact": "positive",
+      "source": "Motley Fool"
+    },
+    {
+      "date": "2026-05-01",
+      "category": "商品",
+      "title": "WTI 原油單日 -3% 至 $101.94，因伊朗提交修正版和平方案；單週 -6%",
+      "impact": "positive",
+      "source": "Schaeffer's"
     },
     {
       "date": "2026-04-30",
@@ -1056,7 +1083,7 @@
     {
       "date": "2026-03-04",
       "category": "財報",
-      "title": "AVGO Q1 FY26：營收 $19.31B (+29%)、AI 收入 $8.4B (+106%)；Q2 指引 $22B",
+      "title": "AVGO Q1 FY26：營收 $19.31B (+29%)、AI 收入 $8.4B (+106%)；Q2 指引 $22B (+47%)、AI $10.7B (+140%)",
       "impact": "positive",
       "source": "CNBC"
     },
@@ -1161,9 +1188,9 @@
     {
       "date": "2026-04",
       "category": "AI 算力",
-      "title": "AVGO CEO Hock Tan：2027 AI 晶片營收可超 $100億",
+      "title": "AVGO CEO Hock Tan：2027 AI 晶片營收可超 $100億；產能已鎖至 2028",
       "impact": "positive",
-      "source": "AVGO 法說"
+      "source": "AVGO 法說 / CRN"
     },
     {
       "date": "2026-04",
@@ -1171,6 +1198,34 @@
       "title": "台積電外資目標：里昂 3,030、花旗 2,800、高盛 2,750、小摩 2,400、大摩 2,288",
       "impact": "positive",
       "source": "TechNews"
+    },
+    {
+      "date": "2026-04",
+      "category": "台股 (新潛力股)",
+      "title": "緯穎 6669：野村目標價 6,670（最高）；2026E EPS 326-350；上半年蹲下半年跳，2H Trainium 3 + Blackwell 放量",
+      "impact": "positive",
+      "source": "Nomura / cmoney"
+    },
+    {
+      "date": "2026-04",
+      "category": "台股 (新潛力股)",
+      "title": "日月光 3711：凱基 588、Factset 中位數 408、歐系最高 660；LEAP 全年上修至 +35 億美元",
+      "impact": "positive",
+      "source": "凱基 / Factset / TechNews"
+    },
+    {
+      "date": "2026-04",
+      "category": "AI 記憶體",
+      "title": "SanDisk 5 年期合約鎖 $42B 出貨；Q1 NAND 漲 55-60%、消費級 +20-35%；Bernstein bull case 看 $3,000",
+      "impact": "positive",
+      "source": "Benzinga"
+    },
+    {
+      "date": "2026-04",
+      "category": "半導體",
+      "title": "TSMC CoWoS 2026 全年產能滿載；Marvell 自研 ASIC 加入客戶；2027 CoWoS 需求預估 9K→178K",
+      "impact": "positive",
+      "source": "isaiahresearch / Silicon Report"
     }
   ],
   "earnings": [

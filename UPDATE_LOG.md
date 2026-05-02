@@ -7,6 +7,30 @@
 
 ---
 
+## 2026-05-02 23:05 — 週末完整深度報告 + 5/4 週一開市策略
+
+**Commit**: `(待 push)` — `update: deep equity report + Monday 5/4 strategy`
+
+### 變更
+- **時間軸校正**：將 `tomorrow_tw_strategy.title` 由「星期一（5/5）」改為正確的「星期一（5/4）」
+- **新聞區強化**：新增 6 則 — Apple Q3 指引 +14-17%（遠優於市場 +9.5%）、AVGO Q2 $22B (+47%) / AI $10.7B (+140%)、>80% S&P 500 EPS 超預期、伊朗修正版和平方案壓油價、緯穎/日月光最新目標、SanDisk 5 年合約 $42B
+- **morning_plan**：擴充至 7 步驟，新增「11:00 緯穎試單」步驟
+- **macro_context**：補充 TSMC CoWoS 滿載 2027、Apple 各部門細項、SanDisk Q1 NAND +55-60%
+- **one_line**：明示主軸「AIXI/ONDL 必清、日月光/AVGO/台積逢回加、緯穎試單」
+- **報價驗證**：BigGo 已驗 2330=NT$2,135、AVGO=$421.28、SMH=$509.82（全與庫存截圖一致）
+
+### 投組總計（無變動）
+- 🇹🇼 台股 NT$489,404（+21.0%）
+- 🇺🇸 美股 NT$322,691（+8.8%）
+- **合計 NT$812,095，總損益 +NT$110,946（+15.83%）**
+
+### 5/4 週一三大行動
+1. 🔴 AIXI 50 股 9:00 美股 Market 賣（已等不到 GTC $1.00）
+2. 🔴 ONDL 30 股 GTC $18.50 限價賣（盤前掛單）
+3. 🟢 台積電 / 日月光 / AVGO / SMH 逢回分批加碼
+
+---
+
 ## 2026-05-02 22:55 — 結構固化（v3.1，模板化）
 
 **Commit**: `(待 push)` — `chore: lock schema into scripts/build_stocks_json.py + SCHEMA.md`
