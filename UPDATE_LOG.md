@@ -7,6 +7,37 @@
 
 ---
 
+## 2026-05-03 — BigGo/Yahoo 全檔報價重驗 + 更正底層誤植
+
+**Commit**: `(待 push)` — `fix: verify quotes BigGo Yahoo, correct TSM TSLA WDC underlying`
+
+### 驗證來源與時間
+| 市場 | 來源 | 說明 |
+|------|------|------|
+| 🇹🇼 台股 7 檔 | [BigGo](https://finance.biggo.com.tw/) | 「今天」為 **2026/4/30 收盤**（週末前最後交易日）|
+| 🇺🇸 美股 liquid | BigGo `AVGO`、`SMH`、`AIXI`、`TSMG` 等 | 收盤 **2026/5/1 EDT** |
+| 🇺🇸 ETF CWVX/ONDL/SNDU/TSLT/WDCX | **Yahoo Finance**（BigGo 頁無報價列） | 收盤價維持與您截圖一致；**一日漲跌幅**以 Yahoo **最後交易日** 補 |
+
+### 重大更正（先前網頁 `underlying_analysis` 誤植）
+| 標的 | 錯誤舊值 | **BigGo 5/1 收盤（正）** |
+|------|----------|--------------------------|
+| TSM ADR | ~$248 | **$397.67** |
+| TSLA | ~$290 | **$390.82** |
+| WDC | ~$85 | **$431.52** |
+
+### 其餘欄位校正
+- **00631L**：涨跌 **-0.21／-0.73%**（非 +1.45%）。
+- **信昌電 6173**：**+1.7／+2.02%**（非先前負向誤填）。
+- **AIXI**：**-0.1591／-16.33%**（5/1 單日；累計獲利率仍約 -49%，由總計自行計）。
+- **CWVX/ONDL/SNDU**：`change`／`pct` 改為 Yahoo 一日波動。
+- **TSMG**：名目改為 BigGo：**Leverage Shares 2× Long TSM Daily**。
+- **`consensus` TSM／WDC 目標價級距**：由原過時區間改為「概略／請以最新研報為準」敘述，避免繼續誤導。
+
+### Dashboard 結果（重建後）
+- 總市值 **NT$812,096**、總損益 **+NT$111,212（15.87%）** — 持股收盤價未改故與前一版總計相同；**文案與風險提示已反映正確報價**。
+
+---
+
 ## 2026-05-02 23:05 — 週末完整深度報告 + 5/4 週一開市策略
 
 **Commit**: `(待 push)` — `update: deep equity report + Monday 5/4 strategy`
