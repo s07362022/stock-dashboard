@@ -9,7 +9,7 @@
 
 ## 2026-05-03 — BigGo/Yahoo 全檔報價重驗 + 更正底層誤植
 
-**Commit**: `(待 push)` — `fix: verify quotes BigGo Yahoo, correct TSM TSLA WDC underlying`
+**Commit**: `ccc7b83` — `fix: verify quotes BigGo Yahoo, correct TSM TSLA WDC underlying 2026-05-03`
 
 ### 驗證來源與時間
 | 市場 | 來源 | 說明 |
