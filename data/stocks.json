@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-05-03 13:52",
-  "updated_at_utc": "2026-05-03 05:52",
+  "updated_at": "2026-05-03 14:00",
+  "updated_at_utc": "2026-05-03 06:00",
   "fx_rate": 31.66,
   "user_strategy": {
     "philosophy": "本金有限：用 2X 槓桿 ETF 代替買不起一股的高價底層股。00631L 視為 0050 長期持有。未來推薦只用個股。5/2 出清 AVGU/AAOX，新建倉 WDCX。",
@@ -1492,11 +1492,11 @@
       "ticker": "2308",
       "name": "台達電",
       "market": "TW",
-      "price": 360,
-      "target_low": 420,
-      "target_high": 450,
-      "upside_pct": 20.8,
-      "thesis": "電源 + 液冷散熱雙重受惠，AI 機櫃 800V 認證",
+      "price": 2165,
+      "target_low": 2400,
+      "target_high": 2650,
+      "upside_pct": 16.6,
+      "thesis": "電源 + 液冷散熱雙受惠；現價 BigGo **4/30 收 NT$2,165**（舊模版誤 NT$360 已更正）。目標區間為情境參考，請以法人最新為準",
       "type": "個股"
     },
     {
@@ -1728,9 +1728,9 @@
         {
           "ticker": "2308",
           "name": "台達電",
-          "price": 360,
-          "rationale": "電源+液冷雙受惠；AI 機櫃",
-          "size_suggest": "1 股 ≈ NT$ 360",
+          "price": 2165,
+          "rationale": "電源+液冷+AI機櫃；4/30 收 **NT$2,165**",
+          "size_suggest": "1 張約 NT$216.5 萬（1000股）— 一般用零股／小數量",
           "confidence": "🟡 中"
         }
       ]
@@ -1875,6 +1875,13 @@
       "rating": "Buy",
       "target": "$200-240",
       "date": "2026-04"
+    },
+    {
+      "symbol": "2308.TW",
+      "name": "台達電",
+      "rating": "偏多（情境參考）",
+      "target": "約 NT$2,400-2,650（請對照法人最新報告）",
+      "date": "2026-05"
     }
   ],
   "forecast": [
@@ -1949,6 +1956,14 @@
       "base": 230,
       "bear": 195,
       "catalyst": "Q3 +14-17% 指引兌現"
+    },
+    {
+      "symbol": "2308.TW",
+      "name": "台達電",
+      "bull": 2650,
+      "base": 2360,
+      "bear": 1950,
+      "catalyst": "AI 電源／液冷；4/30 收 2165"
     }
   ],
   "capital_plan": {

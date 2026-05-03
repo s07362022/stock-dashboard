@@ -7,6 +7,17 @@
 
 ---
 
+## 2026-05-03 — 潛力股 台達電（2308）價錯更正
+
+**Commit**: `(待 push)` — `fix: Delta 2308 TW BigGo NT$2165 replaces wrong NT$360 in picks`
+
+- **問題**：`picks`、`next_buy_recommendations`、portfolio 觀察清單將 2308 誤載為 **NT$360**。
+- **正解**：[BigGo 2308.TW](https://finance.biggo.com.tw/quote/2308.TW) — **2026/4/30 收 NT$2,165**。
+- **連動調整**：`target_low/high` 改為情境參考 **NT$2,400–2,650**、`upside_pct` 約 **16.6%**；新增 `consensus`／`forecast` 2308 列；下單說明改為「1 張約 216.5 萬／零股」。
+- （**法人目標請您自行核對**，此處級距為佔位，非投顧）。
+
+---
+
 ## 2026-05-03 — BigGo/Yahoo 全檔報價重驗 + 更正底層誤植
 
 **Commit**: `ccc7b83` — `fix: verify quotes BigGo Yahoo, correct TSM TSLA WDC underlying 2026-05-03`

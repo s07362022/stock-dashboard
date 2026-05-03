@@ -429,7 +429,7 @@ data = {
 
     "picks": [
         {"rank":1,"ticker":"6669","name":"緯穎","market":"TW","price":4845,"target_low":5500,"target_high":6000,"upside_pct":18.6,"thesis":"AI 伺服器組裝龍頭，AI 訂單佔營收 >70%","type":"個股"},
-        {"rank":2,"ticker":"2308","name":"台達電","market":"TW","price":360,"target_low":420,"target_high":450,"upside_pct":20.8,"thesis":"電源 + 液冷散熱雙重受惠，AI 機櫃 800V 認證","type":"個股"},
+        {"rank":2,"ticker":"2308","name":"台達電","market":"TW","price":2165,"target_low":2400,"target_high":2650,"upside_pct":16.6,"thesis":"電源 + 液冷散熱雙受惠；現價 BigGo **4/30 收 NT$2,165**（舊模版誤 NT$360 已更正）。目標區間為情境參考，請以法人最新為準","type":"個股"},
         {"rank":3,"ticker":"3037","name":"欣興","market":"TW","price":210,"target_low":250,"target_high":280,"upside_pct":26.2,"thesis":"ABF 載板領導廠，AI 晶片封裝訂單能見度至 2027","type":"個股"},
         {"rank":4,"ticker":"ANET","name":"Arista Networks","market":"US","price":164.95,"target_low":200,"target_high":220,"upside_pct":27.3,"thesis":"AI 資料中心 400G/800G 網路交換機龍頭（≤$300）","type":"個股"},
         {"rank":5,"ticker":"ORCL","name":"Oracle","market":"US","price":175.5,"target_low":210,"target_high":230,"upside_pct":25.4,"thesis":"OCI 雲端 + AI 資料庫，多雲 AI 受惠（≤$300）","type":"個股"},
@@ -477,7 +477,7 @@ data = {
                 {"ticker":"3711","name":"日月光投控","price":478,"rationale":"凱基目標 588；LEAP CoWoS；逢 470 加 1 股","size_suggest":"1 股 ≈ NT$ 478","confidence":"🟢 高"},
                 {"ticker":"2330","name":"台積電","price":2135,"rationale":"外資最低目標 2,288；折讓 7%+；7/16 法說","size_suggest":"1 股 ≈ NT$ 2,135","confidence":"🟢 高"},
                 {"ticker":"6669","name":"緯穎","price":4845,"rationale":"AI 伺服器代工龍頭；新標的觀察","size_suggest":"1 股 ≈ NT$ 4,845","confidence":"🟡 中"},
-                {"ticker":"2308","name":"台達電","price":360,"rationale":"電源+液冷雙受惠；AI 機櫃","size_suggest":"1 股 ≈ NT$ 360","confidence":"🟡 中"},
+                {"ticker":"2308","name":"台達電","price":2165,"rationale":"電源+液冷+AI機櫃；4/30 收 **NT$2,165**","size_suggest":"1 張約 NT$216.5 萬（1000股）— 一般用零股／小數量","confidence":"🟡 中"},
             ]
         }
     ],
@@ -516,6 +516,7 @@ data = {
         {"symbol":"2337.TW","name":"旺宏","rating":"Hold","target":"NT$92-149","date":"2026-02"},
         {"symbol":"ANET","name":"Arista Networks","rating":"Buy","target":"$190-220","date":"2026-04"},
         {"symbol":"ORCL","name":"Oracle","rating":"Buy","target":"$200-240","date":"2026-04"},
+        {"symbol":"2308.TW","name":"台達電","rating":"偏多（情境參考）","target":"約 NT$2,400-2,650（請對照法人最新報告）","date":"2026-05"},
     ],
 
     "forecast": [
@@ -528,6 +529,7 @@ data = {
         {"symbol":"3711.TW","name":"日月光","bull":540,"base":510,"bear":460,"catalyst":"LEAP CoWoS 季度超預期"},
         {"symbol":"2337.TW","name":"旺宏","bull":175,"base":160,"bear":140,"catalyst":"投信賣壓消化；eMMC 漲"},
         {"symbol":"AAPL","name":"Apple","bull":250,"base":230,"bear":195,"catalyst":"Q3 +14-17% 指引兌現"},
+        {"symbol":"2308.TW","name":"台達電","bull":2650,"base":2360,"bear":1950,"catalyst":"AI 電源／液冷；4/30 收 2165"},
     ],
 
     # ===== capital_plan（含 status / sources / totals / options 結構）=====
