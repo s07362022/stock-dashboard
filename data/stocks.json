@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-05-03 14:00",
-  "updated_at_utc": "2026-05-03 06:00",
+  "updated_at": "2026-05-03 15:33",
+  "updated_at_utc": "2026-05-03 07:33",
   "fx_rate": 31.66,
   "user_strategy": {
     "philosophy": "本金有限：用 2X 槓桿 ETF 代替買不起一股的高價底層股。00631L 視為 0050 長期持有。未來推薦只用個股。5/2 出清 AVGU/AAOX，新建倉 WDCX。",
@@ -1504,11 +1504,11 @@
       "ticker": "3037",
       "name": "欣興",
       "market": "TW",
-      "price": 210,
-      "target_low": 250,
-      "target_high": 280,
-      "upside_pct": 26.2,
-      "thesis": "ABF 載板領導廠，AI 晶片封裝訂單能見度至 2027",
+      "price": 883,
+      "target_low": 1000,
+      "target_high": 1150,
+      "upside_pct": 21.8,
+      "thesis": "ABF 載板領先；現價 BigGo **2026/4/30 收 NT$883**（+80，約 +9.96%；舊模版誤 NT$210）。目標區間為情境參考，請對照法人最新",
       "type": "個股"
     },
     {
@@ -1882,6 +1882,13 @@
       "rating": "偏多（情境參考）",
       "target": "約 NT$2,400-2,650（請對照法人最新報告）",
       "date": "2026-05"
+    },
+    {
+      "symbol": "3037.TW",
+      "name": "欣興",
+      "rating": "注意股‧波動高（情境參考）",
+      "target": "約 NT$1,000-1,150（請對照法人最新報告）",
+      "date": "2026-05"
     }
   ],
   "forecast": [
@@ -1964,6 +1971,14 @@
       "base": 2360,
       "bear": 1950,
       "catalyst": "AI 電源／液冷；4/30 收 2165"
+    },
+    {
+      "symbol": "3037.TW",
+      "name": "欣興",
+      "bull": 1050,
+      "base": 920,
+      "bear": 750,
+      "catalyst": "ABF／AI 載板；4/30 漲停注意股"
     }
   ],
   "capital_plan": {
