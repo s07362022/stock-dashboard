@@ -9,7 +9,7 @@
 
 ## 2026-05-03 — 潛力股 欣興（3037）價錯更正
 
-**Commit**: `(待 push)` — `fix: Unimicron 3037 TW BigGo NT$883 replaces wrong NT$210 in picks`
+**Commit**: `292b83e` — `fix: Unimicron 3037 TW BigGo NT$883 replaces wrong NT$210 in picks`
 
 - **問題**：`picks` 將欣興誤載 **NT$210**（與現價差數倍）。
 - **正解**：[BigGo 3037.TW](https://finance.biggo.com.tw/quote/3037.TW) — **2026/4/30 收 NT$883**，**+80（約 +9.96%）**，為**注意股**。
