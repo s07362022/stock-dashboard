@@ -9,7 +9,7 @@
 
 ## 2026-05-04 — 美股盤中再分析 + Dashboard 全量更新
 
-**Commit**: `(待 push)` — `feat: US re-analysis BigGo 2026-05-04 ~12:29 EDT`
+**Commit**: `7581a46` — `feat: US re-analysis BigGo 2026-05-04 EDT snapshot`
 
 ### 變更
 - **報價**：`AIXI`/`AVGO`/`SMH`/`CRWV`/`ONDS`/`SNDK`/`TSLA`/`TSM`/`WDC` 依 BigGo **5/4 ~12:29 EDT**；**2X ETF** 由模板內前收 ×（1+2×底層單日報酬）連結。
