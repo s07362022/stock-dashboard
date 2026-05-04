@@ -9,7 +9,7 @@
 
 ## 2026-05-04 — BigGo 重抓美股報價 + 2X ETF 近似更新
 
-**Commit**: `(待 push)` — `chore: refresh US quotes BigGo 2026-05-04, levered ETF 2x marks`
+**Commit**: `9931822` / `94ca976` — `merge: US BigGo refresh 2026-05-04`
 
 ### 變更
 - **資料**：`UPDATE_NOTE` 註記 BigGo **2026-05-04** 重抓；直連標的（`AIXI`/`AVGO`/`SMH`）盤面仍為 **5/1 美東收盤**（與前次相同）。
