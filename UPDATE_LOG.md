@@ -7,6 +7,17 @@
 
 ---
 
+## 2026-05-04 — 美股盤中再分析 + Dashboard 全量更新
+
+**Commit**: `(待 push)` — `feat: US re-analysis BigGo 2026-05-04 ~12:29 EDT`
+
+### 變更
+- **報價**：`AIXI`/`AVGO`/`SMH`/`CRWV`/`ONDS`/`SNDK`/`TSLA`/`TSM`/`WDC` 依 BigGo **5/4 ~12:29 EDT**；**2X ETF** 由模板內前收 ×（1+2×底層單日報酬）連結。
+- **論述**：`pnl_split.us`、`peak_decision`、`short_term_1m` intro/forecasts、`actions`、`underlying_analysis`、`indices`（台股加權約 **40,550** 僅作儀表參考—`TW` 陣列仍舊）、`news` 新增 5/4 輪動條、`forecast` 微調。
+- **產出**：總市值 **NT$825,316**、總損益 **NT$124,432（+17.75%）**。
+
+---
+
 ## 2026-05-04 — BigGo 重抓美股報價 + 2X ETF 近似更新
 
 **Commit**: `9931822` / `94ca976` — `merge: US BigGo refresh 2026-05-04`
