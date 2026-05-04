@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-05-03 15:33",
-  "updated_at_utc": "2026-05-03 07:33",
+  "updated_at": "2026-05-04 20:33",
+  "updated_at_utc": "2026-05-04 12:33",
   "fx_rate": 31.66,
   "user_strategy": {
     "philosophy": "本金有限：用 2X 槓桿 ETF 代替買不起一股的高價底層股。00631L 視為 0050 長期持有。未來推薦只用個股。5/2 出清 AVGU/AAOX，新建倉 WDCX。",
@@ -50,27 +50,27 @@
     ]
   },
   "summary": {
-    "total_market_value_twd": 812096,
+    "total_market_value_twd": 824886,
     "total_cost_twd": 700884,
-    "total_pnl_twd": 111212,
-    "total_pnl_pct": 15.87,
+    "total_pnl_twd": 124002,
+    "total_pnl_pct": 17.69,
     "tw_market_value_twd": 489405,
     "tw_cost_twd": 404205,
     "tw_pnl_twd": 85200,
     "tw_pnl_pct": 21.08,
-    "us_market_value_twd": 322691,
+    "us_market_value_twd": 335481,
     "us_cost_twd": 296679,
-    "us_pnl_twd": 26012,
-    "us_pnl_pct": 8.77,
-    "us_market_value_usd": 10192.41,
+    "us_pnl_twd": 38802,
+    "us_pnl_pct": 13.08,
+    "us_market_value_usd": 10596.38,
     "us_cost_usd": 9370.77,
-    "us_pnl_usd": 821.64,
-    "tw_pct": 60.26,
-    "us_pct": 39.74,
+    "us_pnl_usd": 1225.61,
+    "tw_pct": 59.33,
+    "us_pct": 40.67,
     "winners": 11,
     "losers": 5,
     "holdings_count": 16,
-    "effective_exposure_twd": 1015120,
+    "effective_exposure_twd": 1031108,
     "effective_leverage_ratio": 1.25
   },
   "pnl_split": {
@@ -86,17 +86,17 @@
       "verdict": "強勢部位；4/30 旺宏被投信賣超回測 154，但 Q1 EPS 0.9 元基本面轉佳"
     },
     "us": {
-      "title": "🇺🇸 美股 — 修復中 +8.8%",
-      "market_value_twd": 322691,
+      "title": "🇺🇸 美股 — 修復中 +13.1%",
+      "market_value_twd": 335481,
       "cost_twd": 296679,
-      "pnl_twd": 26012,
-      "pnl_pct": 8.77,
-      "market_value_usd": 10192.41,
+      "pnl_twd": 38802,
+      "pnl_pct": 13.08,
+      "market_value_usd": 10596.38,
       "cost_usd": 9370.77,
-      "pnl_usd": 821.64,
+      "pnl_usd": 1225.61,
       "winners": 7,
       "losers": 2,
-      "highlight": "SMH +16.07%、AVGO +12.84% 主升；TSM ADR≈398、TSLA≈391（舊頁誤植已更正）；SNDK +8.25%、CRWV +6.64%；槓桿 ETF 收盤價僅 Yahoo 可比日漲：CWVX +13%、SNDU +15%、ONDL +5.9%、TSLT +4.9%；AIXI 單日 -16.3%／累計仍慘→快清",
+      "highlight": "BigGo 5/4 重抓：AVGO 421.28、SMH 509.82、TSM 397.67、TSLA 390.82、SNDK 1187、CRWV 119.01（均 5/1 美收）；槓桿 ETF 2X 近似：CWVX≈48.38 +13.3%、SNDU≈82.22 +16.5%、TSLT≈19.15 +4.8%、TSMG≈37.57、WDCX≈65.99、ONDL≈19.24；AIXI 0.8149→仍快清",
       "verdict": "出清 AVGU/AAOX，新建倉 WDCX；Apple/AVGO/SMH 連六週新高帶動修復"
     }
   },
@@ -276,7 +276,7 @@
       "cost_usd": 79.76,
       "pnl_usd": -39.02,
       "pnl_pct": -48.92,
-      "weight": 0.4
+      "weight": 0.38
     },
     {
       "symbol": "AVGO",
@@ -293,45 +293,45 @@
       "cost_usd": 1493.28,
       "pnl_usd": 191.84,
       "pnl_pct": 12.85,
-      "weight": 16.53
+      "weight": 15.9
     },
     {
       "symbol": "CWVX",
       "name": "Tradr 2X Long CRWV Daily",
       "shares": 19,
       "buy_price": 38.83,
-      "close": 42.71,
-      "change": 4.98,
-      "pct": 13.2,
-      "sector": "CRWV 2×（BigGo無收盤，Yahoo一日漲跌幅補）",
+      "close": 48.38,
+      "change": 5.67,
+      "pct": 13.28,
+      "sector": "CRWV 2×（BigGo ETF 無收盤；收盤依 CRWV 5/1 +6.64% 單日 2X 近似）",
       "tag": "growth",
       "underlying": "CRWV",
       "multiplier": 2,
       "underlying_price": 119.01,
       "underlying_change_today": 6.64,
-      "market_value_usd": 811.49,
-      "market_value_twd": 25692,
+      "market_value_usd": 919.22,
+      "market_value_twd": 29103,
       "cost_usd": 737.77,
-      "pnl_usd": 73.72,
-      "pnl_pct": 9.99,
-      "weight": 7.96
+      "pnl_usd": 181.45,
+      "pnl_pct": 24.59,
+      "weight": 8.68
     },
     {
       "symbol": "ONDL",
       "name": "Defiance/Daily Target 2X Long ONDS",
       "shares": 30,
       "buy_price": 19.85,
-      "close": 18.22,
+      "close": 19.24,
       "change": 1.02,
-      "pct": 5.93,
-      "sector": "ONDS 2×（待清；BigGo無收盤，Yahoo補）",
+      "pct": 5.58,
+      "sector": "ONDS 2×（待清；BigGo ETF 無收盤；依 ONDS 5/1 +2.79% 2X 近似）",
       "tag": "exit",
-      "market_value_usd": 546.6,
-      "market_value_twd": 17305,
+      "market_value_usd": 577.2,
+      "market_value_twd": 18274,
       "cost_usd": 595.5,
-      "pnl_usd": -48.9,
-      "pnl_pct": -8.21,
-      "weight": 5.36
+      "pnl_usd": -18.3,
+      "pnl_pct": -3.07,
+      "weight": 5.45
     },
     {
       "symbol": "SMH",
@@ -348,91 +348,91 @@
       "cost_usd": 2635.26,
       "pnl_usd": 423.66,
       "pnl_pct": 16.08,
-      "weight": 30.01
+      "weight": 28.87
     },
     {
       "symbol": "SNDU",
       "name": "T-Rex 2X Long SNDK Daily",
       "shares": 16,
       "buy_price": 60.64,
-      "close": 70.57,
-      "change": 9.2,
-      "pct": 14.99,
-      "sector": "SNDK 2×（NAND/AI；BigGo無收盤，Yahoo補）",
+      "close": 82.22,
+      "change": 11.65,
+      "pct": 16.5,
+      "sector": "SNDK 2×（BigGo ETF 無收盤；依 SNDK 5/1 +8.25% 2X 近似）",
       "tag": "growth",
       "underlying": "SNDK",
       "multiplier": 2,
       "underlying_price": 1187,
       "underlying_change_today": 8.25,
-      "market_value_usd": 1129.12,
-      "market_value_twd": 35748,
+      "market_value_usd": 1315.52,
+      "market_value_twd": 41649,
       "cost_usd": 970.24,
-      "pnl_usd": 158.88,
-      "pnl_pct": 16.38,
-      "weight": 11.08
+      "pnl_usd": 345.28,
+      "pnl_pct": 35.59,
+      "weight": 12.41
     },
     {
       "symbol": "TSLT",
       "name": "T-Rex 2X Long Tesla Daily",
       "shares": 84,
       "buy_price": 17.78,
-      "close": 18.27,
-      "change": 0.86,
-      "pct": 4.94,
-      "sector": "TSLA 2×（衛星；BigGo無收盤，Yahoo補）",
+      "close": 19.15,
+      "change": 0.88,
+      "pct": 4.82,
+      "sector": "TSLA 2×（BigGo ETF 無收盤；依 TSLA 5/1 +2.41% 2X 近似）",
       "tag": "satellite",
       "underlying": "TSLA",
       "multiplier": 2,
       "underlying_price": 390.82,
       "underlying_change_today": 2.41,
-      "market_value_usd": 1534.68,
-      "market_value_twd": 48588,
+      "market_value_usd": 1608.6,
+      "market_value_twd": 50928,
       "cost_usd": 1493.52,
-      "pnl_usd": 41.16,
-      "pnl_pct": 2.76,
-      "weight": 15.06
+      "pnl_usd": 115.08,
+      "pnl_pct": 7.71,
+      "weight": 15.18
     },
     {
       "symbol": "TSMG",
       "name": "Leverage Shares 2x Long TSM Daily",
       "shares": 30,
       "buy_price": 36.84,
-      "close": 37.27,
+      "close": 37.57,
       "change": 0.3,
       "pct": 0.81,
-      "sector": "TSM ADR 2×（視為 TSMC）",
+      "sector": "TSM ADR 2×（BigGo ETF 無收盤；依 TSM 5/1 +0.41% 2X 近似）",
       "tag": "core",
       "underlying": "TSM",
       "multiplier": 2,
       "underlying_price": 397.67,
       "underlying_change_today": 0.41,
-      "market_value_usd": 1118.1,
-      "market_value_twd": 35399,
+      "market_value_usd": 1127.1,
+      "market_value_twd": 35684,
       "cost_usd": 1105.2,
-      "pnl_usd": 12.9,
-      "pnl_pct": 1.17,
-      "weight": 10.97
+      "pnl_usd": 21.9,
+      "pnl_pct": 1.98,
+      "weight": 10.64
     },
     {
       "symbol": "WDCX",
       "name": "Tradr 2X Long WDC Daily",
       "shares": 4,
       "buy_price": 65.06,
-      "close": 66.91,
-      "change": -1.33,
-      "pct": -1.95,
-      "sector": "WDC 2×（BigGo無收盤，Yahoo補）",
+      "close": 65.99,
+      "change": -0.92,
+      "pct": -1.38,
+      "sector": "WDC 2×（BigGo ETF 無收盤；依 WDC 5/1 -0.69% 2X 近似）",
       "tag": "growth",
       "underlying": "WDC",
       "multiplier": 2,
       "underlying_price": 431.52,
       "underlying_change_today": -0.69,
-      "market_value_usd": 267.64,
-      "market_value_twd": 8473,
+      "market_value_usd": 263.96,
+      "market_value_twd": 8357,
       "cost_usd": 260.24,
-      "pnl_usd": 7.4,
-      "pnl_pct": 2.84,
-      "weight": 2.63
+      "pnl_usd": 3.72,
+      "pnl_pct": 1.43,
+      "weight": 2.49
     }
   ],
   "effective_exposure": [
@@ -444,7 +444,7 @@
         "00631L NT$90,121 × 2"
       ],
       "exposure_twd": 452647,
-      "pct_effective": 44.6,
+      "pct_effective": 54.9,
       "long_term": true
     },
     {
@@ -452,10 +452,10 @@
       "icon": "🏭",
       "components": [
         "2330 NT$53,375",
-        "TSMG NT$35,399 × 2"
+        "TSMG NT$35,676 × 2"
       ],
-      "exposure_twd": 124173,
-      "pct_effective": 12.2,
+      "exposure_twd": 124727,
+      "pct_effective": 15.1,
       "long_term": true
     },
     {
@@ -465,7 +465,7 @@
         "AVGO NT$53,351"
       ],
       "exposure_twd": 53351,
-      "pct_effective": 5.3,
+      "pct_effective": 6.5,
       "long_term": true
     },
     {
@@ -475,47 +475,47 @@
         "SMH NT$96,845"
       ],
       "exposure_twd": 96845,
-      "pct_effective": 9.5,
+      "pct_effective": 11.7,
       "long_term": true
     },
     {
       "name": "Tesla TSLA",
       "icon": "🚗",
       "components": [
-        "TSLT NT$48,588 × 2"
+        "TSLT NT$50,903 × 2"
       ],
-      "exposure_twd": 97176,
-      "pct_effective": 9.6,
+      "exposure_twd": 101806,
+      "pct_effective": 12.3,
       "long_term": false
     },
     {
       "name": "SanDisk SNDK",
       "icon": "💾",
       "components": [
-        "SNDU NT$35,748 × 2"
+        "SNDU NT$41,642 × 2"
       ],
-      "exposure_twd": 71496,
-      "pct_effective": 7.0,
+      "exposure_twd": 83284,
+      "pct_effective": 10.1,
       "long_term": false
     },
     {
       "name": "CoreWeave CRWV",
       "icon": "☁️",
       "components": [
-        "CWVX NT$25,692 × 2"
+        "CWVX NT$29,103 × 2"
       ],
-      "exposure_twd": 51384,
-      "pct_effective": 5.1,
+      "exposure_twd": 58206,
+      "pct_effective": 7.1,
       "long_term": false
     },
     {
       "name": "Western Digital WDC",
       "icon": "💿",
       "components": [
-        "WDCX NT$8,473 × 2"
+        "WDCX NT$8,357 × 2"
       ],
-      "exposure_twd": 16946,
-      "pct_effective": 1.7,
+      "exposure_twd": 16714,
+      "pct_effective": 2.0,
       "long_term": false
     },
     {
@@ -528,7 +528,7 @@
         "信昌電 12,855"
       ],
       "exposure_twd": 73503,
-      "pct_effective": 7.2,
+      "pct_effective": 8.9,
       "long_term": false
     },
     {
@@ -536,10 +536,10 @@
       "icon": "⚠️",
       "components": [
         "AIXI 1,290",
-        "ONDL 17,305"
+        "ONDL 18,269"
       ],
-      "exposure_twd": 18595,
-      "pct_effective": 1.8,
+      "exposure_twd": 19559,
+      "pct_effective": 2.4,
       "long_term": false
     }
   ],
@@ -571,7 +571,7 @@
       "name": "Tesla",
       "price": 390.82,
       "today_pct": 2.41,
-      "in_portfolio_twd": 97176,
+      "in_portfolio_twd": 101806,
       "thesis": "Robotaxi 商用化 + 能源；TSLT 持 84 股槓桿耗損是中期風險",
       "pros": [
         "Robotaxi 進度",
@@ -593,7 +593,7 @@
       "name": "TSMC ADR",
       "price": 397.67,
       "today_pct": 0.41,
-      "in_portfolio_twd": 124173,
+      "in_portfolio_twd": 124727,
       "thesis": "Q1 2026 營收 +35%，CoWoS 擴產 14-15 萬片，2027 上看 17 萬片；NVDA 取代 Apple 成為最大客戶",
       "pros": [
         "CoWoS 壟斷",
@@ -614,7 +614,7 @@
       "name": "SanDisk",
       "price": 1187,
       "today_pct": 8.25,
-      "in_portfolio_twd": 71496,
+      "in_portfolio_twd": 83284,
       "thesis": "NAND 漲價週期上行，eMMC AI 機箱需求暴發；外資 Bernstein 目標 $1,250",
       "pros": [
         "NAND 漲價",
@@ -635,7 +635,7 @@
       "name": "CoreWeave",
       "price": 119.01,
       "today_pct": 6.64,
-      "in_portfolio_twd": 51384,
+      "in_portfolio_twd": 58206,
       "thesis": "獲 Meta $21B 合約 + Jane Street $7B 融資；ARR 大幅跳升",
       "pros": [
         "AI 算力剛需",
@@ -657,7 +657,7 @@
       "name": "Western Digital",
       "price": 431.52,
       "today_pct": -0.69,
-      "in_portfolio_twd": 16946,
+      "in_portfolio_twd": 16714,
       "thesis": "WDC 與 SanDisk 拆分後獨立，HDD 企業儲存 AI 受惠；Yahoo 顯示 WDCX 約 -1.95%／日",
       "pros": [
         "AI 資料中心 HDD 需求",
@@ -1591,26 +1591,26 @@
       {
         "symbol": "SNDU",
         "name": "SanDisk 2X",
-        "price": 70.57,
+        "price": 82.22,
         "target": "$80-95",
         "stop": 58,
-        "strategy": "🔥 SNDK +6.91%；Bernstein $1,250；可分批鎖利 1-2 股"
+        "strategy": "🔥 SNDK BigGo 5/1 +8.25%；Bernstein $1,250；暴漲後可分批鎖利 1-2 股"
       },
       {
         "symbol": "CWVX",
         "name": "CoreWeave 2X",
-        "price": 42.71,
+        "price": 48.38,
         "target": "$50-60",
         "stop": 35,
-        "strategy": "🔥 Meta $21B 合約鎖單；ARR 跳升"
+        "strategy": "🔥 CRWV +6.64% 帶動 2X 近似；Meta 合約敘事；波動大"
       },
       {
         "symbol": "WDCX",
         "name": "WDC 2X (新倉)",
-        "price": 66.91,
+        "price": 65.99,
         "target": "$80-95",
         "stop": 55,
-        "strategy": "🆕 YTD +56%；AI HDD 啟動；觀察 Q3 財報"
+        "strategy": "🆕 WDC 5/1 小回；2X 小回撤；觀察 Q3 財報"
       },
       {
         "symbol": "3231.TW",
@@ -1631,7 +1631,7 @@
       {
         "symbol": "TSMG",
         "name": "TSM ADR 2X",
-        "price": 37.27,
+        "price": 37.57,
         "target": "$42-46",
         "stop": 32,
         "strategy": "與台積同向；考慮換為 2330 直接持有"
@@ -1648,9 +1648,9 @@
       {
         "symbol": "ONDL",
         "name": "ONDS 2X (30 股)",
-        "price": 18.22,
+        "price": 19.24,
         "action": "GTC $18.50 限價賣 30 股",
-        "reason": "底層 ONDS 失效；流動性差；回收 ~NT$17,500"
+        "reason": "底層 ONDS 連動弱＋待出清；估回收 ~NT$18,300（依成交價）"
       },
       {
         "symbol": "6173.TW",
@@ -1662,7 +1662,7 @@
       {
         "symbol": "TSLT",
         "name": "Tesla 2X (84 股)",
-        "price": 18.27,
+        "price": 19.15,
         "action": "若 TSLA<$300 減 24 股至 60 股",
         "reason": "槓桿日損耗；FCF 風險；分散度過高"
       }

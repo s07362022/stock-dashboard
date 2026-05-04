@@ -7,6 +7,18 @@
 
 ---
 
+## 2026-05-04 — BigGo 重抓美股報價 + 2X ETF 近似更新
+
+**Commit**: `(待 push)` — `chore: refresh US quotes BigGo 2026-05-04, levered ETF 2x marks`
+
+### 變更
+- **資料**：`UPDATE_NOTE` 註記 BigGo **2026-05-04** 重抓；直連標的（`AIXI`/`AVGO`/`SMH`）盤面仍為 **5/1 美東收盤**（與前次相同）。
+- **2X ETF**：`CWVX`/`ONDL`/`SNDU`/`TSLT`/`TSMG`/`WDCX` 依底層 **CRWV、ONDS、SNDK、TSLA、TSM、WDC** 之 5/1 漲跌幅做 **單日 2X 近似**（BigGo ETF 頁無收盤列）。
+- **連動**：`effective_exposure`、`underlying_analysis`（曝險台幣）、`actions.B/C` 價格與說明、`pnl_split.us.highlight` 已對齊新 `US` 陣列。
+- **產出**：`python scripts/build_stocks_json.py` → 總市值約 **NT$824,886**、總損益約 **NT$124,002（+17.69%）**（台股列仍為模板舊收盤，與美股更新混算；若需完全一致請另更新 `TW` 陣列）。
+
+---
+
 ## 2026-05-03 — 潛力股 欣興（3037）價錯更正
 
 **Commit**: `292b83e` — `fix: Unimicron 3037 TW BigGo NT$883 replaces wrong NT$210 in picks`
