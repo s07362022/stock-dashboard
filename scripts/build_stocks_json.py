@@ -33,30 +33,29 @@ from datetime import datetime
 #  ==== 1. 可變值區（每次更新只改這裡） ====
 # =============================================================================
 
-FX = 31.66                                       # 匯率 USD→TWD
-UPDATE_NOTE = "BigGo 2026-05-04 ~12:29 EDT 快照：美股盤中；直連 AIXI/AVGO/SMH/CRWV/ONDS/SNDK/TSLA/TSM/WDC 取自 BigGo；2X ETF 由模板內前次 ETF 收盤 ×（1+2×底層當日報酬）連結"  # 註記資料來源
+FX = 31.615                                      # 匯率 USD→TWD
+UPDATE_NOTE = "BigGo 2026-05-05（台股收盤 + 美股盤中）與使用者 05/05 券商截圖同步；台股以截圖持股為準，美股含 ORCX/INTC 新部位。"
 
 # ---- 1.1 台股持倉（依券商截圖填寫）----
 TW = [
-    {"symbol":"0050.TW","name":"元大台灣50","shares":3010,"buy_price":63.68,"close":90.5,"change":-0.25,"pct":-0.28,"sector":"ETF（核心，長期）","tag":"core"},
-    {"symbol":"00631L.TW","name":"元大台灣50正2","shares":3150,"buy_price":27.68,"close":28.61,"change":-0.21,"pct":-0.73,"sector":"ETF (=0050 2X)","tag":"core","underlying":"0050","multiplier":2},
-    {"symbol":"2330.TW","name":"台積電","shares":25,"buy_price":2156.62,"close":2135,"change":-45,"pct":-2.06,"sector":"半導體","tag":"core"},
-    {"symbol":"2337.TW","name":"旺宏電子","shares":100,"buy_price":135.57,"close":154,"change":-13,"pct":-7.78,"sector":"記憶體 NOR/NAND","tag":"growth"},
-    {"symbol":"3231.TW","name":"緯創","shares":100,"buy_price":140.81,"close":137,"change":-3.5,"pct":-2.49,"sector":"AI 伺服器代工","tag":"growth"},
-    {"symbol":"3711.TW","name":"日月光投控","shares":66,"buy_price":467.22,"close":478,"change":-10.5,"pct":-2.15,"sector":"封裝測試","tag":"core"},
-    {"symbol":"6173.TW","name":"信昌電","shares":150,"buy_price":86.3,"close":85.7,"change":1.7,"pct":2.02,"sector":"被動元件（待出清）","tag":"reduce"},
+    {"symbol":"0050.TW","name":"元大台灣50","shares":3010,"buy_price":64.1,"close":94.6,"change":0,"pct":0,"sector":"ETF（核心，長期）","tag":"core"},
+    {"symbol":"00631L.TW","name":"元大台灣50正2","shares":4150,"buy_price":28.23,"close":31.08,"change":0.08,"pct":0.26,"sector":"ETF (=0050 2X)","tag":"core","underlying":"0050","multiplier":2},
+    {"symbol":"2330.TW","name":"台積電","shares":25,"buy_price":2145.6,"close":2250,"change":-25,"pct":-1.1,"sector":"半導體","tag":"core"},
+    {"symbol":"2337.TW","name":"旺宏電子","shares":100,"buy_price":134.8,"close":160.5,"change":6,"pct":3.88,"sector":"記憶體 NOR/NAND","tag":"growth"},
+    {"symbol":"3711.TW","name":"日月光投控","shares":86,"buy_price":478.58,"close":520,"change":-5,"pct":-0.95,"sector":"封裝測試","tag":"core"},
 ]
 
 US = [
-    {"symbol":"AIXI","name":"Xiao-I Corp","shares":50,"buy_price":1.5952,"close":0.7681,"change":-0.0469,"pct":-5.75,"sector":"中資 AI 仙股（出清）","tag":"exit"},
-    {"symbol":"AVGO","name":"Broadcom","shares":4,"buy_price":373.32,"close":410.765,"change":-10.515,"pct":-2.5,"sector":"AI 半導體龍頭","tag":"core"},
-    {"symbol":"CWVX","name":"Tradr 2X Long CRWV Daily","shares":19,"buy_price":38.83,"close":52.69,"change":4.31,"pct":8.91,"sector":"CRWV 2×（由昨 ETF 收盤連結 CRWV 日報酬 2X）","tag":"growth","underlying":"CRWV","multiplier":2,"underlying_price":124.315,"underlying_change_today":4.46},
-    {"symbol":"ONDL","name":"Defiance/Daily Target 2X Long ONDS","shares":30,"buy_price":19.85,"close":16.93,"change":-2.31,"pct":-12.01,"sector":"ONDS 2×（待清；底層大跌放大）","tag":"exit"},
-    {"symbol":"SMH","name":"VanEck Semiconductor ETF","shares":6,"buy_price":439.21,"close":502.15,"change":-7.67,"pct":-1.5,"sector":"半導體 ETF","tag":"core"},
-    {"symbol":"SNDU","name":"T-Rex 2X Long SNDK Daily","shares":16,"buy_price":60.64,"close":89.63,"change":7.41,"pct":9.01,"sector":"SNDK 2×（由昨 ETF 收盤連結 SNDK 日報酬 2X）","tag":"growth","underlying":"SNDK","multiplier":2,"underlying_price":1240.485,"underlying_change_today":4.51},
-    {"symbol":"TSLT","name":"T-Rex 2X Long Tesla Daily","shares":84,"buy_price":17.78,"close":18.77,"change":-0.38,"pct":-1.98,"sector":"TSLA 2×（由昨 ETF 收盤連結 TSLA 日報酬 2X）","tag":"satellite","underlying":"TSLA","multiplier":2,"underlying_price":386.9199,"underlying_change_today":-1.0},
-    {"symbol":"TSMG","name":"Leverage Shares 2x Long TSM Daily","shares":30,"buy_price":36.84,"close":37.35,"change":-0.22,"pct":-0.59,"sector":"TSM ADR 2×（由昨 ETF 收盤連結 TSM 日報酬 2X）","tag":"core","underlying":"TSM","multiplier":2,"underlying_price":396.48,"underlying_change_today":-0.3},
-    {"symbol":"WDCX","name":"Tradr 2X Long WDC Daily","shares":4,"buy_price":65.06,"close":68.83,"change":2.84,"pct":4.3,"sector":"WDC 2×（由昨 ETF 收盤連結 WDC 日報酬 2X）","tag":"growth","underlying":"WDC","multiplier":2,"underlying_price":440.805,"underlying_change_today":2.15},
+    {"symbol":"AIXI","name":"Xiao-I Corp","shares":50,"buy_price":1.595238,"close":0.7775,"change":-0.0405,"pct":-4.97,"sector":"中資 AI 仙股（出清）","tag":"exit"},
+    {"symbol":"AVGO","name":"Broadcom","shares":4,"buy_price":373.321786,"close":421.14,"change":-0.14,"pct":-0.03,"sector":"AI 半導體龍頭","tag":"core"},
+    {"symbol":"CWVX","name":"Tradr 2X Long CRWV Daily","shares":19,"buy_price":38.834211,"close":48.69,"change":0.86,"pct":1.8,"sector":"CRWV 2×","tag":"growth","underlying":"CRWV","multiplier":2,"underlying_price":124.315,"underlying_change_today":4.46},
+    {"symbol":"INTC","name":"Intel","shares":2,"buy_price":109.03,"close":108.87,"change":9.25,"pct":9.28,"sector":"半導體","tag":"growth"},
+    {"symbol":"ONDL","name":"Defiance/Daily Target 2X Long ONDS","shares":30,"buy_price":19.85,"close":14.74,"change":-0.42,"pct":-2.77,"sector":"ONDS 2×（待清）","tag":"exit"},
+    {"symbol":"ORCX","name":"Defiance Daily Target 2X Long ORCL","shares":9,"buy_price":38.953333,"close":39.82,"change":4.75,"pct":13.55,"sector":"ORCL 2×","tag":"satellite"},
+    {"symbol":"SMH","name":"VanEck Semiconductor ETF","shares":6,"buy_price":439.213333,"close":521.43,"change":11.61,"pct":2.28,"sector":"半導體 ETF","tag":"core"},
+    {"symbol":"SNDU","name":"T-Rex 2X Long SNDK Daily","shares":6,"buy_price":60.641875,"close":95.65,"change":8.53,"pct":9.79,"sector":"SNDK 2×","tag":"growth","underlying":"SNDK","multiplier":2,"underlying_price":1240.485,"underlying_change_today":4.51},
+    {"symbol":"TSLT","name":"T-Rex 2X Long Tesla Daily","shares":30,"buy_price":17.781309,"close":18.67,"change":0.40,"pct":2.19,"sector":"TSLA 2×","tag":"satellite","underlying":"TSLA","multiplier":2,"underlying_price":400.67,"underlying_change_today":2.52},
+    {"symbol":"TSMG","name":"Leverage Shares 2x Long TSM Daily","shares":30,"buy_price":36.843334,"close":37.5,"change":0.23,"pct":0.62,"sector":"TSM ADR 2×","tag":"core","underlying":"TSM","multiplier":2,"underlying_price":398.16,"underlying_change_today":0.12},
 ]
 
 # =============================================================================
@@ -402,7 +401,7 @@ data = {
         {"ticker":"CRWV","name":"CoreWeave","period":"Q1 2026","revenue":"ARR 跳升","eps":"轉虧為盈中","highlight":"Meta $21B + Jane Street $7B","rating":"Buy"},
         {"ticker":"WDC","name":"Western Digital","period":"FY26 Q3","revenue":"穩健","eps":"—","highlight":"獨立後 HDD AI 需求；YTD +56%","rating":"Buy"},
         {"ticker":"TSLA","name":"Tesla","period":"Q1 2026","revenue":"$22.39B 略低","eps":"$0.41","highlight":"Robotaxi 進度；Capex 上修","rating":"Hold"},
-        {"ticker":"NVDA","name":"NVIDIA","period":"FY26 Q4","revenue":"$68B (+73%)","eps":"—","highlight":"DC $62.3B；Q1 FY27 $78B","rating":"Strong Buy"},
+        {"ticker":"INTC","name":"Intel","period":"Q2 2026E","revenue":"$14.39B（市場估）","eps":"$0.21（市場估）","highlight":"修復型情境，波動大、宜分批","rating":"Hold"},
     ],
 
     "analysts": {
@@ -432,7 +431,7 @@ data = {
         {"rank":2,"ticker":"2308","name":"台達電","market":"TW","price":2165,"target_low":2400,"target_high":2650,"upside_pct":16.6,"thesis":"電源 + 液冷散熱雙受惠；現價 BigGo **4/30 收 NT$2,165**（舊模版誤 NT$360 已更正）。目標區間為情境參考，請以法人最新為準","type":"個股"},
         {"rank":3,"ticker":"3037","name":"欣興","market":"TW","price":883,"target_low":1000,"target_high":1150,"upside_pct":21.8,"thesis":"ABF 載板領先；現價 BigGo **2026/4/30 收 NT$883**（+80，約 +9.96%；舊模版誤 NT$210）。目標區間為情境參考，請對照法人最新","type":"個股"},
         {"rank":4,"ticker":"ANET","name":"Arista Networks","market":"US","price":164.95,"target_low":200,"target_high":220,"upside_pct":27.3,"thesis":"AI 資料中心 400G/800G 網路交換機龍頭（≤$300）","type":"個股"},
-        {"rank":5,"ticker":"ORCL","name":"Oracle","market":"US","price":175.5,"target_low":210,"target_high":230,"upside_pct":25.4,"thesis":"OCI 雲端 + AI 資料庫，多雲 AI 受惠（≤$300）","type":"個股"},
+        {"rank":5,"ticker":"INTC","name":"Intel","market":"US","price":108.87,"target_low":120,"target_high":135,"upside_pct":17.2,"thesis":"修復型半導體龍頭，資本支出與代工敘事仍有事件彈性","type":"個股"},
     ],
 
     # ===== actions（A/B 用 strategy/stop/target；C 用 action/reason）=====
@@ -468,7 +467,7 @@ data = {
             "tickers": [
                 {"ticker":"AVGO","name":"Broadcom","price":410.77,"rationale":"盤中回檔近逢低區；Q2 指引仍為主軸","size_suggest":"1 股 ≈ NT$ 13,006","confidence":"🟢 高"},
                 {"ticker":"ANET","name":"Arista Networks","price":164.95,"rationale":"AI 網路 400G/800G 龍頭；目標 $200-220","size_suggest":"1 股 ≈ NT$ 5,222","confidence":"🟢 高"},
-                {"ticker":"ORCL","name":"Oracle","price":175.5,"rationale":"OCI + AI 資料庫；目標 $210-230","size_suggest":"1 股 ≈ NT$ 5,556","confidence":"🟡 中"},
+                {"ticker":"INTC","name":"Intel","price":108.87,"rationale":"轉機修復 + 量能活躍，適合波段分批","size_suggest":"1 股 ≈ NT$ 3,441","confidence":"🟡 中"},
             ]
         },
         {
@@ -515,7 +514,7 @@ data = {
         {"symbol":"3711.TW","name":"日月光","rating":"加碼","target":"NT$308-588","date":"2026-04"},
         {"symbol":"2337.TW","name":"旺宏","rating":"Hold","target":"NT$92-149","date":"2026-02"},
         {"symbol":"ANET","name":"Arista Networks","rating":"Buy","target":"$190-220","date":"2026-04"},
-        {"symbol":"ORCL","name":"Oracle","rating":"Buy","target":"$200-240","date":"2026-04"},
+        {"symbol":"INTC","name":"Intel","rating":"Hold→Buy(事件驅動)","target":"$120-135","date":"2026-05"},
         {"symbol":"2308.TW","name":"台達電","rating":"偏多（情境參考）","target":"約 NT$2,400-2,650（請對照法人最新報告）","date":"2026-05"},
         {"symbol":"3037.TW","name":"欣興","rating":"注意股‧波動高（情境參考）","target":"約 NT$1,000-1,150（請對照法人最新報告）","date":"2026-05"},
     ],

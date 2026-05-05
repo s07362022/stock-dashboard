@@ -7,6 +7,23 @@
 
 ---
 
+## 2026-05-05 — 依 05/05 最新庫存截圖重建 + 修復空白頁驗證
+
+### 變更
+- 以使用者 **05/05 券商截圖**覆蓋 `scripts/build_stocks_json.py` 可變值區持倉：
+  - 台股改為 5 檔：`0050`、`00631L`、`2330`、`2337`、`3711`
+  - 美股改為 10 檔：新增/保留 `INTC`、`ORCX`，並同步 `SNDU`、`TSLT` 股數變更
+- 匯率更新為 `31.615`（與截圖一致）
+- 對照上一版結構保留 23 個頂層 key，不改結構區欄位名稱
+- 依對話偏好移除推薦中的 `ORCL` / `NVDA`，改為 `INTC`
+
+### 驗證
+- 執行 `python scripts/build_stocks_json.py`：內建 required keys + 子結構驗證全數通過
+- 產出檔：`data/stocks.json` 已重建（UTF-8）
+- 後續以 `check_live_dashboard.py` 驗證 GitHub Pages 顯示
+
+---
+
 ## 2026-05-04 — 美股盤中再分析 + Dashboard 全量更新
 
 **Commit**: `7581a46` — `feat: US re-analysis BigGo 2026-05-04 EDT snapshot`
