@@ -7,6 +7,22 @@
 
 ---
 
+## 2026-05-09 — 依券商庫存截圖全量覆寫可變值區 + BigGo 5/8 驗價
+
+### 變更
+- **台股**：`0050`、`00631L`、`2330`、`2337`、`3711` 股數／成本與截圖一致；**新增 `00830`**。
+- **美股**：與截圖一致 **10 檔** — `ANEL`、`QCOM`、`AIXI`、`ONDL`、`AVGO`、`QCMU`、`SMH`、`SNDU`、`TSLT`、`TSMG`；**移除**舊版 `CWVX`／`ORCX`／`INTC` 等非當前部位。
+- **匯率**：`31.425`（截圖參考）。
+- **報價來源**：[BigGo](https://finance.biggo.com.tw) 台股 **5/8 收盤**、美股 **5/8 美東**（`QCOM`/`SMH`/`AVGO` 等）；`close` 與截圖差異處以 **BigGo 為儀表主顯示**。
+- **論述**：`user_strategy`、`pnl_split`、`effective_exposure`、`underlying_analysis`、`analysts.votes`、`actions`、`allocation`、`news`（新增 5/8 條）、`picks`（ANET/ORCL）同步庫存。
+- **產出驗證**：`python scripts/build_stocks_json.py` → 總市值 **NT$897,875**、總損益 **+21.33%**；內建 23 key + 子結構檢查 **OK**。
+
+### 驗證
+- 本地：`python scripts/build_stocks_json.py`
+- Live：推送後待 Pages 重建，開 live 首頁確認圖表與表格載入。
+
+---
+
 ## 2026-05-05 — 依 05/05 最新庫存截圖重建 + 修復空白頁驗證
 
 ### 變更
