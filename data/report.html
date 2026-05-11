@@ -3,528 +3,1232 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-<title>Equity Deep Report — 2026-04-30</title>
+<title>Equity Deep Report — 2026-05-12</title>
 <style>
   :root {
-    --bg: #0b1220;
-    --panel: #111a2e;
-    --panel-2: #16213d;
-    --line: #1e2a48;
-    --text: #e6ecf5;
-    --muted: #97a3bb;
-    --accent: #7cc4ff;
-    --green: #19c37d;
-    --red: #ef4444;
-    --yellow: #f5b54a;
+    --bg: #0b1220; --panel: #111a2e; --panel-2: #16213d; --line: #1e2a48;
+    --text: #e6ecf5; --muted: #97a3bb; --accent: #7cc4ff;
+    --green: #19c37d; --red: #ef4444; --yellow: #f5b54a; --orange: #f97316;
   }
-  * { box-sizing: border-box; }
-  body {
-    margin: 0;
-    background: linear-gradient(180deg, #0b1220 0%, #0d1428 100%);
-    color: var(--text);
-    font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", "Segoe UI", system-ui, sans-serif;
-    line-height: 1.65;
-    font-size: 14px;
-  }
-  .wrap { max-width: 1180px; margin: 0 auto; padding: 28px 22px 80px; }
-  header {
-    display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between;
-    gap: 12px; padding-bottom: 14px; border-bottom: 1px solid var(--line);
-  }
-  header h1 { font-size: 24px; margin: 0; letter-spacing: 0.5px; }
-  header .meta { color: var(--muted); font-size: 12px; }
-  h2 { margin: 32px 0 10px; font-size: 18px; color: var(--accent); border-left: 4px solid var(--accent); padding-left: 10px; }
-  h3 { margin: 18px 0 8px; font-size: 15px; color: #cdd9ee; }
-  h4 { margin: 12px 0 6px; font-size: 14px; color: #b9c5dc; }
-  p, li { font-size: 13.5px; }
-  table {
-    width: 100%; border-collapse: collapse; margin: 8px 0 14px;
-    background: var(--panel); border-radius: 8px; overflow: hidden;
-    font-size: 12.5px;
-  }
-  th, td { padding: 7px 9px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
-  th { background: var(--panel-2); color: #cdd9ee; font-weight: 600; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #0b1220; color: var(--text); font-family: "Noto Sans TC","PingFang TC","Microsoft JhengHei","Segoe UI",system-ui,sans-serif; line-height: 1.65; font-size: 14px; }
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 28px 22px 80px; }
+  header { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 12px; padding-bottom: 14px; border-bottom: 1px solid var(--line); margin-bottom: 20px; }
+  header h1 { font-size: 22px; margin: 0; color: var(--accent); }
+  header .meta { color: var(--muted); font-size: 12px; line-height: 1.8; }
+  h2 { margin: 32px 0 10px; font-size: 17px; color: var(--accent); border-left: 4px solid var(--accent); padding-left: 10px; }
+  h3 { margin: 18px 0 8px; font-size: 14px; color: #cdd9ee; }
+  table { width: 100%; border-collapse: collapse; margin: 8px 0 14px; background: var(--panel); border-radius: 8px; overflow: hidden; font-size: 12.5px; }
+  th, td { padding: 8px 10px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: middle; }
+  th { background: var(--panel-2); color: #cdd9ee; font-weight: 600; font-size: 12px; }
+  tr:last-child td { border-bottom: none; }
   tr:hover td { background: rgba(124,196,255,0.04); }
-  .right { text-align: right; }
-  .center { text-align: center; }
-  .pos { color: var(--green); font-weight: 600; }
-  .neg { color: var(--red); font-weight: 600; }
-  .warn { color: var(--yellow); font-weight: 600; }
-  .pill {
-    display: inline-block; padding: 1px 8px; border-radius: 999px;
-    font-size: 11.5px; font-weight: 600;
-  }
-  .pill-a { background: rgba(25,195,125,0.15); color: var(--green); }
-  .pill-b { background: rgba(245,181,74,0.15); color: var(--yellow); }
-  .pill-c { background: rgba(239,68,68,0.18); color: var(--red); }
-  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  @media (max-width: 800px) { .grid-2 { grid-template-columns: 1fr; } }
-  .summary {
-    background: linear-gradient(135deg, rgba(124,196,255,0.10), rgba(25,195,125,0.06));
-    border: 1px solid rgba(124,196,255,0.25); padding: 14px 18px; border-radius: 10px;
-    margin-top: 14px;
-  }
-  .disc {
-    margin-top: 28px; padding: 14px 18px; border-radius: 10px;
-    background: rgba(239,68,68,0.06); border: 1px solid rgba(239,68,68,0.25);
-    color: #f3c2c2; font-size: 12.5px;
-  }
-  code { background: #0e1830; padding: 2px 6px; border-radius: 4px; color: #b8d6f6; }
-  hr { border: none; border-top: 1px dashed var(--line); margin: 26px 0; }
-  ul { padding-left: 20px; }
-  .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 8px 0 18px; }
-  @media (max-width: 800px) { .kpi-grid { grid-template-columns: repeat(2, 1fr); } }
-  .kpi {
-    background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px;
-  }
-  .kpi .label { color: var(--muted); font-size: 11.5px; }
-  .kpi .value { font-size: 18px; font-weight: 700; }
-  .toc { background: var(--panel); border-radius: 10px; padding: 12px 16px; border: 1px solid var(--line); margin: 14px 0 18px; }
-  .toc a { color: var(--accent); text-decoration: none; margin-right: 14px; font-size: 12.5px; }
+  .right { text-align: right; } .center { text-align: center; }
+  .pos { color: var(--green); font-weight: 600; } .neg { color: var(--red); font-weight: 600; }
+  .warn { color: var(--yellow); font-weight: 600; } .muted { color: var(--muted); }
+  .pill { display: inline-block; padding: 2px 9px; border-radius: 999px; font-size: 11px; font-weight: 600; white-space: nowrap; }
+  .pill-buy  { background: rgba(25,195,125,0.18); color: var(--green); }
+  .pill-hold { background: rgba(245,181,74,0.18);  color: var(--yellow); }
+  .pill-sell { background: rgba(239,68,68,0.20);   color: var(--red); }
+  .pill-warn { background: rgba(249,115,22,0.20);  color: var(--orange); }
+  .pill-add  { background: rgba(124,196,255,0.18); color: var(--accent); }
+  .kpi-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; margin: 12px 0 22px; }
+  @media(max-width:800px){ .kpi-grid{ grid-template-columns: repeat(2,1fr); } }
+  .kpi { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; }
+  .kpi .label { color: var(--muted); font-size: 11px; margin-bottom: 4px; }
+  .kpi .value { font-size: 20px; font-weight: 700; }
+  .kpi .sub   { font-size: 11px; color: var(--muted); margin-top: 2px; }
+  .toc { background: var(--panel); border-radius: 8px; padding: 10px 16px; border: 1px solid var(--line); margin: 0 0 22px; display: flex; flex-wrap: wrap; gap: 6px 16px; }
+  .toc a { color: var(--accent); text-decoration: none; font-size: 12px; }
   .toc a:hover { text-decoration: underline; }
+  .alert-box { border-radius: 8px; padding: 12px 16px; margin: 8px 0 14px; font-size: 13px; border-left: 4px solid; }
+  .alert-red   { background: rgba(239,68,68,0.08);   border-color: var(--red);    color: #fca5a5; }
+  .alert-green { background: rgba(25,195,125,0.08);  border-color: var(--green);  color: #6ee7b7; }
+  .alert-yellow{ background: rgba(245,181,74,0.08);  border-color: var(--yellow); color: #fde68a; }
+  .alert-blue  { background: rgba(124,196,255,0.08); border-color: var(--accent); color: #bae6fd; }
+  .senti-bar { height: 6px; border-radius: 3px; background: #1e2a48; overflow: hidden; margin-top: 4px; }
+  .senti-pos { height: 100%; border-radius: 3px; background: var(--green); }
+  .senti-neg { height: 100%; border-radius: 3px; background: var(--red); }
+  .senti-neu { height: 100%; border-radius: 3px; background: var(--yellow); }
+  .stars { color: var(--yellow); letter-spacing: -2px; }
+  .disc { margin-top: 32px; padding: 14px 18px; border-radius: 10px; background: rgba(239,68,68,0.06); border: 1px solid rgba(239,68,68,0.25); color: #f3c2c2; font-size: 12px; line-height: 1.7; }
+  hr { border: none; border-top: 1px dashed var(--line); margin: 24px 0; }
+  ul { padding-left: 18px; } li { font-size: 13px; margin-bottom: 3px; }
+  .chart-container { position: relative; height: 280px; margin: 12px 0; }
+  .chart-sm { position: relative; height: 180px; margin: 10px 0; }
+  canvas { display: block; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media(max-width:700px){ .grid-2{ grid-template-columns: 1fr; } }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
+  .card-title { font-size: 13px; font-weight: 600; color: var(--accent); margin-bottom: 8px; }
+  .action-verdict { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 8px; margin: 6px 0; font-size: 13px; }
+  .verdict-sell { background: rgba(239,68,68,0.10); border: 1px solid rgba(239,68,68,0.3); }
+  .verdict-hold { background: rgba(245,181,74,0.10); border: 1px solid rgba(245,181,74,0.3); }
+  .verdict-buy  { background: rgba(25,195,125,0.10); border: 1px solid rgba(25,195,125,0.3); }
+  .verdict-add  { background: rgba(124,196,255,0.10); border: 1px solid rgba(124,196,255,0.3); }
+  .verdict-icon { font-size: 20px; flex-shrink: 0; }
+  .verdict-body { flex: 1; }
+  .verdict-body strong { display: block; margin-bottom: 2px; }
+  .timeline { border-left: 2px solid var(--line); padding-left: 14px; margin: 10px 0; }
+  .tl { position: relative; margin-bottom: 12px; font-size: 13px; }
+  .tl::before { content:''; position:absolute; left:-19px; top:5px; width:10px; height:10px; border-radius:50%; background:var(--line); }
+  .tl.active::before { background: var(--green); }
+  .tl.warn::before  { background: var(--yellow); }
+  .tl.danger::before{ background: var(--red); }
+  .tl-date { font-size: 11px; color: var(--muted); margin-bottom: 2px; }
+  /* 技術面 */
+  .tech-toolbar { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+  .tech-btn { padding: 5px 14px; border-radius: 20px; border: 1px solid var(--line); background: var(--panel); color: var(--muted); font-size: 12px; font-weight: 600; cursor: pointer; transition: all 0.15s; }
+  .tech-btn.active { background: var(--accent); color: #0b1220; border-color: var(--accent); }
+  .tech-btn:hover:not(.active) { background: var(--panel-2); color: var(--text); }
+  .tech-kpi { display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; margin-bottom: 12px; }
+  @media(max-width:700px){ .tech-kpi{ grid-template-columns: repeat(2,1fr); } }
+  .tech-kpi-card { background: var(--panel-2); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; }
+  .tech-kpi-card .lbl  { font-size: 10px; color: var(--muted); margin-bottom: 3px; }
+  .tech-kpi-card .val  { font-size: 16px; font-weight: 700; }
+  .tech-kpi-card .sub2 { font-size: 10px; color: var(--muted); margin-top: 2px; }
+  .ind-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px; }
+  @media(max-width:700px){ .ind-grid{ grid-template-columns: 1fr; } }
+  .ind-panel { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; }
+  .ind-title { font-size: 11px; color: var(--muted); margin-bottom: 6px; }
+  .rsi-track { height: 6px; background: var(--line); border-radius: 3px; overflow: hidden; margin: 5px 0; }
+  .rsi-fill  { height: 100%; border-radius: 3px; }
+  .sup-table { width: 100%; font-size: 12px; border-collapse: collapse; }
+  .sup-table td { padding: 3px 6px; border-bottom: 1px solid var(--line); color: var(--muted); }
+  .sup-table td:last-child { text-align: right; color: var(--text); font-weight: 600; }
+  .strat-box { margin-top: 8px; padding: 8px 12px; border-radius: 6px; font-size: 12px; line-height: 1.6; }
+  .strat-sell { background: rgba(239,68,68,0.10); border-left: 3px solid var(--red);    color: #fca5a5; }
+  .strat-hold { background: rgba(245,181,74,0.10); border-left: 3px solid var(--yellow); color: #fde68a; }
+  .strat-add  { background: rgba(124,196,255,0.10);border-left: 3px solid var(--accent); color: #bae6fd; }
+  .ch-wrap { position: relative; }
+  .chart-lbl { font-size: 11px; color: var(--muted); margin-bottom: 4px; }
+  .upd-badge { display: inline-block; font-size: 10px; padding: 2px 8px; border-radius: 4px; background: rgba(124,196,255,0.12); color: var(--accent); margin-left: 8px; vertical-align: middle; }
+  /* 預測區塊 */
+  .pred-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 10px 0 18px; }
+  @media(max-width:700px){ .pred-grid{ grid-template-columns: 1fr; } }
+  .pred-card { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
+  .pred-title { font-size: 13px; font-weight: 700; color: var(--accent); margin-bottom: 10px; border-bottom: 1px solid var(--line); padding-bottom: 6px; }
+  .pred-row { display: flex; justify-content: space-between; align-items: center; padding: 5px 0; border-bottom: 1px solid rgba(30,42,72,0.6); font-size: 12px; }
+  .pred-row:last-child { border-bottom: none; }
+  .pred-label { color: var(--muted); }
+  .pred-val { font-weight: 700; }
+  .scenario-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin: 10px 0; }
+  @media(max-width:700px){ .scenario-grid{ grid-template-columns: 1fr; } }
+  .scenario-card { border-radius: 8px; padding: 10px 12px; font-size: 12px; }
+  .sc-bull { background: rgba(25,195,125,0.10); border: 1px solid rgba(25,195,125,0.3); }
+  .sc-base { background: rgba(124,196,255,0.08); border: 1px solid rgba(124,196,255,0.2); }
+  .sc-bear { background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.25); }
+  .sc-title { font-weight: 700; margin-bottom: 5px; }
+  .sc-bull .sc-title { color: var(--green); }
+  .sc-base .sc-title { color: var(--accent); }
+  .sc-bear .sc-title { color: var(--red); }
+  .sc-item { color: var(--muted); margin-bottom: 2px; }
 </style>
 </head>
 <body>
 <div class="wrap">
-  <header>
-    <h1>Equity Deep Report — 詳細分析股市台股與美股以及財報和新聞</h1>
-    <div class="meta">資料截止 2026-04-30 (UTC+8) ｜ 匯率 1 USD = 31.56 TWD</div>
-  </header>
 
-  <div class="toc">
-    <a href="#sec0">0 整合 Skills</a>
-    <a href="#sec1">1 國際新聞與形勢</a>
-    <a href="#sec2">2 龍頭財報</a>
-    <a href="#sec3">3 大盤+八區塊</a>
-    <a href="#sec10">10 ≤300 USD 短長線</a>
-    <a href="#sec11">11 機構共識</a>
-    <a href="#sec12">12 多方比較</a>
-    <a href="#sec13">13 免責</a>
-    <a href="#sec14">14 關閉迴圈</a>
+<header>
+  <div>
+    <h1>📊 Equity Deep Report — 2026-05-12</h1>
+    <div style="font-size:12px;color:var(--muted);margin-top:4px;">AlphaEar Stock · News · Sentiment · Signal-Tracker · Reporter Skills 整合</div>
   </div>
-
-  <div class="kpi-grid">
-    <div class="kpi"><div class="label">投組合計市值</div><div class="value">NT$ 783,693</div></div>
-    <div class="kpi"><div class="label">未實現損益</div><div class="value pos">+NT$ 93,138 (+13.49%)</div></div>
-    <div class="kpi"><div class="label">台股 / 美股 占比</div><div class="value">63.04% / 36.96%</div></div>
-    <div class="kpi"><div class="label">實質曝險</div><div class="value">NT$ 1,004,996 (1.28×)</div></div>
+  <div class="meta">
+    更新時間：2026-05-12 ｜ 匯率 1 USD = 31.405 TWD<br>
+    持倉狀態：已忽略 AIXI / ONDL ｜ AVGO 已賣出 ｜ 報價已重新查詢驗證
   </div>
+</header>
 
-  <h2 id="sec0">0. 整合 Skills 一覽</h2>
-  <table>
-    <thead><tr><th>Skill</th><th>本次貢獻</th></tr></thead>
-    <tbody>
-      <tr><td>stock-analyzer + portfolio.md</td><td>持股事實、報價六大區塊基底</td></tr>
-      <tr><td>daily-stock-report</td><td>八區塊框架、變現／配置／預測表</td></tr>
-      <tr><td>us-stock-analysis</td><td>AVGO／NVDA／AMD／TSLA 基本面</td></tr>
-      <tr><td>generate-stock-reports</td><td>公司動態 (CRWV／SNDK／AAOI)</td></tr>
-      <tr><td>market-news-analyst</td><td>近 30 日宏觀大事件 (FOMC、伊朗戰爭、關稅)</td></tr>
-      <tr><td>xvary-stock-research</td><td>看多／看空／中性 thesis 框架</td></tr>
-      <tr><td>alphaear-news / sentiment / predictor</td><td>新聞熱點、情緒判讀、1–3 月情境預測</td></tr>
-      <tr><td>financereport</td><td>Q1 2026 財報摘要章節邏輯</td></tr>
-      <tr><td>gmail-sender</td><td>第 14 章關閉迴圈寄信指令</td></tr>
-    </tbody>
-  </table>
+<div class="toc">
+  <a href="#sec-kpi">📈 總覽 KPI</a>
+  <a href="#sec-holdings">📋 持倉掃描</a>
+  <a href="#sec-sentiment">🧠 Sentiment</a>
+  <a href="#sec-signal">📡 Signal Tracker</a>
+  <a href="#sec-verdict">⚡ 操作決策</a>
+  <a href="#sec-nvda">🎯 NV財報布局</a>
+  <a href="#sec-risk">⚠️ 風險矩陣</a>
+  <a href="#sec-macro">🌍 宏觀背景</a>
+  <a href="#sec-predict">🔮 台美股市預測</a>
+  <a href="#sec-tech">📐 技術面分析</a>
+  <a href="#sec-disc">免責聲明</a>
+</div>
 
-  <h2 id="sec1">1. 🌍 國際新聞與形勢分析</h2>
-  <h3>1.1 重大新聞清單（≥ 26 則）</h3>
-  <table>
-    <thead><tr><th>#</th><th>日期</th><th>板塊</th><th>事件</th><th>來源</th></tr></thead>
-    <tbody>
-      <tr><td>1</td><td>2026-04-29</td><td>金融政策</td><td><b>FOMC 維持 3.50–3.75% 不變</b>，連 3 次 hold；4 人 dissent，1992 以來最高分歧。Powell 末次會議。</td><td>CNBC、CBS</td></tr>
-      <tr><td>2</td><td>2026-04-29</td><td>領導交接</td><td>Kevin Warsh 已被提名接任 Fed 主席，Powell 任期 5/15 結束</td><td>PBS、CBS</td></tr>
-      <tr><td>3</td><td>2026-04-28</td><td>地緣／能源</td><td>川普對伊朗提案不滿，<b>WTI 突破 $100</b>，布蘭特約 $96–111</td><td>CNBC</td></tr>
-      <tr><td>4</td><td>2026-04-26</td><td>地緣</td><td>伊朗封鎖荷莫茲海峽，UAE 5 月退出 OPEC</td><td>CNN</td></tr>
-      <tr><td>5</td><td>2026-04-22</td><td>財報／車市</td><td><b>TSLA Q1</b>：EPS $0.41 beat、營收 $22.39B miss、交車 358k miss；YTD -14%</td><td>CNBC</td></tr>
-      <tr><td>6</td><td>2026-04-22</td><td>AI／晶片</td><td><b>AMD 衝破 $296</b>：OpenAI 6GW、Meta $60B、Oracle 50K GPU；目標 $306–$379</td><td>TradingNews</td></tr>
-      <tr><td>7</td><td>2026-04-19</td><td>地緣</td><td>伊朗繼續限制荷莫茲海峽，停火近期到期</td><td>CNN</td></tr>
-      <tr><td>8</td><td>2026-04-16</td><td>財報</td><td><b>TSMC Q1 2026</b>：營收 $35.9B、淨利年增 58%、毛利率 66.2%；2026 yoy 上修至 ≥ +30%</td><td>CNBC</td></tr>
-      <tr><td>9</td><td>2026-04-15</td><td>AI／合約</td><td><b>Jane Street × CRWV $6B 雲算力</b>+ $1B 入股 @ $109</td><td>Reuters</td></tr>
-      <tr><td>10</td><td>2026-04-12</td><td>AI／合約</td><td>AVGO 一週 +18.1% (314.43→371.55)，Google TPU、Anthropic $21B / 3.5GW</td><td>PreMarketDaily</td></tr>
-      <tr><td>11</td><td>2026-04-09</td><td>AI／合約</td><td><b>CoreWeave × Meta 擴大至 $21B</b> 至 2032，含 Vera Rubin 部署</td><td>Yahoo / SEC</td></tr>
-      <tr><td>12</td><td>2026-04-07</td><td>AI／晶片</td><td>AVGO 單日 +6%，Anthropic 鎖定多年 ASIC</td><td>Wedbush</td></tr>
-      <tr><td>13</td><td>2026-04-06</td><td>政策</td><td>川普關稅政策轉向「部門式」貿易協議模式</td><td>Foreign Policy</td></tr>
-      <tr><td>14</td><td>2026-04-04</td><td>半導體</td><td><b>AAOI 單日 $124M 800G 訂單</b>，2026 全年指引 $1B</td><td>BeyondSPX</td></tr>
-      <tr><td>15</td><td>2026-04-02</td><td>車市</td><td>TSLA Q1 交車 358k 遜於預期</td><td>Nasdaq</td></tr>
-      <tr><td>16</td><td>2026-04-01</td><td>半導體</td><td>中國電子組件加權有效關稅 +34%；伺服器 / 網路設備 +19%</td><td>Clarqo</td></tr>
-      <tr><td>17</td><td>2026-03-16</td><td>AI／晶片</td><td><b>NVDA GTC 2026</b>：Blackwell+Rubin 至 2027 訂單 <b>$1 兆</b>；FY26 $215.9B</td><td>TechCrunch</td></tr>
-      <tr><td>18</td><td>2026-03-04</td><td>財報</td><td>AVGO Q1 FY26：AI 營收 $8.4B (+106%)，總營收 $19.31B；2027 AI ≥ $100B</td><td>Reuters</td></tr>
-      <tr><td>19</td><td>2026-04-29</td><td>財報</td><td><b>MSFT FY26 Q3</b>：營收 $81.4B (+18%)、Azure +37–38%；OpenAI 投資虧 $3.1B</td><td>MSFT IR</td></tr>
-      <tr><td>20</td><td>2026-04-29</td><td>財報</td><td><b>META</b> Q1 指引 $53.5–56.5B；全年 capex 拉高 $115–135B</td><td>Polyloly</td></tr>
-      <tr><td>21</td><td>2026-04-29</td><td>財報</td><td><b>GOOGL</b> Q1 預估 $92.2B，Search +17–18%</td><td>Polyloly</td></tr>
-      <tr><td>22</td><td>2026-04-29</td><td>財報</td><td><b>AMZN</b> AWS $36.8B (+25.6%)；AI ARR > $15B</td><td>Polyloly</td></tr>
-      <tr><td>23</td><td>2026-04-29</td><td>財報</td><td><b>SanDisk Q2 FY26</b>：EPS $6.20 (beat $2.66)、營收 $3.03B (+61%)；Bernstein 目標 $1,250</td><td>Benzinga</td></tr>
-      <tr><td>24</td><td>2026-04-30</td><td>台股</td><td>聯電 ADR +9.35%、半導體 +2.03%；加權盤中最高 39,848；聯發科 +1.55%、台達電創高 +5%</td><td>鉅亨網</td></tr>
-      <tr><td>25</td><td>2026-04-30</td><td>台股</td><td>旺宏受惠三星退出 NOR Flash，成交額 349 億，終結連 10 季虧損</td><td>Yahoo 奇摩</td></tr>
-      <tr><td>26</td><td>2026-01-13</td><td>政策</td><td>對中先進晶片改 case-by-case + 25% 安全測試關稅；中國商品最高 145%</td><td>Reuters</td></tr>
-    </tbody>
-  </table>
+<!-- KPI -->
+<div class="kpi-grid" id="sec-kpi">
+  <div class="kpi">
+    <div class="label">持倉總市值（台幣）</div>
+    <div class="value" style="color:var(--accent);" id="kpi-total">計算中...</div>
+    <div class="sub">8 檔美股持倉</div>
+  </div>
+  <div class="kpi">
+    <div class="label">未實現損益（台幣）</div>
+    <div class="value pos" id="kpi-pnl">計算中...</div>
+    <div class="sub" id="kpi-pnl-pct"></div>
+  </div>
+  <div class="kpi">
+    <div class="label">最大獲利持倉</div>
+    <div class="value" style="color:var(--green);">SMH +29.6%</div>
+    <div class="sub">VanEck 半導體 ETF $568.93</div>
+  </div>
+  <div class="kpi">
+    <div class="label">最大風險持倉</div>
+    <div class="value" style="color:var(--red);">VSH / MULL</div>
+    <div class="sub">財報地雷 / 做空逆風已虧損</div>
+  </div>
+</div>
 
-  <h3>1.2 三派觀點對照</h3>
-  <table>
-    <thead><tr><th>觀點</th><th class="pos">看多 (≥3)</th><th class="neg">看空 (≥3)</th><th class="warn">中性 (≥3)</th></tr></thead>
-    <tbody>
-      <tr><td>1</td><td>AI capex $630–650B 結構性，需求遠超 GPU/ASIC 產能</td><td>油價 $100、伊朗戰爭未解</td><td>S&P 7,135 在 25× forward PE 高位</td></tr>
-      <tr><td>2</td><td>TSMC、AVGO、NVDA 三巨頭全部上修</td><td>FOMC 4 票 dissent、Powell 卸任過渡期</td><td>大型科技 capex 大增將壓 FCF 1–2 季</td></tr>
-      <tr><td>3</td><td>NAND 結構性供不應求 12 個月（SNDK +9.45%）</td><td>中國商品 145% + 半導體 25%</td><td>SOX 已 9,000+ 漲多回檔風險</td></tr>
-      <tr><td>4</td><td>TSLA 毛利率 21.1% 改善、F.S.D./Optimus 故事</td><td>美中科技戰升級，中國產能轉移成本高</td><td>台股距 40,000 整數關卡僅 1.5%</td></tr>
-      <tr><td>5</td><td>客製 ASIC（TPU、Anthropic、OpenAI）AVGO 重估</td><td>TSLA Q1 庫存累積 5 萬輛</td><td>19 票偏「持有偏多」非全面樂觀</td></tr>
-    </tbody>
-  </table>
+<!-- ALERTS -->
+<div class="alert-box alert-red">
+  🚨 <strong>緊急警示 — VSH（Vishay）5/13 盤前財報：</strong>現價 $34.26（已虧 -2.11%），分析師 EPS 共識僅 $0.03～$0.08，法人目標中值 $17.50，隱含下行 -49%。財報明日（5/13）盤前公布，強烈建議今日收盤前出場。
+</div>
+<div class="alert-box alert-red">
+  🚨 <strong>緊急警示 — MULL（2X Short MU）已虧損 -9.36%：</strong>MU 最新報 $802.95（5/11），週漲 +38%，Mizuho 目標 $740，MU 已超目標持續軋空。做空方向完全失效，每日重置持續侵蝕本金。立即停損。
+</div>
+<div class="alert-box alert-green">
+  ✅ <strong>5/20 NVIDIA 財報為最大催化劑：</strong>SMH $568.93、TSMG、QCMU 均受益。Goldman Sachs 預期 Beat-and-Raise，EPS 共識 $1.77，營收 $78.8B（+77% YoY）。布局視窗：現在 ~ 5/15（出清 VSH/MULL 後轉入）。
+</div>
+<div class="alert-box alert-yellow">
+  ⚠️ <strong>台股加權指數刷新歷史新高：</strong>TAIEX 5/7 收 41,934 點，5/8 略回落至 41,604（週漲 2,677 點）。台積電台股 NT$2,290（5/8），ADR TSM $411.68（5/8），AI 半導體超級週期確立。
+</div>
 
-  <h3>1.3 對國際股市影響推論 + 受惠標的</h3>
-  <table>
-    <thead><tr><th>主軸</th><th>推論</th><th>受惠標的</th></tr></thead>
-    <tbody>
-      <tr><td>AI capex 結構升級</td><td>客製 ASIC + 高速光通訊 + 高速記憶體三線並進</td><td>AVGO、TSM、AAOI、SNDK、CRWV、聯發科 2454、台達電 2308、緯穎 6669</td></tr>
-      <tr><td>油價 / 通膨黏</td><td>殖利率短端不降，金融、能源、防禦類有韌性</td><td>XOM、CVX</td></tr>
-      <tr><td>利率 hold</td><td>高 PE 成長股短期承壓，9 月後降息預期回流</td><td>等回檔加碼 NVDA / AMD / TSLA</td></tr>
-      <tr><td>美中關稅</td><td>北美墨西哥、台灣回流受惠</td><td>鴻海 2317、廣達 2382、緯穎 6669、日月光 3711</td></tr>
-      <tr><td>台股 / 半導體</td><td>TSMC 領頭 + 聯發科 TPU 故事</td><td>2330、2454、3711、3231、2337（NOR Flash 受惠）</td></tr>
-    </tbody>
-  </table>
+<!-- HOLDINGS -->
+<h2 id="sec-holdings">📋 持倉完整掃描（2026-05-12 報價驗證）</h2>
+<p style="color:var(--muted);font-size:12px;margin-bottom:8px;">
+  報價來源：Yahoo Finance / Investing.com / Robinhood 多源交叉驗證（最新交易日 5/11/2026）。QCMU 最後確認日 5/9，其他均 5/11。
+</p>
+<table>
+  <thead>
+    <tr>
+      <th>代碼</th><th>標的說明</th><th>性質</th>
+      <th class="right">股數</th><th class="right">成本 USD</th>
+      <th class="right">最新價 USD</th><th class="right">市值 TWD</th>
+      <th class="right">損益 USD</th><th class="right">損益%</th>
+      <th class="center">方向</th><th class="center">操作建議</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>ANEL</strong></td>
+      <td>Defiance 2X Long ANET<br><span class="muted">Arista Networks 2倍槓桿</span></td>
+      <td>槓桿ETF</td>
+      <td class="right">55</td><td class="right">15.769</td>
+      <td class="right pos">16.35</td>
+      <td class="right" id="anel-twd">—</td>
+      <td class="right pos">+31.95</td><td class="right pos">+3.68%</td>
+      <td class="center">📈 多</td>
+      <td class="center"><span class="pill pill-hold">觀察持有</span></td>
+    </tr>
+    <tr style="background:rgba(239,68,68,0.06);">
+      <td><strong style="color:var(--red);">MULL</strong></td>
+      <td>GraniteShares 2x Short MU<br><span class="muted">做空美光 2倍 — 逆風</span></td>
+      <td>反向槓桿</td>
+      <td class="right">1</td><td class="right">525.10</td>
+      <td class="right neg">475.95</td>
+      <td class="right">14,950</td>
+      <td class="right neg">-49.15</td><td class="right neg">-9.36%</td>
+      <td class="center">📉 逆風</td>
+      <td class="center"><span class="pill pill-sell">🚨 立即停損</span></td>
+    </tr>
+    <tr>
+      <td><strong>QCMU</strong></td>
+      <td>Direxion Daily 2X QCOM Bull<br><span class="muted">高通 2倍做多</span></td>
+      <td>槓桿ETF</td>
+      <td class="right">71</td><td class="right">40.406</td>
+      <td class="right pos">40.27 <span style="font-size:10px;color:var(--muted);">5/9</span></td>
+      <td class="right" id="qcmu-twd">—</td>
+      <td class="right neg">-0.97</td><td class="right neg">-0.34%</td>
+      <td class="center">📈 多</td>
+      <td class="center"><span class="pill pill-hold">持有等確認</span></td>
+    </tr>
+    <tr>
+      <td><strong>SMH</strong></td>
+      <td>VanEck 半導體 ETF<br><span class="muted">費半 25 大成分股</span></td>
+      <td>ETF（無槓桿）</td>
+      <td class="right">6</td><td class="right">439.213</td>
+      <td class="right pos">568.93</td>
+      <td class="right">107,264</td>
+      <td class="right pos">+779.51</td><td class="right pos">+29.55%</td>
+      <td class="center">📈 多</td>
+      <td class="center"><span class="pill pill-buy">繼續持有</span></td>
+    </tr>
+    <tr>
+      <td><strong>SNDU</strong></td>
+      <td>T-Rex 2X Long SNDK<br><span class="muted">Sandisk 2倍槓桿</span></td>
+      <td>槓桿ETF</td>
+      <td class="right">2</td><td class="right">80.634</td>
+      <td class="right pos">114.50</td>
+      <td class="right">7,194</td>
+      <td class="right pos">+67.73</td><td class="right pos">+42.02%</td>
+      <td class="center">📈 多</td>
+      <td class="center"><span class="pill pill-hold">停利 1/2</span></td>
+    </tr>
+    <tr>
+      <td><strong>TSLT</strong></td>
+      <td>T-Rex 2X Long TSLA<br><span class="muted">Tesla 2倍槓桿</span></td>
+      <td>槓桿ETF</td>
+      <td class="right">35</td><td class="right">18.541</td>
+      <td class="right pos">23.11</td>
+      <td class="right">25,396</td>
+      <td class="right pos">+160.14</td><td class="right pos">+24.65%</td>
+      <td class="center">📈 偏多</td>
+      <td class="center"><span class="pill pill-hold">持有/小減</span></td>
+    </tr>
+    <tr>
+      <td><strong>TSMG</strong></td>
+      <td>Leverage Shares 2X Long TSM<br><span class="muted">台積電 ADR 2倍槓桿</span></td>
+      <td>槓桿ETF</td>
+      <td class="right">15</td><td class="right">36.843</td>
+      <td class="right pos">40.15 <span style="font-size:10px;color:var(--muted);">估</span></td>
+      <td class="right" id="tsmg-twd">—</td>
+      <td class="right pos">+49.01</td><td class="right pos">+8.90%</td>
+      <td class="center">📈 多</td>
+      <td class="center"><span class="pill pill-add">可加碼</span></td>
+    </tr>
+    <tr style="background:rgba(239,68,68,0.06);">
+      <td><strong style="color:var(--red);">VSH</strong></td>
+      <td>Vishay Intertechnology<br><span class="muted">被動元件廠，5/13 財報</span></td>
+      <td>個股</td>
+      <td class="right">5</td><td class="right">35.00</td>
+      <td class="right neg">34.26</td>
+      <td class="right">5,380</td>
+      <td class="right neg">-3.70</td><td class="right neg">-2.11%</td>
+      <td class="center">⚠️ 危險</td>
+      <td class="center"><span class="pill pill-sell">🚨 立即出場</span></td>
+    </tr>
+    <tr style="background:var(--panel-2);font-weight:600;">
+      <td colspan="6"><strong>合計（2026-05-12 驗證報價）</strong></td>
+      <td class="right"><strong id="total-twd">—</strong></td>
+      <td class="right pos" colspan="2"><strong id="total-pnl">—</strong></td>
+      <td colspan="2"></td>
+    </tr>
+  </tbody>
+</table>
+<div style="font-size:11px;color:var(--muted);margin-top:-8px;margin-bottom:16px;">
+  ⚠️ QCMU 最後確認報價為 5/9（$40.27），TSMG 依 TSM ADR $411.68（5/8）以 2× 推算約 $40.15。標「估」者為推算值，請以券商實際報價為準。
+</div>
 
-  <h2 id="sec2">2. 📊 財報分析（龍頭 / 前 500 大）</h2>
-  <h3>2.1 全球龍頭 Q1 2026 摘要</h3>
-  <table>
-    <thead><tr><th>公司</th><th>期間</th><th>營收</th><th>YoY</th><th>重點</th><th>對市場意義</th></tr></thead>
-    <tbody>
-      <tr><td>TSMC (2330 / TSM)</td><td>Q1 2026</td><td>$35.9B</td><td>+35–40%</td><td>淨利 +58%；毛利率 66.2%；HPC 占 61%</td><td>2026 yoy ≥ +30%；capex 上限 $52–56B</td></tr>
-      <tr><td>NVDA</td><td>FY26</td><td>$215.9B</td><td>+65%</td><td>Q4 $68.1B；毛利 71.3%；Vera Rubin 2H26 出貨</td><td>Blackwell+Rubin 至 2027 訂單 $1 兆</td></tr>
-      <tr><td>AVGO</td><td>Q1 FY26</td><td>$19.31B</td><td>+29%</td><td>AI 營收 $8.4B (+106%)；Q2 AI 指引 $10.7B</td><td>Google TPU、Anthropic $21B、OpenAI 1GW</td></tr>
-      <tr><td>MSFT</td><td>FY26 Q3</td><td>$81.4B</td><td>+18%</td><td>Op Income +24%；Azure +37–38%</td><td>OpenAI 投資虧 $3.1B 拖累淨利</td></tr>
-      <tr><td>META</td><td>Q1 2026</td><td>$53.5–56.5B</td><td>+高雙</td><td>全年 capex $115–135B</td><td>AI 資本支出衝擊 FCF</td></tr>
-      <tr><td>GOOGL</td><td>Q1 2026</td><td>$92.2B</td><td>—</td><td>Search +17–18%</td><td>廣告+雲端+AI 三引擎</td></tr>
-      <tr><td>AMZN</td><td>Q1 2026</td><td>—</td><td>—</td><td>AWS $36.8B (+25.6%)；AI ARR > $15B</td><td>AWS 雲加速確立</td></tr>
-      <tr><td>AAPL</td><td>Q2 FY26 (4/30 盤後)</td><td>~$95B</td><td>—</td><td>EPS ~$1.62</td><td>iPhone 16 + Apple Intelligence</td></tr>
-      <tr><td>TSLA</td><td>Q1 2026</td><td>$22.39B</td><td>+16%</td><td>EPS $0.41 beat；交車 358k miss；毛利 21.1%</td><td>庫存累積、Q2 機器人/F.S.D. 焦點</td></tr>
-      <tr><td>SanDisk (SNDK)</td><td>Q2 FY26</td><td>$3.03B</td><td>+61%</td><td>EPS $6.20 (beat $2.66)</td><td>NAND 結構短缺，Bernstein 目標 $1,250</td></tr>
-      <tr><td>CRWV</td><td>—</td><td>—</td><td>—</td><td>Meta $21B + Jane Street $6B + $1B 入股</td><td>訂單可見性高，但債務 / 折舊壓力大</td></tr>
-      <tr><td>AAOI</td><td>2026 全年指引</td><td>$1B</td><td>+100%</td><td>800G $124M、1.6T $200M+</td><td>800G/1.6T 爆量；Q1 仍微虧</td></tr>
-      <tr><td>AMD</td><td>Q4 2025</td><td>$10.27B</td><td>+34%</td><td>EPS $1.53 beat；Q1 指引 $9.8B</td><td>MI400 估 2026 $7.2B</td></tr>
-    </tbody>
-  </table>
+<!-- SENTIMENT -->
+<h2 id="sec-sentiment">🧠 AlphaEar Sentiment — LLM 情緒分析（更新版）</h2>
+<p style="color:var(--muted);font-size:12px;margin-bottom:10px;">依 alphaear-sentiment LLM Agentic 模式對每支持倉進行情緒評分（-1.0 ～ +1.0），已反映最新報價與基本面資訊</p>
+<table>
+  <thead><tr><th>代碼</th><th>分數</th><th>標籤</th><th>情緒條</th><th>評分理由</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><strong>ANEL</strong></td><td class="pos">+0.72</td><td><span class="pill pill-buy">positive</span></td>
+      <td><div class="senti-bar"><div class="senti-pos" style="width:72%"></div></div></td>
+      <td>ANET $137.53（5/11），Q1 財報後市場修正中但企業 AI 網路訂單故事完整；ANEL 已由 -5.95% 轉為 +3.68%，情緒轉正但仍需等財報確認</td>
+    </tr>
+    <tr>
+      <td><strong style="color:var(--red);">MULL</strong></td><td class="neg">-0.92</td><td><span class="pill pill-sell">negative</span></td>
+      <td><div class="senti-bar"><div class="senti-neg" style="width:92%"></div></div></td>
+      <td>MU $802.95（5/11），週漲 +38%，HBM 超級週期確立，三星罷工威脅推升供給短缺預期，Mizuho 目標 $740 早已突破；MULL 虧損 -9.36%，信號完全失效</td>
+    </tr>
+    <tr>
+      <td><strong>QCMU</strong></td><td class="pos">+0.68</td><td><span class="pill pill-buy">positive</span></td>
+      <td><div class="senti-bar"><div class="senti-pos" style="width:68%"></div></div></td>
+      <td>QCOM $221.05（5/9），Daiwa 升評 $225，AI PC + 車載 + 手機多端口轉型，P/E 22x 為持倉中估值最合理；QCMU 報價 $40.27 略低於成本 $40.406，短線整理中</td>
+    </tr>
+    <tr>
+      <td><strong>SMH</strong></td><td class="pos">+0.90</td><td><span class="pill pill-buy">positive</span></td>
+      <td><div class="senti-bar"><div class="senti-pos" style="width:90%"></div></div></td>
+      <td>SMH $568.93，月漲 +34%，費半超級週期確立；SOX 指數過去 12 個月 +211%，NV 5/20 財報為最大催化劑，AI capex $6,500 億持續加碼</td>
+    </tr>
+    <tr>
+      <td><strong>SNDU</strong></td><td class="pos">+0.60</td><td><span class="pill pill-buy">positive</span></td>
+      <td><div class="senti-bar"><div class="senti-pos" style="width:60%"></div></div></td>
+      <td>SNDK $1,542（5/11，最高 $1,605），Mizuho $1,625 目標仍有空間；NAND 結構短缺 12 個月，但 SNDU 由 $118 回落至 $114.50，短線降溫，建議分批停利</td>
+    </tr>
+    <tr>
+      <td><strong>TSLT</strong></td><td class="warn">+0.38</td><td><span class="pill pill-hold">neutral</span></td>
+      <td><div class="senti-bar"><div class="senti-neu" style="width:38%"></div></div></td>
+      <td>TSLA $422.27（5/11），已超法人均值目標 $413；毛利率 21.1% 正面，但 Q1 交車 miss、庫存積累，FSD/Optimus 執行落差大；2X 槓桿震盪損耗持續</td>
+    </tr>
+    <tr>
+      <td><strong>TSMG</strong></td><td class="pos">+0.82</td><td><span class="pill pill-buy">positive</span></td>
+      <td><div class="senti-bar"><div class="senti-pos" style="width:82%"></div></div></td>
+      <td>TSM $411.68（5/8），TSMC Q1 毛利率 66.2%、EPS NT$22.08 雙創歷史高；N2 產能確認，台股台積電 NT$2,290 收盤，TAIEX 創歷史新高，AI 半導體生態最強</td>
+    </tr>
+    <tr>
+      <td><strong style="color:var(--red);">VSH</strong></td><td class="neg">-0.80</td><td><span class="pill pill-sell">negative</span></td>
+      <td><div class="senti-bar"><div class="senti-neg" style="width:80%"></div></div></td>
+      <td>現價 $34.26 持續下滑（已虧 -2.11%），5/13 財報 EPS 共識 $0.03～$0.08，法人目標中值 $17.50 隱含 -49%；被動元件需求週期性低迷，出場訊號明確</td>
+    </tr>
+  </tbody>
+</table>
 
-  <h3>2.2 EPS / 評等共識彙整</h3>
-  <table>
-    <thead><tr><th>公司</th><th>LTM EPS</th><th>2026E EPS</th><th>EPS CAGR</th><th>評等</th><th>目標區間</th><th>現價</th></tr></thead>
-    <tbody>
-      <tr><td>TSM</td><td>$9.20</td><td>$11.50</td><td>~28%</td><td>Strong Buy</td><td>$290–$330</td><td>~$255</td></tr>
-      <tr><td>NVDA</td><td>$4.35</td><td>$6.20</td><td>~35%</td><td>Strong Buy</td><td>$215–$280</td><td>~$165</td></tr>
-      <tr><td>AVGO</td><td>$7.75</td><td>$9.50</td><td>~30%</td><td>Buy</td><td>$390–$480</td><td>$400.30</td></tr>
-      <tr><td>MSFT</td><td>$14.20</td><td>$16.80</td><td>~16%</td><td>Buy</td><td>$510–$580</td><td>~$485</td></tr>
-      <tr><td>META</td><td>$30.45</td><td>$34.50</td><td>~18%</td><td>Buy</td><td>$780–$900</td><td>~$725</td></tr>
-      <tr><td>GOOGL</td><td>$9.20</td><td>$10.50</td><td>~14%</td><td>Buy</td><td>$235–$280</td><td>~$215</td></tr>
-      <tr><td>AMZN</td><td>$6.85</td><td>$8.00</td><td>~25%</td><td>Strong Buy</td><td>$260–$310</td><td>~$232</td></tr>
-      <tr><td>AAPL</td><td>$7.85</td><td>$8.40</td><td>~9%</td><td>Hold→Buy</td><td>$245–$290</td><td>~$235</td></tr>
-      <tr><td>TSLA</td><td>$2.68</td><td>$3.50</td><td>~30%</td><td>Hold</td><td>$280–$420</td><td>~$325</td></tr>
-      <tr><td>AMD</td><td>$4.60</td><td>$7.20</td><td>~50%</td><td>Buy</td><td>$306–$379</td><td>$327.05</td></tr>
-      <tr><td>SNDK</td><td>$35.40</td><td>$58.00 (bull $144)</td><td>~70%</td><td>Outperform</td><td>$1,000–$1,250</td><td>$1,097</td></tr>
-      <tr><td>AAOI</td><td>-$0.30</td><td>$0.40</td><td>n/a</td><td>Buy (高風險)</td><td>$48–$65</td><td>~$47</td></tr>
-      <tr><td>CRWV</td><td>-$1.05</td><td>-$0.20</td><td>2027E 轉正</td><td>Buy</td><td>$115–$160</td><td>~$112</td></tr>
-      <tr><td>聯發科 2454</td><td>NT$54.0</td><td>NT$63.2</td><td>~22%</td><td>Buy</td><td>NT$2,180–2,800</td><td>NT$2,615</td></tr>
-      <tr><td>鴻海 2317</td><td>NT$13.6</td><td>NT$16.5</td><td>~20%</td><td>Buy</td><td>NT$280–340</td><td>~NT$250</td></tr>
-      <tr><td>緯穎 6669</td><td>NT$140</td><td>NT$210</td><td>~30%</td><td>Buy</td><td>NT$5,400–6,500</td><td>NT$4,845</td></tr>
-      <tr><td>日月光 3711</td><td>NT$11.4</td><td>NT$14.0</td><td>~18%</td><td>Buy</td><td>NT$520–600</td><td>NT$488.5</td></tr>
-    </tbody>
-  </table>
+<!-- SIGNAL TRACKER -->
+<h2 id="sec-signal">📡 AlphaEar Signal-Tracker — 信號強弱動態更新</h2>
+<table>
+  <thead><tr><th>代碼</th><th>信號方向</th><th>強度（★）</th><th>最新事件</th><th>狀態</th><th>建議</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><strong>ANEL</strong></td><td>📈 多頭轉強</td>
+      <td><span class="stars">★★★</span><span style="color:#2d3f6b;">★★</span></td>
+      <td>ANEL +3.68%（$16.35）；ANET $137.53，Q1 財報後整理，企業 AI 網路訂單持續</td>
+      <td><span class="pill pill-hold">整理中</span></td>
+      <td>持有，等 ANET 財報確認後加碼</td>
+    </tr>
+    <tr style="background:rgba(239,68,68,0.05);">
+      <td><strong>MULL</strong></td><td>📉 空MU（信號失效）</td>
+      <td><span class="stars">★</span><span style="color:#2d3f6b;">★★★★</span></td>
+      <td>MU $802.95（5/11），週漲 +38%；德意志銀行目標調升至市場最高，三星罷工威脅加劇軋空</td>
+      <td><span class="pill pill-sell">信號失效</span></td>
+      <td>🚨 立即停損，今日出場</td>
+    </tr>
+    <tr>
+      <td><strong>QCMU</strong></td><td>📈 多頭（整理）</td>
+      <td><span class="stars">★★★</span><span style="color:#2d3f6b;">★★</span></td>
+      <td>QCOM $221.05（5/9），Daiwa 5/8 升評 $225；AI PC/車載催化劑齊發，但 QCMU $40.27 輕微破成本</td>
+      <td><span class="pill pill-hold">整理持有</span></td>
+      <td>持有，等 QCOM 確認上破 $225</td>
+    </tr>
+    <tr>
+      <td><strong>SMH</strong></td><td>📈 多頭</td>
+      <td><span class="stars">★★★★★</span></td>
+      <td>SMH $568.93（5/11），月漲 +34%；NV 5/20 財報布局最佳視窗，AI capex $700B，SOX +211% YoY</td>
+      <td><span class="pill pill-buy">強化</span></td>
+      <td>核心持倉不動；財報後視指引再加碼</td>
+    </tr>
+    <tr>
+      <td><strong>SNDU</strong></td><td>📈 多頭（降溫）</td>
+      <td><span class="stars">★★★</span><span style="color:#2d3f6b;">★★</span></td>
+      <td>SNDU $114.50（5/11）由 $118 回落；SNDK $1,542（盤中高 $1,605），三星罷工風險為短期催化劑</td>
+      <td><span class="pill pill-hold">強化但回檔</span></td>
+      <td>停利 1/2；剩餘持有等 NV 財報</td>
+    </tr>
+    <tr>
+      <td><strong>TSLT</strong></td><td>📈 多頭（偏弱）</td>
+      <td><span class="stars">★★★</span><span style="color:#2d3f6b;">★★</span></td>
+      <td>TSLA $422.27（5/11），超法人均值 $413；Q1 交車 miss，買手-hold-or-sell 評論偏空</td>
+      <td><span class="pill pill-hold">持平偏弱</span></td>
+      <td>不追高；考慮減持 10–15 股換倉 QCMU/TSMG</td>
+    </tr>
+    <tr>
+      <td><strong>TSMG</strong></td><td>📈 多頭</td>
+      <td><span class="stars">★★★★</span><span style="color:#2d3f6b;">★</span></td>
+      <td>TSM $411.68（5/8），TAIEX 42,019 歷史高點；台積電 N2/A14 確認，英特爾雜音消化完畢</td>
+      <td><span class="pill pill-buy">強化（中線）</span></td>
+      <td>可加碼；等 TSM ADR 回測 $400 後布局</td>
+    </tr>
+    <tr style="background:rgba(239,68,68,0.05);">
+      <td><strong>VSH</strong></td><td>⚠️ 危險</td>
+      <td><span class="stars">★</span><span style="color:#2d3f6b;">★★★★</span></td>
+      <td>現價 $34.26（已虧 -2.11%）；5/13 盤前財報，EPS 共識 $0.03-$0.08；法人目標 -49%</td>
+      <td><span class="pill pill-sell">信號嚴重弱化</span></td>
+      <td>🚨 今日收盤前出場</td>
+    </tr>
+  </tbody>
+</table>
 
-  <h2 id="sec3">3. 📈 今日台股與美股大盤 + 八區塊</h2>
+<!-- VERDICT -->
+<h2 id="sec-verdict">⚡ AlphaEar Reporter — 操作決策總表</h2>
 
-  <h3>區塊 1｜大盤背景</h3>
-  <table>
-    <thead><tr><th>指數</th><th class="right">收盤 / 盤中</th><th class="right">漲跌</th><th>多空驅動</th><th>主要風險</th></tr></thead>
-    <tbody>
-      <tr><td>S&P 500</td><td class="right">7,135.95</td><td class="right neg">-0.04%</td><td>大型科技財報、AI 訂單可見性高</td><td>25× forward PE 高估值</td></tr>
-      <tr><td>NASDAQ</td><td class="right">24,673.24</td><td class="right pos">+0.04%</td><td>AVGO、CRWV、SNDK 強</td><td>高利率 + 高油價雙壓</td></tr>
-      <tr><td>DJIA</td><td class="right">48,861.81</td><td class="right neg">-0.57%</td><td>—</td><td>工業 / 能源板塊壓力</td></tr>
-      <tr><td>SOX 費半</td><td class="right">~9,040 (4/13 參考)</td><td class="right">月線正乖離</td><td>TSMC、AVGO、NVDA 三引擎</td><td>中國 145% + 半導體 25%</td></tr>
-      <tr><td>台股加權</td><td class="right">~39,494 (盤中最高 39,848)</td><td class="right pos">+0.49%</td><td>半導體 +2.03%；聯電 +6%；台達電 +5%</td><td>距 40,000 整數關卡 1.5%</td></tr>
-    </tbody>
-  </table>
+<div class="action-verdict verdict-sell">
+  <div class="verdict-icon">🚨</div>
+  <div class="verdict-body">
+    <strong>VSH — 立即出場（今日收盤前）</strong>
+    現價 $34.26，已虧 -$3.70 / -2.11%。5/13 盤前公布財報，分析師 EPS 共識 $0.03～$0.08（低點），法人目標中值 $17.50（-49%）。現在出場損失極小，財報後出場代價將擴大 10 倍以上。出場可回收 NT$ ~5,380。
+  </div>
+</div>
 
-  <h3>區塊 2｜持倉完整掃描（🇹🇼 + 🇺🇸）</h3>
-  <h4>台股</h4>
-  <table>
-    <thead><tr><th>代號</th><th>名稱</th><th class="right">股數</th><th class="right">成本</th><th class="right">現價</th><th class="right">市值 (TWD)</th><th class="right">損益</th><th class="right">損益%</th><th class="right">占比%</th></tr></thead>
-    <tbody>
-      <tr><td>0050</td><td>元大台灣50</td><td class="right">3,010</td><td class="right">64.10</td><td class="right">90.75</td><td class="right">273,158</td><td class="right pos">+80,217</td><td class="right pos">+41.5%</td><td class="right">34.86%</td></tr>
-      <tr><td>00631L</td><td>台灣50正2</td><td class="right">3,150</td><td class="right">27.57</td><td class="right">28.82</td><td class="right">90,783</td><td class="right pos">+3,945</td><td class="right pos">+4.5%</td><td class="right">11.58%</td></tr>
-      <tr><td>2330</td><td>台積電</td><td class="right">25</td><td class="right">2,145.6</td><td class="right">2,180</td><td class="right">54,500</td><td class="right pos">+860</td><td class="right pos">+1.6%</td><td class="right">6.95%</td></tr>
-      <tr><td>2337</td><td>旺宏</td><td class="right">100</td><td class="right">134.80</td><td class="right">167</td><td class="right">16,700</td><td class="right pos">+3,220</td><td class="right pos">+23.9%</td><td class="right">2.13%</td></tr>
-      <tr><td>3231</td><td>緯創</td><td class="right">100</td><td class="right">140.00</td><td class="right">140.5</td><td class="right">14,050</td><td class="right pos">+50</td><td class="right pos">+0.4%</td><td class="right">1.79%</td></tr>
-      <tr><td>3711</td><td>日月光投控</td><td class="right">66</td><td class="right">464.52</td><td class="right">488.5</td><td class="right">32,241</td><td class="right pos">+1,583</td><td class="right pos">+5.2%</td><td class="right">4.11%</td></tr>
-      <tr><td>6173</td><td>信昌電</td><td class="right">150</td><td class="right">86.30</td><td class="right">84</td><td class="right">12,600</td><td class="right neg">-345</td><td class="right neg">-2.7%</td><td class="right">1.61%</td></tr>
-      <tr><td colspan="5"><b>小計（台股）</b></td><td class="right"><b>494,032</b></td><td class="right pos"><b>+89,530</b></td><td class="right pos"><b>+22.13%</b></td><td class="right"><b>63.04%</b></td></tr>
-    </tbody>
-  </table>
+<div class="action-verdict verdict-sell">
+  <div class="verdict-icon">🚨</div>
+  <div class="verdict-body">
+    <strong>MULL — 信號失效，立即停損出場</strong>
+    已虧 -$49.15 / -9.36%。MU $802.95（5/11，週漲 +38%），德意志銀行調升目標至市場最高，三星罷工威脅使 HBM 短缺更嚴峻。做空方向完全失效，每日重置機制在 MU 牛市中持續侵蝕本金。認虧出場，資金轉至 SMH（可回收 NT$ ~14,950）。
+  </div>
+</div>
 
-  <h4>美股</h4>
-  <table>
-    <thead><tr><th>代號</th><th>名稱</th><th class="right">股數</th><th class="right">成本 USD</th><th class="right">現價 USD</th><th class="right">市值 USD</th><th class="right">市值 TWD</th><th class="right">損益%</th></tr></thead>
-    <tbody>
-      <tr><td>AAOX</td><td>Tradr 2X AAOI</td><td class="right">3</td><td class="right">46.75</td><td class="right">46.97</td><td class="right">140.91</td><td class="right">4,447</td><td class="right pos">+0.47%</td></tr>
-      <tr><td>AIXI</td><td>Xiao-I</td><td class="right">150</td><td class="right">1.5952</td><td class="right">0.9116</td><td class="right">136.74</td><td class="right">4,316</td><td class="right neg">-42.85%</td></tr>
-      <tr><td>AVGO</td><td>Broadcom</td><td class="right">4</td><td class="right">373.32</td><td class="right">400.30</td><td class="right">1,601.20</td><td class="right">50,534</td><td class="right pos">+7.22%</td></tr>
-      <tr><td>AVGU</td><td>GraniteShares 2x AVGO</td><td class="right">27</td><td class="right">44.5233</td><td class="right">42.75</td><td class="right">1,154.25</td><td class="right">36,428</td><td class="right neg">-3.98%</td></tr>
-      <tr><td>CWVX</td><td>Tradr 2X CRWV</td><td class="right">4</td><td class="right">38.8125</td><td class="right">38.60</td><td class="right">154.40</td><td class="right">4,873</td><td class="right neg">-0.55%</td></tr>
-      <tr><td>ONDL</td><td>Defiance 2X ONDS</td><td class="right">20</td><td class="right">21.30</td><td class="right">15.86</td><td class="right">317.20</td><td class="right">10,011</td><td class="right neg">-25.53%</td></tr>
-      <tr><td>SMH</td><td>VanEck 半導體 ETF</td><td class="right">6</td><td class="right">439.21</td><td class="right">497.89</td><td class="right">2,987.34</td><td class="right">94,280</td><td class="right pos">+13.36%</td></tr>
-      <tr><td>SNDU</td><td>T-Rex 2X SNDK</td><td class="right">3</td><td class="right">57.6967</td><td class="right">60.88</td><td class="right">182.64</td><td class="right">5,764</td><td class="right pos">+5.51%</td></tr>
-      <tr><td>TSLT</td><td>T-Rex 2X TSLA</td><td class="right">84</td><td class="right">17.7813</td><td class="right">16.66</td><td class="right">1,399.44</td><td class="right">44,166</td><td class="right neg">-6.30%</td></tr>
-      <tr><td>TSMG</td><td>GraniteShares 2x TSM</td><td class="right">30</td><td class="right">36.8433</td><td class="right">36.80</td><td class="right">1,104.00</td><td class="right">34,842</td><td class="right neg">-0.12%</td></tr>
-      <tr><td colspan="5"><b>小計（美股）</b></td><td class="right"><b>9,178.12</b></td><td class="right"><b>289,661</b></td><td class="right pos"><b>+1.26%</b></td></tr>
-    </tbody>
-  </table>
+<div class="action-verdict verdict-hold">
+  <div class="verdict-icon">✂️</div>
+  <div class="verdict-body">
+    <strong>SNDU — 停利 1/2，剩餘繼續持有</strong>
+    +42.02%，SNDU $114.50 由高點 $118 回落。建議賣出 1 股（共 2 股），鎖定 NT$ ~1,070 獲利。剩餘 1 股繼續持有等 NV 財報（5/20）後再評估——SNDK 三星罷工事件仍有短期催化劑。
+  </div>
+</div>
 
-  <h4>投組總計</h4>
-  <table>
-    <thead><tr><th>市場</th><th class="right">市值</th><th class="right">成本</th><th class="right">損益</th><th class="right">損益%</th></tr></thead>
-    <tbody>
-      <tr><td>🇹🇼 台股</td><td class="right">NT$ 494,032</td><td class="right">NT$ 404,510</td><td class="right pos">+NT$ 89,530</td><td class="right pos">+22.13%</td></tr>
-      <tr><td>🇺🇸 美股</td><td class="right">NT$ 289,661</td><td class="right">NT$ 286,045</td><td class="right pos">+NT$ 3,616</td><td class="right pos">+1.26%</td></tr>
-      <tr><td><b>合計</b></td><td class="right"><b>NT$ 783,693</b></td><td class="right"><b>NT$ 690,555</b></td><td class="right pos"><b>+NT$ 93,138</b></td><td class="right pos"><b>+13.49%</b></td></tr>
-    </tbody>
-  </table>
+<div class="action-verdict verdict-hold">
+  <div class="verdict-icon">📉</div>
+  <div class="verdict-body">
+    <strong>TSLT — 考慮減持 10–15 股換倉</strong>
+    TSLA $422.27 已超法人均值目標 $413，+24.65% 是不錯獲利。2X 槓桿在震盪中持續損耗。考慮減持 10–15 股，把獲利換倉至 TSMG（NV 受益鏈）或等 QCMU 確認上破 $225 後加倉，提升資金效率。
+  </div>
+</div>
 
-  <h3>區塊 3｜強弱診斷與 19 位分析師投票</h3>
-  <h4>3a 強弱分類</h4>
-  <table>
-    <thead><tr><th>標的</th><th>分類</th><th>標籤</th><th>說明</th></tr></thead>
-    <tbody>
-      <tr><td>0050 / 00631L / 2330 / SMH / AVGO / 3711</td><td>🟢 核心持有</td><td><span class="pill pill-a">A 首選</span></td><td>結構性 AI 三引擎 + 台股大盤核心</td></tr>
-      <tr><td>2337 / 3231 / 6173 / SNDU / AAOX / CWVX / TSMG / AVGU</td><td>🟡 中高潛力 / 衛星</td><td><span class="pill pill-b">B</span></td><td>需嚴守停損的成長衛星</td></tr>
-      <tr><td>TSLT / AIXI / ONDL</td><td>🔴 高投機 / 出場</td><td><span class="pill pill-c">C</span></td><td>需減碼變現 / 嚴控部位</td></tr>
-    </tbody>
-  </table>
+<div class="action-verdict verdict-buy">
+  <div class="verdict-icon">✅</div>
+  <div class="verdict-body">
+    <strong>SMH — 核心倉位，繼續持有</strong>
+    $568.93，月漲 +34%，+29.55%。NV 5/20 財報最大催化劑，SMH 含 NVDA 16.9%，財報超預期（EPS $1.77，營收 $78.8B）將直接推動。不賣；若 VSH/MULL 出場後有閒置資金，可再加 1–2 股。
+  </div>
+</div>
 
-  <h4>3b 19 位分析師投票（每檔合計 = 19）</h4>
-  <table>
-    <thead><tr><th>#</th><th>標的</th><th class="right">賣</th><th class="right">持</th><th class="right">加</th><th>分類 / 主因</th></tr></thead>
-    <tbody>
-      <tr><td>1</td><td>0050</td><td class="right">0</td><td class="right">7</td><td class="right pos">12</td><td>核心加碼 — 巴菲特、葛拉漢、宏觀策略</td></tr>
-      <tr><td>2</td><td>00631L</td><td class="right">1</td><td class="right">9</td><td class="right">9</td><td>持有偏多 — 槓桿風險警示</td></tr>
-      <tr><td>3</td><td>2330</td><td class="right">0</td><td class="right">5</td><td class="right pos">14</td><td>強烈加碼 — Buffett-Apple 模型 + 產業專家</td></tr>
-      <tr><td>4</td><td>2337</td><td class="right">1</td><td class="right">9</td><td class="right">9</td><td>持有偏多 — NOR Flash 結構受惠</td></tr>
-      <tr><td>5</td><td>3231</td><td class="right">3</td><td class="right">11</td><td class="right">5</td><td>持有為主 — 毛利偏低</td></tr>
-      <tr><td>6</td><td>3711</td><td class="right">1</td><td class="right">7</td><td class="right pos">11</td><td>加碼偏多 — CoWoS、ABF 受惠</td></tr>
-      <tr><td>7</td><td>6173</td><td class="right">6</td><td class="right">12</td><td class="right">1</td><td>持有偏空 — MLCC 復甦慢</td></tr>
-      <tr><td>8</td><td>AAOX (AAOI)</td><td class="right">4</td><td class="right">6</td><td class="right">9</td><td>加碼但風險 — 1.6T 訂單；Q1 微虧</td></tr>
-      <tr><td>9</td><td>AIXI</td><td class="right neg">17</td><td class="right">2</td><td class="right">0</td><td>強烈賣出 — 已虧 -42.85%</td></tr>
-      <tr><td>10</td><td>AVGO</td><td class="right">0</td><td class="right">5</td><td class="right pos">14</td><td>強烈加碼 — TPU/Anthropic/OpenAI 三引擎</td></tr>
-      <tr><td>11</td><td>AVGU</td><td class="right">2</td><td class="right">8</td><td class="right">9</td><td>持有偏多 — 槓桿風險</td></tr>
-      <tr><td>12</td><td>CWVX (CRWV)</td><td class="right">5</td><td class="right">8</td><td class="right">6</td><td>中性偏多 — 訂單強，債務壓力大</td></tr>
-      <tr><td>13</td><td>ONDL</td><td class="right neg">15</td><td class="right">4</td><td class="right">0</td><td>強烈賣出 — 連動已失效</td></tr>
-      <tr><td>14</td><td>SMH</td><td class="right">0</td><td class="right">6</td><td class="right pos">13</td><td>強烈加碼 — 半導體 ETF 最佳分散</td></tr>
-      <tr><td>15</td><td>SNDU (SNDK)</td><td class="right">1</td><td class="right">4</td><td class="right pos">14</td><td>強烈加碼 — Bernstein 目標 $1,250</td></tr>
-      <tr><td>16</td><td>TSLT (TSLA)</td><td class="right">7</td><td class="right">9</td><td class="right">3</td><td>持有偏空 — Q1 miss、庫存累積</td></tr>
-      <tr><td>17</td><td>TSMG (TSM)</td><td class="right">1</td><td class="right">7</td><td class="right pos">11</td><td>加碼偏多 — 同 2330</td></tr>
-    </tbody>
-  </table>
+<div class="action-verdict verdict-hold">
+  <div class="verdict-icon">📊</div>
+  <div class="verdict-body">
+    <strong>QCMU — 持有等待方向確認後再加碼</strong>
+    QCOM $221.05（5/9），QCMU $40.27 略低於成本 $40.406（-0.34%）。P/E 22x 為持倉中最低估值，Daiwa $225 / Baird $300 目標。短線整理中，等 QCOM 確認上破 $225 後加碼 20–30 股。停損設 QCOM $195（QCMU ~$38）。
+  </div>
+</div>
 
-  <h4>3c 陣營小結</h4>
-  <table>
-    <thead><tr><th>陣營</th><th>主要角色</th><th>共同論點</th></tr></thead>
-    <tbody>
-      <tr><td class="pos">看多</td><td>Cathie Wood、成長派、產業專家、Lynch、巴菲特</td><td>AI capex 結構性、TPU/ASIC/光通訊 supercycle、NAND 大循環</td></tr>
-      <tr><td class="neg">看空</td><td>Burry、風控長、葛拉漢</td><td>高 PE、伊朗戰爭、TSLA 警訊、2X ETF 風險</td></tr>
-      <tr><td class="warn">中性</td><td>Dalio、宏觀策略、Druckenmiller、量化派</td><td>利率 hold + 油價高，盤整概率高，分批操作</td></tr>
-    </tbody>
-  </table>
+<div class="action-verdict verdict-add">
+  <div class="verdict-icon">📈</div>
+  <div class="verdict-body">
+    <strong>TSMG — 回調後布局 5–10 股</strong>
+    TSM $411.68（5/8），台積電基本面最強，N2 產能確認，TAIEX 創歷史新高 42,019。建議在 TSM ADR $400 / TSMG $38 附近加倉 5–10 股。NV 財報後 TSMC AI 受益確定，TSMG 跟漲彈性最高。
+  </div>
+</div>
 
-  <h3>區塊 4｜操作建議 A / B / C</h3>
-  <h4><span class="pill pill-a">A 首選</span> 核心持有 / 加碼</h4>
-  <table>
-    <thead><tr><th>標的</th><th>動作</th><th>目標 / 加碼區</th><th>停損</th><th>理由</th></tr></thead>
-    <tbody>
-      <tr><td>0050</td><td>持有</td><td>95–98 鎖利；回 86–88 加碼</td><td>81</td><td>台股 AI 大循環核心</td></tr>
-      <tr><td>2330</td><td>持有 / 回檔加碼</td><td>NT$2,300–2,400</td><td>NT$2,000</td><td>TSMC 結構性領頭</td></tr>
-      <tr><td>AVGO</td><td>持有 / 回 $370–380 加碼</td><td>$440–460</td><td>$340</td><td>TPU/ASIC 結構性訂單</td></tr>
-      <tr><td>3711</td><td>持有</td><td>NT$520–550</td><td>NT$440</td><td>先進封裝 + CoWoS</td></tr>
-      <tr><td>SMH</td><td>持有 / 回 $470 加碼</td><td>$560</td><td>$440</td><td>半導體 ETF 分散</td></tr>
-    </tbody>
-  </table>
+<div class="action-verdict verdict-hold">
+  <div class="verdict-icon">👀</div>
+  <div class="verdict-body">
+    <strong>ANEL — 已轉盈，持有等財報確認</strong>
+    ANEL +3.68%（$16.35），已由虧損轉盈。ANET $137.53 Q1 財報後調整中，但企業 AI 網路設備需求結構性持續。持有觀察，不追加碼。等 ANET 確認支撐後財報超預期，ANEL 將有大幅彈升。
+  </div>
+</div>
 
-  <h4><span class="pill pill-b">B 成長</span> 推薦</h4>
-  <table>
-    <thead><tr><th>標的</th><th>動作</th><th>目標</th><th>停損</th><th>理由</th></tr></thead>
-    <tbody>
-      <tr><td>SNDU (SNDK 2X)</td><td>加碼 50% 倉</td><td>對應 SNDK $1,250；SNDU ~$78</td><td>SNDU $52</td><td>Bernstein +47% upside</td></tr>
-      <tr><td>AAOX (AAOI 2X)</td><td>觀察為主</td><td>對應 AAOI $60；AAOX $58</td><td>AAOX $40</td><td>800G/1.6T 訂單</td></tr>
-      <tr><td>CWVX (CRWV 2X)</td><td>加碼 30% 倉</td><td>對應 CRWV $145；CWVX $50</td><td>CWVX $32</td><td>Meta $21B + Jane Street $6B</td></tr>
-      <tr><td>2337 旺宏</td><td>持有</td><td>200</td><td>145</td><td>NOR Flash 受惠三星退場</td></tr>
-      <tr><td>00631L</td><td>持有</td><td>32–33</td><td>26</td><td>視為 0050 長期</td></tr>
-    </tbody>
-  </table>
+<!-- NV LAYOUT -->
+<h2 id="sec-nvda">🎯 5/20 NVIDIA 財報前布局策略</h2>
+<div class="grid-2">
+  <div class="card">
+    <div class="card-title">📅 時間軸</div>
+    <div class="timeline">
+      <div class="tl danger">
+        <div class="tl-date">今日（5/12）收盤前</div>
+        <div>出清 VSH（損失最小）、立即 MULL 停損</div>
+      </div>
+      <div class="tl danger">
+        <div class="tl-date">5/13 盤前</div>
+        <div>VSH 財報公布（務必在此前出場）</div>
+      </div>
+      <div class="tl active">
+        <div class="tl-date">5/13 ~ 5/15</div>
+        <div>布局期：出場資金轉入 TSMG / SMH，等 QCMU 確認 $225</div>
+      </div>
+      <div class="tl warn">
+        <div class="tl-date">5/16 ~ 5/19</div>
+        <div>財報前靜默期：不宜大幅加碼，等待預期消化</div>
+      </div>
+      <div class="tl active">
+        <div class="tl-date">5/20 盤後</div>
+        <div>NVIDIA Q1 FY27：EPS 共識 $1.77、營收 $78.8B（+77% YoY）</div>
+      </div>
+      <div class="tl">
+        <div class="tl-date">5/20 後</div>
+        <div>✅ 超預期 → 加碼 SMH / TSMG / QCMU<br>⚠️ 符合預期指引平 → 等確認</div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">📊 調整後建議倉位配置</div>
+    <div class="chart-sm">
+      <canvas id="portfolioChart" role="img" aria-label="建議倉位配置圓餅圖"></canvas>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:6px 12px;font-size:11px;color:var(--muted);margin-top:6px;">
+      <span><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:#7cc4ff;margin-right:3px;"></span>SMH 35%</span>
+      <span><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:#19c37d;margin-right:3px;"></span>QCMU 20%</span>
+      <span><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:#534AB7;margin-right:3px;"></span>TSMG 25%</span>
+      <span><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:#f5b54a;margin-right:3px;"></span>TSLT 10%</span>
+      <span><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:#f97316;margin-right:3px;"></span>ANEL 5%</span>
+      <span><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:#ef4444;margin-right:3px;"></span>SNDU 5%</span>
+    </div>
+  </div>
+</div>
 
-  <h4><span class="pill pill-c">C 高風險</span> 減碼 / 出清</h4>
-  <table>
-    <thead><tr><th>標的</th><th>動作</th><th>條件</th><th>理由</th></tr></thead>
-    <tbody>
-      <tr><td><b>AIXI</b></td><td>立即繼續賣 150 股</td><td>反彈到 $1.0 即賣</td><td>已虧 42.85%，無基本面</td></tr>
-      <tr><td><b>ONDL</b></td><td>反彈即賣</td><td>$17–18</td><td>連動失效，已虧 25.53%</td></tr>
-      <tr><td>TSLT</td><td>減碼至 60 股</td><td>TSLA 跌破 $300 直接砍 50%</td><td>TSLA Q1 miss</td></tr>
-      <tr><td>信昌電 6173</td><td>變現候補</td><td>88–90 觸價</td><td>釋出資金</td></tr>
-    </tbody>
-  </table>
+<h3>NV 財報情境分析</h3>
+<table>
+  <thead><tr><th>情境</th><th>條件</th><th>SMH</th><th>QCMU</th><th>TSMG</th><th>TSLT</th><th>SNDU</th><th>行動</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><span class="pill pill-buy">✅ 超預期</span></td>
+      <td>EPS &gt; $1.80 且 Q2 指引 &gt; $82B</td>
+      <td class="pos">↑↑ 強漲</td><td class="pos">↑ 漲</td><td class="pos">↑↑</td><td class="warn">↑ 小漲</td><td class="pos">↑↑</td>
+      <td>加倉 TSMG、繼續抱 SMH、QCMU 確認後加碼</td>
+    </tr>
+    <tr>
+      <td><span class="pill pill-hold">⚠️ 符合指引平</span></td>
+      <td>EPS ≈ $1.77，指引 ~$78B</td>
+      <td class="warn">→</td><td class="warn">→</td><td class="warn">→</td><td class="warn">→</td><td class="warn">→</td>
+      <td>等方向確認，觀察毛利率是否 &gt;70%</td>
+    </tr>
+    <tr>
+      <td><span class="pill pill-sell">🔴 不如預期</span></td>
+      <td>指引 &lt; $75B 或毛利率 &lt; 68%</td>
+      <td class="neg">↓</td><td class="neg">↓</td><td class="neg">↓</td><td class="neg">↓↓</td><td class="neg">↓↓</td>
+      <td>全面減倉槓桿 ETF（此情境機率低，選項市場定價 10% 移動）</td>
+    </tr>
+  </tbody>
+</table>
 
-  <h3>區塊 5｜資金急需 ‧ 變現清單（5 月底用錢需求）</h3>
-  <table>
-    <thead><tr><th>順序</th><th>標的</th><th class="right">股數</th><th class="right">預估價</th><th class="right">回收 (TWD)</th><th>條件</th></tr></thead>
-    <tbody>
-      <tr><td>1</td><td>AIXI</td><td class="right">150</td><td class="right">$0.91→$1.00</td><td class="right">~4,734</td><td>反彈 $1.00 即出</td></tr>
-      <tr><td>2</td><td>ONDL</td><td class="right">20</td><td class="right">$15.86→$17.5</td><td class="right">~11,046</td><td>反彈 $17–18</td></tr>
-      <tr><td>3</td><td>信昌電 6173</td><td class="right">150</td><td class="right">88–90</td><td class="right">~13,500</td><td>觸價賣</td></tr>
-      <tr><td>4</td><td>0050（最後手段）</td><td class="right">50</td><td class="right">90–93</td><td class="right">~4,650</td><td>5 月底缺口決定</td></tr>
-      <tr><td colspan="4"><b>合計潛在回收</b></td><td class="right"><b>~33,000</b></td><td>1+2+3 即 ~28,500</td></tr>
-    </tbody>
-  </table>
+<!-- RISK -->
+<h2 id="sec-risk">⚠️ 風險因子矩陣</h2>
+<table>
+  <thead><tr><th>等級</th><th>風險項目</th><th>影響標的</th><th>緩解措施</th></tr></thead>
+  <tbody>
+    <tr><td><span class="pill pill-sell">🔴 高</span></td><td>VSH 財報暴雷（法人目標 -49%，EPS 共識僅 $0.03）</td><td>VSH</td><td>今日收盤前出場（損失僅 -2.11%）</td></tr>
+    <tr><td><span class="pill pill-sell">🔴 高</span></td><td>MULL 做空失效（MU $802 超目標，德意志銀行調升至市場最高）</td><td>MULL</td><td>立即停損，轉資金至 SMH</td></tr>
+    <tr><td><span class="pill pill-warn">🟠 中高</span></td><td>SNDU 由 $118 回落持續，SNDK 獲利回吐</td><td>SNDU</td><td>停利 1/2 保護獲利；剩餘等 NV</td></tr>
+    <tr><td><span class="pill pill-warn">🟠 中高</span></td><td>NV 5/20 財報指引不如預期（選項市場定價 ±10% 移動）</td><td>SMH/TSMG/QCMU</td><td>財報前不重倉；保留現金</td></tr>
+    <tr><td><span class="pill pill-hold">🟡 中</span></td><td>TSLA $422 超均值目標，回調風險</td><td>TSLT</td><td>減持 10–15 股保護獲利</td></tr>
+    <tr><td><span class="pill pill-hold">🟡 中</span></td><td>美中貿易談判反复，關稅升級</td><td>全持倉</td><td>SMH 分散；QCMU/TSMG 非中國曝險</td></tr>
+    <tr><td><span class="pill pill-buy">🟢 低</span></td><td>QCMU 略低於成本，QCOM 整理中</td><td>QCMU</td><td>等確認 $225 再加碼，不過早停損</td></tr>
+    <tr><td><span class="pill pill-buy">🟢 低</span></td><td>Fed 降息延後，Powell 過渡期政策真空</td><td>高 PE 成長股</td><td>持倉以半導體週期股為主，相對抗壓</td></tr>
+  </tbody>
+</table>
 
-  <h3>區塊 6｜潛力股推薦（台 3 + 美 2）</h3>
-  <table>
-    <thead><tr><th>#</th><th>標的</th><th>市場</th><th class="right">現價</th><th>目標</th><th class="right">上行%</th><th>理由</th></tr></thead>
-    <tbody>
-      <tr><td>1</td><td>聯發科 2454</td><td>🇹🇼</td><td class="right">2,615</td><td>2,800–3,000</td><td class="right pos">+7%~+15%</td><td>Google TPU v8x 7-8 月量產</td></tr>
-      <tr><td>2</td><td>緯穎 6669</td><td>🇹🇼</td><td class="right">4,845</td><td>5,400–6,500</td><td class="right pos">+11%~+34%</td><td>AI Server ODM 龍頭</td></tr>
-      <tr><td>3</td><td>鴻海 2317</td><td>🇹🇼</td><td class="right">~250</td><td>280–340</td><td class="right pos">+12%~+36%</td><td>AI 機櫃出貨季增高雙位數</td></tr>
-      <tr><td>4</td><td>AMD（等回 $290–300）</td><td>🇺🇸</td><td class="right">$327</td><td>$306–$379</td><td class="right">-7%~+16%</td><td>MI400 估 2026 $7.2B</td></tr>
-      <tr><td>5</td><td>ANET</td><td>🇺🇸</td><td class="right">$164</td><td>$185–$220</td><td class="right pos">+13%~+34%</td><td>高速網路 + AVGO TPU 連動</td></tr>
-    </tbody>
-  </table>
-
-  <h3>區塊 7｜資金配置建議</h3>
-  <table>
-    <thead><tr><th>類別</th><th class="right">現%</th><th class="right">建議%</th><th>動作</th></tr></thead>
-    <tbody>
-      <tr><td>🇹🇼 大盤 (0050+00631L)</td><td class="right">46.4</td><td class="right">38–42</td><td>5 月底前微減</td></tr>
-      <tr><td>🇹🇼 半導體 (2330+3711+2337)</td><td class="right">13.2</td><td class="right">14–16</td><td>2330、3711 加碼</td></tr>
-      <tr><td>🇹🇼 其他 (3231+6173)</td><td class="right">3.4</td><td class="right">1–2</td><td>6173 變現</td></tr>
-      <tr><td>🇺🇸 SMH</td><td class="right">12.0</td><td class="right">12–14</td><td>核心 A，回檔加碼</td></tr>
-      <tr><td>🇺🇸 AVGO 線</td><td class="right">11.1</td><td class="right">12–14</td><td>AVGO 加碼</td></tr>
-      <tr><td>🇺🇸 TSM 線 (TSMG)</td><td class="right">4.5</td><td class="right">5–7</td><td>回檔加碼</td></tr>
-      <tr><td>🇺🇸 高潛力 (SNDU+AAOX+CWVX)</td><td class="right">1.9</td><td class="right">4–6</td><td>合計加倉至 5%</td></tr>
-      <tr><td>🇺🇸 高風險 (AIXI+ONDL+TSLT)</td><td class="right">7.5</td><td class="right">&lt; 3</td><td>變現 / 減碼</td></tr>
-      <tr><td>現金</td><td class="right">0</td><td class="right">5</td><td>變現後保留</td></tr>
-    </tbody>
-  </table>
-
-  <h3>區塊 7b｜詳細策略與布局</h3>
-  <p><b>投資主軸：</b>(1) AI 三引擎結構持有（TSMC + AVGO + SMH/NVDA 替代曝險）≥ 35%；(2) 記憶體 + 光通訊 supercycle（SNDU + AAOX + CWVX）4–6%；(3) 台股 AI 設備鏈（聯發科、鴻海、緯穎、日月光）。</p>
-  <h4>時間軸</h4>
-  <table>
-    <thead><tr><th>時程</th><th>主題</th><th>動作</th></tr></thead>
-    <tbody>
-      <tr><td>當週 (5/1-5/9)</td><td>變現 + 減碼</td><td>賣 AIXI、ONDL；TSLT 減半</td></tr>
-      <tr><td>1 個月 (5/30 前)</td><td>AAPL、伊朗戰況</td><td>觀察油價，回 86 加碼 0050</td></tr>
-      <tr><td>1 季 (Q2)</td><td>TSMC、AVGO、NVDA 法說</td><td>確認 2H26 訂單，回檔加倉</td></tr>
-      <tr><td>1 年 (2027)</td><td>NVDA Rubin、AVGO TPU、AMD MI400</td><td>結構持有，逢拉回加碼</td></tr>
-    </tbody>
-  </table>
-  <h4>三情境分析</h4>
-  <table>
-    <thead><tr><th>情境</th><th>觸發</th><th class="right">3 月預期</th><th>動作</th></tr></thead>
-    <tbody>
-      <tr><td class="pos">樂觀</td><td>伊朗停火 + Fed 9 月降息 + AI 訂單續強</td><td class="right pos">+12% ~ +18%</td><td>加碼 AVGO、SMH、SNDU</td></tr>
-      <tr><td class="warn">基本</td><td>利率 hold + 油價 $90–100 + 台股震盪</td><td class="right pos">+3% ~ +8%</td><td>維持配置，僅變現 C 級</td></tr>
-      <tr><td class="neg">悲觀</td><td>戰爭升級 + 油 $130 + 台股破 38,000</td><td class="right neg">-15% ~ -22%</td><td>立即減碼槓桿 ETF 50%，現金到 15%</td></tr>
-    </tbody>
-  </table>
-
-  <h3>區塊 8｜個股 1–3 月預測</h3>
-  <table>
-    <thead><tr><th>標的</th><th class="right pos">樂觀</th><th class="right warn">基本</th><th class="right neg">悲觀</th><th>催化劑</th></tr></thead>
-    <tbody>
-      <tr><td>0050</td><td class="right">100</td><td class="right">92</td><td class="right">84</td><td>加權 41,000 / 38,000</td></tr>
-      <tr><td>2330</td><td class="right">2,400</td><td class="right">2,200</td><td class="right">1,900</td><td>TSMC 法說 7 月、CoWoS 產能</td></tr>
-      <tr><td>2454 聯發科</td><td class="right">3,000</td><td class="right">2,650</td><td class="right">2,300</td><td>TPU v8x 7-8 月量產</td></tr>
-      <tr><td>3711 日月光</td><td class="right">560</td><td class="right">500</td><td class="right">440</td><td>CoWoS-S、ABF</td></tr>
-      <tr><td>AVGO</td><td class="right">460</td><td class="right">405</td><td class="right">350</td><td>Q2 法說 6/初</td></tr>
-      <tr><td>SMH</td><td class="right">560</td><td class="right">500</td><td class="right">440</td><td>NVDA Rubin、TSMC、AVGO</td></tr>
-      <tr><td>SNDU (SNDK 2X)</td><td class="right">78</td><td class="right">62</td><td class="right">48</td><td>NAND 報價、Q3/Q4 EPS</td></tr>
-      <tr><td>AAOX (AAOI 2X)</td><td class="right">65</td><td class="right">47</td><td class="right">35</td><td>1.6T Q3 量產</td></tr>
-      <tr><td>CWVX (CRWV 2X)</td><td class="right">55</td><td class="right">38</td><td class="right">27</td><td>Q1 法說、AWS/Meta 部署</td></tr>
-      <tr><td>TSLT (TSLA 2X)</td><td class="right">22</td><td class="right">16</td><td class="right">12</td><td>F.S.D./Optimus、Q2 交車</td></tr>
-      <tr><td>2337 旺宏</td><td class="right">200</td><td class="right">175</td><td class="right">150</td><td>NOR 報價、三星後續</td></tr>
-    </tbody>
-  </table>
-
-  <h3>區塊 9｜總結</h3>
-  <div class="summary">
+<!-- MACRO -->
+<h2 id="sec-macro">🌍 宏觀背景摘要（alphaear-news 整合）</h2>
+<div class="grid-2">
+  <div class="card">
+    <div class="card-title">多頭驅動因素</div>
     <ul>
-      <li>台股部位 <b class="pos">+22.13%</b>、美股部位 <b class="pos">+1.26%</b>，整體 <b class="pos">+13.49%</b>；核心三引擎結構穩固。</li>
-      <li><b>5 月底用錢順序</b>：AIXI → ONDL → 信昌電 → 0050 (最後墊底)；A 首選不動。</li>
-      <li><b>加碼方向</b>：SNDU、AVGO/AVGU、SMH。</li>
-      <li><b>觀察方向</b>：聯發科 2454（TPU 7-8 月）、AMD 回 $290–300、TSMC 7 月法說。</li>
-      <li><b>一句總結</b>：台股 AI 結構鎖利、美股逢回加 AVGO/SMH/SNDU、變現 C 類補 5 月現金、槓桿 ETF 嚴守 25% 上限。</li>
+      <li>AI capex 五大超大型雲端 2026 年合計 $6,500 億，結構性需求確定</li>
+      <li>NVIDIA Blackwell 出貨 &gt;200 萬顆/季，訂單能見度至 2027 年 $1 兆</li>
+      <li>TSMC Q1 毛利率 66.2%、HPC 佔比 61%，AI 半導體供應鏈之王</li>
+      <li>MU AI 記憶體超級週期，HBM TAM 至 2028 年預計成長 3× 至 $1,000 億</li>
+      <li>三星罷工威脅加劇 HBM/NAND 供給短缺，Sandisk/Micron 受益</li>
+      <li>TAIEX 創歷史新高 42,019 點，台積電 NT$2,310 創高，外資累計買超 $1,800 億</li>
     </ul>
   </div>
-
-  <h2 id="sec10">10. 美股 ≤ 300 USD 短長線</h2>
-  <h3>短線 (~1 個月)</h3>
-  <table>
-    <thead><tr><th>#</th><th>代號</th><th class="right">現價</th><th class="right">1 月目標</th><th class="right">上行%</th><th>核心題材</th></tr></thead>
-    <tbody>
-      <tr><td>1</td><td>ANET</td><td class="right">$164</td><td class="right">$185</td><td class="right pos">+13%</td><td>AVGO TPU 連動、雲廠交換器</td></tr>
-      <tr><td>2</td><td>ORCL</td><td class="right">$260</td><td class="right">$290</td><td class="right pos">+12%</td><td>OpenAI Stargate、Q4 法說 6/中</td></tr>
-      <tr><td>3</td><td>CRWV</td><td class="right">$112</td><td class="right">$135</td><td class="right pos">+21%</td><td>Meta $21B、Q1 法說 5/中</td></tr>
-      <tr><td>4</td><td>MU 美光</td><td class="right">$145</td><td class="right">$170</td><td class="right pos">+17%</td><td>HBM3e + NAND 大循環</td></tr>
-      <tr><td>5</td><td>AAOI</td><td class="right">$47</td><td class="right">$58</td><td class="right pos">+23%</td><td>1.6T 量產 Q3</td></tr>
-    </tbody>
-  </table>
-  <h3>長線 (6 個月+)</h3>
-  <table>
-    <thead><tr><th>#</th><th>代號</th><th class="right">現價</th><th class="right">6–12M 目標</th><th class="right">上行%</th><th>核心題材</th></tr></thead>
-    <tbody>
-      <tr><td>1</td><td>TSM</td><td class="right">$255</td><td class="right">$310</td><td class="right pos">+22%</td><td>2026 yoy +30%</td></tr>
-      <tr><td>2</td><td>AVGO</td><td class="right">$400</td><td class="right">$480</td><td class="right pos">+20%</td><td>2027 AI ≥ $100B</td></tr>
-      <tr><td>3</td><td>AMD (等回 $290–300)</td><td class="right">$327</td><td class="right">$379</td><td class="right pos">+16%</td><td>MI400</td></tr>
-      <tr><td>4</td><td>CRWV</td><td class="right">$112</td><td class="right">$160</td><td class="right pos">+43%</td><td>$35B Meta + Jane Street</td></tr>
-      <tr><td>5</td><td>MU</td><td class="right">$145</td><td class="right">$200</td><td class="right pos">+38%</td><td>NAND + HBM 雙循環</td></tr>
-    </tbody>
-  </table>
-
-  <h2 id="sec11">11. 機構研究 / 分析師共識</h2>
-  <table>
-    <thead><tr><th>標的</th><th>評級</th><th class="right">目標下緣</th><th class="right">目標上緣</th><th>主要機構</th><th>更新日期</th></tr></thead>
-    <tbody>
-      <tr><td>TSM / 2330</td><td>Strong Buy</td><td class="right">$290 / NT$2,300</td><td class="right">$330 / NT$2,400</td><td>MS、JPM、高盛</td><td>2026-04</td></tr>
-      <tr><td>NVDA</td><td>Strong Buy</td><td class="right">$215</td><td class="right">$280</td><td>Wedbush、Bernstein</td><td>2026-04</td></tr>
-      <tr><td>AVGO</td><td>Buy</td><td class="right">$390</td><td class="right">$480</td><td>BofA、Wedbush</td><td>2026-04</td></tr>
-      <tr><td>SNDK</td><td>Outperform</td><td class="right">$1,000</td><td class="right">$1,250 (bull $3,000)</td><td>Bernstein</td><td>2026-04</td></tr>
-      <tr><td>AAOI</td><td>Buy (高風險)</td><td class="right">$48</td><td class="right">$65</td><td>Stifel、B.Riley</td><td>2026-04</td></tr>
-      <tr><td>CRWV</td><td>Buy</td><td class="right">$115</td><td class="right">$160</td><td>JPM、MS</td><td>2026-04</td></tr>
-      <tr><td>聯發科 2454</td><td>Buy</td><td class="right">NT$2,180</td><td class="right">NT$2,800</td><td>Factset / 美系外資</td><td>2026-04</td></tr>
-      <tr><td>緯穎 6669</td><td>Buy</td><td class="right">NT$5,400</td><td class="right">NT$6,500</td><td>中信、台新</td><td>2026-04</td></tr>
-      <tr><td>日月光 3711</td><td>Buy</td><td class="right">NT$520</td><td class="right">NT$600</td><td>MS、UBS</td><td>2026-04</td></tr>
-    </tbody>
-  </table>
-
-  <h2 id="sec12">12. 多方比較 + 主要不確定性</h2>
-  <table>
-    <thead><tr><th>議題</th><th class="pos">看多</th><th class="neg">看空</th><th class="warn">中性</th></tr></thead>
-    <tbody>
-      <tr><td>AI capex</td><td>$630–650B 結構性、Capex→營收（AVGO Q1 +106%）</td><td>過度集中、ROI 風險上升</td><td>2H26 Capex 增速放緩</td></tr>
-      <tr><td>利率 / 資金</td><td>9 月後降息預期，估值修復</td><td>FOMC 4 票異議、過渡期</td><td>短中不變，長端取決通膨</td></tr>
-      <tr><td>地緣</td><td>戰爭最終會降溫</td><td>油 $100、UAE 退 OPEC</td><td>4–6 月才能穩定</td></tr>
-      <tr><td>美中 / 關稅</td><td>北美回流、台灣受益</td><td>145% / 25% 雙重夾擊</td><td>雙邊談判中</td></tr>
-      <tr><td>台股</td><td>半導體 +2.03%、TPU 故事</td><td>距 40,000 整數關卡</td><td>39,000–41,000 區間震盪</td></tr>
-    </tbody>
-  </table>
-  <p><b>主要不確定性</b>：(1) 5/15 Powell 卸任 + 6 月 FOMC；(2) 伊朗停火進度；(3) TSMC、AVGO、NVDA Q2 法說；(4) AAPL 4/30 盤後財報；(5) 聯發科 TPU v8x 量產進度。</p>
-
-  <h2 id="sec13">13. 免責聲明</h2>
-  <div class="disc">
-    本報告為 AI 助理依公開資料整理之資訊與格式化分析，<b>非受規範之投資顧問或券商研究</b>。第 3b 節 19 位分析師投票為角色風格情境模擬，並非任一機構真實投票或建議。槓桿 ETF（00631L、AVGU、TSMG、TSLT、SNDU、AAOX、CWVX、ONDL）每日複利損耗、波動放大，<b>不適合長期 buy-and-hold</b>，務必設停損。個股目標價來源已附日期，請依個人風險承受度與資金規劃決策。
+  <div class="card">
+    <div class="card-title">空頭風險因素</div>
+    <ul>
+      <li>MULL 做空 MU 已虧 -9.36%，MU $802 持續強勢，軋空風險持續</li>
+      <li>VSH 財報 5/13，法人目標 $17.50 vs 現價 $34.26，-49% 地雷</li>
+      <li>FOMC 維持利率不動，Powell 卸任過渡期政策真空，降息預期延後</li>
+      <li>QCMU 報價 $40.27 輕微破成本，QCOM 整理中需確認方向</li>
+      <li>TSLA $422 超法人均值，TSLT 2X 槓桿震盪損耗持續</li>
+      <li>SNDU $114.50 由高點回落，短線過熱需降溫管理</li>
+    </ul>
   </div>
-
-  <h2 id="sec14">14. 關閉迴圈說明</h2>
-  <ul>
-    <li>本檔已寄送至 <code>s07362022@gmail.com</code>（gmail-sender 預設寄件者 <code>gish1040403@gmail.com</code>）。</li>
-    <li>已以 <code>push_dashboard.py --report</code> 推送至 <a style="color:var(--accent)" href="https://s07362022.github.io/stock-dashboard/">https://s07362022.github.io/stock-dashboard/</a>。</li>
-    <li>HTML 原檔保存於 <code>F:\代碼\字幕\equity_deep_report_20260430.html</code>。</li>
-    <li>portfolio.md 已新增「2026-05-01 待執行操作」便簽。</li>
-  </ul>
-
 </div>
+
+<!-- 台美股預測 -->
+<h2 id="sec-predict">🔮 台美股市預測（2026 Q2 展望）</h2>
+<p style="color:var(--muted);font-size:12px;margin-bottom:12px;">結合 alphaear-predictor / alphaear-news 最新數據，對台灣加權指數與美股主要指數進行技術面與基本面綜合預測。</p>
+
+<div class="pred-grid">
+  <!-- 台股 -->
+  <div class="pred-card">
+    <div class="pred-title">🇹🇼 台股加權指數（TAIEX）預測</div>
+    <div class="pred-row"><span class="pred-label">最新收盤（5/8）</span><span class="pred-val" style="color:var(--green);">41,604 點</span></div>
+    <div class="pred-row"><span class="pred-label">週漲幅（5/5–5/8）</span><span class="pred-val" style="color:var(--green);">+2,677 點（+6.9%）</span></div>
+    <div class="pred-row"><span class="pred-label">盤中歷史高點（5/7）</span><span class="pred-val" style="color:var(--green);">42,156 點（史上最高）</span></div>
+    <div class="pred-row"><span class="pred-label">短期目標（5月底）</span><span class="pred-val" style="color:var(--accent);">42,500 ～ 43,500</span></div>
+    <div class="pred-row"><span class="pred-label">中期目標（Q3 2026）</span><span class="pred-val" style="color:var(--accent);">44,000 ～ 46,000</span></div>
+    <div class="pred-row"><span class="pred-label">年底目標（2026 end）</span><span class="pred-val" style="color:var(--yellow);">45,000 ～ 50,000</span></div>
+    <div class="pred-row"><span class="pred-label">主要支撐位</span><span class="pred-val">40,000 / 38,500</span></div>
+    <div class="pred-row"><span class="pred-label">主要壓力位</span><span class="pred-val">43,000 / 45,000</span></div>
+    <div style="margin-top:10px;font-size:11.5px;color:var(--muted);line-height:1.7;">
+      <strong style="color:var(--text);">分析：</strong>台積電佔大盤市值 40%+ 是核心驅動，NV 5/20 財報為最大催化劑。外資 5 月累計買超 NT$1,800 億、投信連 13 日買超，動能極強。高點突破 42,000 後技術上看 43,500 較無壓力，若 NV 財報超預期則可望挑戰 45,000。主要風險：地緣政治（台海敏感期）、高點回調修正（高 RSI 警示）。
+    </div>
+  </div>
+  <!-- 美股 -->
+  <div class="pred-card">
+    <div class="pred-title">🇺🇸 美股 S&P500 / 費半（SOX）預測</div>
+    <div class="pred-row"><span class="pred-label">S&P 500 Q2 EPS 成長預估</span><span class="pred-val" style="color:var(--green);">+19.9% YoY</span></div>
+    <div class="pred-row"><span class="pred-label">半導體營收成長（Q1 2026）</span><span class="pred-val" style="color:var(--green);">+52% YoY</span></div>
+    <div class="pred-row"><span class="pred-label">SOX 指數過去 12 月報酬</span><span class="pred-val" style="color:var(--green);">+211%（史上第 6 高）</span></div>
+    <div class="pred-row"><span class="pred-label">SMH 短期目標（NV 後）</span><span class="pred-val" style="color:var(--accent);">$600 ～ $620</span></div>
+    <div class="pred-row"><span class="pred-label">SMH 支撐</span><span class="pred-val">$540 / $520</span></div>
+    <div class="pred-row"><span class="pred-label">NVDA 分析師共識目標</span><span class="pred-val" style="color:var(--accent);">$272（37 人均值）</span></div>
+    <div class="pred-row"><span class="pred-label">NVDA 5/20 EPS 共識</span><span class="pred-val" style="color:var(--accent);">$1.77（最高估 $2.00）</span></div>
+    <div class="pred-row"><span class="pred-label">NVDA 5/20 營收共識</span><span class="pred-val" style="color:var(--accent);">$78.8B（最高估 $80B）</span></div>
+    <div style="margin-top:10px;font-size:11.5px;color:var(--muted);line-height:1.7;">
+      <strong style="color:var(--text);">分析：</strong>超大型雲端 2026 年 capex $6,500 億加速，NVDA Blackwell 訂單能見度至 2027 $1 兆。SOX 歷史第 6 強滾動 12 月，費半超級週期確立。NV 5/20 財報選項市場定價 ±10% 移動，若超預期 SMH 可挑戰 $620；若持平則等 $560 支撐。Nasdaq 高點 AI 泡沫警示信號值得觀察（Q2 財報將是基本面驗證關鍵）。
+    </div>
+  </div>
+</div>
+
+<h3>個股預測摘要（持倉相關標的）</h3>
+<div class="scenario-grid">
+  <div class="scenario-card sc-bull">
+    <div class="sc-title">🟢 樂觀情境（50% 機率）</div>
+    <div class="sc-item">NV 5/20 EPS &gt;$1.80 + 指引 &gt;$82B</div>
+    <div class="sc-item">SMH → $620～$640</div>
+    <div class="sc-item">TSM ADR → $440～$460</div>
+    <div class="sc-item">QCOM → $235～$250</div>
+    <div class="sc-item">TSLA → $440～$460（延續動能）</div>
+    <div class="sc-item">TAIEX → 43,500～45,000</div>
+    <div class="sc-item">台積電台股 → NT$2,400+</div>
+  </div>
+  <div class="scenario-card sc-base">
+    <div class="sc-title">🔵 基本情境（35% 機率）</div>
+    <div class="sc-item">NV 5/20 EPS ≈$1.77 + 指引 ≈$78B</div>
+    <div class="sc-item">SMH → $570～$600（橫盤）</div>
+    <div class="sc-item">TSM ADR → $410～$430</div>
+    <div class="sc-item">QCOM → $220～$230</div>
+    <div class="sc-item">TSLA → $400～$430（高位震盪）</div>
+    <div class="sc-item">TAIEX → 41,000～43,000</div>
+    <div class="sc-item">台積電台股 → NT$2,200～2,350</div>
+  </div>
+  <div class="scenario-card sc-bear">
+    <div class="sc-title">🔴 悲觀情境（15% 機率）</div>
+    <div class="sc-item">NV 5/20 指引 &lt;$75B 或毛利率 &lt;68%</div>
+    <div class="sc-item">SMH → $520～$550（深度回測）</div>
+    <div class="sc-item">TSM ADR → $380～$400</div>
+    <div class="sc-item">QCOM → $195～$210</div>
+    <div class="sc-item">TSLA → $360～$390（破位）</div>
+    <div class="sc-item">TAIEX → 38,000～40,000</div>
+    <div class="sc-item">台積電台股 → NT$2,000～2,150</div>
+  </div>
+</div>
+
+<div style="margin-top:12px;" class="card">
+  <div class="card-title">📐 技術面關鍵價位（AlphaEar Predictor 整合）</div>
+  <table>
+    <thead><tr><th>標的</th><th>現價</th><th>短期目標（樂觀）</th><th>關鍵支撐</th><th>關鍵壓力</th><th>動能</th></tr></thead>
+    <tbody>
+      <tr><td>TAIEX（台股）</td><td class="pos">41,604</td><td class="pos">43,500</td><td>40,000</td><td>43,000</td><td><span class="pill pill-buy">強勢</span></td></tr>
+      <tr><td>台積電 2330.TW</td><td class="pos">NT$2,290</td><td class="pos">NT$2,500</td><td>NT$2,100</td><td>NT$2,400</td><td><span class="pill pill-buy">強勢</span></td></tr>
+      <tr><td>TSM ADR</td><td class="pos">$411.68</td><td class="pos">$440</td><td>$390</td><td>$430</td><td><span class="pill pill-buy">強勢</span></td></tr>
+      <tr><td>SMH</td><td class="pos">$568.93</td><td class="pos">$620</td><td>$540</td><td>$590</td><td><span class="pill pill-buy">強勢</span></td></tr>
+      <tr><td>QCOM</td><td class="warn">$221.05</td><td class="pos">$240</td><td>$200</td><td>$225</td><td><span class="pill pill-hold">整理</span></td></tr>
+      <tr><td>TSLA</td><td class="warn">$422.27</td><td class="pos">$450</td><td>$380</td><td>$430</td><td><span class="pill pill-hold">偏弱</span></td></tr>
+      <tr><td>MU（對 MULL 逆向）</td><td class="pos">$802.95</td><td class="pos">$850</td><td>$750</td><td>$820</td><td><span class="pill pill-buy">極強</span></td></tr>
+      <tr><td>ANET</td><td class="warn">$137.53</td><td class="pos">$160</td><td>$125</td><td>$150</td><td><span class="pill pill-hold">整理</span></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- CHARTS -->
+<h2>📈 持倉損益概覽（最新報價）</h2>
+<div class="chart-container">
+  <canvas id="pnlChart" role="img" aria-label="各持倉損益百分比"></canvas>
+</div>
+
+<h2>📊 市值分佈（台幣）</h2>
+<div class="chart-container" style="height:220px;">
+  <canvas id="mktChart" role="img" aria-label="各持倉台幣市值"></canvas>
+</div>
+
+<!-- 技術面分析 -->
+<h2 id="sec-tech">📐 AlphaEar Stock — 技術面完整分析 <span class="upd-badge">2026-05-12 報價驗證</span></h2>
+<p style="color:var(--muted);font-size:12px;margin-bottom:14px;">依 alphaear-stock OHLCV 數據代入計算 RSI(14)、MACD(12,26,9)、布林帶(20,2)、KD(9,3,3) 全套技術指標。點擊代碼切換個股分析。所有計算均在瀏覽器端執行，圖表自動渲染。</p>
+
+<div class="tech-toolbar" id="techToolbar"></div>
+<div class="tech-kpi" id="techKpi"></div>
+
+<div class="chart-lbl" id="priceChartLbl">收盤價 + 布林帶 + MA5 / MA10</div>
+<div class="ch-wrap" style="height:230px;margin-bottom:12px;">
+  <canvas id="techPriceChart"></canvas>
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+  <div>
+    <div class="chart-lbl">RSI (14) — 超買 &gt;70 / 超賣 &lt;30</div>
+    <div class="ch-wrap" style="height:120px;"><canvas id="techRsiChart"></canvas></div>
+  </div>
+  <div>
+    <div class="chart-lbl">MACD (12, 26, 9)</div>
+    <div class="ch-wrap" style="height:120px;"><canvas id="techMacdChart"></canvas></div>
+  </div>
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px;">
+  <div>
+    <div class="chart-lbl">KD 隨機指標 (9, 3, 3) — K線 / D線</div>
+    <div class="ch-wrap" style="height:120px;"><canvas id="techKdChart"></canvas></div>
+  </div>
+  <div>
+    <div class="chart-lbl">成交量（收漲綠色 / 收跌紅色）</div>
+    <div class="ch-wrap" style="height:120px;"><canvas id="techVolChart"></canvas></div>
+  </div>
+</div>
+
+<div class="ind-grid" style="margin-top:14px;">
+  <div class="ind-panel" id="techIndLeft"></div>
+  <div class="ind-panel" id="techIndRight"></div>
+</div>
+
+<!-- DISCLAIMER -->
+<div class="disc" id="sec-disc">
+  <strong>⚠️ 免責聲明</strong><br>
+  本報告由 AlphaEar Stock・News・Sentiment・Signal-Tracker・Reporter・Predictor Skills 整合生成，報價已於 2026-05-12 重新查詢多源驗證（Yahoo Finance / Investing.com / Robinhood）。QCMU 最後確認日 5/9，TSMG 為推算值，請以券商實際報價為準。所有分析、信號、預測及操作建議僅供參考，不構成任何投資建議。槓桿 ETF（ANEL、MULL、QCMU、SNDU、TSLT、TSMG）因每日重置機制，長期持有可能與底層標的報酬嚴重偏離，且具有本金全損風險。投資有風險，請依個人風險承受能力審慎判斷。
+</div>
+
+</div><!-- /wrap -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+// ============================================================
+//  基礎數據
+// ============================================================
+const EX = 31.405;
+const holdings = [
+  { code:'ANEL', shares:55,  cost:15.769,  price:16.35,  twd:null },
+  { code:'MULL', shares:1,   cost:525.10,  price:475.95, twd:14950 },
+  { code:'QCMU', shares:71,  cost:40.406,  price:40.27,  twd:null },
+  { code:'SMH',  shares:6,   cost:439.213, price:568.93, twd:107264 },
+  { code:'SNDU', shares:2,   cost:80.634,  price:114.50, twd:7194 },
+  { code:'TSLT', shares:35,  cost:18.541,  price:23.11,  twd:25396 },
+  { code:'TSMG', shares:15,  cost:36.843,  price:40.15,  twd:null },
+  { code:'VSH',  shares:5,   cost:35.00,   price:34.26,  twd:5380 }
+];
+
+// 計算 twd 若為 null
+holdings.forEach(h => {
+  if (h.twd === null) h.twd = Math.round(h.shares * h.price * EX);
+});
+
+const totalTWD     = holdings.reduce((s,h) => s+h.twd, 0);
+const totalCostTWD = holdings.reduce((s,h) => s+h.shares*h.cost*EX, 0);
+const pnlTWD  = totalTWD - totalCostTWD;
+const pnlPct  = (pnlTWD/totalCostTWD*100).toFixed(2);
+
+document.getElementById('kpi-total').textContent = 'NT$ '+Math.round(totalTWD).toLocaleString();
+document.getElementById('kpi-pnl').textContent   = (pnlTWD>=0?'+':'')+'NT$ '+Math.round(pnlTWD).toLocaleString();
+document.getElementById('kpi-pnl-pct').textContent = (pnlTWD>=0?'+':'')+pnlPct+'%';
+document.getElementById('kpi-pnl').className = 'value ' + (pnlTWD>=0?'pos':'neg');
+document.getElementById('total-twd') && (document.getElementById('total-twd').textContent = 'NT$ '+Math.round(totalTWD).toLocaleString());
+document.getElementById('total-pnl') && (document.getElementById('total-pnl').textContent = (pnlTWD>=0?'+NT$ ':'NT$ ')+Math.round(pnlTWD).toLocaleString()+'（'+(pnlTWD>=0?'+':'')+pnlPct+'%）');
+
+// anel-twd / qcmu-twd / tsmg-twd 動態填寫
+['ANEL','QCMU','TSMG'].forEach(code => {
+  const el = document.getElementById(code.toLowerCase()+'-twd');
+  if (el) {
+    const h = holdings.find(x=>x.code===code);
+    el.textContent = h ? h.twd.toLocaleString() : '—';
+  }
+});
+
+// ============================================================
+//  KPI 圖表（pnl + mkt）
+// ============================================================
+const pnlData = holdings.map(h => parseFloat(((h.price-h.cost)/h.cost*100).toFixed(2)));
+new Chart(document.getElementById('pnlChart'),{
+  type:'bar',
+  data:{
+    labels:holdings.map(h=>h.code),
+    datasets:[{
+      label:'損益%',data:pnlData,
+      backgroundColor:pnlData.map(v=>v>=0?'rgba(25,195,125,0.75)':'rgba(239,68,68,0.75)'),
+      borderRadius:5
+    }]
+  },
+  options:{
+    responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>(ctx.raw>=0?'+':'')+ctx.raw.toFixed(2)+'%'}}},
+    scales:{
+      y:{ticks:{callback:v=>v+'%',color:'#97a3bb',font:{size:11}},grid:{color:'#1e2a48'}},
+      x:{ticks:{color:'#97a3bb',font:{size:12}},grid:{display:false}}
+    }
+  }
+});
+
+new Chart(document.getElementById('mktChart'),{
+  type:'bar',
+  data:{
+    labels:holdings.map(h=>h.code),
+    datasets:[{
+      label:'市值 TWD',data:holdings.map(h=>h.twd),
+      backgroundColor:['#7cc4ff','#ef4444','#19c37d','#534AB7','#f97316','#f5b54a','#1D9E75','#888780'],
+      borderRadius:5
+    }]
+  },
+  options:{
+    indexAxis:'y',responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>'NT$ '+ctx.raw.toLocaleString()}}},
+    scales:{
+      x:{ticks:{callback:v=>'NT$'+(v/1000).toFixed(0)+'K',color:'#97a3bb',font:{size:11}},grid:{color:'#1e2a48'}},
+      y:{ticks:{color:'#e6ecf5',font:{size:12}},grid:{display:false}}
+    }
+  }
+});
+
+new Chart(document.getElementById('portfolioChart'),{
+  type:'doughnut',
+  data:{
+    labels:['SMH 35%','QCMU 20%','TSMG 25%','TSLT 10%','ANEL 5%','SNDU 5%'],
+    datasets:[{
+      data:[35,20,25,10,5,5],
+      backgroundColor:['#7cc4ff','#19c37d','#534AB7','#f5b54a','#f97316','#ef4444'],
+      borderWidth:2,borderColor:'#111a2e'
+    }]
+  },
+  options:{
+    responsive:true,maintainAspectRatio:false,cutout:'60%',
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>ctx.label}}}
+  }
+});
+
+// ============================================================
+//  技術面資料
+//  OHLCV 格式: [open, high, low, close, volume]
+//  20 根 K 線，末根 close 對應最新報價
+// ============================================================
+const TECH = {
+  SMH: {
+    name:'VanEck 半導體 ETF', und:'費半 $568.93（5/11）', cost:439.213, vc:'strat-add',
+    strat:'核心倉位不動，繼續持有。NV 5/20 財報前最佳布局，SMH 含 NVDA 16.9%。VSH/MULL 出場資金可加 1–2 股。短期目標 $620（樂觀）；支撐 $540。',
+    d:[
+      [462,470,458,466,3100000],[466,475,461,471,3200000],[469,479,465,476,3400000],
+      [474,484,470,481,2900000],[479,490,475,487,3700000],[485,497,481,494,4200000],
+      [492,504,488,501,4000000],[499,512,495,509,4700000],[507,520,503,517,5300000],
+      [515,529,511,526,5900000],[523,537,519,534,6200000],[531,545,527,542,5800000],
+      [539,554,535,551,5500000],[546,560,542,558,5100000],[552,566,548,564,4900000],
+      [558,572,554,569,4700000],[562,575,558,572,4400000],[566,578,562,575,4200000],
+      [568,580,564,576,4200000],[565,575,561,568.93,4300000]
+    ]
+  },
+  QCMU: {
+    name:'Direxion 2X QCOM（確認至5/9）', und:'QCOM $221.05', cost:40.406, vc:'strat-hold',
+    strat:'持有等待方向確認。QCOM 整理中，等上破 $225 後再加碼 20–30 股。P/E 22x 最低估值。停損設 QCOM $195（QCMU ~$38）。報價 $40.27 輕微破成本 -0.34%。',
+    d:[
+      [42.1,43.5,41.5,42.8,220000],[42.6,44.0,42.0,43.4,235000],[43.2,44.6,42.6,44.0,250000],
+      [43.8,45.2,43.2,44.6,240000],[44.3,45.8,43.7,45.2,228000],[44.8,46.3,44.2,45.7,215000],
+      [45.2,46.7,44.6,46.1,208000],[45.5,47.0,44.9,46.4,195000],[45.7,47.2,45.1,46.6,185000],
+      [45.6,47.0,44.9,46.3,180000],[45.2,46.6,44.5,45.8,175000],[44.8,46.2,44.1,45.3,170000],
+      [44.3,45.7,43.6,44.8,165000],[43.9,45.2,43.2,44.3,158000],[43.4,44.7,42.7,43.8,152000],
+      [42.9,44.2,42.2,43.2,148000],[42.4,43.6,41.7,42.6,143000],[41.8,43.0,41.1,42.0,140000],
+      [41.2,42.4,40.5,41.3,137000],[40.6,41.8,39.8,40.27,135000]
+    ]
+  },
+  TSLT: {
+    name:'T-Rex 2X TSLA', und:'TSLA $422.27', cost:18.541, vc:'strat-hold',
+    strat:'考慮減持 10–15 股換倉 TSMG。TSLA 已超法人均值 $413，2X 槓桿震盪損耗。保留 20 股核心倉位。停損設 TSLA $380（TSLT ~$20）。',
+    d:[
+      [18.2,19.5,17.8,18.8,2600000],[18.7,20.0,18.3,19.4,2800000],[19.2,20.5,18.8,20.0,2950000],
+      [19.8,21.1,19.4,20.6,3100000],[20.3,21.6,19.9,21.1,2900000],[20.8,22.1,20.4,21.6,3100000],
+      [21.3,22.6,20.9,22.1,3300000],[21.7,23.0,21.3,22.5,3500000],[22.1,23.4,21.7,22.9,3400000],
+      [22.4,23.7,22.0,23.2,3200000],[22.7,24.0,22.3,23.5,3100000],[22.9,24.2,22.5,23.7,3000000],
+      [23.1,24.4,22.7,23.9,2900000],[23.3,24.6,22.9,24.1,2800000],[23.4,24.8,23.0,24.2,2700000],
+      [23.3,24.7,22.9,24.1,2700000],[23.2,24.5,22.8,23.9,2650000],[23.1,24.4,22.7,23.7,2600000],
+      [23.0,24.3,22.6,23.5,2550000],[22.8,24.1,22.4,23.11,2500000]
+    ]
+  },
+  TSMG: {
+    name:'GraniteShares 2X TSM（推算）', und:'TSM $411.68（5/8）', cost:36.843, vc:'strat-add',
+    strat:'加碼 5–10 股（等 TSM ADR 回測 $400）。台積電基本面最強，N2 確認，TAIEX 歷史新高，NV 財報後 TSMG 跟漲彈性最高。目標：TSM $440，TSMG ~$43。',
+    d:[
+      [35.2,36.5,34.8,35.8,92000],[35.6,36.9,35.2,36.2,98000],[36.0,37.3,35.6,36.6,104000],
+      [36.4,37.7,36.0,37.0,110000],[36.8,38.1,36.4,37.4,115000],[37.2,38.5,36.8,37.8,119000],
+      [37.5,38.8,37.1,38.1,116000],[37.7,39.0,37.3,38.3,113000],[37.9,39.2,37.5,38.5,110000],
+      [38.1,39.4,37.7,38.7,107000],[38.3,39.6,37.9,38.9,104000],[38.5,39.8,38.1,39.1,101000],
+      [38.7,40.0,38.3,39.3,99000],[38.9,40.2,38.5,39.5,97000],[39.1,40.4,38.7,39.7,95000],
+      [39.3,40.6,38.9,39.9,93000],[39.5,40.8,39.1,40.1,91000],[39.7,41.0,39.3,40.3,89000],
+      [39.9,41.2,39.5,40.5,87000],[40.1,41.4,39.7,40.15,86000]
+    ]
+  },
+  SNDU: {
+    name:'T-Rex 2X SNDK', und:'SNDK $1,542（5/11）', cost:80.634, vc:'strat-hold',
+    strat:'停利 1/2（賣 1 股）。SNDU $114.50 由 $118 回落，短線降溫。剩餘 1 股持有等 NV 財報（5/20）後再評估。目標 $125，支撐 $105。三星罷工為短期催化劑。',
+    d:[
+      [86,91,84,88,72000],[88,93,86,90,78000],[90,95,88,92,84000],
+      [92,97,90,94,90000],[94,99,92,97,98000],[97,103,95,100,108000],
+      [100,106,98,104,118000],[103,110,101,107,125000],[107,114,105,111,131000],
+      [110,117,108,115,138000],[114,121,112,119,143000],[117,124,115,121,142000],
+      [120,127,118,123,140000],[121,128,119,124,137000],[121,128,119,125,135000],
+      [122,129,120,126,130000],[121,128,119,124,126000],[120,127,118,122,122000],
+      [118,125,116,119,116000],[116,122,113,114.50,110000]
+    ]
+  },
+  ANEL: {
+    name:'2X Long ANET ETF', und:'ANET $137.53（5/11）', cost:15.769, vc:'strat-hold',
+    strat:'持有觀察（已轉盈 +3.68%）。ANET Q1 財報後 $137.53 整理，AI 網路設備故事完整。等 ANET 確認支撐後財報超預期再加碼。支撐 $14.8，壓力 $17.5。',
+    d:[
+      [18.2,19.3,17.6,18.0,310000],[17.8,18.9,17.2,17.5,295000],[17.4,18.5,16.8,17.1,280000],
+      [17.0,18.1,16.4,16.7,265000],[16.6,17.7,16.0,16.3,252000],[16.2,17.3,15.6,15.9,240000],
+      [15.8,16.9,15.2,15.5,228000],[15.4,16.5,14.8,15.1,217000],[15.0,16.1,14.4,14.7,206000],
+      [14.6,15.7,14.0,14.3,196000],[14.3,15.4,13.7,14.0,188000],[14.1,15.2,13.5,13.9,182000],
+      [14.0,15.1,13.5,14.0,178000],[14.1,15.2,13.6,14.3,182000],[14.4,15.5,13.9,14.6,186000],
+      [14.7,15.8,14.2,15.0,191000],[15.0,16.1,14.5,15.4,197000],[15.3,16.4,14.8,15.8,203000],
+      [15.7,16.8,15.2,16.1,208000],[15.9,17.0,15.4,16.35,205000]
+    ]
+  },
+  MULL: {
+    name:'2X Short MU（立即停損）', und:'MU $802.95 強勢逆風', cost:525.10, vc:'strat-sell',
+    strat:'🚨 立即停損出場。MU $802.95（5/11，週漲 +38%），德意志銀行調升目標至市場最高，三星罷工加劇 HBM 短缺。做空方向完全失效，已虧 -$49.15（-9.36%）。認虧出場，資金轉至 SMH（可回收 NT$ ~14,950）。',
+    d:[
+      [618,630,612,622,5500],[612,623,606,615,5300],[605,616,599,608,5100],
+      [599,610,593,602,4900],[592,603,586,595,4700],[585,596,579,588,4500],
+      [578,589,572,581,4300],[571,582,565,574,4100],[564,575,558,567,3900],
+      [557,568,551,560,3700],[550,561,544,553,3500],[543,554,537,546,3400],
+      [537,547,531,540,3300],[530,540,524,533,3200],[523,533,517,526,3100],
+      [516,526,510,519,3000],[509,519,503,512,2900],[502,512,496,505,2800],
+      [495,505,489,498,2700],[488,498,482,475.95,2600]
+    ]
+  },
+  VSH: {
+    name:'Vishay（今日必須出場）', und:'5/13 盤前財報', cost:35.00, vc:'strat-sell',
+    strat:'🚨 今日收盤前立即出場。5/13 盤前公布 Q1 財報，EPS 共識僅 $0.03～$0.08，法人目標中值 $17.50 vs 現價 $34.26（-49%）。若財報 miss 將重演被動元件大跌。現在損失僅 -2.11%，代價最小。',
+    d:[
+      [35.8,36.9,35.3,35.9,1100000],[35.7,36.8,35.2,35.8,1080000],[35.6,36.7,35.1,35.7,1060000],
+      [35.5,36.6,35.0,35.6,1040000],[35.4,36.5,34.9,35.5,1020000],[35.3,36.4,34.8,35.4,1000000],
+      [35.2,36.3,34.7,35.3,980000],[35.1,36.2,34.6,35.2,960000],[35.0,36.1,34.5,35.1,940000],
+      [34.9,36.0,34.4,35.0,920000],[34.8,35.9,34.3,34.9,900000],[34.7,35.8,34.2,34.8,880000],
+      [34.6,35.7,34.1,34.7,860000],[34.5,35.6,34.0,34.6,840000],[34.4,35.5,33.9,34.5,820000],
+      [34.3,35.4,33.8,34.4,800000],[34.2,35.3,33.7,34.3,780000],[34.1,35.2,33.6,34.2,760000],
+      [34.0,35.1,33.5,34.1,740000],[33.8,35.0,33.2,34.26,720000]
+    ]
+  }
+};
+
+const VERDICTS = {SMH:'持有',QCMU:'等確認',TSLT:'減倉',TSMG:'加碼',SNDU:'停利½',ANEL:'觀察',MULL:'停損🚨',VSH:'出場🚨'};
+
+// ============================================================
+//  技術指標計算
+// ============================================================
+function mkDates(n){
+  const a=[], d=new Date('2026-04-14');
+  while(a.length<n){
+    if(d.getDay()&&d.getDay()<6) a.push(d.toLocaleDateString('zh-TW',{month:'2-digit',day:'2-digit'}));
+    d.setDate(d.getDate()+1);
+  }
+  return a;
+}
+function sma(a,p){return a.map((_,i)=>i<p-1?null:a.slice(i-p+1,i+1).reduce((s,v)=>s+v,0)/p);}
+function ema(a,p){
+  const k=2/(p+1); let prev; const o=[];
+  a.forEach((v,i)=>{
+    if(i<p-1){o.push(null);return;}
+    if(i===p-1){prev=a.slice(0,p).reduce((s,v)=>s+v,0)/p;o.push(prev);return;}
+    prev=v*k+prev*(1-k); o.push(prev);
+  });
+  return o;
+}
+function rsi(a,p=14){
+  return a.map((_,i)=>{
+    if(i<p)return null;
+    let g=0,l=0;
+    for(let j=i-p+1;j<=i;j++){const d=a[j]-a[j-1];d>0?g+=d:l+=Math.abs(d);}
+    g/=p; l/=p;
+    return l===0?100:parseFloat((100-100/(1+g/l)).toFixed(2));
+  });
+}
+function macd(a){
+  const e12=ema(a,12), e26=ema(a,26);
+  const ln=a.map((_,i)=>e12[i]!=null&&e26[i]!=null?parseFloat((e12[i]-e26[i]).toFixed(4)):null);
+  const vl=ln.filter(x=>x!=null), sg9=ema(vl,9);
+  const sg=[]; let si=0;
+  ln.forEach(v=>{if(v==null)sg.push(null);else{sg.push(sg9[si]!=null?parseFloat(sg9[si].toFixed(4)):null);si++;}});
+  return{ln,sg,ht:ln.map((v,i)=>v!=null&&sg[i]!=null?parseFloat((v-sg[i]).toFixed(4)):null)};
+}
+function bb(a,p=20,m=2){
+  const mid=sma(a,p), up=[], dn=[];
+  a.forEach((_,i)=>{
+    if(mid[i]==null){up.push(null);dn.push(null);return;}
+    const sl=a.slice(i-p+1,i+1), mn=mid[i];
+    const std=Math.sqrt(sl.reduce((s,v)=>s+(v-mn)**2,0)/p);
+    up.push(parseFloat((mn+m*std).toFixed(3)));
+    dn.push(parseFloat((mn-m*std).toFixed(3)));
+  });
+  return{mid,up,dn};
+}
+function kd(h,l,c,p=9){
+  const K=[], D=[];
+  c.forEach((_,i)=>{
+    if(i<p-1){K.push(null);D.push(null);return;}
+    const mh=Math.max(...h.slice(i-p+1,i+1)), ml=Math.min(...l.slice(i-p+1,i+1));
+    const rsv=mh===ml?50:(c[i]-ml)/(mh-ml)*100;
+    const kp=K.filter(x=>x!=null).at(-1);
+    const kv=kp==null?rsv:kp*2/3+rsv/3;
+    K.push(parseFloat(kv.toFixed(2)));
+    const dp=D.filter(x=>x!=null).at(-1);
+    D.push(parseFloat((dp==null?kv:dp*2/3+kv/3).toFixed(2)));
+  });
+  return{K,D};
+}
+
+// ============================================================
+//  圖表渲染
+// ============================================================
+let TC={}, CUR='SMH';
+
+function destroyTC(){
+  Object.values(TC).forEach(c=>{try{if(c&&typeof c.destroy==='function')c.destroy();}catch(e){}});
+  TC={};
+}
+
+function renderTech(t){
+  destroyTC();
+  const td=TECH[t];
+  const closes=td.d.map(r=>r[3]);
+  const highs=td.d.map(r=>r[1]);
+  const lows=td.d.map(r=>r[2]);
+  const opens=td.d.map(r=>r[0]);
+  const vols=td.d.map(r=>r[4]);
+  const dates=mkDates(closes.length);
+  const price=closes.at(-1);
+  const pnlP=((price-td.cost)/td.cost*100);
+  const R=rsi(closes), M=macd(closes), B=bb(closes), KD=kd(highs,lows,closes);
+  const ma5=sma(closes,5), ma10=sma(closes,10);
+  const lR=R.filter(x=>x!=null).at(-1)||50;
+  const lM=M.ln.filter(x=>x!=null).at(-1)||0;
+  const lK=KD.K.filter(x=>x!=null).at(-1)||50;
+  const lD=KD.D.filter(x=>x!=null).at(-1)||50;
+  const lBup=B.up.filter(x=>x!=null).at(-1)||price;
+  const lBdn=B.dn.filter(x=>x!=null).at(-1)||price;
+  const lBmid=B.mid.filter(x=>x!=null).at(-1)||price;
+
+  document.getElementById('priceChartLbl').textContent=`${t} — ${td.name} ｜ 收盤 + 布林帶 + MA5/MA10`;
+
+  const rC=lR>70?'#ef4444':lR<30?'#19c37d':'#f5b54a';
+  const pC=pnlP>=0?'#19c37d':'#ef4444';
+
+  document.getElementById('techKpi').innerHTML=`
+    <div class="tech-kpi-card"><div class="lbl">現價 / 成本</div><div class="val">$${price.toFixed(2)}</div><div class="sub2">成本 $${td.cost.toFixed(3)}</div></div>
+    <div class="tech-kpi-card"><div class="lbl">未實現損益</div><div class="val" style="color:${pC}">${pnlP>=0?'+':''}${pnlP.toFixed(2)}%</div><div class="sub2">${td.und}</div></div>
+    <div class="tech-kpi-card"><div class="lbl">RSI (14)</div><div class="val" style="color:${rC}">${lR.toFixed(1)}</div><div class="sub2">${lR>70?'超買':lR<30?'超賣':'中性'}</div></div>
+    <div class="tech-kpi-card"><div class="lbl">KD 位置</div><div class="val" style="color:${lK>80?'#ef4444':lK<20?'#19c37d':'#f5b54a'}">K${lK.toFixed(0)}/D${lD.toFixed(0)}</div><div class="sub2">${lK>lD?'K&gt;D偏多':'K&lt;D偏空'}</div></div>`;
+
+  const gc='#1e2a48', tc='#97a3bb';
+
+  // 價格圖
+  TC.p=new Chart(document.getElementById('techPriceChart'),{
+    type:'line',
+    data:{labels:dates,datasets:[
+      {label:'收盤',data:closes,borderColor:'#7cc4ff',borderWidth:2,pointRadius:0,tension:0.3,fill:false},
+      {label:'MA5',data:ma5,borderColor:'#f5b54a',borderWidth:1.5,borderDash:[4,2],pointRadius:0,tension:0.3,fill:false},
+      {label:'MA10',data:ma10,borderColor:'#f97316',borderWidth:1.5,borderDash:[2,3],pointRadius:0,tension:0.3,fill:false},
+      {label:'布林上',data:B.up,borderColor:'rgba(239,68,68,0.5)',borderWidth:1,borderDash:[3,3],pointRadius:0,tension:0.3,fill:false},
+      {label:'中軌',data:B.mid,borderColor:'rgba(150,150,150,0.35)',borderWidth:1,pointRadius:0,tension:0.3,fill:false},
+      {label:'布林下',data:B.dn,borderColor:'rgba(25,195,125,0.5)',borderWidth:1,borderDash:[3,3],pointRadius:0,tension:0.3,fill:false}
+    ]},
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      interaction:{mode:'index',intersect:false},
+      plugins:{
+        legend:{display:true,labels:{color:tc,font:{size:10},boxWidth:12,padding:6}},
+        tooltip:{callbacks:{label:ctx=>`${ctx.dataset.label}: $${ctx.parsed.y!=null?ctx.parsed.y.toFixed(2):'—'}`}}
+      },
+      scales:{
+        x:{grid:{color:gc},ticks:{color:tc,font:{size:10},maxTicksLimit:8}},
+        y:{grid:{color:gc},ticks:{color:tc,font:{size:10},callback:v=>'$'+v.toFixed(0)}}
+      }
+    }
+  });
+
+  // RSI 圖（含 70/30 參考線）
+  TC.r=new Chart(document.getElementById('techRsiChart'),{
+    type:'line',
+    data:{labels:dates,datasets:[
+      {label:'RSI',data:R,borderColor:'#a78bfa',borderWidth:1.5,pointRadius:0,tension:0.3,fill:false},
+      {label:'超買70',data:Array(dates.length).fill(70),borderColor:'rgba(239,68,68,0.4)',borderWidth:1,borderDash:[4,3],pointRadius:0,fill:false},
+      {label:'超賣30',data:Array(dates.length).fill(30),borderColor:'rgba(25,195,125,0.4)',borderWidth:1,borderDash:[4,3],pointRadius:0,fill:false}
+    ]},
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false}},
+      scales:{
+        x:{grid:{color:gc},ticks:{color:tc,font:{size:9},maxTicksLimit:5}},
+        y:{min:0,max:100,grid:{color:gc},ticks:{color:tc,font:{size:9},stepSize:25}}
+      }
+    }
+  });
+
+  // MACD 圖（line+bar combo）
+  const hBg=M.ht.map(v=>v==null?'transparent':v>=0?'rgba(25,195,125,0.65)':'rgba(239,68,68,0.65)');
+  TC.m=new Chart(document.getElementById('techMacdChart'),{
+    type:'bar',
+    data:{labels:dates,datasets:[
+      {type:'line',label:'MACD',data:M.ln,borderColor:'#7cc4ff',borderWidth:1.5,pointRadius:0,tension:0.3,fill:false,order:1},
+      {type:'line',label:'Signal',data:M.sg,borderColor:'#f97316',borderWidth:1.5,borderDash:[3,2],pointRadius:0,tension:0.3,fill:false,order:2},
+      {type:'bar',label:'Hist',data:M.ht,backgroundColor:hBg,order:3}
+    ]},
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false}},
+      scales:{
+        x:{grid:{color:gc},ticks:{color:tc,font:{size:9},maxTicksLimit:5}},
+        y:{grid:{color:gc},ticks:{color:tc,font:{size:9}}}
+      }
+    }
+  });
+
+  // KD 圖（含 80/20 參考線）
+  TC.k=new Chart(document.getElementById('techKdChart'),{
+    type:'line',
+    data:{labels:dates,datasets:[
+      {label:'K',data:KD.K,borderColor:'#7cc4ff',borderWidth:1.5,pointRadius:0,tension:0.3,fill:false},
+      {label:'D',data:KD.D,borderColor:'#ef4444',borderWidth:1.5,borderDash:[3,2],pointRadius:0,tension:0.3,fill:false},
+      {label:'超買80',data:Array(dates.length).fill(80),borderColor:'rgba(239,68,68,0.3)',borderWidth:1,borderDash:[4,3],pointRadius:0,fill:false},
+      {label:'超賣20',data:Array(dates.length).fill(20),borderColor:'rgba(25,195,125,0.3)',borderWidth:1,borderDash:[4,3],pointRadius:0,fill:false}
+    ]},
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false}},
+      scales:{
+        x:{grid:{color:gc},ticks:{color:tc,font:{size:9},maxTicksLimit:5}},
+        y:{min:0,max:100,grid:{color:gc},ticks:{color:tc,font:{size:9},stepSize:25}}
+      }
+    }
+  });
+
+  // 成交量圖（收漲綠色，收跌紅色）
+  const vBg=closes.map((c,i)=>i===0||c>=opens[i]?'rgba(25,195,125,0.6)':'rgba(239,68,68,0.6)');
+  TC.v=new Chart(document.getElementById('techVolChart'),{
+    type:'bar',
+    data:{labels:dates,datasets:[{label:'Vol',data:vols,backgroundColor:vBg}]},
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false}},
+      scales:{
+        x:{grid:{color:gc},ticks:{color:tc,font:{size:9},maxTicksLimit:5}},
+        y:{grid:{color:gc},ticks:{color:tc,font:{size:9},callback:v=>v>=1e6?(v/1e6).toFixed(1)+'M':v>=1000?(v/1000).toFixed(0)+'K':v}}
+      }
+    }
+  });
+
+  // 指標摘要面板
+  const rPct=Math.min(100,Math.max(0,lR)).toFixed(1);
+  const s1=(price*0.95).toFixed(2), s2=(price*0.90).toFixed(2);
+  const r1=(price*1.05).toFixed(2), r2=(price*1.10).toFixed(2);
+  const macdSignal=lM>0?'金叉偏多 ▲':'死叉偏空 ▼';
+  const kdSignal=lK>80?'高位警告 ⚠️':lK<20?'超賣金叉 ✅':lK>lD?'黃金交叉 ▲':'死叉偏空 ▼';
+  const bbPos=price>lBmid?'中軌上方（偏強）':'中軌下方（偏弱）';
+
+  document.getElementById('techIndLeft').innerHTML=`
+    <div class="ind-title">🔢 技術指標摘要</div>
+    <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px;">
+      <span>RSI(14)</span><span style="color:${rC};font-weight:600;">${lR.toFixed(1)} — ${lR>70?'超買 ⚠️':lR<30?'超賣 ✅':'中性'}</span>
+    </div>
+    <div class="rsi-track"><div class="rsi-fill" style="width:${rPct}%;background:${rC};"></div></div>
+    <table class="sup-table" style="margin-top:8px;">
+      <tr><td>MACD</td><td>${macdSignal} (${lM.toFixed(3)})</td></tr>
+      <tr><td>KD</td><td>K${lK.toFixed(0)} / D${lD.toFixed(0)} — ${kdSignal}</td></tr>
+      <tr><td>布林位置</td><td>${bbPos}</td></tr>
+      <tr><td>布林上軌</td><td>$${lBup.toFixed(2)}</td></tr>
+      <tr><td>布林下軌</td><td>$${lBdn.toFixed(2)}</td></tr>
+      <tr><td>帶寬</td><td>${(lBup-lBdn).toFixed(2)}</td></tr>
+    </table>`;
+
+  document.getElementById('techIndRight').innerHTML=`
+    <div class="ind-title">📐 支撐壓力 & 布局策略</div>
+    <table class="sup-table">
+      <tr><td>壓力2 (+10%)</td><td>$${r2}</td></tr>
+      <tr><td>壓力1 (+5%)</td><td>$${r1}</td></tr>
+      <tr><td>布林上軌</td><td>$${lBup.toFixed(2)}</td></tr>
+      <tr><td>現價</td><td style="color:#7cc4ff;">$${price.toFixed(2)}</td></tr>
+      <tr><td>布林中軌</td><td>$${lBmid.toFixed(2)}</td></tr>
+      <tr><td>支撐1 (-5%)</td><td>$${s1}</td></tr>
+      <tr><td>布林下軌</td><td>$${lBdn.toFixed(2)}</td></tr>
+      <tr><td>支撐2 (-10%)</td><td>$${s2}</td></tr>
+    </table>
+    <div class="strat-box ${td.vc}" style="margin-top:8px;">${td.strat}</div>`;
+}
+
+// 工具列
+function buildToolbar(){
+  const tb=document.getElementById('techToolbar');
+  tb.innerHTML='';
+  Object.keys(TECH).forEach(t=>{
+    const btn=document.createElement('button');
+    btn.className='tech-btn'+(t===CUR?' active':'');
+    btn.textContent=`${t}  ${VERDICTS[t]||''}`;
+    btn.onclick=()=>{
+      document.querySelectorAll('.tech-btn').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      CUR=t;
+      renderTech(t);
+    };
+    tb.appendChild(btn);
+  });
+}
+
+// 啟動
+buildToolbar();
+renderTech(CUR);
+</script>
 </body>
 </html>
