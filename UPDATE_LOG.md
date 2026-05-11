@@ -7,6 +7,19 @@
 
 ---
 
+## 2026-05-12 — 券商美股庫存截圖全量更新（QCMU 71、MULL、VSH；無 QCOM 正股）
+
+### 變更
+- **匯率**：`31.405`（截圖）。
+- **美股 11 檔**：SMH、QCMU、AVGO、ANEL、TSLT、ONDL、TSMG、MULL、SNDU、VSH、AIXI — 股數／成本／市價依 **2026/05/12 券商表**；**已移除 QCOM 正股**。
+- **新增**：**MULL**（GraniteShares 2× Long MU Daily）、**VSH**（Vishay）。
+- **QCMU**：46→**71** 股；**ANEL** 50→**55**；**TSLT** 30→**35**；**TSMG** 30→**15**；**SNDU** 3→**2**；**AIXI** 70→**3**（成本結構已變）。
+- **`user_strategy` / `leverage_map` / `effective_exposure` / `underlying_analysis` / `analysts.votes` / `actions` / `allocation` / `forecast` / `horizon_views`**：同步新結構與論述。
+- **台股**：`TW` 區仍為前次 BigGo 值；`portfolio.md` 已註記待補台股新截圖。
+- **產出驗證**：`python scripts/build_stocks_json.py` → 總市值 **NT$945,624**、總損益 **+22.1%**（+NT$171,128）；23 key + 子結構 **OK**。
+
+---
+
 ## 2026-05-11 — BigGo 台股 5/11 盤中 + 美股 5/8 收盤同步儀表板
 
 ### 變更

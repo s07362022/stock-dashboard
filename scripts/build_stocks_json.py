@@ -33,8 +33,8 @@ from datetime import datetime
 #  ==== 1. 可變值區（每次更新只改這裡） ====
 # =============================================================================
 
-FX = 31.425                                      # 匯率 USD→TWD（portfolio 參考）
-UPDATE_NOTE = "BigGo 2026/05/11 台股 ~13:30 UTC+8／美股 2026/05/08 收盤：台股 3711 +4.07%、00830 +4.71%、2337 +4.25%；2330 回檔至 2235（前收 2290）；0050 96.9。美股 SMH $566.54（+4.9%）、QCOM $219.09（+8.17%）、AVGO $430（+4.23%）、QCMU $39.5（+15.77%）、ANEL $15.98、AIXI $0.6101（弱勢）；TSMG $39.61。ONDL／部分槓桿 ETF BigGo 無即時價處沿用前次 close。"
+FX = 31.405                                      # 匯率 USD→TWD（券商截圖 2026/05/12）
+UPDATE_NOTE = "券商庫存 2026/05/12：美股已換倉—**無 QCOM 正股**，**QCMU 71 股**（2×QCOM）、**MULL 1 股**（GraniteShares 2×MU）、**VSH 5 股**；SMH $575.26、AVGO $429.87、ANEL $14.83×55、TSLT $22.89×35、TSMG $38.47×15、SNDU $118.05×2、ONDL $14.80、AIXI $12.28×3。台股區仍用前次 BigGo／截圖，待你補台股新圖再同步。"
 
 # ---- 1.1 台股持倉（依 BigGo 2026/05/11 UTC+8 盤中／收盤標示）----
 TW = [
@@ -46,18 +46,19 @@ TW = [
     {"symbol":"3711.TW","name":"日月光投控","shares":86,"buy_price":478.58,"close":537.0,"change":21,"pct":4.07,"sector":"封裝測試","tag":"core"},
 ]
 
-# ---- 1.2 美股持倉（依 BigGo 2026/05/08 美東收盤為主；盤前另見官網）----
+# ---- 1.2 美股持倉（券商截圖 2026/05/12；change/pct 日內變化未列者填 0）----
 US = [
-    {"symbol":"ANEL","name":"Defiance 2× Long ANET Daily","shares":50,"buy_price":15.84,"close":15.98,"change":-0.07,"pct":-0.44,"sector":"ANET 2×（日槓桿）","tag":"satellite","underlying":"ANET","multiplier":2},
-    {"symbol":"QCOM","name":"Qualcomm","shares":1,"buy_price":226.88,"close":219.09,"change":16.54,"pct":8.17,"sector":"半導體／邊緣AI／資料中心","tag":"core"},
-    {"symbol":"AIXI","name":"Xiao-I Corp","shares":70,"buy_price":1.388027,"close":0.6101,"change":-0.1129,"pct":-15.62,"sector":"AI 軟體（高風險）","tag":"exit"},
-    {"symbol":"ONDL","name":"Defiance 2× Long ONDS Daily","shares":30,"buy_price":19.85,"close":13.2,"change":0,"pct":0,"sector":"ONDS 2×","tag":"exit","underlying":"ONDS","multiplier":2},
-    {"symbol":"AVGO","name":"Broadcom","shares":5,"buy_price":382.957429,"close":430.0,"change":17.44,"pct":4.23,"sector":"AI 半導體龍頭","tag":"core"},
-    {"symbol":"QCMU","name":"Direxion Daily QCOM Bull 2X ETF","shares":46,"buy_price":39.030381,"close":39.5,"change":5.38,"pct":15.77,"sector":"QCOM 2×日槓桿","tag":"satellite","underlying":"QCOM","multiplier":2},
-    {"symbol":"SMH","name":"VanEck Semiconductor ETF","shares":6,"buy_price":439.213333,"close":566.54,"change":26.44,"pct":4.9,"sector":"半導體 ETF","tag":"core"},
-    {"symbol":"SNDU","name":"T-Rex 2× Long SNDK Daily","shares":3,"buy_price":80.633942,"close":110.2,"change":0,"pct":0,"sector":"SNDK 2×","tag":"growth","underlying":"SNDK","multiplier":2},
-    {"symbol":"TSLT","name":"T-Rex 2× Long Tesla Daily","shares":30,"buy_price":17.781309,"close":21.82,"change":0,"pct":0,"sector":"TSLA 2×","tag":"satellite","underlying":"TSLA","multiplier":2},
-    {"symbol":"TSMG","name":"Leverage Shares 2× Long TSM Daily","shares":30,"buy_price":36.843334,"close":39.61,"change":-0.78,"pct":-1.93,"sector":"TSM ADR 2×","tag":"core","underlying":"TSM","multiplier":2},
+    {"symbol":"SMH","name":"VanEck Semiconductor ETF","shares":6,"buy_price":439.213333,"close":575.26,"change":0,"pct":0,"sector":"半導體 ETF","tag":"core"},
+    {"symbol":"QCMU","name":"Direxion Daily QCOM Bull 2X ETF","shares":71,"buy_price":40.406303,"close":45.1,"change":0,"pct":0,"sector":"QCOM 2×日槓桿","tag":"satellite","underlying":"QCOM","multiplier":2},
+    {"symbol":"AVGO","name":"Broadcom","shares":5,"buy_price":382.957429,"close":429.87,"change":0,"pct":0,"sector":"AI 半導體龍頭","tag":"core"},
+    {"symbol":"ANEL","name":"Defiance 2× Long ANET Daily","shares":55,"buy_price":15.769091,"close":14.83,"change":0,"pct":0,"sector":"ANET 2×（日槓桿）","tag":"satellite","underlying":"ANET","multiplier":2},
+    {"symbol":"TSLT","name":"T-Rex 2× Long Tesla Daily","shares":35,"buy_price":18.541122,"close":22.89,"change":0,"pct":0,"sector":"TSLA 2×","tag":"satellite","underlying":"TSLA","multiplier":2},
+    {"symbol":"ONDL","name":"Defiance 2× Long ONDS Daily","shares":30,"buy_price":19.85,"close":14.8,"change":0,"pct":0,"sector":"ONDS 2×","tag":"exit","underlying":"ONDS","multiplier":2},
+    {"symbol":"TSMG","name":"Leverage Shares 2× Long TSM Daily","shares":15,"buy_price":36.843334,"close":38.47,"change":0,"pct":0,"sector":"TSM ADR 2×","tag":"core","underlying":"TSM","multiplier":2},
+    {"symbol":"MULL","name":"GraniteShares 2× Long MU Daily","shares":1,"buy_price":525.1,"close":547.5,"change":0,"pct":0,"sector":"美光 MU 2×日槓桿","tag":"satellite","underlying":"MU","multiplier":2},
+    {"symbol":"SNDU","name":"T-Rex 2× Long SNDK Daily","shares":2,"buy_price":80.633942,"close":118.05,"change":0,"pct":0,"sector":"SNDK 2×","tag":"growth","underlying":"SNDK","multiplier":2},
+    {"symbol":"VSH","name":"Vishay Intertechnology","shares":5,"buy_price":35.0,"close":34.82,"change":0,"pct":0,"sector":"被動元件／分離式半導體","tag":"satellite"},
+    {"symbol":"AIXI","name":"Xiao-I Corp","shares":3,"buy_price":32.387307,"close":12.28,"change":0,"pct":0,"sector":"AI 軟體（高風險）","tag":"exit"},
 ]
 
 # =============================================================================
@@ -107,9 +108,11 @@ data = {
     "fx_rate": FX,
 
     "user_strategy": {
-        "philosophy": "台股核心 0050/00631L + 2330/3711；美股半導體與槓桿衛星並存。**ANEL 為 2×ANET 日槓桿**，不等同長抱 ANET 正股。AIXI／ONDL 為戰術性虧損部位（使用者意向：反彈後賣）。",
+        "philosophy": "台股核心 0050/00631L + 2330/3711；美股以 **SMH／AVGO** 為核心，**QCMU（2×QCOM）+ MULL（2×MU）+ 多檔日槓桿**疊加半導體 β，波動顯著高於單抱正股。**已無 QCOM 正股**。VSH 為非槓桿衛星。AIXI／ONDL 仍為高風險／虧損監控區。",
         "leverage_map": [
             {"etf":"00631L","underlying":"0050","multiplier":2,"treat_as":"long_term_core"},
+            {"etf":"QCMU","underlying":"QCOM","multiplier":2,"treat_as":"underlying_proxy"},
+            {"etf":"MULL","underlying":"MU","multiplier":2,"treat_as":"underlying_proxy"},
             {"etf":"ANEL","underlying":"ANET","multiplier":2,"treat_as":"underlying_proxy"},
             {"etf":"TSLT","underlying":"TSLA","multiplier":2,"treat_as":"underlying_proxy"},
             {"etf":"TSMG","underlying":"TSM","multiplier":2,"treat_as":"underlying_proxy"},
@@ -162,8 +165,8 @@ data = {
             "cost_usd": round(us_cost_usd, 2),
             "pnl_usd": round(us_mv_usd - us_cost_usd, 2),
             "winners": us_w, "losers": us_l,
-            "highlight": "BigGo 5/8 收：QCOM +8.17%、SMH +4.9%、AVGO +4.23%、QCMU +15.77%；AIXI 弱勢；ONDL 仍深虧（BigGo 無即時價）。",
-            "verdict": "半導體與 QCOM 事件驅動強；槓桿標的（ANEL/ONDL/TSLT/SNDU/TSMG）留意衰減與波動。"
+            "highlight": "券商 5/12：SMH +30.97%、SNDU +46.4%、TSLT +23.45%、QCMU +11.61%、AVGO +12.25%；ONDL -25.44%、AIXI -62.08%、ANEL -5.95%。**QCOM 曝險僅剩 QCMU（71 股 2×）**；新增 **MULL（2×MU）**、**VSH**。",
+            "verdict": "半導體多層槓桿（QCMU/MULL/ANEL/TSLT/TSMG/SNDU）與 SMH 重疊—宜設**總槓桿上限**；正股型核心仍看 AVGO+SMH。"
         }
     },
 
@@ -171,7 +174,7 @@ data = {
         {"name":"S&P 500","code":"SPX","value":7391.10,"change":54.5,"pct":0.74},
         {"name":"NASDAQ","code":"IXIC","value":26144.57,"change":341.6,"pct":1.32},
         {"name":"Dow Jones","code":"DJI","value":49621.33,"change":24.8,"pct":0.05},
-        {"name":"SMH(費半ETF)","code":"SMH","value":566.54,"change":26.44,"pct":4.9},
+        {"name":"SMH(費半ETF)","code":"SMH","value":575.26,"change":0,"pct":0},
         {"name":"VIX","code":"VIX","value":17.0,"change":0.2,"pct":1.2},
         {"name":"台股加權","code":"TWII","value":41138,"change":369,"pct":0.91},
     ],
@@ -180,20 +183,22 @@ data = {
     "us_stocks": US,
 
     "effective_exposure": [
-        {"name":"0050＋00631L（台股核心）","icon":"🇹🇼","components":["0050","00631L ×2 槓桿"],"exposure_twd":430000,"pct_effective":52.0,"long_term":True},
-        {"name":"台積電／TSM 曝險","icon":"🏭","components":["2330 現股","TSMG 2×"],"exposure_twd":145000,"pct_effective":17.5,"long_term":True},
-        {"name":"半導體 ETF（SMH＋00830）","icon":"🔌","components":["SMH","00830.TW"],"exposure_twd":125000,"pct_effective":15.0,"long_term":True},
-        {"name":"Broadcom AVGO","icon":"💎","components":["AVGO"],"exposure_twd":67500,"pct_effective":8.2,"long_term":True},
-        {"name":"Qualcomm QCOM","icon":"📱","components":["QCOM"],"exposure_twd":6900,"pct_effective":0.8,"long_term":True},
-        {"name":"記憶體／槓桿 SNDU","icon":"💾","components":["SNDU 2×"],"exposure_twd":35000,"pct_effective":4.2,"long_term":False},
-        {"name":"Tesla 槓桿 TSLT","icon":"🚗","components":["TSLT 2×"],"exposure_twd":20500,"pct_effective":2.5,"long_term":False},
-        {"name":"ANET 槓桿 ANEL","icon":"🌐","components":["ANEL 2×"],"exposure_twd":24100,"pct_effective":2.9,"long_term":False},
-        {"name":"待出清／高風險","icon":"⚠️","components":["AIXI","ONDL"],"exposure_twd":18000,"pct_effective":2.2,"long_term":False},
+        {"name":"0050＋00631L（台股核心）","icon":"🇹🇼","components":["0050","00631L ×2 槓桿"],"exposure_twd":430000,"pct_effective":45.0,"long_term":True},
+        {"name":"台積電／TSM 曝險","icon":"🏭","components":["2330 現股","TSMG 2×"],"exposure_twd":135000,"pct_effective":14.2,"long_term":True},
+        {"name":"半導體 ETF（SMH＋00830）","icon":"🔌","components":["SMH","00830.TW"],"exposure_twd":118000,"pct_effective":12.4,"long_term":True},
+        {"name":"Broadcom AVGO","icon":"💎","components":["AVGO"],"exposure_twd":67500,"pct_effective":7.1,"long_term":True},
+        {"name":"QCOM 槓桿 QCMU","icon":"📱","components":["QCMU 2× 71 股"],"exposure_twd":100600,"pct_effective":10.6,"long_term":False},
+        {"name":"美光槓桿 MULL","icon":"🧠","components":["MULL 2×MU"],"exposure_twd":17200,"pct_effective":1.8,"long_term":False},
+        {"name":"記憶體 SNDU","icon":"💾","components":["SNDU 2×"],"exposure_twd":7400,"pct_effective":0.8,"long_term":False},
+        {"name":"Tesla 槓桿 TSLT","icon":"🚗","components":["TSLT 2×"],"exposure_twd":25200,"pct_effective":2.6,"long_term":False},
+        {"name":"ANET 槓桿 ANEL","icon":"🌐","components":["ANEL 2×"],"exposure_twd":25600,"pct_effective":2.7,"long_term":False},
+        {"name":"Vishay VSH","icon":"🔧","components":["VSH 正股"],"exposure_twd":5500,"pct_effective":0.6,"long_term":False},
+        {"name":"待出清／高風險","icon":"⚠️","components":["AIXI","ONDL"],"exposure_twd":15200,"pct_effective":1.6,"long_term":False},
     ],
 
     "underlying_analysis": [
         {
-            "ticker":"AVGO","name":"Broadcom","price":430.0,"today_pct":4.23,"in_portfolio_twd":67563,
+            "ticker":"AVGO","name":"Broadcom","price":429.87,"today_pct":0,"in_portfolio_twd":67507,
             "thesis":"AI 客製 ASIC + 網路基礎設施雙引擎；財報與指引為多頭主軸",
             "pros":["AI 相關營收占比提升","客戶涵蓋超大雲","現金流與回購"],
             "cons":["估值不低","單日波動大"],
@@ -207,11 +212,25 @@ data = {
             "consensus_target":"ADR 級距請對照外資最新","rating":"Strong Buy","next_catalyst":"季報法說","user_action":"🟢 2330 為主、TSMG 為槓桿衛星"
         },
         {
-            "ticker":"QCOM","name":"Qualcomm","price":219.09,"today_pct":8.17,"in_portfolio_twd":6885,
-            "thesis":"Q2 FY2026 EPS $6.88（超預期 173%）+ 超大雲（hyperscaler）客製矽晶片 Q4 2026 出貨；資料中心題材急拉；6/24 投資人日待確認細節",
-            "pros":["超大雲客製 ASIC 勝案（首次）","車用 +50% YoY","授權+晶片雙引擎","EPS 超預期彈性高"],
-            "cons":["手機業務仍弱（存儲器價格高）","Q3 指引 $9.6B 低於共識","股價已遠超分析師目標 $168","執行風險：客製案多代期限與量能"],
-            "consensus_target":"法說前共識 $168.50；RBC 升至 $175；Citi/JPM/WFC 至 $160；股價 $219 已遠超多數目標—升評追價窗口","rating":"Hold→升評中（分歧）","next_catalyst":"6/24 投資人日（資料中心+實體AI）、客製矽初始出貨進度","user_action":"🟡 1 股持有：股價已高於共識，設停利 $240 / 停損 $190"
+            "ticker":"QCMU","name":"Direxion 2× Long QCOM Daily","price":45.1,"today_pct":0,"in_portfolio_twd":100562,
+            "thesis":"**已無 QCOM 正股**；以 **71 股 QCMU** 集中表達 QCOM 方向曝險（日報酬 2×）。與 SMH、AVGO 同向時波動放大；6/24 投資人日仍影響底層 QCOM。",
+            "pros":["免個股選擇即可放大 QCOM 動能","與 AI／數據中心敘事連動"],
+            "cons":["日槓桿衰減與波動","71 股名義曝險大","若 QCOM 回檔則 2× 回撤更深"],
+            "consensus_target":"跟隨 QCOM 分析師共識（請以最新為準）","rating":"工具型（非基本面評等）","next_catalyst":"QCOM 投資人日／財報","user_action":"🟡 設**總曝險上限**；可逢大漲分批鎖利、與 SMH 擇一降重疊"
+        },
+        {
+            "ticker":"MULL","name":"GraniteShares 2× Long MU Daily","price":547.5,"today_pct":0,"in_portfolio_twd":17194,
+            "thesis":"**1 股**高單價日槓桿 ETF，底層 **美光 MU**；與 **SNDU（SNDK）**、記憶體循環同向疊加。",
+            "pros":["AI 記憶體／HBM 敘事強時攻擊性高"],
+            "cons":["日槓桿重置","單標的集中","與 SMH、QCMU 並列時總 β 過高"],
+            "consensus_target":"跟隨 MU 走勢","rating":"高波動工具","next_catalyst":"MU 財報、記憶體報價","user_action":"🟡 僅衛星；不宜再加碼放大與 SNDU 之重疊"
+        },
+        {
+            "ticker":"VSH","name":"Vishay Intertechnology","price":34.82,"today_pct":0,"in_portfolio_twd":5468,
+            "thesis":"分離式與被動元件供應商；**非槓桿**，可作半導體供應鏈衛星。",
+            "pros":["與車用／工業需求連動","波動低於槓桿 ETF"],
+            "cons":["成長性不如 AI 晶片設計","毛利週期敏感"],
+            "consensus_target":"參考法人區間","rating":"Hold／中性偏多","next_catalyst":"財報、庫存週期","user_action":"🟢 5 股小部位：可續抱或與 SMH 擇一精簡"
         },
         {
             "ticker":"ANET","name":"Arista Networks","price":141.77,"today_pct":0.01,"in_portfolio_twd":24330,
@@ -240,7 +259,7 @@ data = {
     "horizon_views": {
         "short_term_1m": {
             "title": "🔭 短線（~1 個月）情境預測",
-            "intro": "5/11 台股：3711、00830、2337 強勢，2330 回檔整理；美股 5/8 費半 SMH +4.9%、QCOM +8.17%、AVGO +4.23%。槓桿 ETF（ANEL、ONDL、TSLT、SNDU、QCMU）注意**日衰減**與波動。地緣／油價仍為變數。",
+            "intro": "5/12 美股庫存：核心 **SMH／AVGO** 強勢；**QCMU 71 股**與 **MULL（2×MU）** 大幅拉高半導體 β；**無 QCOM 正股**。槓桿群（QCMU/MULL/ANEL/TSLT/TSMG/SNDU）務必控總上限；**ONDL、AIXI** 仍虧。台股區待新截圖同步。",
             "tw_index": {
                 "current": 41138,
                 "bull": 42500, "p_bull": 40,
@@ -254,9 +273,9 @@ data = {
                 {"symbol":"2337.TW","name":"旺宏","current":159.5,"bull":175,"base":165,"bear":145,"view":"注意股波動；記憶體敘事輪動"},
                 {"symbol":"3711.TW","name":"日月光","current":537,"bull":580,"base":545,"bear":500,"view":"LEAP/CoWoS 受惠；凱基 588"},
                 {"symbol":"ANET","name":"Arista Networks","current":141.77,"bull":175,"base":155,"bear":125,"view":"Strong Buy 共識；ANEL 為 2× 短線工具"},
-                {"symbol":"QCOM","name":"Qualcomm","current":219.09,"bull":250,"base":220,"bear":190,"view":"超大雲勝案推動；6/24 投資人日；股價已超大多數目標"},
-                {"symbol":"AVGO","name":"Broadcom","current":430.0,"bull":500,"base":455,"bear":395,"view":"AI 主軸；Morningstar FV $500；Q2 $22B 兌現待確認"},
-                {"symbol":"SMH","name":"VanEck SMH","current":566.54,"bull":610,"base":570,"bear":520,"view":"費半強勢延伸；守 530"},
+                {"symbol":"MU","name":"Micron（底層）","current":118,"bull":145,"base":125,"bear":95,"view":"MULL/SNDU 共同底層敘事；財報與記憶體報價主導"},
+                {"symbol":"AVGO","name":"Broadcom","current":429.87,"bull":500,"base":455,"bear":395,"view":"AI 主軸；Morningstar FV $500；Q2 指引兌現"},
+                {"symbol":"SMH","name":"VanEck SMH","current":575.26,"bull":620,"base":580,"bear":530,"view":"費半強勢；居高鎖利與回撤門檻並重"},
                 {"symbol":"SNDK","name":"SanDisk","current":1240,"bull":1350,"base":1200,"bear":950,"view":"NAND 強勢延續；注意波動"},
                 {"symbol":"TSLA","name":"Tesla","current":395,"bull":450,"base":400,"bear":320,"view":"TSLT 2X 緊盯；Robotaxi 進度催化"},
             ]
@@ -280,15 +299,16 @@ data = {
                 {"symbol":"ANET","name":"Arista Networks","view":"AI 網路 400G/800G 龍頭"},
             ],
             "exit_or_reduce": [
-                {"symbol":"AIXI","name":"Xiao-I","view":"深虧仙股；使用者：等反彈賣—仍建議設**時間停損**"},
-                {"symbol":"ONDL","name":"ONDS 2X","view":"底層弱勢時 2×失血；使用者：等反彈賣"},
+                {"symbol":"AIXI","name":"Xiao-I","view":"仍深虧；3 股—建議停損或反彈減碼，不宜攤平"},
+                {"symbol":"ONDL","name":"ONDS 2X","view":"仍虧約 -25%；2× 弱底層；減碼優先"},
+                {"symbol":"MULL","name":"2×MU","view":"與 SNDU／SMH 同向疊加時總 β 過高；僅能當衛星"},
                 {"symbol":"ANEL","name":"2×ANET","view":"屬短線槓桿工具；要長抱網路龍頭請對照 ANET 正股"},
             ]
         },
         "peak_decision": {
             "title": "❓ 加碼 / 持有 / 賣？— 我的判斷",
-            "current_status": "2026/05/11：庫存依 portfolio；BigGo 台股盤中、美股 5/8 收盤已同步至儀表板；半導體與封測仍為主軸。",
-            "verdict": "『核心（0050／2330／AVGO／SMH）續抱＋槓桿衛星控比重』；**AIXI／ONDL** 依使用者策略『反彈再賣』，仍須預設時間停損與流動性風險。",
+            "current_status": "2026/05/12：美股庫存已依券商截圖更新（**QCMU 71、MULL、VSH**；**已無 QCOM 正股**）。台股列仍為前次資料，補圖後可再同步。",
+            "verdict": "『AVGO＋SMH』為美股核心；**QCMU＋MULL** 為高 β 工具—與多檔 2× 並存時務必**封頂槓桿**。**ONDL／AIXI** 停損或反彈減碼二擇一，避免無限攤平。",
             "actions": [
                 {"type":"🟢 加碼／續抱","items":[
                     "00631L 與 0050 核心長抱策略不變",
@@ -297,8 +317,8 @@ data = {
                 ]},
                 {"type":"🟡 持有（控槓桿）","items":[
                     "ANEL：等同 **2×ANET 短線曝險**；不宜用『長期買 ANET』心智持有",
-                    "TSLT／TSMG／SNDU：守停損與部位上限",
-                    "QCOM 1 股：事件波動大，設停利／回撤門檻",
+                    "TSLT／TSMG／SNDU／**QCMU／MULL**：守停損與**合計槓桿上限**（與 SMH 重疊時尤甚）",
+                    "VSH：小衛星，可續抱或與 SMH 精簡二擇一",
                 ]},
                 {"type":"🔴 反彈調節／出清","items":[
                     "AIXI：等政策／流動性反彈分批降（依使用者：等回漲再賣）",
@@ -322,12 +342,12 @@ data = {
             ],
             "morning_plan": [
                 {"step":1,"action":"9:00-9:15 觀察開盤量能","detail":"美股 5/8 連續 6 週新高；台股預期跳空開高；若 +1% 以上 → 觀察量能確認；SMH 創新高帶動 00830、2330 等"},
-                {"step":2,"action":"9:00 立即評估 AIXI 賣單（美股）","detail":"🔴 AIXI $0.6134（-15.16% 今日）；70 股 × $0.6134 ≈ $43；繼續等反彈不現實 → 設 $0.75 GTC 賣單，或直接市價止損"},
-                {"step":3,"action":"9:30 評估 ONDL 出清（美股）","detail":"🔴 ONDL $13.20（-33.5% 損失）；底層 ONDS 疲弱；等反彈至 $14.50-15 再設 GTC；注意流動性"},
+                {"step":2,"action":"盤前檢視 AIXI（美股）","detail":"🔴 AIXI 3 股 @$12.28，仍約 -62%；部位小但邏輯上可設**時間停損**或反彈減碼，不宜再攤平"},
+                {"step":3,"action":"評估 ONDL（美股）","detail":"🔴 ONDL $14.80（仍約 -25%）；30 股 × 2× 波動大；反彈減碼或硬停損二選一"},
                 {"step":4,"action":"10:00 觀察台積電 2330","detail":"🟢 外資目標 2,288-3,030；現價 2,290 已在最低目標；若開盤站穩 2,250 → 持有；若回 2,200 → 考慮加 1 股"},
                 {"step":5,"action":"10:30 觀察日月光 3711","detail":"🟢 CoWoS+LEAP 敘事；Q1 EPS 3.24 超預期；目標凱基 588；若回 ≤500 → 考慮加 1 股"},
                 {"step":6,"action":"11:00 觀察 ANEL 決策","detail":"🟡 ANEL $15.47（ANET $139.69）；ANET 分析師均值 $175.18（+25% 上行）；小部位（$773）→ 若 ANET 近期有財報催化劑則續持；否則設停損 $13"},
-                {"step":7,"action":"收盤前評估 QCOM","detail":"🟡 QCOM $217.67；已遠超分析師均值 $168；6/24 投資人日前暫觀望；1 股設停利 $240 / 停損 $195"},
+                {"step":7,"action":"收盤前檢視 QCMU／MULL","detail":"🟡 **無 QCOM 正股**；QCMU 71 股為 2× 曝險。6/24 QCOM 事件前後波動大 → 設**回撤%數**或分批鎖利；MULL 1 股勿再加碼放大記憶體槓桿"},
             ],
             "watch_list_for_tomorrow": [
                 {"symbol":"2330.TW","name":"台積電","buy_zone":"2,200-2,250","target":"2,400-3,030","action":"AI 製程核心；回檔加 1 股；外資最低目標 7%+ 折讓"},
@@ -337,22 +357,23 @@ data = {
                 {"symbol":"6669.TW","name":"緯穎","buy_zone":"4,700-4,800","target":"5,500-6,700","action":"AI 伺服器龍頭；野村目標 6,670；觀察標的"},
             ],
             "avoid_list": [
-                {"symbol":"AIXI","name":"Xiao-I","reason":"今日 -15.16%；仙股；虧損 -55%；繼續等反彈風險極大"},
-                {"symbol":"ONDL","name":"ONDS 2X","reason":"底層 ONDS 疲弱；-33.5% 損失；注意流動性"},
+                {"symbol":"AIXI","name":"Xiao-I","reason":"仍深虧約 -62%；3 股部位小但邏輯上不宜攤平"},
+                {"symbol":"ONDL","name":"ONDS 2X","reason":"仍約 -25%；2× 與弱底層組合"},
                 {"symbol":"ANEL","name":"2×ANET","reason":"槓桿日衰減；不宜追加；小部位可留博短期 ANET 上行"},
             ],
             "risk_alerts": [
                 "🚨 美伊和平談判破局：油價可能急反彈至 $115+；半導體將承壓",
-                "🚨 QCOM 股價大幅高於分析師共識 $168：若 6/24 投資人日不如預期 → 急跌風險",
+                "🚨 **QCMU** 緊盯底層 QCOM：6/24 投資人日或財報不如預期 → **2×** 急跌",
                 "🚨 Fed 若 9 月前不降息（核心 PCE 仍 3.1%）：高估值科技股（ANET P/E ~60）受壓",
                 "🚨 台股加權若跌破 38,000（心理支撐）：短線轉弱",
-                "🚨 AIXI 流動性風險：極小市值（$1,088 萬）→ 賣單可能無法執行",
+                "🚨 **MULL＋SNDU＋SMH**：記憶體／費半同向時總 β 過高",
             ],
-            "one_line": "5/11 起：費半與 QCOM／AVGO 延續強勢敘事；台股 3711／00830 強、2330 回檔分化；主軸『核心續抱 + 槓桿封頂 + AIXI／ONDL 有紀律調節』"
+            "one_line": "5/12：**SMH／AVGO**當核心，**QCMU＋MULL**為高 β 工具須封頂；**ONDL／AIXI**務必有紀律；台股待補新圖同步。"
         }
     },
 
     "news": [
+        {"date":"2026-05-12","category":"持倉","title":"美股庫存更新：無 QCOM 正股；QCMU **71** 股、ANEL **55**、TSLT **35**、TSMG **15**、SNDU **2**、AIXI **3**；新增 **MULL（2×MU）**、**VSH**；SMH $575.26、AVGO $429.87","impact":"neutral","source":"券商截圖／使用者"},
         {"date":"2026-05-11","category":"台股","title":"BigGo：3711 $537（+4.07%）、00830 $82.3（+4.71%）、2337 $159.5（+4.25%）；2330 $2,235（-2.4%）；0050 $96.9","impact":"mixed","source":"BigGo"},
         {"date":"2026-05-08","category":"美股大盤","title":"S&P 500 (+0.74%) 7,391 / NASDAQ (+1.32%) 26,145 / Dow (+0.05%) 49,621 — 創歷史新高；美股連 6 週上漲；83% S&P 500 公司 Q1 EPS 超預期","impact":"positive","source":"Yahoo Finance / Marketscreener"},
         {"date":"2026-05-08","category":"半導體","title":"費半 ETF SMH BigGo 收 $566.54（+4.9%）；Intel +16%（Apple 晶片代工談判）、AMD +8%、Micron +13%","impact":"positive","source":"BigGo / Motley Fool"},
@@ -401,15 +422,16 @@ data = {
             {"symbol":"00830.TW","name":"費城半導體 ETF","sell":0,"hold":12,"buy":7,"label":"費半代理"},
             {"symbol":"AVGO","name":"Broadcom","sell":0,"hold":5,"buy":14,"label":"AI ASIC"},
             {"symbol":"SMH","name":"SMH","sell":0,"hold":6,"buy":13,"label":"半導體 ETF"},
-        {"symbol":"QCOM","name":"Qualcomm","sell":1,"hold":9,"buy":9,"label":"資料中心客製矽"},
-        {"symbol":"ANEL","name":"2×ANET","sell":7,"hold":9,"buy":3,"label":"日槓桿 ANET"},
+            {"symbol":"QCMU","name":"2×QCOM","sell":6,"hold":8,"buy":5,"label":"71 股槓桿曝險"},
+            {"symbol":"MULL","name":"2×MU","sell":8,"hold":8,"buy":3,"label":"記憶體 2×"},
+            {"symbol":"ANEL","name":"2×ANET","sell":7,"hold":9,"buy":3,"label":"日槓桿 ANET"},
             {"symbol":"TSMG","name":"2×TSM","sell":5,"hold":10,"buy":4,"label":"ADR 槓桿"},
             {"symbol":"TSLT","name":"2×TSLA","sell":6,"hold":10,"buy":3,"label":"高波動"},
             {"symbol":"SNDU","name":"2×SNDK","sell":3,"hold":9,"buy":7,"label":"記憶體槓桿"},
-            {"symbol":"AIXI","name":"AIXI","sell":14,"hold":4,"buy":1,"label":"仙股／反彈賣"},
+            {"symbol":"VSH","name":"Vishay","sell":2,"hold":14,"buy":3,"label":"被動元件"},
+            {"symbol":"AIXI","name":"AIXI","sell":15,"hold":3,"buy":1,"label":"深虧／3 股"},
             {"symbol":"ONDL","name":"ONDL","sell":12,"hold":5,"buy":2,"label":"2×弱底層"},
             {"symbol":"2337.TW","name":"旺宏","sell":2,"hold":9,"buy":8,"label":"記憶體轉機"},
-            {"symbol":"QCMU","name":"QCMU","sell":4,"hold":12,"buy":3,"label":"QCOM 2×槓桿"},
         ]
     },
 
@@ -418,7 +440,7 @@ data = {
         {"rank":2,"ticker":"2308","name":"台達電","market":"TW","price":2165,"target_low":2400,"target_high":2650,"upside_pct":16.6,"thesis":"AI 電源+液冷+散熱三受惠；2026E EPS 強勁；目標 $2,400-2,650","type":"個股"},
         {"rank":3,"ticker":"3711","name":"日月光投控","market":"TW","price":537,"target_low":560,"target_high":660,"upside_pct":15.0,"thesis":"LEAP 先進封裝 CoWoS 受惠；Q1 EPS 3.24 超預期；凱基目標 588，歐系最高 660","type":"個股"},
         {"rank":4,"ticker":"ANET","name":"Arista Networks","market":"US","price":141.77,"target_low":175,"target_high":200,"upside_pct":23.4,"thesis":"AI Ethernet 400/800G 龍頭；分析師 Strong Buy 共識；均值約 $175；≤$300 ✓","type":"個股"},
-        {"rank":5,"ticker":"QCOM","name":"Qualcomm","market":"US","price":219.09,"target_low":175,"target_high":300,"upside_pct":5.0,"thesis":"超大雲客製矽 Q4 2026 出貨；6/24 投資人日；股價高於多數共識目標；≤$300 ✓","type":"個股"},
+        {"rank":5,"ticker":"MU","name":"Micron","market":"US","price":118,"target_low":105,"target_high":150,"upside_pct":12.0,"thesis":"MULL／SNDU 底層；記憶體與 HBM 循環；持槓桿時以 **MU 正股**理解風險較直觀；≤$300 ✓","type":"個股"},
     ],
 
     # ===== actions（A/B 用 strategy/stop/target；C 用 action/reason）=====
@@ -427,22 +449,24 @@ data = {
             {"symbol":"0050.TW","name":"元大台灣50","price":96.9,"target":"100-105","stop":90,"strategy":"壓艙石；與 00631L 長期核心；台股大盤重心不動"},
             {"symbol":"2330.TW","name":"台積電","price":2235,"target":"2,400-3,030","stop":2100,"strategy":"外資目標 2,288-3,030；Q2 指引 $39-40B 強勁；7/16 法說"},
             {"symbol":"3711.TW","name":"日月光投控","price":537,"target":"560-660","stop":500,"strategy":"LEAP/CoWoS；凱基 588、歐系 660；守月線"},
-            {"symbol":"AVGO","name":"Broadcom","price":430.0,"target":"$450-500","stop":390,"strategy":"AI 主軸；Morningstar FV $500；5/8 +4.23%，分批鎖利可選"},
-            {"symbol":"SMH","name":"VanEck 半導體","price":566.54,"target":"$580-620","stop":510,"strategy":"費半代理；5/8 +4.9%；居高思危"},
+            {"symbol":"AVGO","name":"Broadcom","price":429.87,"target":"$450-500","stop":390,"strategy":"AI 主軸；Morningstar FV $500；分批鎖利可選"},
+            {"symbol":"SMH","name":"VanEck 半導體","price":575.26,"target":"$600-640","stop":520,"strategy":"費半核心；+31% 獲利大；居高思危"},
             {"symbol":"00631L.TW","name":"台灣50正2","price":32.66,"target":"34-38","stop":29,"strategy":"長期=0050 槓桿版；槓桿自律"},
         ],
         "B": [
-            {"symbol":"QCOM","name":"Qualcomm","price":219.09,"target":"$225-250（Q4 客製矽出貨前重估）","stop":190,"strategy":"超大雲客製矽 Q4 2026；6/24 投資人日；1 股設停利 $240 / 停損 $190"},
-            {"symbol":"ANEL","name":"2×ANET","price":15.98,"target":"$18-22（ANET 看 $170-175）","stop":13.0,"strategy":"短線槓桿博 ANET 上行；**非**長抱 ANET 正股；可評估換 ANET 正股"},
-            {"symbol":"TSMG","name":"TSM 2×","price":39.61,"target":"$42-46","stop":34,"strategy":"考慮與 2330 重疊時降總曝險；與 ADR 連動"},
-            {"symbol":"SNDU","name":"SNDK 2×","price":110.2,"target":"$115-130","stop":88,"strategy":"2× 放大；僅衛星；NAND 週期支撐"},
+            {"symbol":"QCMU","name":"2×QCOM Daily","price":45.1,"target":"事件前分段鎖利","stop":38,"strategy":"**無 QCOM 正股**；71 股 2× 曝險大；6/24 投資人日前後減碼或設回撤門檻"},
+            {"symbol":"MULL","name":"2×MU Daily","price":547.5,"target":"波段高檔鎖利","stop":480,"strategy":"1 股即高名義曝險；與 SNDU／SMH 同向時勿再加"},
+            {"symbol":"ANEL","name":"2×ANET","price":14.83,"target":"$17-20","stop":12.5,"strategy":"55 股部位上升；仍屬日槓桿工具"},
+            {"symbol":"TSMG","name":"TSM 2×","price":38.47,"target":"$42-46","stop":33,"strategy":"15 股；與 2330 連動；降總重疊時優先減槓桿"},
+            {"symbol":"SNDU","name":"SNDK 2×","price":118.05,"target":"$125-140","stop":92,"strategy":"2 股仍高 β；與 MULL 記憶體敘事重疊"},
+            {"symbol":"VSH","name":"Vishay","price":34.82,"target":"$38-42","stop":31,"strategy":"非槓桿衛星；可與 SMH 擇一精簡降低持倉數"},
             {"symbol":"2337.TW","name":"旺宏","price":159.5,"target":"170-180","stop":145,"strategy":"注意股波動；記憶體敘事；設好停損"},
-            {"symbol":"00830.TW","name":"00830","price":82.3,"target":"88-95","stop":75,"strategy":"費半代理；小部位；與 SMH 連動"},
+            {"symbol":"00830.TW","name":"00830","price":82.3,"target":"88-95","stop":75,"strategy":"費半代理；與 SMH 連動"},
         ],
         "C": [
-            {"symbol":"AIXI","name":"Xiao-I","price":0.6101,"action":"等反彈分批賣（使用者策略）；設時程停損","reason":"流動性差、深虧；-55% 級距，不宜無限等反彈"},
-            {"symbol":"ONDL","name":"ONDS 2×","price":13.2,"action":"反彈沿壓力減碼（使用者：等回漲賣）","reason":"底層 ONDS 疲弱，2× 持續衰減；注意流動性"},
-            {"symbol":"TSLT","name":"Tesla 2×","price":21.82,"action":"槓桿上限控管；不宜再加","reason":"日損耗＋TSLA 高波動；目前盈利可設 $18 保護停損"},
+            {"symbol":"AIXI","name":"Xiao-I","price":12.28,"action":"停損或反彈減碼；勿攤平","reason":"仍約 -62%；3 股部位小但邏輯上不宜加碼"},
+            {"symbol":"ONDL","name":"ONDS 2×","price":14.8,"action":"反彈減碼或硬停損","reason":"仍約 -25%；2× 弱底層風險"},
+            {"symbol":"TSLT","name":"Tesla 2×","price":22.89,"action":"獲利了結部分或上移停利","reason":"35 股部位放大；日損耗＋波動；鎖住部分獲利"},
         ]
     },
 
@@ -470,23 +494,23 @@ data = {
     # ===== allocation（陣列格式，非物件）=====
     "allocation": {
         "current": [
-            {"label":"台股核心（0050+00631L+2330+3711+2337+00830）","value":61.6},
-            {"label":"美股半導體（AVGO+SMH+QCOM）","value":24.0},
-            {"label":"槓桿衛星（ANEL+TSLT+TSMG+SNDU+ONDL）","value":12.0},
-            {"label":"高風險／待調節（AIXI+QCMU）","value":2.4},
-            {"label":"現金","value":0.0},
+            {"label":"台股核心（0050+00631L+2330+3711+2337+00830）","value":56.5},
+            {"label":"美股核心（AVGO+SMH+VSH）","value":19.5},
+            {"label":"美股槓桿（QCMU+MULL+ANEL+TSLT+TSMG+SNDU+ONDL）","value":22.0},
+            {"label":"高風險／待調節（AIXI）","value":0.4},
+            {"label":"現金","value":1.6},
         ],
         "target": [
-            {"label":"台股核心","value":58},
-            {"label":"美股半導體","value":28},
-            {"label":"槓桿衛星","value":10},
+            {"label":"台股核心","value":55},
+            {"label":"美股核心","value":22},
+            {"label":"美股槓桿","value":14},
             {"label":"高風險","value":0},
-            {"label":"現金","value":4},
+            {"label":"現金","value":9},
         ]
     },
 
     "consensus": [
-        {"symbol":"QCOM","name":"Qualcomm","rating":"Hold→升評中（分歧）","target":"法說前均值 $168.50；RBC $175、Citi/JPM/WFC $160；股價 $219 遠超共識—升評追蹤中","date":"2026-05"},
+        {"symbol":"QCMU","name":"Direxion 2× QCOM（持倉）","rating":"工具型","target":"曝險來自 **71 股 QCMU**；無 QCOM 正股；事件日波動放大","date":"2026-05"},
         {"symbol":"AVGO","name":"Broadcom","rating":"Buy（11/12 分析師）","target":"$430-500；Morningstar FV $500","date":"2026-05"},
         {"symbol":"AAPL","name":"Apple","rating":"Buy","target":"$215-280","date":"2026-05"},
         {"symbol":"TSM","name":"TSMC ADR","rating":"Strong Buy","target":"概略 $400-480（級距上移，請以最新外資為準）","date":"2026-05"},
@@ -504,7 +528,8 @@ data = {
 
     "forecast": [
         {"symbol":"AVGO","name":"Broadcom","bull":500,"base":455,"bear":395,"catalyst":"Q2 $22B + AI $10.7B 兌現；Morningstar FV $500"},
-        {"symbol":"QCOM","name":"Qualcomm","bull":250,"base":220,"bear":190,"catalyst":"6/24 投資人日；Q4 超大雲客製矽出貨確認"},
+        {"symbol":"QCMU","name":"2×QCOM ETF","bull":52,"base":45,"bear":36,"catalyst":"QCOM 投資人日／財報；2× 回撤深"},
+        {"symbol":"MU","name":"Micron","bull":140,"base":118,"bear":88,"catalyst":"記憶體報價；HBM；MULL/SNDU 底層"},
         {"symbol":"ANET","name":"Arista Networks","bull":200,"base":175,"bear":130,"catalyst":"FY2026 AI 指引 $35 億兌現；Morningstar FV $190"},
         {"symbol":"TSM","name":"TSMC ADR","bull":460,"base":410,"bear":345,"catalyst":"7/16 法說；CoWoS 擴產；Q2 指引 $39-40B"},
         {"symbol":"SNDK","name":"SanDisk","bull":1350,"base":1200,"bear":950,"catalyst":"NAND 合約漲 55-60%；Bernstein $1,250"},
