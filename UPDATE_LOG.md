@@ -7,6 +7,18 @@
 
 ---
 
+## 2026-05-11 — BigGo 台股 5/11 盤中 + 美股 5/8 收盤同步儀表板
+
+### 變更
+- **台股（BigGo ~13:30 UTC+8）**：0050 **96.9**、00631L **32.66**、00830 **82.3**、2330 **2235**、2337 **159.5**、3711 **537**；`UPDATE_NOTE` 與 `news` 首條同步。
+- **美股（BigGo 5/8 美東收盤）**：QCOM **219.09**（+8.17%）、SMH **566.54**（+4.9%）、AVGO **430**（+4.23%）、QCMU **39.5**（+15.77%）、ANEL **15.98**、AIXI **0.6101**、TSMG **39.61**；ONDL／TSLT／SNDU BigGo 無即時價處沿用前次 **close**。
+- **QCMU**：名稱改為 **Direxion Daily QCOM Bull 2X ETF**；分析師票 label 改為「QCOM 2×槓桿」。
+- **大盤 ribbon**：SMH **566.54**、台股加權參考 **41,138**（媒體前段創高區間）、VIX 略上修敘述。
+- **actions / picks / horizon_views / underlying_analysis / consensus**：價格與字串對齊新報價。
+- **產出驗證**：`python scripts/build_stocks_json.py` → 總市值 **NT$900,657**、總損益 **+21.71%**（+NT$160,639）；23 key + 子結構 **全部 OK**。
+
+---
+
 ## 2026-05-09 v2 — BigGo 5/8 盤中最新報價 + QCOM 財報大漲 + 美伊和平 + 費半新高
 
 ### 變更
