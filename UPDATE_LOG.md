@@ -17,6 +17,12 @@
 - **`user_strategy` / `leverage_map` / `effective_exposure` / `underlying_analysis` / `analysts.votes` / `actions` / `allocation` / `forecast` / `horizon_views`**：同步新結構與論述。
 - **台股**：`TW` 區仍為前次 BigGo 值；`portfolio.md` 已註記待補台股新截圖。
 - **產出驗證**：`python scripts/build_stocks_json.py` → 總市值 **NT$945,624**、總損益 **+22.1%**（+NT$171,128）；23 key + 子結構 **OK**。
+- **追加內容（來自新 deep report 2026-05-12）**：補充 `horizon_views.tomorrow_tw_strategy` 的
+  - `macro_context`（NV 5/20 最大催化）
+  - `morning_plan`（VSH 出場／MULL 停損與 5/13~5/15 布局期）
+  - `watch_list_for_tomorrow`（新增 SMH / TSMG / QCMU 觀察與加碼條件）
+  - `avoid_list`（新增 VSH）
+  - `risk_alerts`（新增 VSH / MULL / NV 指引不如預期 / TSLA 回調 / QCMU 參考門檻）
 
 ---
 
