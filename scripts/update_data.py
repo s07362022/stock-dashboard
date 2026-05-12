@@ -3,6 +3,13 @@
 Stock Dashboard Data Updater
 Fetches latest stock data for portfolio holdings and saves to data/stocks.json
 Runs via GitHub Actions daily after market close.
+
+⚠️  WARNING (2026-05-12): 本腳本的持倉清單已過時（聯發科/台塑化/AMD 等舊持股），
+且產出的 JSON 只有 5 個頂層 key，缺少 dashboard 需要的 23 個 key，
+會導致 index.html boot() 失敗、頁面空白。
+
+正確更新方式：在本機執行 python scripts/build_stocks_json.py
+自動排程已在 .github/workflows/update-stocks.yml 停用。
 """
 
 import json

@@ -7,6 +7,25 @@
 
 ---
 
+## 2026-05-12 — 修復 GitHub Actions 自動排程破壞 dashboard 的根本原因
+
+### 問題根因
+- `.github/workflows/update-stocks.yml` 每天排程（台灣時間 06:30 / 14:30）自動執行 `scripts/update_data.py`。
+- `update_data.py` 使用**舊版假持倉**（聯發科、台塑化、AMD 等早已不持有的股票），且只產出 **5 個頂層 key**。
+- `index.html` 的 `boot()` 需要 **23 個頂層 key**，缺失 18 個 key 導致 JS 錯誤、頁面完全空白。
+- 每次本機手動修復後，下一次 Actions 排程就再度覆蓋成壞的 JSON。
+
+### 修復內容
+1. **停用 cron 排程**：`.github/workflows/update-stocks.yml` 的 `schedule` 區塊全部注解掉，只保留 `workflow_dispatch`（手動觸發）。
+2. **`update_data.py` 加入警告**：明確標注本腳本已過時，禁止用於 dashboard 更新。
+3. **重建 `stocks.json`**：`python scripts/build_stocks_json.py` → 23 key + 子結構全 OK。
+
+### 驗證
+- `Required keys missing: NONE`
+- 總市值 NT$945,624 / 損益 +22.1%
+
+---
+
 ## 2026-05-12 — 券商美股庫存截圖全量更新（QCMU 71、MULL、VSH；無 QCOM 正股）
 
 ### 變更

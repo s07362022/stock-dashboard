@@ -1,12 +1,13 @@
 name: Daily Stock Update
 
 on:
-  schedule:
-    # 每天台灣時間 06:30 (UTC 22:30) — 美股收盤後
-    - cron: '30 22 * * 1-5'
-    # 每天台灣時間 14:30 (UTC 06:30) — 台股收盤後
-    - cron: '30 6 * * 1-5'
-  workflow_dispatch:  # 支援手動觸發
+  # ⚠️ 自動排程已停用 (2026-05-12)
+  # update_data.py 只含舊版假持倉（5 key），會破壞 dashboard (23 key)。
+  # 正確更新方式：本機執行 python scripts/build_stocks_json.py → git push
+  # schedule:
+  #   - cron: '30 22 * * 1-5'   # 台灣時間 06:30
+  #   - cron: '30 6 * * 1-5'    # 台灣時間 14:30
+  workflow_dispatch:  # 保留手動觸發（測試用，勿輕易啟用）
 
 permissions:
   contents: write
@@ -27,7 +28,10 @@ jobs:
         run: pip install yfinance pandas
 
       - name: Fetch stock data
-        run: python scripts/update_data.py
+        run: |
+          echo "⚠️  WARNING: update_data.py 只含舊版假持倉，僅供參考，不寫入 stocks.json"
+          echo "正確更新請用本機 python scripts/build_stocks_json.py"
+          # python scripts/update_data.py  ← 已停用
 
       - name: Commit and push
         run: |
