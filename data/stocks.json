@@ -1,9 +1,9 @@
 {
-  "updated_at": "2026-05-14 18:54",
-  "updated_at_utc": "2026-05-14 10:54",
+  "updated_at": "2026-05-14 21:07",
+  "updated_at_utc": "2026-05-14 13:07",
   "fx_rate": 31.405,
   "user_strategy": {
-    "philosophy": "台股核心 0050/00631L + 2330/2337/3711；美股已重組：**SMH×7股**為核心，**QCMU×92股（2×QCOM）**為最大槓桿部位（均攤成本$39.42，6/24投資人日催化）；**TSLT+ANEL+TSMG** 衛星槓桿群；🆕 **PLUG**（氫能財報轉機）+ **LNOK**（2×Nokia AI網路）小部位；已出清 AVGO/AIXI/MULL/SNDU/VSH。ONDL 待出清。",
+    "philosophy": "台股核心 0050/00631L + 2330/2337/3711；美股已重組：**SMH×7股**為核心，**QCMU×92股（2×QCOM）**為最大槓桿部位（均攤成本$39.42，6/24投資人日催化）；**TSLT+ANEL+TSMG** 衛星槓桿群；🆕 **PLUG**（氫能財報轉機）+ **LNOK**（2×Nokia AI網路爆漲）小部位；🔥 **ONDL**（2×ONDS）策略翻轉：財報爆炸→暫停出清改持有；已出清 AVGO/AIXI/MULL/SNDU/VSH。",
     "leverage_map": [
       {
         "etf": "00631L",
@@ -50,27 +50,27 @@
     ]
   },
   "summary": {
-    "total_market_value_twd": 874840,
+    "total_market_value_twd": 877020,
     "total_cost_twd": 729592,
-    "total_pnl_twd": 145248,
-    "total_pnl_pct": 19.91,
+    "total_pnl_twd": 147428,
+    "total_pnl_pct": 20.21,
     "tw_market_value_twd": 554018,
     "tw_cost_twd": 427727,
     "tw_pnl_twd": 126291,
     "tw_pnl_pct": 29.53,
-    "us_market_value_twd": 320822,
+    "us_market_value_twd": 323002,
     "us_cost_twd": 301865,
-    "us_pnl_twd": 18957,
-    "us_pnl_pct": 6.28,
-    "us_market_value_usd": 10215.63,
+    "us_pnl_twd": 21137,
+    "us_pnl_pct": 7.0,
+    "us_market_value_usd": 10285.03,
     "us_cost_usd": 9612.02,
-    "us_pnl_usd": 603.61,
-    "tw_pct": 63.33,
-    "us_pct": 36.67,
+    "us_pnl_usd": 673.01,
+    "tw_pct": 63.17,
+    "us_pct": 36.83,
     "winners": 11,
     "losers": 3,
     "holdings_count": 14,
-    "effective_exposure_twd": 1093550,
+    "effective_exposure_twd": 1096275,
     "effective_leverage_ratio": 1.25
   },
   "pnl_split": {
@@ -86,14 +86,14 @@
       "verdict": "台股部位與 AI／封測敘事一致；00830 貼費半但權重小，屬衛星。"
     },
     "us": {
-      "title": "🇺🇸 美股 — 修復中 +6.3%",
-      "market_value_twd": 320822,
+      "title": "🇺🇸 美股 — 修復中 +7.0%",
+      "market_value_twd": 323002,
       "cost_twd": 301865,
-      "pnl_twd": 18957,
-      "pnl_pct": 6.28,
-      "market_value_usd": 10215.63,
+      "pnl_twd": 21137,
+      "pnl_pct": 7.0,
+      "market_value_usd": 10285.03,
       "cost_usd": 9612.02,
-      "pnl_usd": 603.61,
+      "pnl_usd": 673.01,
       "winners": 5,
       "losers": 3,
       "highlight": "券商 5/12：SMH +30.97%、SNDU +46.4%、TSLT +23.45%、QCMU +11.61%、AVGO +12.25%；ONDL -25.44%、AIXI -62.08%、ANEL -5.95%。**QCOM 曝險僅剩 QCMU（71 股 2×）**；新增 **MULL（2×MU）**、**VSH**。",
@@ -260,7 +260,7 @@
       "cost_usd": 3183.14,
       "pnl_usd": 824.08,
       "pnl_pct": 25.89,
-      "weight": 39.23
+      "weight": 38.96
     },
     {
       "symbol": "QCMU",
@@ -279,7 +279,7 @@
       "cost_usd": 3626.53,
       "pnl_usd": -270.37,
       "pnl_pct": -7.46,
-      "weight": 32.85
+      "weight": 32.63
     },
     {
       "symbol": "ANEL",
@@ -298,7 +298,7 @@
       "cost_usd": 867.3,
       "pnl_usd": -11.5,
       "pnl_pct": -1.33,
-      "weight": 8.38
+      "weight": 8.32
     },
     {
       "symbol": "TSLT",
@@ -317,26 +317,26 @@
       "cost_usd": 648.94,
       "pnl_usd": 171.46,
       "pnl_pct": 26.42,
-      "weight": 8.03
+      "weight": 7.98
     },
     {
       "symbol": "ONDL",
       "name": "Defiance 2× Long ONDS Daily",
       "shares": 20,
       "buy_price": 19.85,
-      "close": 13.24,
-      "change": -0.48,
-      "pct": -3.5,
+      "close": 16.71,
+      "change": 3.47,
+      "pct": 26.22,
       "sector": "ONDS 2×",
-      "tag": "exit",
+      "tag": "satellite",
       "underlying": "ONDS",
       "multiplier": 2,
-      "market_value_usd": 264.8,
-      "market_value_twd": 8316,
+      "market_value_usd": 334.2,
+      "market_value_twd": 10496,
       "cost_usd": 397.0,
-      "pnl_usd": -132.2,
-      "pnl_pct": -33.3,
-      "weight": 2.59
+      "pnl_usd": -62.8,
+      "pnl_pct": -15.82,
+      "weight": 3.25
     },
     {
       "symbol": "TSMG",
@@ -355,7 +355,7 @@
       "cost_usd": 552.65,
       "pnl_usd": 8.05,
       "pnl_pct": 1.46,
-      "weight": 5.49
+      "weight": 5.45
     },
     {
       "symbol": "LNOK",
@@ -374,7 +374,7 @@
       "cost_usd": 261.66,
       "pnl_usd": 9.69,
       "pnl_pct": 3.7,
-      "weight": 2.66
+      "weight": 2.64
     },
     {
       "symbol": "PLUG",
@@ -391,7 +391,7 @@
       "cost_usd": 74.8,
       "pnl_usd": 4.4,
       "pnl_pct": 5.88,
-      "weight": 0.78
+      "weight": 0.77
     }
   ],
   "effective_exposure": [
@@ -489,13 +489,13 @@
       "long_term": false
     },
     {
-      "name": "待出清（ONDL）",
-      "icon": "⚠️",
+      "name": "ONDS財報爆ONDL持有中",
+      "icon": "🔥",
       "components": [
-        "ONDL 20股"
+        "ONDL 20股 盤前+26.22%"
       ],
-      "exposure_twd": 8440,
-      "pct_effective": 0.9,
+      "exposure_twd": 10500,
+      "pct_effective": 1.1,
       "long_term": false
     }
   ],
@@ -506,7 +506,7 @@
       "price": 196.0,
       "today_pct": -9.3,
       "in_portfolio_twd": 104300,
-      "thesis": "⚠️ QCMU盤前-9.27%至$33.10；QCOM跌因：CPI超預期獲利了結+Apple modem份額流失+Android疲弱+分析師稱基本面與股價脫節。5/12 -11.4%後5/13反彈+2.7%，但5/14盤前再跌-9.27%。",
+      "thesis": "⚠️ QCMU 5/13收$36.48(+2.7%反彈)；5/14盤前-6.72%至$34.03。QCOM跌因：CPI超預期獲利了結+Apple modem份額流失+Android市場疲弱+分析師稱基本面與估值脫節。5/12 -11.4%→5/13反彈+2.7%→5/14盤前再跌-6.72%，波動劇烈。",
       "pros": [
         "超大雲客製矽Q4 2026出貨確認",
         "車用收入+38% YoY",
@@ -523,7 +523,7 @@
       "consensus_target": "Baird $300、Tigress $280、Daiwa $225；但分析師Tae Kim指QCOM為'問題兒童'，基本面挑戰被低估",
       "rating": "Hold（偏多分析師開始質疑）",
       "next_catalyst": "6/24 投資人日；Q3 FY26 財報（7月）",
-      "user_action": "🔴 盤前-9.27%=$33.10！若開盤確認跌破$34→立即減碼20-30股（降至60-70股）；等QCOM企穩$190-195後再評估"
+      "user_action": "🔴 5/14盤前-6.72%=$34.03！若開盤跌破$34→立即減碼20-30股（降至60-70股）；等QCOM企穩$190-195後再評估是否補回"
     },
     {
       "ticker": "TSM",
@@ -617,7 +617,7 @@
       "price": 5.85,
       "today_pct": 10.5,
       "in_portfolio_twd": 8521,
-      "thesis": "Nokia Q1 2026 AI雲端訂單+49%；CAGR指引上調至27%；新CEO；LNOK 5/13收90.45(+24.76%)；盤前+9.86%=$99.37",
+      "thesis": "Nokia Q1 2026 AI雲端訂單+49%；CAGR指引上調至27%；新CEO；LNOK 5/13收90.45(+24.76%)；盤前+8.13%=$97.80",
       "pros": [
         "AI雲端訂單+49% YoY",
         "CAGR指引16%→27%",
@@ -633,7 +633,34 @@
       "consensus_target": "Nokia ADR 分析師目標 $6-8；LNOK追蹤2×波動",
       "rating": "Hold→升評中（AI訂單爆發）",
       "next_catalyst": "Nokia Q2 2026財報；AI大型電信合約確認",
-      "user_action": "🟢 3股暴漲+24.76%！持有；停損$85/LNOK；若站穩$90可考慮加1股；目標$110-120"
+      "user_action": "🟢 LNOK 5/13收$90.45(+24.76%)，5/14盤前再+8.13%至$97.80！持有；停損$85/LNOK；目標$110-120"
+    },
+    {
+      "ticker": "ONDS",
+      "name": "Ondas Holdings（底層 ONDL×20）",
+      "price": 16.71,
+      "today_pct": 26.22,
+      "in_portfolio_twd": 10500,
+      "thesis": "🔥 ONDS Q1 2026 破紀錄財報（5/14 8:30AM ET發布）：Q1營收$50.1M年增10倍、超公司指引25%；全年展望上修至$3.9億(+670% YoY)；積壓訂單由$68.3M爆增至$4.57億；EBITDA提前6個月達正；現金$14.8億。ONDL盤前+26.22%至$16.71，原虧損-32.6%狀態已大幅縮窄。",
+      "pros": [
+        "Q1營收$50.1M年增10倍",
+        "全年展望$3.9億+670% YoY",
+        "積壓訂單$457M vs 上年底$68.3M",
+        "EBITDA轉正早6個月達標",
+        "4M Defense+INDO Earth Q1合計獲$2.2億訂單",
+        "無人機反制+國防自主系統市場爆發",
+        "現金$14.8億財務安全"
+      ],
+      "cons": [
+        "2×日衰減長持會侵蝕報酬",
+        "小市值高波動",
+        "國防預算依賴",
+        "仍有淨虧損（轉虧為盈進行中）"
+      ],
+      "consensus_target": "財報後目標價待更新；事件驅動暴漲，觀察開盤後分析師反應",
+      "rating": "Buy（事件驅動催化）",
+      "next_catalyst": "5/14 開盤市場消化；全年$3.9億指引進度；後續大型國防合約",
+      "user_action": "🟢🔥 ONDL盤前+26.22%至$16.71！原掛出清$13.80 GTC令應立即撤銷！若5/14開盤站穩$16.50→持有目標$20-22；跌回$14.00→恢復出清策略；停損$13.50"
     }
   ],
   "horizon_views": {
@@ -800,7 +827,7 @@
         {
           "symbol": "ONDL",
           "name": "ONDS 2X（20股）",
-          "view": "虧損-32.6%；本週出清；底層ONDS無反彈催化"
+          "view": "🔥 策略翻轉！ONDS Q1財報破紀錄→出清策略暫緩；若開盤站穩$16.50持有至$20-22；跌回$14恢復出清"
         },
         {
           "symbol": "TSMG",
@@ -815,7 +842,7 @@
         {
           "symbol": "LNOK",
           "name": "2×Nokia（3股）",
-          "view": "小倉觀察；若6個月無Nokia重大合約消息→停損出場"
+          "view": "🔥 連兩日爆漲+24.76%+8.13%；AI訂單爆發；小倉可持有；目標$110-120"
         }
       ]
     },
@@ -864,7 +891,8 @@
         "📌 台股5/14大漲+377pts(+0.91%)收41,752；台積電+50元收2,270；日月光平盤548；旺宏NOR主題延續；成交1.22兆",
         "📌 美股S&P 7,444(+0.58%歷史新高)；NASDAQ +1.2%歷史新高；SMH 5/13收$572.46(+2%)；費半強勢",
         "📌 川習峰會正向收場：美中貿易「互利共贏」；300億美元商品關稅互降談判中；習提台灣警告",
-        "📌 QCMU 5/13實際收盤$36.48(+2.7%，非盤中高點$37.97)；盤前5/14已跌-6.83%至$33.99，需密切監控",
+        "📌 QCMU 5/13收盤$36.48；5/14盤前-6.72%至$34.03（QCOM Apple modem份額流失問題持續）；需密切監控開盤走向",
+        "📌 🔥 ONDS Q1 2026破紀錄財報→ONDL盤前+26.22%至$16.71！原出清策略翻轉為持有！立即撤銷GTC$13.80出清令",
         "📌 NVDA 5/20財報為下一大催化：若EPS>$4.50且指引強→SMH挑戰$620-650；5/15-5/19最後布局視窗"
       ],
       "morning_plan": [
@@ -895,8 +923,8 @@
         },
         {
           "step": 6,
-          "action": "ONDL繼續掛出清",
-          "detail": "🔴 掛GTC限價$13.80出清20股；每日衰減中；本週最後一天盤中確認成交"
+          "action": "🔥 ONDL策略翻轉！撤銷出清令",
+          "detail": "🔥 ONDS Q1財報破紀錄！ONDL盤前+26.22%至$16.71；立即撤銷原$13.80 GTC出清單；若美股開盤(台灣時間21:30)站穩$16.50→持有觀察；目標$20-22；新停損$13.50"
         },
         {
           "step": 7,
@@ -950,11 +978,6 @@
       ],
       "avoid_list": [
         {
-          "symbol": "ONDL",
-          "name": "ONDS 2×",
-          "reason": "虧損持續惡化；底層ONDS無反彈催化；盡快出清"
-        },
-        {
           "symbol": "TSMG",
           "name": "TSM 2×",
           "reason": "日槓桿衰減；建議賣出換2330正股更有效率"
@@ -962,21 +985,35 @@
         {
           "symbol": "QCMU（謹慎）",
           "name": "2×QCOM",
-          "reason": "盤前-6.83%疑似出現未知利空；5/15開盤前先確認QCOM跌因，再決定是否減碼"
+          "reason": "盤前-6.72%至$34.03，Apple modem份額流失+Android疲弱持續；需監控開盤走向，跌破$34減碼20-30股"
         }
       ],
       "risk_alerts": [
-        "🚨 QCMU盤前-6.83%($33.99)：QCOM疑似有利空；92股×2倍=巨大風險；5/15美股開盤第一時間確認原因",
+        "🚨 QCMU盤前-6.72%($34.03)：QCOM Apple modem份額流失+Android市場疲弱；92股×2倍=最大持倉風險；5/15美股開盤跌破$34需立即減碼",
+        "🔥 ONDL大逆轉：ONDS財報→盤前+26.22%至$16.71；立即撤銷GTC$13.80出清令；開盤站穩$16.50可持有至$20-22",
         "🚨 習近平台灣警告：「處理不當可能引發衝突」；地緣溢價長期存在於台股；注意突發消息",
-        "🚨 美國通膨數據5/14超預期：Fed降息時程再度延後；高估值科技股面臨持續壓力",
         "🚨 NVDA 5/20財報：若EPS指引低於預期→SMH可能跌10%；勿在財報前重倉追高",
         "🚨 美中貿易談判：僅有象徵性聲明，無具體協議日期；後續執行存在不確定性",
-        "🚨 ONDL 20股：每日持續衰減；必須本週出清"
+        "🚨 LNOK盤前+8.13%至$97.80：連兩日暴漲，高波動性；可持有但不可加碼追高"
       ],
-      "one_line": "5/15：台美股雙雙在歷史高位；重點是監控QCMU盤前暴跌原因，NVDA5/20財報前布局SMH，以及持續推進ONDL出清。"
+      "one_line": "5/15：ONDS財報爆炸→ONDL策略180度翻轉(出清→持有)！QCMU繼續承壓需警戒；台股在歷史高位整理；NVDA 5/20財報前布局SMH。"
     }
   },
   "news": [
+    {
+      "date": "2026-05-14",
+      "category": "🔥 財報爆炸",
+      "title": "🚀 ONDS（Ondas Holdings）Q1 2026破紀錄：營收$50.1M年增10倍(超指引25%)；全年展望上修$3.9億(+670%)；積壓訂單$457M(+569%)；EBITDA轉正早6個月達標！ONDL盤前+26.22%至$16.71",
+      "impact": "positive",
+      "source": "Newswire / ir.ondas.com"
+    },
+    {
+      "date": "2026-05-14",
+      "category": "⚠️ 警示",
+      "title": "QCMU(2×QCOM)盤前-6.72%至$34.03；QCOM持續面臨Apple modem流失+Android疲弱；92股×2倍曝險需警戒；若開盤跌破$34需減碼20-30股",
+      "impact": "negative",
+      "source": "BigGo 盤前 09:02 EDT"
+    },
     {
       "date": "2026-05-14",
       "category": "台股",
@@ -1411,10 +1448,10 @@
       {
         "symbol": "ONDL",
         "name": "ONDL",
-        "sell": 16,
-        "hold": 2,
-        "buy": 1,
-        "label": "🔴 待出清 20 股"
+        "sell": 2,
+        "hold": 7,
+        "buy": 10,
+        "label": "🔥 ONDS財報爆+670%！盤前+26.22%，策略翻轉"
       },
       {
         "symbol": "2337.TW",
@@ -1601,15 +1638,15 @@
       {
         "symbol": "ONDL",
         "name": "ONDS 2×（20股）",
-        "price": 13.38,
-        "action": "🔴 繼續減碼；掛 GTC 限價 $13.80；目標出清至0",
-        "reason": "虧損-32.6%；底層ONDS業務不透明；日槓桿持續衰減，無反彈催化劑"
+        "price": 16.71,
+        "action": "🔄 緊急撤銷出清令！ONDS財報爆！盤前+26.22%至$16.71。暫時持有等開盤確認",
+        "reason": "Q1 2026財報破紀錄：營收$50.1M年增10倍、全年展望$3.9億+670%、EBITDA提前6個月轉正。若開盤站穩$16.50→持有目標$20-22；若跌回$14→恢復出清策略"
       },
       {
         "symbol": "TSMG",
         "name": "TSM 2× ETF",
-        "price": 37.52,
-        "action": "⚠️ 考慮賣出換 2330 正股",
+        "price": 37.38,
+        "action": "⚠️ 盤前+1.93%至$38.10，考慮賣出換 2330 正股",
         "reason": "日槓桿衰減 + TSM 正股上漲才有意義；持有成本$36.84，目前小幅獲利；建議TSMG→2330正股1股長持"
       }
     ]
