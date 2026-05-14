@@ -55,8 +55,8 @@ US = [
     {"symbol":"TSLT","name":"T-Rex 2× Long Tesla Daily","shares":35,"buy_price":18.541122,"close":23.44,"change":1.26,"pct":5.68,"sector":"TSLA 2×","tag":"satellite","underlying":"TSLA","multiplier":2},
     {"symbol":"ONDL","name":"Defiance 2× Long ONDS Daily","shares":20,"buy_price":19.85,"close":13.24,"change":-0.48,"pct":-3.50,"sector":"ONDS 2×","tag":"exit","underlying":"ONDS","multiplier":2},
     {"symbol":"TSMG","name":"Leverage Shares 2× Long TSM Daily","shares":15,"buy_price":36.843334,"close":37.38,"change":0.31,"pct":0.84,"sector":"TSM ADR 2×","tag":"satellite","underlying":"TSM","multiplier":2},
-    {"symbol":"LNOK","name":"Defiance 2× Long NOK Daily","shares":3,"buy_price":87.22,"close":87.83,"change":0.61,"pct":0.69,"sector":"Nokia 2×（日槓桿）","tag":"satellite","underlying":"NOK","multiplier":2},
-    {"symbol":"PLUG","name":"Plug Power Inc.","shares":20,"buy_price":3.74,"close":3.87,"change":0.13,"pct":3.47,"sector":"氫能／燃料電池","tag":"growth"},
+    {"symbol":"LNOK","name":"Defiance 2× Long NOK Daily","shares":3,"buy_price":87.22,"close":90.45,"change":17.95,"pct":24.76,"sector":"Nokia 2×（日槓桿）","tag":"satellite","underlying":"NOK","multiplier":2},
+    {"symbol":"PLUG","name":"Plug Power Inc.","shares":20,"buy_price":3.74,"close":3.96,"change":0.40,"pct":11.24,"sector":"氫能／燃料電池","tag":"growth"},
 ]
 
 # =============================================================================
@@ -194,11 +194,11 @@ data = {
 
     "underlying_analysis": [
         {
-            "ticker":"QCOM","name":"Qualcomm（底層 QCMU×92）","price":212.61,"today_pct":1.1,"in_portfolio_twd":110400,
-            "thesis":"**92 股 QCMU（2×QCOM）**為最大美股部位；5/12 -11.4% 後已於5/13反彈+7%回穩；6/24 投資人日揭露超大雲客製矽路線圖為最大催化劑。",
-            "pros":["超大雲客製矽Q4 2026出貨確認","車用收入+38% YoY破紀錄","Edge AI Snapdragon龍頭","分析師目標$225-300"],
-            "cons":["日槓桿衰減（2× ETF 長持不適合）","92股曝險集中風險","若QCOM跌回$190 QCMU跌至$29"],
-            "consensus_target":"Baird $300、Tigress $280、Daiwa $225；目前$212.61約30%折讓","rating":"Buy（多數分析師）","next_catalyst":"6/24 投資人日（最關鍵）；Q3 FY26 財報（7月）","user_action":"🟡 守$39.42均攤成本；QCOM站穩$215+才加碼；跌破$195立即減碼20-25股"
+            "ticker":"QCOM","name":"Qualcomm（底層 QCMU×92）","price":196.0,"today_pct":-9.3,"in_portfolio_twd":104300,
+            "thesis":"⚠️ QCMU盤前-9.27%至$33.10；QCOM跌因：CPI超預期獲利了結+Apple modem份額流失+Android疲弱+分析師稱基本面與股價脫節。5/12 -11.4%後5/13反彈+2.7%，但5/14盤前再跌-9.27%。",
+            "pros":["超大雲客製矽Q4 2026出貨確認","車用收入+38% YoY","Edge AI Snapdragon龍頭","6/24投資人日催化劑"],
+            "cons":["🔴 Apple modem份額持續流失（最大風險）","🔴 Android市場需求疲弱","🔴 分析師稱估值超越基本面","日槓桿衰減","92股集中風險"],
+            "consensus_target":"Baird $300、Tigress $280、Daiwa $225；但分析師Tae Kim指QCOM為'問題兒童'，基本面挑戰被低估","rating":"Hold（偏多分析師開始質疑）","next_catalyst":"6/24 投資人日；Q3 FY26 財報（7月）","user_action":"🔴 盤前-9.27%=$33.10！若開盤確認跌破$34→立即減碼20-30股（降至60-70股）；等QCOM企穩$190-195後再評估"
         },
         {
             "ticker":"TSM","name":"TSMC ADR（底層 TSMG×15）","price":411.0,"today_pct":0,"in_portfolio_twd":128000,
@@ -229,11 +229,11 @@ data = {
             "consensus_target":"B. Riley $5.00、HC Wainwright $7.00、Canaccord $4.00","rating":"分歧（Buy/Neutral）","next_catalyst":"Q2 EBITDAS 進度；電解槽大客戶訂單","user_action":"🟡 20股小倉保留；若站穩$3.75→目標$4-5；跌破$3.20停損"
         },
         {
-            "ticker":"NOK","name":"Nokia（底層 LNOK×3）","price":5.3,"today_pct":0.5,"in_portfolio_twd":8310,
-            "thesis":"Nokia 企業 5G + AI 網路設備；LNOK 為 Defiance 2× 日槓桿 ETF；小部位押注諾基亞 AI 企業化轉型",
-            "pros":["企業5G網路升級潮","AI機房網路需求間接受惠","估值便宜"],
-            "cons":["利潤率偏低","競爭激烈（Ericsson/Cisco）","2×日衰減"],
-            "consensus_target":"Nokia ADR 約 $5-7 法人目標","rating":"Hold/中性","next_catalyst":"Nokia Q2 2026財報；企業AI合約訂單","user_action":"🟡 3股小試水溫；停損 $75/LNOK；等Nokia AI合約消息才加碼"
+            "ticker":"NOK","name":"Nokia（底層 LNOK×3）","price":5.85,"today_pct":10.5,"in_portfolio_twd":8521,
+            "thesis":"Nokia Q1 2026 AI雲端訂單+49%；CAGR指引上調至27%；新CEO；LNOK 5/13收90.45(+24.76%)；盤前+9.86%=$99.37",
+            "pros":["AI雲端訂單+49% YoY","CAGR指引16%→27%","法律勝訴（Acer/Asus）","股價年初至今+100%","新CEO改革訊號"],
+            "cons":["2×日衰減（長持不宜）","電信設備競爭激烈（Ericsson/Cisco）","利潤率偏低"],
+            "consensus_target":"Nokia ADR 分析師目標 $6-8；LNOK追蹤2×波動","rating":"Hold→升評中（AI訂單爆發）","next_catalyst":"Nokia Q2 2026財報；AI大型電信合約確認","user_action":"🟢 3股暴漲+24.76%！持有；停損$85/LNOK；若站穩$90可考慮加1股；目標$110-120"
         },
     ],
 
