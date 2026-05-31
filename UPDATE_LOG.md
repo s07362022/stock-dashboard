@@ -7,6 +7,18 @@
 
 ---
 
+## 2026-05-31（二次）— 五月全數出清 → 10/31 變現計畫
+
+**Commit**: `(待 push)` — `update: all-cash May exit, Oct31 liquidity plan`
+
+### 變更
+- **持倉**：TW/US 清空（0050/00631L/2330/SMH/DDOG/CSCO/NVDA 全部賣出）
+- **現金**：NT$858,324（估算）
+- **策略**：6-8月成長布局（ORCL/ANET/0050/DDOG）；9月起週減20%；10/31前全現金
+- **硬約束**：十月底需用錢；保留30%現金不動
+
+---
+
 ## 2026-05-31 — 完整報告：持倉精簡 + 12 萬配置
 
 **Commit**: `(待 push)` — `update: portfolio 2026-05-31 COMPUTEX report`
