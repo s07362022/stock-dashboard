@@ -33,23 +33,27 @@ from datetime import datetime
 #  ==== 1. 可變值區（每次更新只改這裡） ====
 # =============================================================================
 
-FX = 31.355                                     # 匯率 USD→TWD
-UPDATE_NOTE = "2026/05/31 核心 0050/00631L/2330 長期持有不賣；五月賣出其餘股票回收現金 25 萬，計畫投入 20 萬做 6-8 月成長（10/31 前變現）。台股5檔≤1000、美股5檔≤300。"
+FX = 31.355                                     # 匯率 USD→TWD（2026/05/31 券商截圖）
+UPDATE_NOTE = "2026/05/31 庫存以券商截圖為準（7檔全持有）。核心 0050/00631L/2330 永久不賣；SMH/DDOG/CSCO/NVDA 為 3 個月可變現部位（10/31 需用錢）。已清除所有五月過時敘述。"
 
-# 可投資現金（五月賣出回收）
-CASH_ON_HAND = 250000                              # 可投資現金 25 萬
-CASH_TO_DEPLOY = 200000                            # 計畫投入 20 萬
-CASH_NEED_DATE = "2026-10-31"                      # 十月底需用錢
+CASH_ON_HAND = 0                                   # 無額外現金（資金在持倉中）
+CASH_TO_DEPLOY = 0
+CASH_NEED_DATE = "2026-10-31"                      # 十月底需用錢→美股4檔須於此前變現
 
-# ---- 1.1 台股持倉（核心，長期持有不賣；報價 5/29 收盤）----
+# ---- 1.1 台股持倉（券商 2026/05/31 截圖）----
 TW = [
     {"symbol":"0050.TW","name":"元大台灣50","shares":3210,"buy_price":65.93,"close":105.4,"change":4.9,"pct":4.88,"sector":"ETF（核心，永久持有）","tag":"core"},
-    {"symbol":"00631L.TW","name":"元大台灣50正2","shares":4350,"buy_price":28.42,"close":36.94,"change":2.47,"pct":7.17,"sector":"ETF (=0050 2X，核心)","tag":"core","underlying":"0050","multiplier":2},
-    {"symbol":"2330.TW","name":"台積電","shares":25,"buy_price":2145.6,"close":2355.0,"change":60.0,"pct":2.61,"sector":"半導體（核心）","tag":"core"},
+    {"symbol":"00631L.TW","name":"元大台灣50正2","shares":4350,"buy_price":28.42,"close":36.94,"change":2.47,"pct":7.17,"sector":"ETF (=0050 2X，核心永久)","tag":"core","underlying":"0050","multiplier":2},
+    {"symbol":"2330.TW","name":"台積電","shares":25,"buy_price":2145.6,"close":2355.0,"change":60.0,"pct":2.61,"sector":"半導體（核心永久）","tag":"core"},
 ]
 
-# ---- 1.2 美股持倉（2026/05 已全部賣出）----
-US = []
+# ---- 1.2 美股持倉（券商 2026/05/31 截圖；3 個月可變現部位）----
+US = [
+    {"symbol":"SMH","name":"VanEck Semiconductor ETF","shares":7,"buy_price":454.734285,"close":598.93,"change":-0.9,"pct":-0.15,"sector":"半導體 ETF（3個月）","tag":"satellite"},
+    {"symbol":"DDOG","name":"Datadog Inc.","shares":4,"buy_price":220.661667,"close":247.35,"change":22.11,"pct":9.82,"sector":"雲監控／AI 可觀測性（3個月）","tag":"satellite"},
+    {"symbol":"CSCO","name":"Cisco Systems","shares":3,"buy_price":116.583333,"close":120.42,"change":1.78,"pct":1.5,"sector":"通訊／AI 網路（3個月）","tag":"satellite"},
+    {"symbol":"NVDA","name":"NVIDIA Corporation","shares":1,"buy_price":234.59,"close":211.14,"change":-3.11,"pct":-1.45,"sector":"AI GPU（3個月）","tag":"satellite"},
+]
 
 # =============================================================================
 #  ==== 2. 結構區（不要改 key 名稱！） ====
@@ -102,7 +106,7 @@ data = {
     "fx_rate": FX,
 
     "user_strategy": {
-        "philosophy": f"2026/05/31 核心 0050/00631L/2330 長期持有不賣。五月賣出其餘股票回收現金 NT${CASH_ON_HAND:,}，計畫投入 NT${CASH_TO_DEPLOY:,} 做 6-8 月成長（台5美5），10/31 前全數變現、保留 5 萬緩衝。",
+        "philosophy": "2026/05/31：核心 0050/00631L/2330 永久持有不賣；美股 SMH/DDOG/CSCO/NVDA 視為 3 個月可變現部位，因 10/31 需用錢→9 月起分批了結。重點是保護獲利、確保 10 月底現金到位。",
         "leverage_map": [
             {"etf":"00631L","underlying":"0050","multiplier":2,"treat_as":"long_term_core"},
         ]
@@ -139,16 +143,16 @@ data = {
 
     "pnl_split": {
         "tw": {
-            "title": f"🇹🇼 台股核心（長期持有不賣）+{round(safe_pct(tw_mv - tw_cost, tw_cost),1)}%",
+            "title": f"🇹🇼 台股核心（永久持有不賣）+{round(safe_pct(tw_mv - tw_cost, tw_cost),1)}%",
             "market_value_twd": tw_mv, "cost_twd": tw_cost,
             "pnl_twd": tw_mv - tw_cost,
             "pnl_pct": safe_pct(tw_mv - tw_cost, tw_cost),
             "winners": tw_w, "losers": tw_l,
-            "highlight": "0050 +60.8%、00631L +29.5%、2330 +9.2%；核心壓艙石，不在本次操作範圍。",
-            "verdict": "0050/00631L/2330 永久持有；新資金 20 萬另做成長倉。"
+            "highlight": "0050 +60.8%、00631L +29.5%、2330 +9.2%；壓艙石，不變現。",
+            "verdict": "0050/00631L/2330 永久持有，不在 10 月變現範圍。"
         },
         "us": {
-            "title": "🇺🇸 美股 — 5月已全部賣出（待重建成長倉）",
+            "title": f"🇺🇸 美股（3 個月可變現部位）{'+' if (us_mv_usd - us_cost_usd)>=0 else ''}{round(safe_pct(us_mv_usd - us_cost_usd, us_cost_usd),1)}%",
             "market_value_twd": us_mv_twd, "cost_twd": us_cost_twd,
             "pnl_twd": us_mv_twd - us_cost_twd,
             "pnl_pct": safe_pct(us_mv_twd - us_cost_twd, us_cost_twd),
@@ -156,8 +160,8 @@ data = {
             "cost_usd": round(us_cost_usd, 2),
             "pnl_usd": round(us_mv_usd - us_cost_usd, 2),
             "winners": us_w, "losers": us_l,
-            "highlight": "SMH/DDOG/CSCO/NVDA 已出清；現金等待 6-8 月布局。",
-            "verdict": "美股成長倉重建：ORCL/ANET/DDOG/MRVL/CRWV（≤$300），10/31 前變現。"
+            "highlight": "SMH +31.7%、DDOG +12.1%、CSCO +3.3%、NVDA -10.0%。",
+            "verdict": "因 10/31 用錢→9 月起分批了結；SMH/DDOG 留尾段、NVDA 反彈先出。"
         }
     },
 
@@ -175,245 +179,198 @@ data = {
     "us_stocks": US,
 
     "effective_exposure": [
-        {"name":"0050＋00631L（核心，永久）","icon":"🇹🇼","components":["0050×3210","00631L×4350"],"exposure_twd":499023,"pct_effective":61.7,"long_term":True},
-        {"name":"台積電 2330（核心，永久）","icon":"🏭","components":["2330 25股"],"exposure_twd":58875,"pct_effective":7.3,"long_term":True},
-        {"name":"可投資現金（25萬，投20萬）","icon":"💵","components":["五月賣出回收"],"exposure_twd":CASH_ON_HAND,"pct_effective":31.0,"long_term":False},
+        {"name":"0050＋00631L（核心永久）","icon":"🇹🇼","components":["0050×3210","00631L×4350"],"exposure_twd":499023,"pct_effective":61.7,"long_term":True},
+        {"name":"台積電 2330（核心永久）","icon":"🏭","components":["2330 25股"],"exposure_twd":58875,"pct_effective":7.3,"long_term":True},
+        {"name":"美股半導體（SMH×7，3個月）","icon":"🔌","components":["SMH ETF"],"exposure_twd":131456,"pct_effective":16.3,"long_term":False},
+        {"name":"美股成長（DDOG/CSCO/NVDA，3個月）","icon":"🤖","components":["DDOG×4","CSCO×3","NVDA×1"],"exposure_twd":48970,"pct_effective":6.1,"long_term":False},
     ],
 
-    "underlying_analysis": [],
+    "underlying_analysis": [
+        {
+            "ticker":"SMH","name":"VanEck SMH（×7）","price":598.93,"today_pct":-0.15,"in_portfolio_twd":131456,
+            "thesis":"費半超週期；+31.7% 最大獲利部位；占美股約 73%。",
+            "pros":["AI 晶片超週期","HBM 短缺","5月費半+22%"],
+            "cons":["高檔震盪","10月需變現"],
+            "consensus_target":"$620-660","rating":"Buy","next_catalyst":"COMPUTEX/NVDA 供應鏈","user_action":"🟢 留至 9 月尾段；停損$540"
+        },
+        {
+            "ticker":"DDOG","name":"Datadog（×4）","price":247.35,"today_pct":9.82,"in_portfolio_twd":31023,
+            "thesis":"5/29 +9.8%；雲監控+AI 可觀測性；BTIG 目標 $255。",
+            "pros":["+12.1% 獲利","AI 工作負載","Strong Buy"],
+            "cons":["高估值","波動大"],
+            "consensus_target":"$255（BTIG）","rating":"Buy","next_catalyst":"8/6 財報","user_action":"🟢 8/6 財報後分批了結"
+        },
+        {
+            "ticker":"CSCO","name":"Cisco（×3）","price":120.42,"today_pct":1.5,"in_portfolio_twd":11327,
+            "thesis":"Q3 FY26 +12%；AI 訂單 $9B；HSBC 目標 $137。",
+            "pros":["穩健","股息","AI 網通"],
+            "cons":["成長較低"],
+            "consensus_target":"$124-137","rating":"Buy","next_catalyst":"8/19 財報","user_action":"🟢 穩健留；目標$130 了結"
+        },
+        {
+            "ticker":"NVDA","name":"NVIDIA（×1）","price":211.14,"today_pct":-1.45,"in_portfolio_twd":6620,
+            "thesis":"財報強但股價弱；唯一虧損 -10%；與 SMH 重疊。",
+            "pros":["共識$304","AI 龍頭"],
+            "cons":["-10% 虧損","與 SMH 重疊"],
+            "consensus_target":"均值 $304","rating":"Strong Buy","next_catalyst":"8/26 財報","user_action":"🟡 反彈至 $220-230 先出（重疊）"
+        },
+    ],
 
     # ===== horizon_views（必須匹配渲染函式期望）=====
     "horizon_views": {
         "short_term_1m": {
-            "title": "🔭 短線（~1 個月）情境預測",
-            "intro": "5/14 台灣時間 1AM：持倉重組完成（出清AVGO/AIXI/MULL/SNDU/VSH；QCMU均攤至92股@$39.42；SMH×7；+PLUG+LNOK）。美股5/13強力V形反彈：**QCMU +6.9%**、**TSLT +7.6%**、**SMH +2.2%**；PLUG財報超預期+14.5%。台股5/14預期跟漲+0.5-1.5%，旺宏NOR主題延續。核心任務：TSLT今日鎖利10-15股；ONDL 20股出清；QCMU守住$39.42成本線等6/24催化劑。",
+            "title": "🔭 短線（~1 個月，6 月）情境",
+            "intro": "核心 0050/00631L/2330 永久持有不動。美股 4 檔（SMH/DDOG/CSCO/NVDA）為 3 個月可變現部位：6 月先觀察強弱、守停損，9 月起分批了結以備 10/31 用錢。台股 4.5 萬點過熱（融資新高），不追高。",
             "tw_index": {
-                "current": 41374.5,
-                "bull": 43000, "p_bull": 30,
-                "base": 40500, "p_base": 45,
-                "bear": 39000, "p_bear": 25,
-                "scenario": "多頭：川習會協議+AI超週期持續；基本：通膨頑固+震盪消化；空頭：油價升溫+美中談判破裂+費半持續修正",
+                "current": 44954.0,
+                "bull": 46500, "p_bull": 30,
+                "base": 44000, "p_base": 45,
+                "bear": 41000, "p_bear": 25,
+                "scenario": "多頭：COMPUTEX+AI CapEx 延續；基本：高檔震盪換手；空頭：融資過熱回檔+Fed 鷹派",
             },
             "forecasts": [
-                {"symbol":"0050.TW","name":"元大台灣50","current":95.5,"bull":103,"base":98,"bear":90,"view":"5/13 -1.39%；美股反彈→5/14應跟漲；核心壓艙石不動"},
-                {"symbol":"2330.TW","name":"台積電","current":2220,"bull":2600,"base":2350,"bear":2050,"view":"5/13 -1.55%技術修正；EPS NT$22.08歷史新高；全年>30%；5/14預期反彈"},
-                {"symbol":"2337.TW","name":"旺宏","current":168,"bull":300,"base":200,"bear":140,"view":"🔥 5/13漲停+9.8%；NOR缺貨初期；等回測155-165加碼；目標300元"},
-                {"symbol":"3711.TW","name":"日月光","current":548,"bull":620,"base":570,"bear":500,"view":"5/13 -1.26%；CoWoS受惠；EPS 3.24超預期；凱基目標588；5/14預期回升"},
-                {"symbol":"QCOM","name":"Qualcomm（QCMU底層）","current":212.61,"bull":280,"base":225,"bear":185,"view":"5/12 -11.4%→5/13 +6-7%反彈；6/24投資人日為最大催化劑；QCMU 92股均攤$39.42"},
-                {"symbol":"ANET","name":"Arista Networks（ANEL底層）","current":92,"bull":120,"base":105,"bear":78,"view":"ANEL底層；AI資料中心400/800G受惠；Strong Buy共識；5/14預期跟漲"},
-                {"symbol":"SMH","name":"VanEck SMH（7股）","current":573.62,"bull":660,"base":600,"bear":500,"view":"5/13 +2.2%=$573；7股核心不動；NVDA 5/20財報前布局視窗"},
-                {"symbol":"TSLA","name":"Tesla（TSLT底層）","current":426,"bull":530,"base":420,"bear":320,"view":"TSLT 2X今日+7.6%=$23.88；已獲利+29%；今日賣10-15股鎖利"},
-                {"symbol":"PLUG","name":"Plug Power","current":3.87,"bull":7.50,"base":4.50,"bear":2.80,"view":"🆕 Q1財報超預期+14.5%；Project Quantum Leap降本；目標$4-7中線"},
+                {"symbol":"0050.TW","name":"元大台灣50","current":105.4,"bull":112,"base":107,"bear":98,"view":"核心永久持有；不變現"},
+                {"symbol":"2330.TW","name":"台積電","current":2355,"bull":2600,"base":2450,"bear":2200,"view":"核心永久持有；AI 製造定錨"},
+                {"symbol":"SMH","name":"VanEck SMH（7股）","current":598.93,"bull":660,"base":620,"bear":540,"view":"+31.7% 最大獲利；留至 9 月尾段變現；停損$540"},
+                {"symbol":"DDOG","name":"Datadog（4股）","current":247.35,"bull":275,"base":255,"bear":225,"view":"+12.1%；8/6 財報後了結"},
+                {"symbol":"CSCO","name":"Cisco（3股）","current":120.42,"bull":137,"base":128,"bear":110,"view":"+3.3% 穩健；目標$130 了結"},
+                {"symbol":"NVDA","name":"NVIDIA（1股）","current":211.14,"bull":250,"base":220,"bear":185,"view":"-10% 唯一虧損；反彈$220-230 先出（與 SMH 重疊）"},
             ]
         },
         "long_term": {
-            "title": "🏔️ 長期（6 個月+）持有分析",
-            "intro": "AI 結構性多頭至 2027；先進製程、AI ASIC、AI 雲算力、AI NAND 為四大核心。「核心 + 衛星」配置。",
+            "title": "🏔️ 核心永久持有 vs 3 個月變現部位",
+            "intro": "核心（0050/00631L/2330）永久不賣；美股 4 檔屬 3 個月部位，因 10/31 需用錢須在此前了結。",
             "core_long_term_buys": [
-                {"symbol":"0050.TW","name":"元大台灣50","view":"永遠不賣的壓艙石，長期 8-12%/年"},
-                {"symbol":"00631L.TW","name":"台灣50正2","view":"宣告長期持有，2X 放大 14-20%/年"},
-                {"symbol":"2330.TW","name":"台積電","view":"AI 製造主軸無對手；目標 3,000+"},
-                {"symbol":"AVGO","name":"Broadcom","view":"AI 客製 ASIC 龍頭；2027 AI 收入 $100B+"},
-                {"symbol":"SMH","name":"VanEck SMH","view":"半導體大盤代理；長期目標 $580+"},
-                {"symbol":"3711.TW","name":"日月光","view":"後段封測+CoWoS 受惠；目標 600+"},
+                {"symbol":"0050.TW","name":"元大台灣50","view":"永久壓艙石 +60.8%；不變現"},
+                {"symbol":"00631L.TW","name":"台灣50正2","view":"永久持有 +29.5%；不變現"},
+                {"symbol":"2330.TW","name":"台積電","view":"AI 製造主軸 +9.2%；永久不賣"},
             ],
             "satellite_growth": [
-                {"symbol":"SNDK","name":"SanDisk","view":"AI NAND Pure Play；3 年 EPS 5→130+"},
-                {"symbol":"CRWV","name":"CoreWeave","view":"AI 雲算力新星；ARR 大幅跳升"},
-                {"symbol":"WDC","name":"Western Digital","view":"獨立後 HDD AI 儲存崛起"},
-                {"symbol":"6669.TW","name":"緯穎","view":"AI 伺服器代工龍頭；新標的觀察"},
-                {"symbol":"ANET","name":"Arista Networks","view":"AI 網路 400G/800G 龍頭"},
+                {"symbol":"SMH","name":"VanEck SMH","view":"3個月部位 +31.7%；9 月尾段了結"},
+                {"symbol":"DDOG","name":"Datadog","view":"3個月部位 +12.1%；8/6 財報後了結"},
+                {"symbol":"CSCO","name":"Cisco","view":"3個月部位 +3.3%；目標$130 了結"},
             ],
             "exit_or_reduce": [
-                {"symbol":"ONDL","name":"ONDS 2X（20股）","view":"🔥 策略翻轉！ONDS Q1財報破紀錄→出清策略暫緩；若開盤站穩$16.50持有至$20-22；跌回$14恢復出清"},
-                {"symbol":"TSMG","name":"TSM 2X（15股）","view":"建議賣出換 2330 正股；消除日槓桿衰減"},
-                {"symbol":"ANEL","name":"2×ANET","view":"屬短線槓桿工具；若長抱 ANET 邏輯請考慮正股"},
-                {"symbol":"LNOK","name":"2×Nokia（3股）","view":"🔥 連兩日爆漲+24.76%+8.13%；AI訂單爆發；小倉可持有；目標$110-120"},
+                {"symbol":"NVDA","name":"NVIDIA（1股）","view":"-10% 與 SMH 重疊；反彈先出，或跌破$200 認賠"},
             ]
         },
         "peak_decision": {
-            "title": "❓ 加碼 / 持有 / 賣？— 我的判斷",
-            "current_status": "2026/05/14 凌晨：持倉重組完成（出清AVGO/AIXI/MULL/SNDU/VSH）。美股核心→**SMH×7股**；最大槓桿→**QCMU×92股**（均攤$39.42）；新增PLUG/LNOK小倉。6/24 QCOM投資人日為最重要催化劑。",
-            "verdict": "**SMH×7** 為核心多頭錨；**QCMU×92** 為最大風險＋最大機會點（6/24決戰）；TSLT今日+7.6%→應鎖利；**ONDL必須本週出清**；PLUG財報超預期是本週最佳操盤。",
+            "title": "❓ 持有 / 了結？— 3 個月變現判斷",
+            "current_status": "2026/05/31：核心 0050/00631L/2330 永久持有；美股 SMH/DDOG/CSCO/NVDA 共約 NT$18 萬，因 10/31 用錢需於 9-10 月分批了結。",
+            "verdict": "核心不動；美股 4 檔以「保護獲利」為先：NVDA 反彈先出、SMH/DDOG 留尾段、CSCO 達標了結。9 月啟動每週減倉。",
             "actions": [
-                {"type":"🟢 加碼／續抱","items":[
-                    "00631L 與 0050 核心長抱策略不變",
-                    "AVGO／SMH：趨勢未破前續抱；分批逢高鎖利可選擇",
-                    "2330／3711：基本面＋封測敘事未破線前續抱",
+                {"type":"🟢 核心永久持有","items":[
+                    "0050 / 00631L / 2330：不在 10 月變現範圍，續抱",
                 ]},
-                {"type":"🟡 持有（控槓桿）","items":[
-                    "ANEL：等同 **2×ANET 短線曝險**；不宜用『長期買 ANET』心智持有",
-                    "TSLT／TSMG／SNDU／**QCMU／MULL**：守停損與**合計槓桿上限**（與 SMH 重疊時尤甚）",
-                    "VSH：小衛星，可續抱或與 SMH 精簡二擇一",
+                {"type":"🟡 3 個月續抱（守停損）","items":[
+                    "SMH×7：+31.7% 最大部位，留至 9 月尾段；停損$540",
+                    "DDOG×4：+12.1%；8/6 財報後分批了結",
+                    "CSCO×3：+3.3% 穩健；目標$130 了結",
                 ]},
-                {"type":"🔴 本週必做","items":[
-                    "ONDL 20股：掛 GTC $13.80 出清，虧損-32.6%無反彈催化",
-                    "TSLT 10-15股：今日+7.6%→鎖利，留20-25股長抱",
-                    "TSMG 15股：考慮賣出換 2330 正股 1 股（消除日衰減）",
+                {"type":"🔴 優先了結","items":[
+                    "NVDA×1：-10% 與 SMH 重疊；反彈$220-230 先出或跌破$200 認賠",
                 ]},
-                {"type":"⚫ 結構替代","items":[
-                    "若確信 TSM 長多：TSMG（2×日槓桿）→ 2330 正股，更合適長期持有",
-                    "若確信 ANET 長多：ANEL（2×日槓桿）→ ANET 正股，降低衰減風險",
+                {"type":"⚫ 變現紀律","items":[
+                    "9/1 起每週了結美股部位 25-30%，10/25 前清空",
+                    "若 9 月遇急跌，弱者（NVDA）先砍、強者（SMH）留尾段",
                 ]},
             ],
-            "cash_target": "維持現金緩衝；槓桿標的不宜再加總曝險。"
+            "cash_target": "10/31 前美股 4 檔全數變現為現金；核心台股不動。"
         },
         "tomorrow_tw_strategy": {
-            "title": "📆 5/22（週四）台股／美股策略",
+            "title": "📆 6 月 / 隔日操作重點",
             "macro_context": [
-                "📌 5/21 台股 +1,347pts 收41,368（+3.36%）量價齊揚",
-                "📌 5/20 輝達財報營收816億但股價走弱（利多出盡）",
-                "📌 5/21 QCMU反彈+5%仍虧-12.6%；SMH -0.39%休息",
-                "📌 台積電 5/26 法說；創意 5/22 財報",
-                "📌 川習緩和+AI CapEx 主線不變；短線勿追高",
+                "📌 台股 4.5 萬歷史新高；融資創新高為過熱警訊",
+                "📌 美股 S&P 7580 九週連漲；DDOG 5/29 +9.8%",
+                "📌 Fed 6 月預期維持利率；核心 PCE 3.3% 偏高",
+                "📌 核心 0050/00631L/2330 永久不動",
+                "📌 美股 4 檔為 3 個月部位，10/31 前須變現",
             ],
             "morning_plan": [
-                {"step":1,"action":"9:00 確認美股收盤","detail":"NVDA 盤後走向；若續弱→台股科技開低機率升"},
-                {"step":2,"action":"9:10 台積電","detail":"🟢 2,230 核心不動；5/26法說前不追高；停損2,100"},
-                {"step":3,"action":"9:30 QCMU減碼","detail":"🔴 開盤掛減30-50股；守$32；保留QCOM正股"},
-                {"step":4,"action":"3711 日月光","detail":"🟡 510反彈；未站530不補；破450出清"},
-                {"step":5,"action":"21:30 美股","detail":"SMH/CSCO持有；NVDA不追；00631L獲利可轉0050"},
+                {"step":1,"action":"核心檢視","detail":"🟢 0050/00631L/2330 永久持有，不操作"},
+                {"step":2,"action":"SMH×7","detail":"🟢 +31.7% 留尾段；跌破$540 才減"},
+                {"step":3,"action":"DDOG×4","detail":"🟢 +12.1%；8/6 財報前持有"},
+                {"step":4,"action":"CSCO×3","detail":"🟢 穩健；達$130 了結"},
+                {"step":5,"action":"NVDA×1","detail":"🟡 反彈$220-230 先出（與 SMH 重疊）"},
             ],
-            "one_line": "5/22：台股強彈後降槓桿→減QCMU、守0050/2330/SMH；等台積5/26法說。"
+            "one_line": "核心永久不動；美股 4 檔守停損、9 月起分批了結，確保 10/31 現金到位。"
         }
     },
 
     "news": [
-        {"date":"2026-05-31","category":"台股","title":"台股 5 月大漲 5806 點衝 44954 歷史新高；COMPUTEX+黃仁勳行情；外資 5 月買超 2360 億","impact":"positive","source":"鉅亨網 / 自由財經"},
-        {"date":"2026-05-31","category":"⚠️ 警示","title":"永豐投顧：融資餘額創新高、市值膨脹快於資金供給；高檔震盪加劇","impact":"mixed","source":"鉅亨網"},
-        {"date":"2026-05-29","category":"美股","title":"S&P 7580 九週連漲創新高；Dell +33%、DDOG +9.8%、ORCL +10.8%；5 月 S&P +5.1%","impact":"positive","source":"Sunday Guardian / Daily Times"},
-        {"date":"2026-05-29","category":"Fed","title":"Fed 6 月預期維持利率；核心 PCE 3.3% 仍高於 2% 目標；通膨僵固","impact":"mixed","source":"TowneBank / Pluang"},
-        {"date":"2026-05-29","category":"台股","title":"6669 緯穎漲停 +10%；2330 +2.61% 至 2355；0050 +4.88%","impact":"positive","source":"BigGo Finance"},
-        {"date":"2026-05-26","category":"分析師","title":"BTIG 上調 DDOG 目標至 $255（Buy）；雲監控 AI 可觀測性受追捧","impact":"positive","source":"GuruFocus"},
-        {"date":"2026-05-21","category":"台股","title":"台股加權 +1,347pts 收41,368（+3.36%），史上第五大點數漲幅；成交逾1兆","impact":"positive","source":"Taiwan News"},
-        {"date":"2026-05-21","category":"半導體","title":"聯發科漲停、台積電+2.06%、日月光+7.14%；半導體領漲","impact":"positive","source":"Taiwan News / BigGo"},
-        {"date":"2026-05-21","category":"美股","title":"QCOM +2.56%、ANEL底層ANET鏈+5.66%；SMH -0.39% 休息","impact":"mixed","source":"BigGo Finance"},
-        {"date":"2026-05-20","category":"科技","title":"輝達宣布$80B 額外回購、季股息$0.01→$0.25","impact":"positive","source":"Al Jazeera"},
-        {"date":"2026-05-19","category":"台股","title":"台股加權 -716pts 收40,176（-1.75%），跌破月線；台積電 -1.56% 至2,205；聯發科 -7.21%；記憶體股跌停","impact":"negative","source":"Taiwan News / Yahoo TW"},
-        {"date":"2026-05-19","category":"半導體","title":"費半/SMH -1.83%；MU -5.95%；MULL(2×MU) -11.84%；半導體獲利了結延續","impact":"negative","source":"BigGo Finance"},
-        {"date":"2026-05-18","category":"美股","title":"Nasdaq 收跌：科技／晶片領跌；10Y美債殖利率升至2025/2以來高點~4.6%","impact":"negative","source":"Economic Times / TradingView"},
-        {"date":"2026-05-15","category":"通膨/Fed","title":"CPI 3.8%、核心2.8%超預期；市場估Fed年底可能升息25bp","impact":"negative","source":"CNBC / Yahoo Finance"},
-        {"date":"2026-05-19","category":"資金輪動","title":"資金由大型科技轉向金融、電信；中華電創新高","impact":"mixed","source":"Taiwan News"},
-        {"date":"2026-05-14","category":"⚠️ 警示","title":"QCMU(2×QCOM)盤前-6.72%至$34.03；QCOM持續面臨Apple modem流失+Android疲弱；92股×2倍曝險需警戒；若開盤跌破$34需減碼20-30股","impact":"negative","source":"BigGo 盤前 09:02 EDT"},
-        {"date":"2026-05-14","category":"台股","title":"🎉 台股大漲+377pts(+0.91%)收41,752；台積電+50元收2,270；成交1.22兆；記憶體三雄成焦點；川習峰會帶動AI半導體樂觀","impact":"positive","source":"壹蘋、Yahoo財經"},
-        {"date":"2026-05-14","category":"美股","title":"🏆 S&P 500創歷史新高7,444(+0.58%)；NASDAQ歷史新高+1.2%；Alphabet、NVIDIA大漲帶動；川習會+AI樂觀情緒驅動","impact":"positive","source":"MarketScreener、Moneycontrol"},
-        {"date":"2026-05-14","category":"地緣政治","title":"川習峰會正向收場：習稱「貿易戰無贏家」；美中擬各降300億商品關稅；惟習嚴正警告台灣問題可能引發衝突","impact":"mixed","source":"CBS News、Business Times"},
-        {"date":"2026-05-13","category":"台股","title":"台股加權 -523.82pts(-1.25%) 收41,374；盤中最深跌883pts；台積電-1.55%收2,220；失守5日線","impact":"negative","source":"聯合、PChome"},
-        {"date":"2026-05-13","category":"記憶體","title":"🔥 旺宏(2337)漲停+9.80%（168元）；AI NOR Flash缺貨爆發；大廠撤出2D NAND，旺宏成「最後供應商」；本土機構目標300元","impact":"positive","source":"CMoney、理財周刊"},
-        {"date":"2026-05-13","category":"地緣政治","title":"川習會5/13-14北京登場；美稀土 vs 中半導體出口管制為談判核心；中國重稀土出口量同比-50%，傳考慮延長休戰期","impact":"mixed","source":"經濟日報、時報資訊"},
-        {"date":"2026-05-12","category":"通膨/Fed","title":"美國4月CPI年增3.8%（創2023年5月新高，超預期3.7%）；核心CPI 2.8%；Fed降息推至2027；6月降息概率僅2.4%","impact":"negative","source":"鉅亨網、工商時報"},
-        {"date":"2026-05-12","category":"半導體","title":"⚠️ QCOM暴跌-11.4%（2020年來最糟單日）；AI rally退潮獲利了結；費半SOX -3.01%；QCMU(2×QCOM)實際收盤-23%至$35.52","impact":"negative","source":"FXLeaders、CNBC"},
-        {"date":"2026-05-12","category":"美股","title":"ANEL(2×ANET)+8.80%；AVGO -2.13%收$419.30（盤前5/13回升$421.95）；SMH -2.61%收$561.25（盤前+1.92%）","impact":"mixed","source":"BigGo"},
-        {"date":"2026-05-13","category":"半導體","title":"美商務部禁止晶片設備商向華虹半導體供貨；鎖定阻礙中國7nm晶片；美中半導體出口管制持續升級","impact":"negative","source":"Now新聞"},
-        {"date":"2026-05-13","category":"關稅","title":"美國際貿易法院裁定川普10%全球關稅違法；未來恐改以半導體/稀土232條款繼續加碼","impact":"mixed","source":"經濟日報"},
-        {"date":"2026-05-12","category":"能源","title":"美伊緊張局勢升高；中東油價一度突破$100/桶；CPI能源分項年增17.9%；通膨主要推手","impact":"negative","source":"多方來源"},
-        {"date":"2026-05-13","category":"🆕 財報","title":"🔥 PLUG（Plug Power）Q1 2026 財報超預期：EPS -$0.08（估-$0.09）；營收$163M +22% YoY；毛利率-13%（大幅改善自-55%）；Project Quantum Leap降本；CEO：Q4 2026 正EBITDAS；股價今日+14.5%","impact":"positive","source":"Proactive Investors / Motley Fool"},
-        {"date":"2026-05-13","category":"美股反彈","title":"QCMU +6.9%($37.97)、TSLT +7.64%($23.88)、SMH +2.2%($573.62) — 半導體 V 形反彈；市場認為 CPI 引發賣壓過度反應；AVGO 小跌 -0.49%($417.22)","impact":"positive","source":"BigGo Finance 5/13 盤中"},
-        {"date":"2026-05-13","category":"分析師","title":"PLUG 多家分析師上調目標：B.Riley $5.00、HC Wainwright $7.00（Buy）、Canaccord $4.00（升自$2.50）、Susquehanna $3.75（Neutral）","impact":"positive","source":"MarketBeat / 247wallst"},
-        {"date":"2026-05-13","category":"台股","title":"台股 5/13 大盤 41,374.5 (-523pt, -1.25%)；旺宏 2337 +9.8% 漲停；日月光 3711 -1.26%；台積電 2330 -1.55%；電子股普跌","impact":"negative","source":"TechNews / BigGo"},
-        {"date":"2026-05-12","category":"美股","title":"QCOM 暴跌 -11.4%（2020年最糟）→ QCMU -23%；原因：4月核心CPI +0.4% MoM超預期(vs +0.3%)；半導體賣壓擴大","impact":"negative","source":"CNBC / fxleaders"},
-        {"date":"2026-05-12","category":"宏觀","title":"美國 4月核心CPI +0.4% MoM（預期+0.3%）；年增 3.2%；Fed 降息預期進一步延後至最早 12月","impact":"negative","source":"BLS / Bloomberg"},
-        {"date":"2026-05-08","category":"美股大盤","title":"S&P 500 (+0.74%) 7,391 / NASDAQ (+1.32%) 26,145 / Dow (+0.05%) 49,621 — 創歷史新高；美股連 6 週上漲；83% S&P 500 公司 Q1 EPS 超預期","impact":"positive","source":"Yahoo Finance / Marketscreener"},
-        {"date":"2026-05-08","category":"半導體","title":"費半 ETF SMH BigGo 收 $566.54（+4.9%）；Intel +16%（Apple 晶片代工談判）、AMD +8%、Micron +13%","impact":"positive","source":"BigGo / Motley Fool"},
-        {"date":"2026-05-08","category":"美股","title":"QCOM BigGo 收 $219.09（+8.17%）；Q2 FY2026 EPS $6.88 超預期；超大雲客製矽 Q4 2026 初出貨；5天內共+41%","impact":"positive","source":"BigGo / Trefis"},
-        {"date":"2026-05-08","category":"美股","title":"Arista（ANET）BigGo 收 $141.77（+0.01%）；FY2026 AI 指引延續","impact":"mixed","source":"BigGo / StockAnalysis"},
-        {"date":"2026-05-08","category":"地緣","title":"美伊和平談判進展：伊朗回應美方備忘錄；荷姆茲海峽再開預期 → 布蘭特原油跌至 ~$98；全球股市大漲","impact":"positive","source":"Bloomberg / CNBC"},
-        {"date":"2026-05-07","category":"美中貿易","title":"川習會談判持續；美中關稅降幅討論中；稀土出口管制預期鬆綁 → 半導體製造成本利好","impact":"mixed","source":"WEF / Yahoo Finance"},
-        {"date":"2026-05-08","category":"就業數據","title":"美國 4 月新增就業 115,000（超預期 65,000）；失業率穩 4.3%；勞動市場韌性支撐 Fed 維持利率","impact":"positive","source":"BLS / Yahoo Finance"},
-        {"date":"2026-04-30","category":"QCOM 財報","title":"QCOM 超大雲客製矽揭露（4/30）→ 股價單日飆 +16-20%；5天連漲達 $219；Q2 EPS $6.88 (+173% YoY)；車用+50%","impact":"positive","source":"Morningstar / Business Insider"},
-        {"date":"2026-04-25","category":"財報","title":"台積電Q1 2026：EPS NT$22.08歷史新高；毛利率66.2%；全年成長上修>30%；N2量產良率良好","impact":"positive","source":"民報、fiisual"},
-        {"date":"2026-04-27","category":"台股","title":"旺宏 Q1 2026：EPS 0.9 元終結連 10 季虧損；毛利 40.8%；NOR Flash 缺貨行情確立","impact":"positive","source":"Yahoo TW"},
-        {"date":"2026-04-29","category":"台股","title":"日月光 Q1 2026：EPS 3.24 元超預期；LEAP 先進封測 2026 突破 $35億；CoWoS 受惠","impact":"positive","source":"TechNews"},
-        {"date":"2026-04","category":"美聯準會","title":"FOMC：19 人中 7 人預期 2026 全年零降息；Fed 加息概率 30%（2027 前）；核心 PCE 通膨 3.1%","impact":"negative","source":"Phemex / Fed"},
+        {"date":"2026-05-31","category":"台股","title":"台股 5 月大漲衝 44954 歷史新高；COMPUTEX+黃仁勳行情；外資 5 月買超約 2360 億","impact":"positive","source":"鉅亨網 / 自由財經"},
+        {"date":"2026-05-31","category":"⚠️ 警示","title":"投顧示警：融資餘額創新高、市值膨脹快於資金供給；高檔震盪加劇，不宜追高","impact":"mixed","source":"鉅亨網"},
+        {"date":"2026-05-31","category":"持倉","title":"庫存現況：台股 0050/00631L/2330（核心永久）；美股 SMH+31.7%、DDOG+12.1%、CSCO+3.3%、NVDA-10.0%","impact":"positive","source":"券商對帳截圖"},
+        {"date":"2026-05-29","category":"美股","title":"S&P 約 7580 九週連漲創新高；DDOG +9.8%；5 月 S&P 約 +5%","impact":"positive","source":"Sunday Guardian / Daily Times"},
+        {"date":"2026-05-29","category":"Fed","title":"Fed 6 月預期維持利率；核心 PCE 約 3.3% 仍高於 2% 目標；通膨僵固","impact":"mixed","source":"TowneBank / Pluang"},
+        {"date":"2026-05-29","category":"台股","title":"2330 +2.61% 至 2355；0050 +4.88% 至 105.4；半導體領漲","impact":"positive","source":"BigGo Finance"},
+        {"date":"2026-05-26","category":"分析師","title":"BTIG 上調 DDOG 目標至 $255（Buy）；雲監控／AI 可觀測性受追捧","impact":"positive","source":"GuruFocus"},
     ],
 
     "earnings": [
-        {"ticker":"DDOG","name":"Datadog","period":"Q1 2026 (5月)","revenue":"YoY +25%+","eps":"超預期","highlight":"5/29 股價 +9.8%；AI 可觀測性；BTIG 目標 $255","rating":"Buy"},
-        {"ticker":"NVDA","name":"NVIDIA","period":"Q1 FY27 (5/20)","revenue":"$81.6B (+85%)","eps":"$1.87 adj.","highlight":"資料中心$75.2B；下季指引$91B；股價走弱","rating":"Strong Buy"},
-        {"ticker":"CSCO","name":"Cisco","period":"Q3 FY26 (5/13)","revenue":"$15.8B (+12%)","eps":"$1.06 adj.","highlight":"AI 訂單 FY26 $9B；毛利66%","rating":"Buy"},
-        {"ticker":"PLUG","name":"Plug Power","period":"Q1 2026 (5/13)","revenue":"$163M (+22% YoY)","eps":"-$0.08（超預期 -$0.09）","highlight":"毛利率-13%（大幅改善自-55%）；Project Quantum Leap降本；Q4 2026 正EBITDAS目標；$8B電解槽管線；今日+14.5%","rating":"Buy（B.Riley目標$5）"},
-        {"ticker":"AAPL","name":"Apple","period":"Q2 FY26 (4/30)","revenue":"$111.2B (+17%)","eps":"$2.01 (+22%)","highlight":"服務 $31B 新高；$100B 回購；Q3 指引 +14-17%；毛利 47.5-48.5%","rating":"Buy"},
-        {"ticker":"AVGO","name":"Broadcom","period":"Q1 FY26 (3/4)","revenue":"$19.31B (+29%)","eps":"$2.05 (Non-GAAP)","highlight":"AI 收入 $8.4B (+106%)；Q2 指引 $22B；CEO：2027 AI 晶片 >$100B；下次財報 6/3","rating":"Buy"},
-        {"ticker":"QCOM","name":"Qualcomm","period":"Q2 FY26 (5/8)","revenue":"$10.6B (-3% YoY)","eps":"$6.88（超預期 $2.61；+173% YoY）","highlight":"超大雲客製矽 Q4 2026 出貨；車用 +50% YoY；6/24 投資人日（最重要催化劑）","rating":"Hold→升評中"},
-        {"ticker":"2330.TW","name":"台積電","period":"Q1 2026","revenue":"$35.9B (+35.1%)","eps":"NT$22.08","highlight":"毛利 66.2%；全年指引>30%；AI 加速器 CAGR 54-56%；CoWoS 滿載至 2027；CapEx $52-56B","rating":"Strong Buy"},
-        {"ticker":"3711.TW","name":"日月光投控","period":"Q1 2026","revenue":"超預期","eps":"NT$3.24","highlight":"LEAP 先進封測 2026 突破 $35億；CoWoS 受惠","rating":"Buy"},
-        {"ticker":"2337.TW","name":"旺宏","period":"Q1 2026","revenue":"轉正","eps":"NT$0.90","highlight":"終結連 10 季虧損；毛利 40.8%；投信賣壓仍在","rating":"Hold"},
-        {"ticker":"SNDK","name":"SanDisk","period":"FY26 Q3","revenue":"上行週期","eps":"2026E $127","highlight":"NAND 合約漲 55-60%；5 年期 $42B 合約；Bernstein 目標 $1,250","rating":"Buy"},
-        {"ticker":"INTC","name":"Intel","period":"Q2 2026E","revenue":"$14.39B（市場估）","eps":"$0.21（市場估）","highlight":"Apple 晶片代工談判 → 單日 +16%；修復+事件驅動","rating":"Hold→Buy(事件)"},
-        {"ticker":"TSLA","name":"Tesla","period":"Q1 2026","revenue":"$22.39B","eps":"$0.41","highlight":"Robotaxi 進度；Capex 上修；TSLT 2× 衰減注意","rating":"Hold"},
-        {"ticker":"CRWV","name":"CoreWeave","period":"Q1 2026","revenue":"ARR 跳升","eps":"轉虧為盈中","highlight":"Meta $21B + Jane Street $7B；雲算力核心標的","rating":"Buy"},
+        {"ticker":"DDOG","name":"Datadog（持倉×4）","period":"Q1 2026","revenue":"YoY +25%+","eps":"超預期","highlight":"5/29 股價 +9.8%；AI 可觀測性；BTIG 目標 $255；下次財報 8/6","rating":"Buy"},
+        {"ticker":"NVDA","name":"NVIDIA（持倉×1）","period":"Q1 FY27 (5/20)","revenue":"$81.6B (+85%)","eps":"$1.87 adj.","highlight":"資料中心$75.2B；下季指引$91B；股價走弱（持倉 -10%）；下次財報 8/26","rating":"Strong Buy"},
+        {"ticker":"CSCO","name":"Cisco（持倉×3）","period":"Q3 FY26 (5/13)","revenue":"$15.8B (+12%)","eps":"$1.06 adj.","highlight":"AI 訂單 FY26 $9B；毛利66%；下次財報 8/19","rating":"Buy"},
+        {"ticker":"SMH","name":"VanEck SMH（持倉×7）","period":"ETF（成分財報）","revenue":"—","eps":"—","highlight":"費半 5 月約 +22%；持倉 +31.7% 最大獲利；追蹤 NVDA/TSM/AVGO 等","rating":"Buy"},
+        {"ticker":"2330.TW","name":"台積電（核心永久）","period":"Q1 2026","revenue":"$35.9B (+35.1%)","eps":"NT$22.08","highlight":"毛利 66.2%；全年指引>30%；CoWoS 滿載至 2027；7/16 法說","rating":"Strong Buy"},
     ],
 
     "analysts": {
         "panel": ["巴菲特","芒格","Cathie Wood","Michael Burry","Peter Lynch","Ray Dalio","Druckenmiller","葛拉漢","索羅斯","科斯托蘭尼","Jim Simons","動能派","價值派","成長派","宏觀策略","風控長","產業專家","量化派","ESG"],
         "votes": [
-            {"symbol":"2317.TW","name":"鴻海","sell":1,"hold":5,"buy":13,"label":"AI server+機器人"},
-            {"symbol":"2382.TW","name":"廣達","sell":1,"hold":6,"buy":12,"label":"AI server ODM"},
-            {"symbol":"3231.TW","name":"緯創","sell":2,"hold":6,"buy":11,"label":"GB200 機櫃"},
-            {"symbol":"2303.TW","name":"聯電","sell":3,"hold":11,"buy":5,"label":"低估值防禦"},
-            {"symbol":"2337.TW","name":"旺宏","sell":3,"hold":9,"buy":7,"label":"NOR缺貨"},
-            {"symbol":"ORCL","name":"Oracle","sell":0,"hold":5,"buy":14,"label":"雲 AI"},
-            {"symbol":"ANET","name":"Arista","sell":0,"hold":3,"buy":16,"label":"AI 網路"},
-            {"symbol":"DDOG","name":"Datadog","sell":2,"hold":6,"buy":11,"label":"AI 可觀測性"},
-            {"symbol":"MRVL","name":"Marvell","sell":1,"hold":5,"buy":13,"label":"AI ASIC/光通訊"},
-            {"symbol":"CRWV","name":"CoreWeave","sell":3,"hold":8,"buy":8,"label":"AI 算力(高險)"},
+            {"symbol":"2330.TW","name":"台積電（核心永久）","sell":0,"hold":4,"buy":15,"label":"AI 製造主軸"},
+            {"symbol":"0050.TW","name":"元大台灣50（核心永久）","sell":0,"hold":6,"buy":13,"label":"大盤壓艙石"},
+            {"symbol":"SMH","name":"VanEck SMH（持倉×7）","sell":1,"hold":5,"buy":13,"label":"費半超週期"},
+            {"symbol":"DDOG","name":"Datadog（持倉×4）","sell":2,"hold":6,"buy":11,"label":"AI 可觀測性"},
+            {"symbol":"CSCO","name":"Cisco（持倉×3）","sell":1,"hold":9,"buy":9,"label":"AI 網通穩健"},
+            {"symbol":"NVDA","name":"NVIDIA（持倉×1）","sell":2,"hold":6,"buy":11,"label":"AI GPU（與SMH重疊）"},
         ]
     },
 
     "picks": [
-        {"rank":1,"ticker":"2317","name":"鴻海","market":"TW","price":289,"target_low":330,"target_high":360,"upside_pct":20.0,"thesis":"AI server+機器人；5/29漲停+9.9%；COMPUTEX主秀；≤1000 ✓","type":"台股成長"},
-        {"rank":2,"ticker":"ORCL","name":"Oracle","market":"US","price":225.78,"target_low":260,"target_high":290,"upside_pct":24.0,"thesis":"雲AI Capex；6/10財報；≤$300 ✓","type":"美股成長"},
-        {"rank":3,"ticker":"3231","name":"緯創","market":"TW","price":158.5,"target_low":185,"target_high":205,"upside_pct":25.0,"thesis":"GB200機櫃+散熱；5/29漲停；≤1000 ✓","type":"台股成長"},
-        {"rank":4,"ticker":"ANET","name":"Arista Networks","market":"US","price":159.47,"target_low":175,"target_high":190,"upside_pct":19.0,"thesis":"AI 800G網路；Strong Buy；≤$300 ✓","type":"美股成長"},
-        {"rank":5,"ticker":"MRVL","name":"Marvell","market":"US","price":205,"target_low":235,"target_high":260,"upside_pct":20.0,"thesis":"AI ASIC/光通訊；6/4財報催化；≤$300 ✓","type":"美股成長"},
-        {"rank":6,"ticker":"2382","name":"廣達","market":"TW","price":339,"target_low":380,"target_high":420,"upside_pct":18.0,"thesis":"AI server龍頭ODM；5/29漲停；6/1財報；≤1000 ✓","type":"台股成長"},
-        {"rank":7,"ticker":"DDOG","name":"Datadog","market":"US","price":247.35,"target_low":255,"target_high":275,"upside_pct":9.0,"thesis":"雲監控；BTIG $255；8/6財報；≤$300 ✓","type":"美股成長"},
-        {"rank":8,"ticker":"2303","name":"聯電","market":"TW","price":144.5,"target_low":158,"target_high":170,"upside_pct":15.0,"thesis":"成熟製程foundry；低估值防禦；≤1000 ✓","type":"台股成長"},
-        {"rank":9,"ticker":"2337","name":"旺宏","market":"TW","price":166.5,"target_low":190,"target_high":230,"upside_pct":25.0,"thesis":"NOR Flash缺貨；AI邊緣推理；≤1000 ✓","type":"台股成長"},
-        {"rank":10,"ticker":"CRWV","name":"CoreWeave","market":"US","price":109.53,"target_low":130,"target_high":160,"upside_pct":30.0,"thesis":"AI雲算力新星；高波動小倉；≤$300 ✓","type":"美股成長(高險)"},
+        {"rank":1,"ticker":"SMH","name":"VanEck SMH（持倉×7）","market":"US","price":598.93,"target_low":620,"target_high":660,"upside_pct":7.0,"thesis":"+31.7% 最大獲利；費半超週期；留至 9 月尾段了結；停損$540","type":"3個月續抱"},
+        {"rank":2,"ticker":"DDOG","name":"Datadog（持倉×4）","market":"US","price":247.35,"target_low":255,"target_high":275,"upside_pct":9.0,"thesis":"+12.1%；BTIG $255；8/6 財報後分批了結","type":"3個月續抱"},
+        {"rank":3,"ticker":"CSCO","name":"Cisco（持倉×3）","market":"US","price":120.42,"target_low":128,"target_high":137,"upside_pct":8.0,"thesis":"+3.3% 穩健；AI 訂單 $9B；達$130 了結","type":"3個月續抱"},
+        {"rank":4,"ticker":"NVDA","name":"NVIDIA（持倉×1）","market":"US","price":211.14,"target_low":220,"target_high":250,"upside_pct":5.0,"thesis":"-10% 唯一虧損；與 SMH 重疊；反彈$220-230 先出","type":"優先了結"},
+        {"rank":5,"ticker":"2330","name":"台積電（核心永久）","market":"TW","price":2355,"target_low":2450,"target_high":2600,"upside_pct":4.0,"thesis":"+9.2% AI 製造主軸；永久持有，不在變現範圍","type":"核心永久"},
+        {"rank":6,"ticker":"0050","name":"元大台灣50（核心永久）","market":"TW","price":105.4,"target_low":107,"target_high":112,"upside_pct":2.0,"thesis":"+60.8% 壓艙石；永久持有不賣","type":"核心永久"},
+        {"rank":7,"ticker":"00631L","name":"台灣50正2（核心永久）","market":"TW","price":36.94,"target_low":38,"target_high":40,"upside_pct":3.0,"thesis":"+29.5% =0050 2X；永久持有不賣","type":"核心永久"},
     ],
 
     # ===== actions（A/B 用 strategy/stop/target；C 用 action/reason）=====
     "actions": {
         "A": [
-            {"symbol":"2317.TW","name":"鴻海","price":289,"target":"330-360","stop":262,"strategy":"AI server核心；6月分批；9月底前變現"},
-            {"symbol":"ORCL","name":"Oracle","price":225.78,"target":"260-290","stop":205,"strategy":"6/10財報催化；9/15前出清"},
-            {"symbol":"3231.TW","name":"緯創","price":158.5,"target":"185-205","stop":144,"strategy":"GB200機櫃；逢回148-152加；9月底前賣"},
-            {"symbol":"ANET","name":"Arista Networks","price":159.47,"target":"175-190","stop":145,"strategy":"AI網路；8月底前出清"},
+            {"symbol":"NVDA","name":"NVIDIA（持倉×1）","price":211.14,"target":"反彈$220-230 先出","stop":200,"strategy":"-10% 唯一虧損且與 SMH 重疊；反彈先了結；跌破$200 認賠"},
         ],
         "B": [
-            {"symbol":"MRVL","name":"Marvell","price":205,"target":"235-260","stop":185,"strategy":"6/4財報前小量；過財報加碼"},
-            {"symbol":"2382.TW","name":"廣達","price":339,"target":"380-420","stop":308,"strategy":"6/1財報；漲多分批；9月變現"},
-            {"symbol":"DDOG","name":"Datadog","price":247.35,"target":"255-275","stop":225,"strategy":"7月布局；8/6財報前；9/1前賣"},
-            {"symbol":"2303.TW","name":"聯電","price":144.5,"target":"158-170","stop":135,"strategy":"低估值防禦倉；穩健"},
-            {"symbol":"2337.TW","name":"旺宏","price":166.5,"target":"190-230","stop":150,"strategy":"NOR缺貨題材；小倉博彈性"},
+            {"symbol":"SMH","name":"VanEck SMH（×7）","price":598.93,"target":"620-660","stop":540,"strategy":"+31.7% 最大部位；留至 9 月尾段，跌破$540 才減"},
+            {"symbol":"DDOG","name":"Datadog（×4）","price":247.35,"target":"255-275","stop":225,"strategy":"+12.1%；8/6 財報後分批了結"},
+            {"symbol":"CSCO","name":"Cisco（×3）","price":120.42,"target":"128-137","stop":110,"strategy":"+3.3% 穩健；達$130 了結"},
         ],
         "C": [
-            {"symbol":"CRWV","name":"CoreWeave","price":109.53,"action":"小倉≤3%；高波動","reason":"AI算力高成長但虧損；停損$95"},
-            {"symbol":"00631L","name":"台灣50正2","price":36.94,"action":"核心續抱不加碼","reason":"長期持有；新資金勿再投槓桿ETF"},
+            {"symbol":"0050","name":"元大台灣50（核心永久）","price":105.4,"action":"永久持有不賣","reason":"+60.8% 壓艙石；不在 10 月變現範圍"},
+            {"symbol":"00631L","name":"台灣50正2（核心永久）","price":36.94,"action":"永久持有不賣","reason":"+29.5%；=0050 2X 長期持有"},
+            {"symbol":"2330","name":"台積電（核心永久）","price":2355,"action":"永久持有不賣","reason":"+9.2% AI 製造主軸；不變現"},
         ]
     },
 
     # ===== next_buy_recommendations（tickers 必須是物件陣列）=====
     "next_buy_recommendations": [
         {
-            "scenario": "台股 5 檔成長倉（投 12 萬；≤1000元）",
+            "scenario": "🔴 10/31 變現排程（美股 4 檔，約 NT$18 萬）",
             "tickers": [
-                {"ticker":"2317","name":"鴻海","price":289,"rationale":"AI server+機器人；COMPUTEX主秀","size_suggest":"約 NT$33,000（100股+）","confidence":"🟢 高"},
-                {"ticker":"3231","name":"緯創","price":158.5,"rationale":"GB200機櫃+散熱純度高","size_suggest":"約 NT$27,000","confidence":"🟢 高"},
-                {"ticker":"2382","name":"廣達","price":339,"rationale":"AI server龍頭；6/1財報","size_suggest":"約 NT$24,000","confidence":"🟢 高"},
-                {"ticker":"2303","name":"聯電","price":144.5,"rationale":"低估值foundry防禦倉","size_suggest":"約 NT$20,000","confidence":"🟡 中"},
-                {"ticker":"2337","name":"旺宏","price":166.5,"rationale":"NOR缺貨彈性倉","size_suggest":"約 NT$16,000","confidence":"🟡 中"},
+                {"ticker":"NVDA","name":"NVIDIA（×1）","price":211.14,"rationale":"-10% 與 SMH 重疊；最優先","size_suggest":"反彈$220-230 先出","confidence":"🔴 先了結"},
+                {"ticker":"DDOG","name":"Datadog（×4）","price":247.35,"rationale":"+12.1%；8/6 財報後","size_suggest":"8 月底前分批","confidence":"🟡 中段"},
+                {"ticker":"CSCO","name":"Cisco（×3）","price":120.42,"rationale":"+3.3%；達標","size_suggest":"$130 了結","confidence":"🟡 中段"},
+                {"ticker":"SMH","name":"VanEck SMH（×7）","price":598.93,"rationale":"+31.7% 最大獲利；留尾段","size_suggest":"9 月分批至 10/25 清空","confidence":"🟢 留最後"},
             ]
         },
         {
-            "scenario": "美股 5 檔成長倉（投 8 萬≈$2,550；≤$300）",
+            "scenario": "🟢 核心永久持有（不變現，不操作）",
             "tickers": [
-                {"ticker":"ORCL","name":"Oracle","price":225.78,"rationale":"雲AI；6/10財報；9/15前賣","size_suggest":"約 $700（NT$22,000）","confidence":"🟢 高"},
-                {"ticker":"ANET","name":"Arista","price":159.47,"rationale":"AI 800G網路Strong Buy","size_suggest":"約 $600（NT$19,000）","confidence":"🟢 高"},
-                {"ticker":"MRVL","name":"Marvell","price":205,"rationale":"AI ASIC/光通訊；6/4財報","size_suggest":"約 $500（NT$16,000）","confidence":"🟢 高"},
-                {"ticker":"DDOG","name":"Datadog","price":247.35,"rationale":"雲監控；BTIG $255","size_suggest":"約 $450（NT$14,000）","confidence":"🟡 中"},
-                {"ticker":"CRWV","name":"CoreWeave","price":109.53,"rationale":"AI算力高成長小倉","size_suggest":"約 $300（NT$9,000）","confidence":"🔴 高險"},
+                {"ticker":"0050","name":"元大台灣50","price":105.4,"rationale":"+60.8% 壓艙石","size_suggest":"永久持有","confidence":"🟢 不賣"},
+                {"ticker":"00631L","name":"台灣50正2","price":36.94,"rationale":"+29.5% =0050 2X","size_suggest":"永久持有","confidence":"🟢 不賣"},
+                {"ticker":"2330","name":"台積電","price":2355,"rationale":"+9.2% AI 製造主軸","size_suggest":"永久持有","confidence":"🟢 不賣"},
             ]
         }
     ],
@@ -422,126 +379,114 @@ data = {
     "allocation": {
         "current": [
             {"label":"台股核心（0050+00631L+2330，永久）","value":69.0},
-            {"label":"可投資現金（25萬）","value":31.0},
-            {"label":"成長倉（待建）","value":0.0},
+            {"label":"美股半導體（SMH×7，3個月）","value":16.3},
+            {"label":"美股成長（DDOG/CSCO/NVDA，3個月）","value":6.1},
+            {"label":"現金","value":0.0},
         ],
         "target": [
-            {"label":"台股 5 檔成長倉（投 12 萬）","value":48},
-            {"label":"美股 5 檔成長倉（投 8 萬）","value":32},
-            {"label":"現金緩衝（5 萬，至 10/31）","value":20},
+            {"label":"台股核心（永久不動）","value":75},
+            {"label":"美股部位（9-10 月分批變現）","value":0},
+            {"label":"現金（10/31 到位）","value":25},
         ]
     },
 
     "consensus": [
-        {"symbol":"QCMU","name":"Direxion 2× QCOM（92股）","rating":"🟡 均攤觀察","target":"QCOM 分析師均值$225-300；今日QCMU+6.9%=$37.97；守$39.42均攤成本；6/24投資人日為定論日","date":"2026-05-14"},
-        {"symbol":"PLUG","name":"Plug Power（20股）","rating":"🆕 Buy/Neutral 分歧","target":"B.Riley $5.00；HC Wainwright $7.00；Canaccord $4.00；Susquehanna $3.75；Q1財報超預期","date":"2026-05-13"},
-        {"symbol":"LNOK","name":"Defiance 2×Nokia（3股）","rating":"中性","target":"Nokia ADR $5-7；LNOK跟隨2×波動；小倉觀察","date":"2026-05-14"},
-        {"symbol":"AAPL","name":"Apple","rating":"Buy","target":"$215-280","date":"2026-05"},
-        {"symbol":"TSM","name":"TSMC ADR","rating":"Strong Buy","target":"$400-480","date":"2026-05"},
-        {"symbol":"2330.TW","name":"台積電","rating":"加碼","target":"NT$2,288-3,030","date":"2026-04"},
-        {"symbol":"3711.TW","name":"日月光","rating":"加碼","target":"NT$308-588","date":"2026-04"},
-        {"symbol":"2337.TW","name":"旺宏","rating":"🔥 強力買進","target":"NT$200-300；本土機構目標300元；NOR缺貨初期；5/13漲停+9.8%；AI邊緣推理需求引爆","date":"2026-05-13"},
-        {"symbol":"ANET","name":"Arista Networks","rating":"Strong Buy（17/17）","target":"均值 $175.18；範圍 $112-200；Morningstar $190","date":"2026-05"},
-        {"symbol":"INTC","name":"Intel","rating":"Hold→Buy(事件驅動)","target":"$120-135","date":"2026-05"},
-        {"symbol":"SMH","name":"VanEck 半導體 ETF","rating":"Buy","target":"$620-680；費半多頭主軸","date":"2026-05"},
-        {"symbol":"CRWV","name":"CoreWeave","rating":"Buy","target":"$130-160","date":"2026-05"},
+        {"symbol":"SMH","name":"VanEck 半導體 ETF（持倉×7）","rating":"Buy","target":"$620-660；費半多頭主軸","date":"2026-05-29"},
+        {"symbol":"DDOG","name":"Datadog（持倉×4）","rating":"Buy","target":"$255（BTIG 5/26 上調）","date":"2026-05-26"},
+        {"symbol":"CSCO","name":"Cisco（持倉×3）","rating":"Buy","target":"$124-137；AI 訂單 $9B","date":"2026-05"},
+        {"symbol":"NVDA","name":"NVIDIA（持倉×1）","rating":"Strong Buy","target":"均值 $304；持倉 -10%（與 SMH 重疊）","date":"2026-05"},
+        {"symbol":"2330.TW","name":"台積電（核心永久）","rating":"加碼","target":"NT$2,450-3,030","date":"2026-05"},
     ],
 
     "forecast": [
-        {"symbol":"QCMU","name":"2×QCOM ETF（92股）","bull":52,"base":40,"bear":26,"catalyst":"6/24投資人日揭露超大雲路線圖（最大催化）；今日+6.9%=$37.97；QCOM底層若站穩$215→目標QCMU $42-48"},
-        {"symbol":"PLUG","name":"Plug Power（正股）","bull":7.50,"base":4.50,"bear":2.80,"catalyst":"Q1財報超預期；Project Quantum Leap降本；Q4 2026 EBITDAS正數目標；電解槽$8B管線"},
-        {"symbol":"LNOK","name":"2×Nokia ETF","bull":115,"base":88,"bear":65,"catalyst":"企業5G+AI網路合約；諾基亞Q2財報；3股小倉"},
-        {"symbol":"ANET","name":"Arista Networks（ANEL底層）","bull":120,"base":100,"bear":75,"catalyst":"FY2026 AI指引；Strong Buy共識；ANEL底層"},
-        {"symbol":"TSM","name":"TSMC ADR（TSMG底層）","bull":460,"base":405,"bear":340,"catalyst":"7/16法說；CoWoS擴產；Q2指引$39-40B；N2量產"},
-        {"symbol":"TSLA","name":"Tesla（TSLT底層）","bull":530,"base":420,"bear":320,"catalyst":"Robotaxi FSD進展；Q2交付數據；TSLT今日+7.6%"},
-        {"symbol":"CRWV","name":"CoreWeave","bull":160,"base":135,"bear":90,"catalyst":"Meta $21B合約；Q2 ARR揭露；AI雲算力"},
-        {"symbol":"2330.TW","name":"台積電","bull":2600,"base":2350,"bear":2050,"catalyst":"EPS NT$22.08歷史新高；全年>30%成長；7/16法說；N2量產"},
-        {"symbol":"3711.TW","name":"日月光","bull":620,"base":560,"bear":490,"catalyst":"CoWoS封裝供不應求；EPS 10.85超預期；AI封測訂單"},
-        {"symbol":"2337.TW","name":"旺宏","bull":300,"base":200,"bear":140,"catalyst":"🔥 NOR Flash缺貨爆發；今日漲停+9.8%；AI邊緣推理+AI-in-Car需求爆發"},
-        {"symbol":"AAPL","name":"Apple","bull":255,"base":235,"bear":200,"catalyst":"Q3 +14-17%指引；$100B回購；服務收入$31B新高"},
-        {"symbol":"SMH","name":"VanEck SMH","bull":640,"base":580,"bear":510,"catalyst":"費半超賣後NVDA 5/20財報催化；$545-555支撐；盤前+1.92%反彈"},
+        {"symbol":"SMH","name":"VanEck SMH（持倉×7）","bull":660,"base":620,"bear":540,"catalyst":"費半超週期；+31.7% 最大獲利；留至 9 月尾段；停損$540"},
+        {"symbol":"DDOG","name":"Datadog（持倉×4）","bull":275,"base":255,"bear":225,"catalyst":"BTIG 目標$255；AI 可觀測性；8/6 財報後了結"},
+        {"symbol":"CSCO","name":"Cisco（持倉×3）","bull":137,"base":128,"bear":110,"catalyst":"AI 訂單 $9B；穩健；達$130 了結"},
+        {"symbol":"NVDA","name":"NVIDIA（持倉×1）","bull":250,"base":220,"bear":185,"catalyst":"共識$304 但持倉 -10%；與 SMH 重疊；反彈先出"},
+        {"symbol":"2330.TW","name":"台積電（核心永久）","bull":2600,"base":2450,"bear":2200,"catalyst":"全年>30%成長；7/16法說；CoWoS 滿載；永久持有"},
+        {"symbol":"0050.TW","name":"元大台灣50（核心永久）","bull":112,"base":107,"bear":98,"catalyst":"大盤壓艙石 +60.8%；永久持有不賣"},
     ],
 
     # ===== capital_plan（含 status / sources / totals / options 結構）=====
     "capital_plan": {
-        "title": "2026-05-31 投 20 萬成長倉（台5美5）→10/31 變現",
+        "title": "2026-05-31 美股 4 檔 3 個月變現規劃（10/31 用錢）",
         "sources": [
-            {"src":"五月賣出回收現金","amount_twd":250000,"amount_usd":7975,"status":"immediate","note":"可投資 25 萬；計畫投入 20 萬，留 5 萬緩衝"},
+            {"src":"美股 SMH/DDOG/CSCO/NVDA 變現","amount_twd":180369,"amount_usd":5752,"status":"conditional","note":"3 個月部位，於 9-10 月分批了結為現金"},
         ],
         "totals": {
-            "immediate": 200000,
-            "conditional": 50000,
-            "total": 250000
+            "immediate": 0,
+            "conditional": 180369,
+            "total": 180369
         },
         "context": [
-            "核心 0050/00631L/2330 長期持有不賣，不在本次操作",
-            "投資視野 6-8 月成長；10/31 前需用錢→9月起變現",
-            "台股 12 萬（5 檔≤1000）+ 美股 8 萬（5 檔≤$300）",
-            "保留 5 萬現金緩衝",
-            "美股 T+2，9 月變現需提前下單",
+            "核心 0050/00631L/2330 永久持有，不在變現範圍",
+            "美股 4 檔總值約 NT$18 萬，因 10/31 用錢須於 9-10 月了結",
+            "美股 T+2，提前 2 個交易日下單；含匯回時間預留至 10/25",
+            "原則：弱者（NVDA）先出、強者（SMH）留尾段、達標即了結",
+            "無新增現金；不買進新標的",
         ],
         "options": [
             {
                 "id": "A",
-                "name": "台美均衡成長（推薦 ⭐）",
-                "philosophy": "台股12萬(60%) + 美股8萬(40%) + 留5萬",
+                "name": "分批了結（推薦 ⭐）",
+                "philosophy": "守停損續抱至 8-9 月，9 月起每週減倉，10/25 清空",
                 "actions": [
-                    {"step":1,"fund":"台股：鴻海3.3萬+緯創2.7萬+廣達2.4萬+聯電2萬+旺宏1.6萬","use":"AI server+foundry+memory","rationale":"COMPUTEX主線、分散主題"},
-                    {"step":2,"fund":"美股：ORCL$700+ANET$600+MRVL$500+DDOG$450+CRWV$300","use":"雲/網路/ASIC/軟體/算力","rationale":"≤$300、財報催化"},
-                    {"step":3,"fund":"保留 NT$50,000 緩衝","use":"逢回加碼/應急","rationale":"高檔震盪"},
-                    {"step":4,"fund":"9/1 起每週賣 20-25%","use":"變現","rationale":"10/25 前清成長倉"},
+                    {"step":1,"fund":"NVDA×1","use":"反彈$220-230 先出","rationale":"-10% 且與 SMH 重疊，最優先"},
+                    {"step":2,"fund":"DDOG×4","use":"8/6 財報後分批了結","rationale":"+12.1%；財報為最後催化"},
+                    {"step":3,"fund":"CSCO×3","use":"達$130 了結","rationale":"+3.3% 穩健，達標即出"},
+                    {"step":4,"fund":"SMH×7","use":"9 月分批至 10/25 清空","rationale":"+31.7% 最大獲利，留尾段"},
                 ],
                 "result": {
-                    "post_tw_pct": 48,
-                    "post_us_pct": 32,
-                    "post_cash_pct": 20,
+                    "post_tw_pct": 75,
+                    "post_us_pct": 0,
+                    "post_cash_pct": 25,
                     "post_leveraged_pct": 0,
-                    "summary": "成長分散；核心不動；10/31 準時出金"
+                    "summary": "核心永久不動；美股 10/31 前全變現為現金"
                 }
             },
             {
                 "id": "B",
-                "name": "台股為主（偏保守）",
-                "philosophy": "台股14萬 + 美股4萬 + 留2萬",
+                "name": "提前了結（保守）",
+                "philosophy": "8 月底前清光美股，鎖定獲利避開 9-10 月不確定",
                 "actions": [
-                    {"step":1,"fund":"台股 5 檔各約 2.8 萬","use":"台股成長","rationale":"交割快、9月好變現"},
-                    {"step":2,"fund":"美股僅 ORCL+ANET 各 $700","use":"少量美股","rationale":"降匯率/交割風險"},
+                    {"step":1,"fund":"NVDA 立即、CSCO 達標","use":"先出弱與達標","rationale":"降低波動"},
+                    {"step":2,"fund":"SMH/DDOG 8 月底前分批","use":"提前變現","rationale":"提早鎖利"},
                 ],
                 "result": {
-                    "post_tw_pct": 56,
-                    "post_us_pct": 16,
-                    "post_cash_pct": 28,
+                    "post_tw_pct": 75,
+                    "post_us_pct": 0,
+                    "post_cash_pct": 25,
                     "post_leveraged_pct": 0,
-                    "summary": "變現方便；成長略低；適合保守"
+                    "summary": "提早出金、確定性高；可能少賺尾段"
                 }
             },
             {
                 "id": "C",
-                "name": "積極成長（高風險）",
-                "philosophy": "投滿20萬，重壓AI server+CRWV",
+                "name": "續抱到底（積極）",
+                "philosophy": "守停損抱到 10 月，最後一刻才賣",
                 "actions": [
-                    {"step":1,"fund":"台股 server 3 檔加碼 + 美股 5 檔","use":"6-8月","rationale":"財報催化"},
-                    {"step":2,"fund":"9/15 起無條件全賣","use":"變現","rationale":"預留緩衝至10/31"},
+                    {"step":1,"fund":"4 檔守停損續抱","use":"等更高價","rationale":"博尾段漲幅"},
+                    {"step":2,"fund":"10/20-25 無條件全賣","use":"硬變現","rationale":"10/31 用錢底線"},
                 ],
                 "result": {
-                    "post_tw_pct": 52,
-                    "post_us_pct": 38,
-                    "post_cash_pct": 10,
+                    "post_tw_pct": 75,
+                    "post_us_pct": 0,
+                    "post_cash_pct": 25,
                     "post_leveraged_pct": 0,
-                    "summary": "報酬高但回撤大；僅適合可承受15%回撤"
+                    "summary": "報酬上限高但若 10 月回檔恐低賣"
                 }
             }
         ],
         "recommendation": {
             "primary": "A",
-            "reason": "20萬分台12美8、留5萬；6-8月成長、9月起變現；核心0050/00631L/2330不動。",
+            "reason": "核心永久不動；美股 NVDA 先出、CSCO 達標、DDOG 過財報、SMH 留尾段，9 月起分批至 10/25 清空。",
             "secondary_if_aggressive": "C"
         },
         "risks": [
-            "AI server 股漲多（5/29多檔漲停），追高短線回檔風險",
-            "10/31 用錢硬約束→9月須提前變現，恐遇回檔低賣",
-            "美股 T+2 + 匯率波動",
-            "CRWV/旺宏波動大，須嚴守停損",
+            "台股 4.5 萬過熱、融資新高，若回檔費半/SMH 同步受影響",
+            "10/31 用錢硬約束→若 9-10 月回檔恐被迫低賣",
+            "美股 T+2 + 匯率波動，須提前下單",
+            "NVDA 與 SMH 重疊，半導體回檔時雙重曝險",
         ]
     },
 

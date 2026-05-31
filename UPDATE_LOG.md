@@ -7,6 +7,25 @@
 
 ---
 
+## 2026-05-31（四次）— 依券商截圖還原 7 檔庫存 + 全面清除五月過時內容
+
+**Commit**: `(待 push)` — `fix: restore actual 7 holdings, purge stale May content, 3-month liquidation plan`
+
+### 變更
+- **修正庫存**：依券商對帳截圖，**7 檔全持有**（先前誤刪美股已還原）
+  - 核心永久：0050(+60.8%)、00631L(+29.5%)、2330(+9.2%)
+  - 美股 3 個月部位：SMH(+31.7%)、DDOG(+12.1%)、CSCO(+3.3%)、NVDA(−10.0%)
+- **需求修正**：3 個月投資、10/31 用錢 → 美股 4 檔於 9-10 月分批變現；核心台股不動
+- **全面清除五月過時內容**：
+  - news：刪除 5/8–5/22 全部舊新聞，僅留 5/26–5/31
+  - horizon_views：重寫（移除 QCMU/PLUG/ONDL/TSLT/「5/14」「5/22」等）
+  - earnings/consensus/forecast：僅留現有持股，刪除 PLUG/QCOM/AVGO/AAPL/TSM/INTC/旺宏等舊敘述
+  - picks/actions/next_buy/capital_plan：由「投 20 萬買新股」改為「美股 4 檔 10/31 變現規劃」
+- **無新增現金**：現金 0；不買進新標的（純管理現有持倉）
+- 總市值 NT$738,324、總損益 +38.1%
+
+---
+
 ## 2026-05-31（三次）— 修正核心持有 + 投 20 萬成長倉（台5美5）
 
 **Commit**: `(待 push)` — `update: core held, deploy 200K growth picks`
