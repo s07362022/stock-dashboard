@@ -34,15 +34,19 @@ from datetime import datetime
 # =============================================================================
 
 FX = 31.355                                     # 匯率 USD→TWD
-UPDATE_NOTE = "2026/05/31 五月全數出清→全現金約86萬。目標：6-8月三個月成長布局；10月底需用錢→9月起逐步變現。禁槓桿ETF；最多投入60%；保留30%現金緩衝。"
+UPDATE_NOTE = "2026/05/31 核心 0050/00631L/2330 長期持有不賣；五月賣出其餘股票回收現金 25 萬，計畫投入 20 萬做 6-8 月成長（10/31 前變現）。台股5檔≤1000、美股5檔≤300。"
 
-# 五月末出清後現金（5/29 收盤價估算：持倉738,324 + 原現金120,000）
-CASH_ON_HAND = 858324
-REALIZED_PNL_TWD = 203619                          # 出清前未實現損益（已實現）
+# 可投資現金（五月賣出回收）
+CASH_ON_HAND = 250000                              # 可投資現金 25 萬
+CASH_TO_DEPLOY = 200000                            # 計畫投入 20 萬
 CASH_NEED_DATE = "2026-10-31"                      # 十月底需用錢
 
-# ---- 1.1 台股持倉（2026/05 已全部賣出）----
-TW = []
+# ---- 1.1 台股持倉（核心，長期持有不賣；報價 5/29 收盤）----
+TW = [
+    {"symbol":"0050.TW","name":"元大台灣50","shares":3210,"buy_price":65.93,"close":105.4,"change":4.9,"pct":4.88,"sector":"ETF（核心，永久持有）","tag":"core"},
+    {"symbol":"00631L.TW","name":"元大台灣50正2","shares":4350,"buy_price":28.42,"close":36.94,"change":2.47,"pct":7.17,"sector":"ETF (=0050 2X，核心)","tag":"core","underlying":"0050","multiplier":2},
+    {"symbol":"2330.TW","name":"台積電","shares":25,"buy_price":2145.6,"close":2355.0,"change":60.0,"pct":2.61,"sector":"半導體（核心）","tag":"core"},
+]
 
 # ---- 1.2 美股持倉（2026/05 已全部賣出）----
 US = []
@@ -82,8 +86,8 @@ tw_mv, tw_cost = calc_tw(TW)
 us_mv_usd, us_cost_usd, us_mv_twd = calc_us(US, FX)
 us_cost_twd = round(us_cost_usd * FX)
 holdings_mv = tw_mv + us_mv_twd
-total_mv = CASH_ON_HAND if CASH_ON_HAND and not (TW or US) else holdings_mv
-total_cost = (total_mv - REALIZED_PNL_TWD) if CASH_ON_HAND and not (TW or US) else (tw_cost + us_cost_twd)
+total_mv = holdings_mv + CASH_ON_HAND
+total_cost = tw_cost + us_cost_twd + CASH_ON_HAND
 
 def safe_pct(num, den):
     return round(num / den * 100, 2) if den else 0.0
@@ -98,8 +102,10 @@ data = {
     "fx_rate": FX,
 
     "user_strategy": {
-        "philosophy": f"2026/05/31 五月高檔全數出清→現金 NT${CASH_ON_HAND:,}。6-8月三個月成長（最多投入60%）；9月降倉、10/31前全數變現。禁00631L/日槓桿ETF；十月底需用錢為硬約束。",
-        "leverage_map": []
+        "philosophy": f"2026/05/31 核心 0050/00631L/2330 長期持有不賣。五月賣出其餘股票回收現金 NT${CASH_ON_HAND:,}，計畫投入 NT${CASH_TO_DEPLOY:,} 做 6-8 月成長（台5美5），10/31 前全數變現、保留 5 萬緩衝。",
+        "leverage_map": [
+            {"etf":"00631L","underlying":"0050","multiplier":2,"treat_as":"long_term_core"},
+        ]
     },
 
     "summary": {
@@ -120,28 +126,29 @@ data = {
         "us_pnl_usd": round(us_mv_usd - us_cost_usd, 2),
         "tw_pct": safe_pct(tw_mv, total_mv),
         "us_pct": safe_pct(us_mv_twd, total_mv),
-        "cash_pct": safe_pct(CASH_ON_HAND, total_mv) if not (TW or US) else safe_pct(max(0, total_mv - holdings_mv), total_mv),
+        "cash_pct": safe_pct(CASH_ON_HAND, total_mv),
         "winners": tw_w + us_w,
         "losers": tw_l + us_l,
         "holdings_count": len(TW) + len(US),
         "cash_on_hand_twd": CASH_ON_HAND,
+        "cash_to_deploy_twd": CASH_TO_DEPLOY,
         "cash_need_date": CASH_NEED_DATE,
-        "effective_exposure_twd": holdings_mv if (TW or US) else 0,
+        "effective_exposure_twd": holdings_mv,
         "effective_leverage_ratio": 1.0,
     },
 
     "pnl_split": {
         "tw": {
-            "title": "🇹🇼 台股 — 5月已全部賣出（0050/00631L/2330 已實現獲利）",
+            "title": f"🇹🇼 台股核心（長期持有不賣）+{round(safe_pct(tw_mv - tw_cost, tw_cost),1)}%",
             "market_value_twd": tw_mv, "cost_twd": tw_cost,
             "pnl_twd": tw_mv - tw_cost,
             "pnl_pct": safe_pct(tw_mv - tw_cost, tw_cost),
             "winners": tw_w, "losers": tw_l,
-            "highlight": "0050 +61%、00631L +29%、2330 +9% 已於5月底高檔出清鎖利。",
-            "verdict": "台股 4.5 萬點過熱出清正確；6月後逢回再加 0050 零股，禁正2。"
+            "highlight": "0050 +60.8%、00631L +29.5%、2330 +9.2%；核心壓艙石，不在本次操作範圍。",
+            "verdict": "0050/00631L/2330 永久持有；新資金 20 萬另做成長倉。"
         },
         "us": {
-            "title": "🇺🇸 美股 — 5月已全部賣出（SMH/DDOG/CSCO/NVDA 已實現）",
+            "title": "🇺🇸 美股 — 5月已全部賣出（待重建成長倉）",
             "market_value_twd": us_mv_twd, "cost_twd": us_cost_twd,
             "pnl_twd": us_mv_twd - us_cost_twd,
             "pnl_pct": safe_pct(us_mv_twd - us_cost_twd, us_cost_twd),
@@ -149,8 +156,8 @@ data = {
             "cost_usd": round(us_cost_usd, 2),
             "pnl_usd": round(us_mv_usd - us_cost_usd, 2),
             "winners": us_w, "losers": us_l,
-            "highlight": "SMH +32%、DDOG +12% 獲利了結；NVDA -10% 小虧出場。",
-            "verdict": "持倉歸零；6-8月可重建 ORCL/ANET/0050，9月起準備10月底變現。"
+            "highlight": "SMH/DDOG/CSCO/NVDA 已出清；現金等待 6-8 月布局。",
+            "verdict": "美股成長倉重建：ORCL/ANET/DDOG/MRVL/CRWV（≤$300），10/31 前變現。"
         }
     },
 
@@ -168,7 +175,9 @@ data = {
     "us_stocks": US,
 
     "effective_exposure": [
-        {"name":"現金（全額可用）","icon":"💵","components":["5月出清全部持股"],"exposure_twd":CASH_ON_HAND,"pct_effective":100.0,"long_term":False},
+        {"name":"0050＋00631L（核心，永久）","icon":"🇹🇼","components":["0050×3210","00631L×4350"],"exposure_twd":499023,"pct_effective":61.7,"long_term":True},
+        {"name":"台積電 2330（核心，永久）","icon":"🏭","components":["2330 25股"],"exposure_twd":58875,"pct_effective":7.3,"long_term":True},
+        {"name":"可投資現金（25萬，投20萬）","icon":"💵","components":["五月賣出回收"],"exposure_twd":CASH_ON_HAND,"pct_effective":31.0,"long_term":False},
     ],
 
     "underlying_analysis": [],
@@ -338,50 +347,73 @@ data = {
     "analysts": {
         "panel": ["巴菲特","芒格","Cathie Wood","Michael Burry","Peter Lynch","Ray Dalio","Druckenmiller","葛拉漢","索羅斯","科斯托蘭尼","Jim Simons","動能派","價值派","成長派","宏觀策略","風控長","產業專家","量化派","ESG"],
         "votes": [
-            {"symbol":"CASH","name":"全現金觀望","sell":0,"hold":19,"buy":0,"label":"5月出清等6月布局"},
+            {"symbol":"2317.TW","name":"鴻海","sell":1,"hold":5,"buy":13,"label":"AI server+機器人"},
+            {"symbol":"2382.TW","name":"廣達","sell":1,"hold":6,"buy":12,"label":"AI server ODM"},
+            {"symbol":"3231.TW","name":"緯創","sell":2,"hold":6,"buy":11,"label":"GB200 機櫃"},
+            {"symbol":"2303.TW","name":"聯電","sell":3,"hold":11,"buy":5,"label":"低估值防禦"},
+            {"symbol":"2337.TW","name":"旺宏","sell":3,"hold":9,"buy":7,"label":"NOR缺貨"},
+            {"symbol":"ORCL","name":"Oracle","sell":0,"hold":5,"buy":14,"label":"雲 AI"},
+            {"symbol":"ANET","name":"Arista","sell":0,"hold":3,"buy":16,"label":"AI 網路"},
+            {"symbol":"DDOG","name":"Datadog","sell":2,"hold":6,"buy":11,"label":"AI 可觀測性"},
+            {"symbol":"MRVL","name":"Marvell","sell":1,"hold":5,"buy":13,"label":"AI ASIC/光通訊"},
+            {"symbol":"CRWV","name":"CoreWeave","sell":3,"hold":8,"buy":8,"label":"AI 算力(高險)"},
         ]
     },
 
     "picks": [
-        {"rank":1,"ticker":"ORCL","name":"Oracle","market":"US","price":225.78,"target_low":250,"target_high":280,"upside_pct":24.0,"thesis":"6/10財報；8月底前需出清","type":"6-8月布局"},
-        {"rank":2,"ticker":"ANET","name":"Arista Networks","market":"US","price":159.47,"target_low":172,"target_high":185,"upside_pct":16.0,"thesis":"AI網路；流動性佳易變現","type":"6-8月布局"},
-        {"rank":3,"ticker":"0050","name":"元大台灣50","market":"TW","price":105.4,"target_low":108,"target_high":112,"upside_pct":6.0,"thesis":"台股核心；9月優先變現標的","type":"6-8月布局"},
-        {"rank":4,"ticker":"DDOG","name":"Datadog","market":"US","price":247.35,"target_low":255,"target_high":270,"upside_pct":9.0,"thesis":"8/6財報前持有；9月前賣","type":"6-8月布局"},
-        {"rank":5,"ticker":"00878","name":"國泰永續高股息","market":"TW","price":21.5,"target_low":21.8,"target_high":22.2,"upside_pct":3.0,"thesis":"9-10月過渡倉；高流動性","type":"變現緩衝"},
+        {"rank":1,"ticker":"2317","name":"鴻海","market":"TW","price":289,"target_low":330,"target_high":360,"upside_pct":20.0,"thesis":"AI server+機器人；5/29漲停+9.9%；COMPUTEX主秀；≤1000 ✓","type":"台股成長"},
+        {"rank":2,"ticker":"ORCL","name":"Oracle","market":"US","price":225.78,"target_low":260,"target_high":290,"upside_pct":24.0,"thesis":"雲AI Capex；6/10財報；≤$300 ✓","type":"美股成長"},
+        {"rank":3,"ticker":"3231","name":"緯創","market":"TW","price":158.5,"target_low":185,"target_high":205,"upside_pct":25.0,"thesis":"GB200機櫃+散熱；5/29漲停；≤1000 ✓","type":"台股成長"},
+        {"rank":4,"ticker":"ANET","name":"Arista Networks","market":"US","price":159.47,"target_low":175,"target_high":190,"upside_pct":19.0,"thesis":"AI 800G網路；Strong Buy；≤$300 ✓","type":"美股成長"},
+        {"rank":5,"ticker":"MRVL","name":"Marvell","market":"US","price":205,"target_low":235,"target_high":260,"upside_pct":20.0,"thesis":"AI ASIC/光通訊；6/4財報催化；≤$300 ✓","type":"美股成長"},
+        {"rank":6,"ticker":"2382","name":"廣達","market":"TW","price":339,"target_low":380,"target_high":420,"upside_pct":18.0,"thesis":"AI server龍頭ODM；5/29漲停；6/1財報；≤1000 ✓","type":"台股成長"},
+        {"rank":7,"ticker":"DDOG","name":"Datadog","market":"US","price":247.35,"target_low":255,"target_high":275,"upside_pct":9.0,"thesis":"雲監控；BTIG $255；8/6財報；≤$300 ✓","type":"美股成長"},
+        {"rank":8,"ticker":"2303","name":"聯電","market":"TW","price":144.5,"target_low":158,"target_high":170,"upside_pct":15.0,"thesis":"成熟製程foundry；低估值防禦；≤1000 ✓","type":"台股成長"},
+        {"rank":9,"ticker":"2337","name":"旺宏","market":"TW","price":166.5,"target_low":190,"target_high":230,"upside_pct":25.0,"thesis":"NOR Flash缺貨；AI邊緣推理；≤1000 ✓","type":"台股成長"},
+        {"rank":10,"ticker":"CRWV","name":"CoreWeave","market":"US","price":109.53,"target_low":130,"target_high":160,"upside_pct":30.0,"thesis":"AI雲算力新星；高波動小倉；≤$300 ✓","type":"美股成長(高險)"},
     ],
 
     # ===== actions（A/B 用 strategy/stop/target；C 用 action/reason）=====
     "actions": {
         "A": [
-            {"symbol":"ORCL","name":"Oracle","price":225.78,"target":"250-280","stop":205,"strategy":"6月分批建倉；6/10財報後評估；9/15前必賣"},
-            {"symbol":"ANET","name":"Arista Networks","price":159.47,"target":"172-185","stop":145,"strategy":"6-7月布局；8月底前出清"},
-            {"symbol":"0050.TW","name":"元大台灣50","price":105.4,"target":"108-112","stop":100,"strategy":"逢回100-102買；9月優先變現"},
+            {"symbol":"2317.TW","name":"鴻海","price":289,"target":"330-360","stop":262,"strategy":"AI server核心；6月分批；9月底前變現"},
+            {"symbol":"ORCL","name":"Oracle","price":225.78,"target":"260-290","stop":205,"strategy":"6/10財報催化；9/15前出清"},
+            {"symbol":"3231.TW","name":"緯創","price":158.5,"target":"185-205","stop":144,"strategy":"GB200機櫃；逢回148-152加；9月底前賣"},
+            {"symbol":"ANET","name":"Arista Networks","price":159.47,"target":"175-190","stop":145,"strategy":"AI網路；8月底前出清"},
         ],
         "B": [
-            {"symbol":"DDOG","name":"Datadog","price":247.35,"target":"255-270","stop":225,"strategy":"7月布局；8/6財報前持有；9/1前賣"},
-            {"symbol":"00878","name":"國泰永續高股息","price":21.5,"target":"21.8-22.2","stop":20.5,"strategy":"9月起過渡倉；10/25前全賣"},
+            {"symbol":"MRVL","name":"Marvell","price":205,"target":"235-260","stop":185,"strategy":"6/4財報前小量；過財報加碼"},
+            {"symbol":"2382.TW","name":"廣達","price":339,"target":"380-420","stop":308,"strategy":"6/1財報；漲多分批；9月變現"},
+            {"symbol":"DDOG","name":"Datadog","price":247.35,"target":"255-275","stop":225,"strategy":"7月布局；8/6財報前；9/1前賣"},
+            {"symbol":"2303.TW","name":"聯電","price":144.5,"target":"158-170","stop":135,"strategy":"低估值防禦倉；穩健"},
+            {"symbol":"2337.TW","name":"旺宏","price":166.5,"target":"190-230","stop":150,"strategy":"NOR缺貨題材；小倉博彈性"},
         ],
         "C": [
-            {"symbol":"00631L","name":"台灣50正2","price":36.94,"action":"禁止買入","reason":"日槓桿+定時出金衝突；10/31前需全現金"},
-            {"symbol":"SMH","name":"VanEck SMH","price":598.93,"action":"禁止買入","reason":"波動大+難定價出場日；改用0050/ORCL"},
+            {"symbol":"CRWV","name":"CoreWeave","price":109.53,"action":"小倉≤3%；高波動","reason":"AI算力高成長但虧損；停損$95"},
+            {"symbol":"00631L","name":"台灣50正2","price":36.94,"action":"核心續抱不加碼","reason":"長期持有；新資金勿再投槓桿ETF"},
         ]
     },
 
     # ===== next_buy_recommendations（tickers 必須是物件陣列）=====
     "next_buy_recommendations": [
         {
-            "scenario": "6-8月成長布局（10/31前全變現）",
+            "scenario": "台股 5 檔成長倉（投 12 萬；≤1000元）",
             "tickers": [
-                {"ticker":"ORCL","name":"Oracle","price":225.78,"rationale":"6/10財報催化；目標$250-280；9/15前賣","size_suggest":"約 NT$170,000（20%）","confidence":"🟢 高"},
-                {"ticker":"ANET","name":"Arista Networks","price":159.47,"rationale":"AI網路；8月底前出清","size_suggest":"約 NT$128,000（15%）","confidence":"🟢 高"},
-                {"ticker":"0050","name":"元大台灣50","price":105.4,"rationale":"台股流動性佳；9月變現主力","size_suggest":"約 NT$171,000（20%）","confidence":"🟢 高"},
+                {"ticker":"2317","name":"鴻海","price":289,"rationale":"AI server+機器人；COMPUTEX主秀","size_suggest":"約 NT$33,000（100股+）","confidence":"🟢 高"},
+                {"ticker":"3231","name":"緯創","price":158.5,"rationale":"GB200機櫃+散熱純度高","size_suggest":"約 NT$27,000","confidence":"🟢 高"},
+                {"ticker":"2382","name":"廣達","price":339,"rationale":"AI server龍頭；6/1財報","size_suggest":"約 NT$24,000","confidence":"🟢 高"},
+                {"ticker":"2303","name":"聯電","price":144.5,"rationale":"低估值foundry防禦倉","size_suggest":"約 NT$20,000","confidence":"🟡 中"},
+                {"ticker":"2337","name":"旺宏","price":166.5,"rationale":"NOR缺貨彈性倉","size_suggest":"約 NT$16,000","confidence":"🟡 中"},
             ]
         },
         {
-            "scenario": "9-10月變現過渡",
+            "scenario": "美股 5 檔成長倉（投 8 萬≈$2,550；≤$300）",
             "tickers": [
-                {"ticker":"00878","name":"國泰永續高股息","price":21.5,"rationale":"高股息ETF過渡；10/25前全賣","size_suggest":"約 NT$85,000（10%）","confidence":"🟡 中"},
-                {"ticker":"CASH","name":"活存／USD活存","price":1,"rationale":"保留30%≈NT$257,000至10/31","size_suggest":"NT$257,000","confidence":"🟢 必保留"},
+                {"ticker":"ORCL","name":"Oracle","price":225.78,"rationale":"雲AI；6/10財報；9/15前賣","size_suggest":"約 $700（NT$22,000）","confidence":"🟢 高"},
+                {"ticker":"ANET","name":"Arista","price":159.47,"rationale":"AI 800G網路Strong Buy","size_suggest":"約 $600（NT$19,000）","confidence":"🟢 高"},
+                {"ticker":"MRVL","name":"Marvell","price":205,"rationale":"AI ASIC/光通訊；6/4財報","size_suggest":"約 $500（NT$16,000）","confidence":"🟢 高"},
+                {"ticker":"DDOG","name":"Datadog","price":247.35,"rationale":"雲監控；BTIG $255","size_suggest":"約 $450（NT$14,000）","confidence":"🟡 中"},
+                {"ticker":"CRWV","name":"CoreWeave","price":109.53,"rationale":"AI算力高成長小倉","size_suggest":"約 $300（NT$9,000）","confidence":"🔴 高險"},
             ]
         }
     ],
@@ -389,14 +421,14 @@ data = {
     # ===== allocation（陣列格式，非物件）=====
     "allocation": {
         "current": [
-            {"label":"現金（5月出清後）","value":100.0},
-            {"label":"台股持倉","value":0.0},
-            {"label":"美股持倉","value":0.0},
+            {"label":"台股核心（0050+00631L+2330，永久）","value":69.0},
+            {"label":"可投資現金（25萬）","value":31.0},
+            {"label":"成長倉（待建）","value":0.0},
         ],
         "target": [
-            {"label":"現金緩衝（至10/31）","value":30},
-            {"label":"6-8月成長倉（ORCL/ANET/0050/DDOG）","value":55},
-            {"label":"9-10月過渡＋預留變現","value":15},
+            {"label":"台股 5 檔成長倉（投 12 萬）","value":48},
+            {"label":"美股 5 檔成長倉（投 8 萬）","value":32},
+            {"label":"現金緩衝（5 萬，至 10/31）","value":20},
         ]
     },
 
@@ -432,85 +464,84 @@ data = {
 
     # ===== capital_plan（含 status / sources / totals / options 結構）=====
     "capital_plan": {
-        "title": "2026-05-31 全現金→6-8月成長→10/31變現計畫",
+        "title": "2026-05-31 投 20 萬成長倉（台5美5）→10/31 變現",
         "sources": [
-            {"src":"5月出清全部持股","amount_twd":858324,"amount_usd":27375,"status":"immediate","note":"含原持倉738,324+現金120,000（5/29收盤估算）"},
+            {"src":"五月賣出回收現金","amount_twd":250000,"amount_usd":7975,"status":"immediate","note":"可投資 25 萬；計畫投入 20 萬，留 5 萬緩衝"},
         ],
         "totals": {
-            "immediate": 858324,
-            "conditional": 0,
-            "total": 858324
+            "immediate": 200000,
+            "conditional": 50000,
+            "total": 250000
         },
         "context": [
-            "5月底高檔全數出清→現金 NT$858,324",
-            "硬約束：2026/10/31 前需用錢（全數可動用）",
-            "6-8月：最多投入 55%（≈NT$472,000）追求成長",
-            "9/1 起：每週減倉 20%，10/25 前持倉≤5%",
-            "禁止：00631L、QCMU、SMH 等槓桿/高波標的",
+            "核心 0050/00631L/2330 長期持有不賣，不在本次操作",
+            "投資視野 6-8 月成長；10/31 前需用錢→9月起變現",
+            "台股 12 萬（5 檔≤1000）+ 美股 8 萬（5 檔≤$300）",
+            "保留 5 萬現金緩衝",
+            "美股 T+2，9 月變現需提前下單",
         ],
         "options": [
             {
                 "id": "A",
-                "name": "定時變現成長（推薦 ⭐）",
-                "philosophy": "6-8月成長55% + 現金30% + 9-10月過渡15%",
+                "name": "台美均衡成長（推薦 ⭐）",
+                "philosophy": "台股12萬(60%) + 美股8萬(40%) + 留5萬",
                 "actions": [
-                    {"step":1,"fund":"保留現金 NT$257,000（30%）","use":"10/31備用","rationale":"硬約束不動用"},
-                    {"step":2,"fund":"6月：ORCL NT$170,000 + ANET NT$128,000","use":"美股成長","rationale":"6/10 ORCL財報催化"},
-                    {"step":3,"fund":"7月：0050 NT$171,000（逢回100-102）","use":"台股","rationale":"流動性佳、9月好賣"},
-                    {"step":4,"fund":"8月：DDOG NT$86,000","use":"美股","rationale":"8/6財報前；9/1前賣"},
-                    {"step":5,"fund":"9/1-10/25：每週賣出20%持倉","use":"變現","rationale":"10/31前全現金"},
+                    {"step":1,"fund":"台股：鴻海3.3萬+緯創2.7萬+廣達2.4萬+聯電2萬+旺宏1.6萬","use":"AI server+foundry+memory","rationale":"COMPUTEX主線、分散主題"},
+                    {"step":2,"fund":"美股：ORCL$700+ANET$600+MRVL$500+DDOG$450+CRWV$300","use":"雲/網路/ASIC/軟體/算力","rationale":"≤$300、財報催化"},
+                    {"step":3,"fund":"保留 NT$50,000 緩衝","use":"逢回加碼/應急","rationale":"高檔震盪"},
+                    {"step":4,"fund":"9/1 起每週賣 20-25%","use":"變現","rationale":"10/25 前清成長倉"},
                 ],
                 "result": {
-                    "post_tw_pct": 20,
-                    "post_us_pct": 35,
-                    "post_cash_pct": 45,
+                    "post_tw_pct": 48,
+                    "post_us_pct": 32,
+                    "post_cash_pct": 20,
                     "post_leveraged_pct": 0,
-                    "summary": "兼顧成長與10月底出金；推薦"
+                    "summary": "成長分散；核心不動；10/31 準時出金"
                 }
             },
             {
                 "id": "B",
-                "name": "保守觀望",
-                "philosophy": "維持 80% 活存 + 20% 0050 試單",
+                "name": "台股為主（偏保守）",
+                "philosophy": "台股14萬 + 美股4萬 + 留2萬",
                 "actions": [
-                    {"step":1,"fund":"活存 NT$686,000（80%）","use":"10/31備用","rationale":"確保出金"},
-                    {"step":2,"fund":"0050 NT$172,000（約1600股）","use":"試單","rationale":"9月全賣"},
+                    {"step":1,"fund":"台股 5 檔各約 2.8 萬","use":"台股成長","rationale":"交割快、9月好變現"},
+                    {"step":2,"fund":"美股僅 ORCL+ANET 各 $700","use":"少量美股","rationale":"降匯率/交割風險"},
                 ],
                 "result": {
-                    "post_tw_pct": 20,
-                    "post_us_pct": 0,
-                    "post_cash_pct": 80,
+                    "post_tw_pct": 56,
+                    "post_us_pct": 16,
+                    "post_cash_pct": 28,
                     "post_leveraged_pct": 0,
-                    "summary": "成長有限但10月底零風險"
+                    "summary": "變現方便；成長略低；適合保守"
                 }
             },
             {
                 "id": "C",
                 "name": "積極成長（高風險）",
-                "philosophy": "投入 70% 但 9/15 起強制清倉",
+                "philosophy": "投滿20萬，重壓AI server+CRWV",
                 "actions": [
-                    {"step":1,"fund":"ORCL+ANET+DDOG+0050 共 NT$600,000","use":"6-8月","rationale":"財報催化"},
-                    {"step":2,"fund":"9/15 起無條件全賣","use":"變現","rationale":"預留6週緩衝至10/31"},
+                    {"step":1,"fund":"台股 server 3 檔加碼 + 美股 5 檔","use":"6-8月","rationale":"財報催化"},
+                    {"step":2,"fund":"9/15 起無條件全賣","use":"變現","rationale":"預留緩衝至10/31"},
                 ],
                 "result": {
-                    "post_tw_pct": 25,
-                    "post_us_pct": 45,
-                    "post_cash_pct": 30,
+                    "post_tw_pct": 52,
+                    "post_us_pct": 38,
+                    "post_cash_pct": 10,
                     "post_leveraged_pct": 0,
-                    "summary": "僅適合可接受9月急賣滑價者"
+                    "summary": "報酬高但回撤大；僅適合可承受15%回撤"
                 }
             }
         ],
         "recommendation": {
             "primary": "A",
-            "reason": "858K 中保留30%現金不動；6-8月用55%做 ORCL/ANET/0050/DDOG；9月起週減20%至10/25全清。",
+            "reason": "20萬分台12美8、留5萬；6-8月成長、9月起變現；核心0050/00631L/2330不動。",
             "secondary_if_aggressive": "C"
         },
         "risks": [
-            "9-10月若市場急跌，被迫低點變現",
-            "美股 T+2 交割需預留 9 月提前量",
-            "台股 4.5 萬高檔回檔 10% 將壓縮 0050 獲利",
-            "ORCL/DDOG 財報後可能利多出盡",
+            "AI server 股漲多（5/29多檔漲停），追高短線回檔風險",
+            "10/31 用錢硬約束→9月須提前變現，恐遇回檔低賣",
+            "美股 T+2 + 匯率波動",
+            "CRWV/旺宏波動大，須嚴守停損",
         ]
     },
 
