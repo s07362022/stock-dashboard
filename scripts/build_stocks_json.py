@@ -33,26 +33,30 @@ from datetime import datetime
 #  ==== 1. 可變值區（每次更新只改這裡） ====
 # =============================================================================
 
-FX = 31.355                                     # 匯率 USD→TWD（2026/05/31 券商截圖）
-UPDATE_NOTE = "2026/05/31 庫存以券商截圖為準（7檔全持有）。核心 0050/00631L/2330 永久不賣；SMH/DDOG/CSCO/NVDA 為 3 個月可變現部位（10/31 需用錢）。已清除所有五月過時敘述。"
+FX = 31.425                                     # 匯率 USD→TWD（2026/06/04 券商截圖）
+UPDATE_NOTE = "2026/06/04 庫存以券商截圖為準（美股 8 檔）。核心 0050/00631L/2330 永久不賣；SMH/NVDA/HPQ/VSH/DRAM + 槓桿 ETF（CWVX/NBIL/ORCX）為 3 個月可變現（10/31 需用錢）。"
 
 CASH_ON_HAND = 0                                   # 無額外現金（資金在持倉中）
 CASH_TO_DEPLOY = 0
 CASH_NEED_DATE = "2026-10-31"                      # 十月底需用錢→美股4檔須於此前變現
 
-# ---- 1.1 台股持倉（券商 2026/05/31 截圖）----
+# ---- 1.1 台股持倉（BigGo 2026/06/03 收盤）----
 TW = [
-    {"symbol":"0050.TW","name":"元大台灣50","shares":3210,"buy_price":65.93,"close":105.4,"change":4.9,"pct":4.88,"sector":"ETF（核心，永久持有）","tag":"core"},
-    {"symbol":"00631L.TW","name":"元大台灣50正2","shares":4350,"buy_price":28.42,"close":36.94,"change":2.47,"pct":7.17,"sector":"ETF (=0050 2X，核心永久)","tag":"core","underlying":"0050","multiplier":2},
-    {"symbol":"2330.TW","name":"台積電","shares":25,"buy_price":2145.6,"close":2355.0,"change":60.0,"pct":2.61,"sector":"半導體（核心永久）","tag":"core"},
+    {"symbol":"0050.TW","name":"元大台灣50","shares":3210,"buy_price":65.93,"close":107.6,"change":1.9,"pct":1.8,"sector":"ETF（核心，永久持有）","tag":"core"},
+    {"symbol":"00631L.TW","name":"元大台灣50正2","shares":4350,"buy_price":28.42,"close":39.22,"change":1.31,"pct":3.46,"sector":"ETF (=0050 2X，核心永久)","tag":"core","underlying":"0050","multiplier":2},
+    {"symbol":"2330.TW","name":"台積電","shares":25,"buy_price":2145.6,"close":2425.0,"change":45.0,"pct":1.89,"sector":"半導體（核心永久）","tag":"core"},
 ]
 
-# ---- 1.2 美股持倉（券商 2026/05/31 截圖；3 個月可變現部位）----
+# ---- 1.2 美股持倉（券商 2026/06/04 截圖；3 個月可變現）----
 US = [
-    {"symbol":"SMH","name":"VanEck Semiconductor ETF","shares":7,"buy_price":454.734285,"close":598.93,"change":-0.9,"pct":-0.15,"sector":"半導體 ETF（3個月）","tag":"satellite"},
-    {"symbol":"DDOG","name":"Datadog Inc.","shares":4,"buy_price":220.661667,"close":247.35,"change":22.11,"pct":9.82,"sector":"雲監控／AI 可觀測性（3個月）","tag":"satellite"},
-    {"symbol":"CSCO","name":"Cisco Systems","shares":3,"buy_price":116.583333,"close":120.42,"change":1.78,"pct":1.5,"sector":"通訊／AI 網路（3個月）","tag":"satellite"},
-    {"symbol":"NVDA","name":"NVIDIA Corporation","shares":1,"buy_price":234.59,"close":211.14,"change":-3.11,"pct":-1.45,"sector":"AI GPU（3個月）","tag":"satellite"},
+    {"symbol":"SMH","name":"VanEck Semiconductor ETF","shares":7,"buy_price":454.734285,"close":636.03,"change":3.82,"pct":0.6,"sector":"半導體 ETF","tag":"satellite"},
+    {"symbol":"ORCX","name":"Defiance 2X Long ORCL Daily","shares":10,"buy_price":61.1,"close":59.36,"change":-8.53,"pct":-12.56,"sector":"2X 槓桿 ETF","tag":"speculative"},
+    {"symbol":"HPQ","name":"HP Inc.","shares":20,"buy_price":28.9725,"close":26.24,"change":-1.06,"pct":-3.87,"sector":"PC／硬體","tag":"satellite"},
+    {"symbol":"NBIL","name":"GraniteShares 2X Long NBIS","shares":5,"buy_price":59.664,"close":50.0,"change":-4.71,"pct":-8.61,"sector":"2X 槓桿 ETF","tag":"speculative"},
+    {"symbol":"VSH","name":"Vishay Intertechnology","shares":5,"buy_price":62.55,"close":62.63,"change":0.14,"pct":0.22,"sector":"半導體元件","tag":"satellite"},
+    {"symbol":"CWVX","name":"Tradr 2X Long CRWV Daily","shares":5,"buy_price":43.786,"close":35.12,"change":-4.56,"pct":-11.48,"sector":"2X 槓桿 ETF","tag":"speculative"},
+    {"symbol":"NVDA","name":"NVIDIA Corporation","shares":1,"buy_price":234.59,"close":215.86,"change":-6.96,"pct":-3.12,"sector":"AI GPU","tag":"satellite"},
+    {"symbol":"DRAM","name":"Roundhill Memory ETF","shares":1,"buy_price":66.7,"close":68.86,"change":-0.71,"pct":-1.02,"sector":"記憶體 ETF","tag":"satellite"},
 ]
 
 # =============================================================================
@@ -106,7 +110,7 @@ data = {
     "fx_rate": FX,
 
     "user_strategy": {
-        "philosophy": "2026/05/31：核心 0050/00631L/2330 永久持有不賣；美股 SMH/DDOG/CSCO/NVDA 視為 3 個月可變現部位，因 10/31 需用錢→9 月起分批了結。重點是保護獲利、確保 10 月底現金到位。",
+        "philosophy": "2026/06/04：核心 0050/00631L/2330 永久持有；美股 8 檔（SMH 為主、含 CWVX/NBIL/ORCX 槓桿 ETF）因 10/31 需用錢→不攤平槓桿 ETF、9 月起分批了結 SMH。",
         "leverage_map": [
             {"etf":"00631L","underlying":"0050","multiplier":2,"treat_as":"long_term_core"},
         ]
@@ -148,7 +152,7 @@ data = {
             "pnl_twd": tw_mv - tw_cost,
             "pnl_pct": safe_pct(tw_mv - tw_cost, tw_cost),
             "winners": tw_w, "losers": tw_l,
-            "highlight": "0050 +60.8%、00631L +29.5%、2330 +9.2%；壓艙石，不變現。",
+            "highlight": "0050 +63%、00631L +38%、2330 +13%；壓艙石，不變現。",
             "verdict": "0050/00631L/2330 永久持有，不在 10 月變現範圍。"
         },
         "us": {
@@ -160,59 +164,73 @@ data = {
             "cost_usd": round(us_cost_usd, 2),
             "pnl_usd": round(us_mv_usd - us_cost_usd, 2),
             "winners": us_w, "losers": us_l,
-            "highlight": "SMH +31.7%、DDOG +12.1%、CSCO +3.3%、NVDA -10.0%。",
-            "verdict": "因 10/31 用錢→9 月起分批了結；SMH/DDOG 留尾段、NVDA 反彈先出。"
+            "highlight": "SMH +40%、DRAM/VSH 持平；NVDA/HPQ/CWVX/NBIL/ORCX 虧損。",
+            "verdict": "槓桿 ETF 不攤平；NVDA 反彈先出；SMH 9 月尾段變現。"
         }
     },
 
     "indices": [
-        {"name":"S&P 500","code":"SPX","value":7580.07,"change":16.44,"pct":0.22},
-        {"name":"NASDAQ","code":"IXIC","value":26972.62,"change":55.15,"pct":0.21},
-        {"name":"Dow Jones","code":"DJI","value":51032.34,"change":363.37,"pct":0.72},
-        {"name":"SMH(費半ETF)","code":"SMH","value":598.93,"change":-0.9,"pct":-0.15},
+        {"name":"S&P 500","code":"SPX","value":7609.78,"change":9.82,"pct":0.13},
+        {"name":"NASDAQ","code":"IXIC","value":27093.90,"change":7.09,"pct":0.03},
+        {"name":"Dow Jones","code":"DJI","value":51307.79,"change":228.91,"pct":0.45},
+        {"name":"費城半導體","code":"SOX","value":13726.27,"change":760.62,"pct":5.87},
+        {"name":"SMH(費半ETF)","code":"SMH","value":636.03,"change":3.82,"pct":0.6},
         {"name":"VIX","code":"VIX","value":16.5,"change":-0.8,"pct":-4.6},
-        {"name":"10Y美債","code":"US10Y","value":4.44,"change":-0.01,"pct":-0.23},
-        {"name":"台股加權","code":"TWII","value":44954.0,"change":580.0,"pct":1.31},
+        {"name":"台股加權","code":"TWII","value":45200.0,"change":250.0,"pct":0.56},
     ],
 
     "tw_stocks": TW,
     "us_stocks": US,
 
     "effective_exposure": [
-        {"name":"0050＋00631L（核心永久）","icon":"🇹🇼","components":["0050×3210","00631L×4350"],"exposure_twd":499023,"pct_effective":61.7,"long_term":True},
-        {"name":"台積電 2330（核心永久）","icon":"🏭","components":["2330 25股"],"exposure_twd":58875,"pct_effective":7.3,"long_term":True},
-        {"name":"美股半導體（SMH×7，3個月）","icon":"🔌","components":["SMH ETF"],"exposure_twd":131456,"pct_effective":16.3,"long_term":False},
-        {"name":"美股成長（DDOG/CSCO/NVDA，3個月）","icon":"🤖","components":["DDOG×4","CSCO×3","NVDA×1"],"exposure_twd":48970,"pct_effective":6.1,"long_term":False},
+        {"name":"0050＋00631L（核心永久）","icon":"🇹🇼","components":["0050×3210","00631L×4350"],"exposure_twd":516003,"pct_effective":65.8,"long_term":True},
+        {"name":"台積電 2330（核心永久）","icon":"🏭","components":["2330 25股"],"exposure_twd":60625,"pct_effective":7.7,"long_term":True},
+        {"name":"美股半導體（SMH×7）","icon":"🔌","components":["SMH ETF"],"exposure_twd":139912,"pct_effective":17.8,"long_term":False},
+        {"name":"美股其他（7檔）","icon":"🤖","components":["NVDA/HPQ/槓桿ETF等"],"exposure_twd":67207,"pct_effective":8.6,"long_term":False},
     ],
 
     "underlying_analysis": [
         {
-            "ticker":"SMH","name":"VanEck SMH（×7）","price":598.93,"today_pct":-0.15,"in_portfolio_twd":131456,
-            "thesis":"費半超週期；+31.7% 最大獲利部位；占美股約 73%。",
-            "pros":["AI 晶片超週期","HBM 短缺","5月費半+22%"],
+            "ticker":"SMH","name":"VanEck SMH（×7）","price":636.03,"today_pct":0.6,"in_portfolio_twd":139912,
+            "thesis":"費半超週期；+40% 最大獲利；占美股約 68%。",
+            "pros":["AI 晶片超週期","費城半導體 +5.9%","共識 $572-660"],
             "cons":["高檔震盪","10月需變現"],
-            "consensus_target":"$620-660","rating":"Buy","next_catalyst":"COMPUTEX/NVDA 供應鏈","user_action":"🟢 留至 9 月尾段；停損$540"
+            "consensus_target":"$620-660","rating":"Buy","next_catalyst":"COMPUTEX 延續","user_action":"🟢 續抱等 $650+；9 月尾段變現；停損$580"
         },
         {
-            "ticker":"DDOG","name":"Datadog（×4）","price":247.35,"today_pct":9.82,"in_portfolio_twd":31023,
-            "thesis":"5/29 +9.8%；雲監控+AI 可觀測性；BTIG 目標 $255。",
-            "pros":["+12.1% 獲利","AI 工作負載","Strong Buy"],
-            "cons":["高估值","波動大"],
-            "consensus_target":"$255（BTIG）","rating":"Buy","next_catalyst":"8/6 財報","user_action":"🟢 8/6 財報後分批了結"
+            "ticker":"NVDA","name":"NVIDIA（×1）","price":215.86,"today_pct":-3.12,"in_portfolio_twd":6783,
+            "thesis":"財報強但短線走弱；與 SMH 重疊；不建議攤平。",
+            "pros":["共識約 $310","AI 龍頭"],
+            "cons":["-8% 虧損","與 SMH 重疊"],
+            "consensus_target":"均值 $310","rating":"Strong Buy","next_catalyst":"8/26 財報","user_action":"🟡 反彈 $220-230 減碼；跌破 $200 認賠"
         },
         {
-            "ticker":"CSCO","name":"Cisco（×3）","price":120.42,"today_pct":1.5,"in_portfolio_twd":11327,
-            "thesis":"Q3 FY26 +12%；AI 訂單 $9B；HSBC 目標 $137。",
-            "pros":["穩健","股息","AI 網通"],
-            "cons":["成長較低"],
-            "consensus_target":"$124-137","rating":"Buy","next_catalyst":"8/19 財報","user_action":"🟢 穩健留；目標$130 了結"
+            "ticker":"HPQ","name":"HP Inc.（×20）","price":26.24,"today_pct":-3.87,"in_portfolio_twd":16488,
+            "thesis":"PC 硬體；分析師多數 Reduce；虧損 -9.4%。",
+            "pros":["股息","估值低"],
+            "cons":["成長慢","共識目標低於現價爭議"],
+            "consensus_target":"$23（均值）","rating":"Reduce","next_catalyst":"6/3 財報","user_action":"🔴 不攤平；反彈 $28-29 減碼"
         },
         {
-            "ticker":"NVDA","name":"NVIDIA（×1）","price":211.14,"today_pct":-1.45,"in_portfolio_twd":6620,
-            "thesis":"財報強但股價弱；唯一虧損 -10%；與 SMH 重疊。",
-            "pros":["共識$304","AI 龍頭"],
-            "cons":["-10% 虧損","與 SMH 重疊"],
-            "consensus_target":"均值 $304","rating":"Strong Buy","next_catalyst":"8/26 財報","user_action":"🟡 反彈至 $220-230 先出（重疊）"
+            "ticker":"CWVX","name":"Tradr 2X CRWV（×5）","price":35.12,"today_pct":-11.48,"in_portfolio_twd":5515,
+            "thesis":"日槓桿 ETF；-19.8%；時間衰減風險。",
+            "pros":["波動大時短線彈性"],
+            "cons":["槓桿衰減","深套"],
+            "consensus_target":"—","rating":"高風險","next_catalyst":"—","user_action":"🔴 不攤平；反彈 $40-42 出清"
+        },
+        {
+            "ticker":"NBIL","name":"GraniteShares 2X NBIS（×5）","price":50.0,"today_pct":-8.61,"in_portfolio_twd":7853,
+            "thesis":"日槓桿 ETF；-16.2%。",
+            "pros":["—"],
+            "cons":["槓桿衰減","單日 -8%"],
+            "consensus_target":"—","rating":"高風險","next_catalyst":"—","user_action":"🔴 不攤平；$52-55 減碼"
+        },
+        {
+            "ticker":"ORCX","name":"Defiance 2X ORCL（×10）","price":59.36,"today_pct":-12.56,"in_portfolio_twd":18654,
+            "thesis":"日槓桿 ETF；今日 -12.6%；不宜長抱。",
+            "pros":["ORCL 雲業務強"],
+            "cons":["槓桿 ETF 波動","與單日大跌"],
+            "consensus_target":"—","rating":"高風險","next_catalyst":"—","user_action":"🟡 不攤平；$62-65 逢反彈減碼"
         },
     ],
 
@@ -298,21 +316,20 @@ data = {
     },
 
     "news": [
-        {"date":"2026-05-31","category":"台股","title":"台股 5 月大漲衝 44954 歷史新高；COMPUTEX+黃仁勳行情；外資 5 月買超約 2360 億","impact":"positive","source":"鉅亨網 / 自由財經"},
-        {"date":"2026-05-31","category":"⚠️ 警示","title":"投顧示警：融資餘額創新高、市值膨脹快於資金供給；高檔震盪加劇，不宜追高","impact":"mixed","source":"鉅亨網"},
-        {"date":"2026-05-31","category":"持倉","title":"庫存現況：台股 0050/00631L/2330（核心永久）；美股 SMH+31.7%、DDOG+12.1%、CSCO+3.3%、NVDA-10.0%","impact":"positive","source":"券商對帳截圖"},
-        {"date":"2026-05-29","category":"美股","title":"S&P 約 7580 九週連漲創新高；DDOG +9.8%；5 月 S&P 約 +5%","impact":"positive","source":"Sunday Guardian / Daily Times"},
-        {"date":"2026-05-29","category":"Fed","title":"Fed 6 月預期維持利率；核心 PCE 約 3.3% 仍高於 2% 目標；通膨僵固","impact":"mixed","source":"TowneBank / Pluang"},
-        {"date":"2026-05-29","category":"台股","title":"2330 +2.61% 至 2355；0050 +4.88% 至 105.4；半導體領漲","impact":"positive","source":"BigGo Finance"},
-        {"date":"2026-05-26","category":"分析師","title":"BTIG 上調 DDOG 目標至 $255（Buy）；雲監控／AI 可觀測性受追捧","impact":"positive","source":"GuruFocus"},
+        {"date":"2026-06-04","category":"持倉","title":"庫存更新：美股 8 檔（SMH/NVDA/HPQ/VSH/DRAM + CWVX/NBIL/ORCX 槓桿 ETF）；台股核心不變","impact":"mixed","source":"券商截圖 2026/06/04"},
+        {"date":"2026-06-03","category":"美股","title":"S&P 7609 九連漲創高；費城半導體 +5.9%；Marvell +32%；NVDA -0.7%","impact":"positive","source":"Reuters / BigGo"},
+        {"date":"2026-06-03","category":"台股","title":"2330 +1.9% 至 2425；0050 107.6；COMPUTEX 行情延續","impact":"positive","source":"BigGo Finance"},
+        {"date":"2026-06-03","category":"⚠️ 風險","title":"科技板塊占 S&P 市值 39%+ 創紀錄；指數超買 RSI 75","impact":"negative","source":"Reuters / Meyka"},
+        {"date":"2026-06-03","category":"策略","title":"槓桿日 ETF（CWVX/NBIL/ORCX）單日大跌；不建議攤平","impact":"negative","source":"持倉分析"},
+        {"date":"2026-06-03","category":"分析師","title":"NVDA 共識目標約 $310（+39% 潛在）；HPQ 多數 Reduce","impact":"mixed","source":"MarketBeat / VCP"},
     ],
 
     "earnings": [
-        {"ticker":"DDOG","name":"Datadog（持倉×4）","period":"Q1 2026","revenue":"YoY +25%+","eps":"超預期","highlight":"5/29 股價 +9.8%；AI 可觀測性；BTIG 目標 $255；下次財報 8/6","rating":"Buy"},
-        {"ticker":"NVDA","name":"NVIDIA（持倉×1）","period":"Q1 FY27 (5/20)","revenue":"$81.6B (+85%)","eps":"$1.87 adj.","highlight":"資料中心$75.2B；下季指引$91B；股價走弱（持倉 -10%）；下次財報 8/26","rating":"Strong Buy"},
-        {"ticker":"CSCO","name":"Cisco（持倉×3）","period":"Q3 FY26 (5/13)","revenue":"$15.8B (+12%)","eps":"$1.06 adj.","highlight":"AI 訂單 FY26 $9B；毛利66%；下次財報 8/19","rating":"Buy"},
-        {"ticker":"SMH","name":"VanEck SMH（持倉×7）","period":"ETF（成分財報）","revenue":"—","eps":"—","highlight":"費半 5 月約 +22%；持倉 +31.7% 最大獲利；追蹤 NVDA/TSM/AVGO 等","rating":"Buy"},
-        {"ticker":"2330.TW","name":"台積電（核心永久）","period":"Q1 2026","revenue":"$35.9B (+35.1%)","eps":"NT$22.08","highlight":"毛利 66.2%；全年指引>30%；CoWoS 滿載至 2027；7/16 法說","rating":"Strong Buy"},
+        {"ticker":"HPQ","name":"HP Inc.（×20）","period":"Q2 FY26","revenue":"待公布","eps":"—","highlight":"6/3 財報日；持倉 -9.4%；不攤平","rating":"Reduce"},
+        {"ticker":"NVDA","name":"NVIDIA（×1）","period":"Q1 FY27","revenue":"$81.6B","eps":"$1.87","highlight":"共識 $310；持倉 -8%；8/26 下次財報","rating":"Strong Buy"},
+        {"ticker":"SMH","name":"VanEck SMH（×7）","period":"ETF","revenue":"—","eps":"—","highlight":"持倉 +40%；成分 NVDA/TSM/AVGO","rating":"Buy"},
+        {"ticker":"VSH","name":"Vishay（×5）","period":"Q2","revenue":"—","eps":"—","highlight":"8/12 財報；持平","rating":"Hold"},
+        {"ticker":"2330.TW","name":"台積電（核心）","period":"Q1 2026","revenue":"+35%","eps":"NT$22.08","highlight":"7/16 法說；永久持有","rating":"Strong Buy"},
     ],
 
     "analysts": {
@@ -320,57 +337,61 @@ data = {
         "votes": [
             {"symbol":"2330.TW","name":"台積電（核心永久）","sell":0,"hold":4,"buy":15,"label":"AI 製造主軸"},
             {"symbol":"0050.TW","name":"元大台灣50（核心永久）","sell":0,"hold":6,"buy":13,"label":"大盤壓艙石"},
-            {"symbol":"SMH","name":"VanEck SMH（持倉×7）","sell":1,"hold":5,"buy":13,"label":"費半超週期"},
-            {"symbol":"DDOG","name":"Datadog（持倉×4）","sell":2,"hold":6,"buy":11,"label":"AI 可觀測性"},
-            {"symbol":"CSCO","name":"Cisco（持倉×3）","sell":1,"hold":9,"buy":9,"label":"AI 網通穩健"},
-            {"symbol":"NVDA","name":"NVIDIA（持倉×1）","sell":2,"hold":6,"buy":11,"label":"AI GPU（與SMH重疊）"},
+            {"symbol":"SMH","name":"VanEck SMH（×7）","sell":1,"hold":5,"buy":13,"label":"費半超週期 +40%"},
+            {"symbol":"NVDA","name":"NVIDIA（×1）","sell":2,"hold":6,"buy":11,"label":"共識高、與SMH重疊"},
+            {"symbol":"HPQ","name":"HP Inc.（×20）","sell":8,"hold":7,"buy":4,"label":"Reduce 居多"},
+            {"symbol":"CWVX","name":"2X 槓桿 ETF 群","sell":12,"hold":4,"buy":3,"label":"不適合長抱"},
         ]
     },
 
     "picks": [
-        {"rank":1,"ticker":"SMH","name":"VanEck SMH（持倉×7）","market":"US","price":598.93,"target_low":620,"target_high":660,"upside_pct":7.0,"thesis":"+31.7% 最大獲利；費半超週期；留至 9 月尾段了結；停損$540","type":"3個月續抱"},
-        {"rank":2,"ticker":"DDOG","name":"Datadog（持倉×4）","market":"US","price":247.35,"target_low":255,"target_high":275,"upside_pct":9.0,"thesis":"+12.1%；BTIG $255；8/6 財報後分批了結","type":"3個月續抱"},
-        {"rank":3,"ticker":"CSCO","name":"Cisco（持倉×3）","market":"US","price":120.42,"target_low":128,"target_high":137,"upside_pct":8.0,"thesis":"+3.3% 穩健；AI 訂單 $9B；達$130 了結","type":"3個月續抱"},
-        {"rank":4,"ticker":"NVDA","name":"NVIDIA（持倉×1）","market":"US","price":211.14,"target_low":220,"target_high":250,"upside_pct":5.0,"thesis":"-10% 唯一虧損；與 SMH 重疊；反彈$220-230 先出","type":"優先了結"},
-        {"rank":5,"ticker":"2330","name":"台積電（核心永久）","market":"TW","price":2355,"target_low":2450,"target_high":2600,"upside_pct":4.0,"thesis":"+9.2% AI 製造主軸；永久持有，不在變現範圍","type":"核心永久"},
-        {"rank":6,"ticker":"0050","name":"元大台灣50（核心永久）","market":"TW","price":105.4,"target_low":107,"target_high":112,"upside_pct":2.0,"thesis":"+60.8% 壓艙石；永久持有不賣","type":"核心永久"},
-        {"rank":7,"ticker":"00631L","name":"台灣50正2（核心永久）","market":"TW","price":36.94,"target_low":38,"target_high":40,"upside_pct":3.0,"thesis":"+29.5% =0050 2X；永久持有不賣","type":"核心永久"},
+        {"rank":1,"ticker":"SMH","name":"VanEck SMH（×7）","market":"US","price":636.03,"target_low":650,"target_high":660,"upside_pct":4.0,"thesis":"+40% 最大獲利；等 $650+ 再分批獲利；停損$580","type":"續抱等目標"},
+        {"rank":2,"ticker":"NVDA","name":"NVIDIA（×1）","market":"US","price":215.86,"target_low":220,"target_high":310,"upside_pct":44.0,"thesis":"共識 $310 但與 SMH 重疊；不攤平；反彈先出","type":"等反彈減碼"},
+        {"rank":3,"ticker":"2330","name":"台積電（核心）","market":"TW","price":2425,"target_low":2500,"target_high":2600,"upside_pct":3.0,"thesis":"+13% 永久持有","type":"核心永久"},
+        {"rank":4,"ticker":"0050","name":"元大台灣50（核心）","market":"TW","price":107.6,"target_low":110,"target_high":115,"upside_pct":3.0,"thesis":"+63% 壓艙石","type":"核心永久"},
+        {"rank":5,"ticker":"VSH","name":"Vishay（×5）","market":"US","price":62.63,"target_low":65,"target_high":68,"upside_pct":5.0,"thesis":"持平；續抱","type":"衛星"},
+        {"rank":6,"ticker":"INTC","name":"Intel（觀察 ≤$300）","market":"US","price":22.0,"target_low":25,"target_high":28,"upside_pct":15.0,"thesis":"費半輪動；未持倉","type":"觀察"},
+        {"rank":7,"ticker":"AVGO","name":"Broadcom（觀察）","market":"US","price":280.0,"target_low":300,"target_high":320,"upside_pct":8.0,"thesis":"AI 網通；與 SMH 重疊度高","type":"觀察"},
     ],
 
     # ===== actions（A/B 用 strategy/stop/target；C 用 action/reason）=====
     "actions": {
         "A": [
-            {"symbol":"NVDA","name":"NVIDIA（持倉×1）","price":211.14,"target":"反彈$220-230 先出","stop":200,"strategy":"-10% 唯一虧損且與 SMH 重疊；反彈先了結；跌破$200 認賠"},
+            {"symbol":"SMH","name":"VanEck SMH（×7）","price":636.03,"target":"650-660","stop":580,"strategy":"+40% 最大獲利；續抱等目標區；9 月尾段變現；不追高加碼"},
         ],
         "B": [
-            {"symbol":"SMH","name":"VanEck SMH（×7）","price":598.93,"target":"620-660","stop":540,"strategy":"+31.7% 最大部位；留至 9 月尾段，跌破$540 才減"},
-            {"symbol":"DDOG","name":"Datadog（×4）","price":247.35,"target":"255-275","stop":225,"strategy":"+12.1%；8/6 財報後分批了結"},
-            {"symbol":"CSCO","name":"Cisco（×3）","price":120.42,"target":"128-137","stop":110,"strategy":"+3.3% 穩健；達$130 了結"},
+            {"symbol":"NVDA","name":"NVIDIA（×1）","price":215.86,"target":"220-310（共識）","stop":200,"strategy":"不攤平；反彈 $220-230 減碼（與 SMH 重疊）"},
+            {"symbol":"VSH","name":"Vishay（×5）","price":62.63,"target":"65-68","stop":58,"strategy":"持平小部位；續抱至 8/12 財報"},
+            {"symbol":"DRAM","name":"Roundhill Memory（×1）","price":68.86,"target":"72-75","stop":64,"strategy":"+3% 小部位；記憶體景氣續抱"},
         ],
         "C": [
-            {"symbol":"0050","name":"元大台灣50（核心永久）","price":105.4,"action":"永久持有不賣","reason":"+60.8% 壓艙石；不在 10 月變現範圍"},
-            {"symbol":"00631L","name":"台灣50正2（核心永久）","price":36.94,"action":"永久持有不賣","reason":"+29.5%；=0050 2X 長期持有"},
-            {"symbol":"2330","name":"台積電（核心永久）","price":2355,"action":"永久持有不賣","reason":"+9.2% AI 製造主軸；不變現"},
+            {"symbol":"CWVX","name":"Tradr 2X CRWV（×5）","price":35.12,"action":"不攤平；反彈出清","reason":"-19.8% 槓桿 ETF；時間衰減"},
+            {"symbol":"NBIL","name":"GraniteShares 2X NBIS（×5）","price":50.0,"action":"不攤平；減碼","reason":"-16.2% 槓桿 ETF"},
+            {"symbol":"ORCX","name":"Defiance 2X ORCL（×10）","price":59.36,"action":"不攤平；逢反彈減","reason":"日槓桿；今日 -12.6%"},
+            {"symbol":"HPQ","name":"HP Inc.（×20）","price":26.24,"action":"不攤平；反彈減碼","reason":"-9.4%；分析師 Reduce"},
+            {"symbol":"0050","name":"元大台灣50（核心）","price":107.6,"action":"永久持有","reason":"+63% 壓艙石"},
+            {"symbol":"2330","name":"台積電（核心）","price":2425,"action":"永久持有","reason":"+13% AI 製造主軸"},
         ]
     },
 
     # ===== next_buy_recommendations（tickers 必須是物件陣列）=====
     "next_buy_recommendations": [
         {
-            "scenario": "🔴 10/31 變現排程（美股 4 檔，約 NT$18 萬）",
+            "scenario": "🔴 10/31 變現排程（美股 8 檔，約 NT$20.7 萬）",
             "tickers": [
-                {"ticker":"NVDA","name":"NVIDIA（×1）","price":211.14,"rationale":"-10% 與 SMH 重疊；最優先","size_suggest":"反彈$220-230 先出","confidence":"🔴 先了結"},
-                {"ticker":"DDOG","name":"Datadog（×4）","price":247.35,"rationale":"+12.1%；8/6 財報後","size_suggest":"8 月底前分批","confidence":"🟡 中段"},
-                {"ticker":"CSCO","name":"Cisco（×3）","price":120.42,"rationale":"+3.3%；達標","size_suggest":"$130 了結","confidence":"🟡 中段"},
-                {"ticker":"SMH","name":"VanEck SMH（×7）","price":598.93,"rationale":"+31.7% 最大獲利；留尾段","size_suggest":"9 月分批至 10/25 清空","confidence":"🟢 留最後"},
+                {"ticker":"CWVX","name":"2X 槓桿 ETF 群","price":35.12,"rationale":"深套 + 時間衰減","size_suggest":"反彈出清，不攤平","confidence":"🔴 優先減"},
+                {"ticker":"NBIL","name":"NBIL（×5）","price":50.0,"rationale":"-16% 槓桿","size_suggest":"$52-55 減碼","confidence":"🔴 優先減"},
+                {"ticker":"NVDA","name":"NVIDIA（×1）","price":215.86,"rationale":"與 SMH 重疊","size_suggest":"$220-230 減碼","confidence":"🟡 中段"},
+                {"ticker":"HPQ","name":"HP（×20）","price":26.24,"rationale":"Reduce 共識","size_suggest":"$28-29 減碼","confidence":"🟡 中段"},
+                {"ticker":"SMH","name":"VanEck SMH（×7）","price":636.03,"rationale":"+40% 最大獲利","size_suggest":"9 月分批清空","confidence":"🟢 留最後"},
             ]
         },
         {
-            "scenario": "🟢 核心永久持有（不變現，不操作）",
+            "scenario": "🟢 核心永久持有（不變現）",
             "tickers": [
-                {"ticker":"0050","name":"元大台灣50","price":105.4,"rationale":"+60.8% 壓艙石","size_suggest":"永久持有","confidence":"🟢 不賣"},
-                {"ticker":"00631L","name":"台灣50正2","price":36.94,"rationale":"+29.5% =0050 2X","size_suggest":"永久持有","confidence":"🟢 不賣"},
-                {"ticker":"2330","name":"台積電","price":2355,"rationale":"+9.2% AI 製造主軸","size_suggest":"永久持有","confidence":"🟢 不賣"},
+                {"ticker":"0050","name":"元大台灣50","price":107.6,"rationale":"+63% 壓艙石","size_suggest":"永久持有","confidence":"🟢 不賣"},
+                {"ticker":"00631L","name":"台灣50正2","price":39.22,"rationale":"+38% =0050 2X","size_suggest":"永久持有","confidence":"🟢 不賣"},
+                {"ticker":"2330","name":"台積電","price":2425,"rationale":"+13% AI 主軸","size_suggest":"永久持有","confidence":"🟢 不賣"},
             ]
         }
     ],
@@ -378,9 +399,9 @@ data = {
     # ===== allocation（陣列格式，非物件）=====
     "allocation": {
         "current": [
-            {"label":"台股核心（0050+00631L+2330，永久）","value":69.0},
-            {"label":"美股半導體（SMH×7，3個月）","value":16.3},
-            {"label":"美股成長（DDOG/CSCO/NVDA，3個月）","value":6.1},
+            {"label":"台股核心（0050+00631L+2330，永久）","value":73.5},
+            {"label":"美股半導體（SMH×7）","value":17.8},
+            {"label":"美股其他（7檔含槓桿ETF）","value":8.6},
             {"label":"現金","value":0.0},
         ],
         "target": [
@@ -391,32 +412,32 @@ data = {
     },
 
     "consensus": [
-        {"symbol":"SMH","name":"VanEck 半導體 ETF（持倉×7）","rating":"Buy","target":"$620-660；費半多頭主軸","date":"2026-05-29"},
-        {"symbol":"DDOG","name":"Datadog（持倉×4）","rating":"Buy","target":"$255（BTIG 5/26 上調）","date":"2026-05-26"},
-        {"symbol":"CSCO","name":"Cisco（持倉×3）","rating":"Buy","target":"$124-137；AI 訂單 $9B","date":"2026-05"},
-        {"symbol":"NVDA","name":"NVIDIA（持倉×1）","rating":"Strong Buy","target":"均值 $304；持倉 -10%（與 SMH 重疊）","date":"2026-05"},
-        {"symbol":"2330.TW","name":"台積電（核心永久）","rating":"加碼","target":"NT$2,450-3,030","date":"2026-05"},
+        {"symbol":"SMH","name":"VanEck SMH（×7）","rating":"Buy","target":"$620-660 / 聚合 $572","date":"2026-06-03"},
+        {"symbol":"NVDA","name":"NVIDIA（×1）","rating":"Strong Buy","target":"均值約 $310（79 位分析師）","date":"2026-06-03"},
+        {"symbol":"HPQ","name":"HP Inc.（×20）","rating":"Reduce","target":"均值 $23（16 位）","date":"2026-06-03"},
+        {"symbol":"2330.TW","name":"台積電（核心）","rating":"加碼","target":"NT$2,500-2,600","date":"2026-06-03"},
+        {"symbol":"0050.TW","name":"元大台灣50","rating":"持有","target":"跟隨大盤","date":"2026-06-03"},
     ],
 
     "forecast": [
-        {"symbol":"SMH","name":"VanEck SMH（持倉×7）","bull":660,"base":620,"bear":540,"catalyst":"費半超週期；+31.7% 最大獲利；留至 9 月尾段；停損$540"},
-        {"symbol":"DDOG","name":"Datadog（持倉×4）","bull":275,"base":255,"bear":225,"catalyst":"BTIG 目標$255；AI 可觀測性；8/6 財報後了結"},
-        {"symbol":"CSCO","name":"Cisco（持倉×3）","bull":137,"base":128,"bear":110,"catalyst":"AI 訂單 $9B；穩健；達$130 了結"},
-        {"symbol":"NVDA","name":"NVIDIA（持倉×1）","bull":250,"base":220,"bear":185,"catalyst":"共識$304 但持倉 -10%；與 SMH 重疊；反彈先出"},
-        {"symbol":"2330.TW","name":"台積電（核心永久）","bull":2600,"base":2450,"bear":2200,"catalyst":"全年>30%成長；7/16法說；CoWoS 滿載；永久持有"},
-        {"symbol":"0050.TW","name":"元大台灣50（核心永久）","bull":112,"base":107,"bear":98,"catalyst":"大盤壓艙石 +60.8%；永久持有不賣"},
+        {"symbol":"SMH","name":"VanEck SMH（×7）","bull":660,"base":640,"bear":580,"catalyst":"+40% 獲利；等 $650+；9 月變現"},
+        {"symbol":"NVDA","name":"NVIDIA（×1）","bull":250,"base":220,"bear":200,"catalyst":"共識 $310；不攤平；反彈減碼"},
+        {"symbol":"HPQ","name":"HP Inc.（×20）","bull":29,"base":27,"bear":24,"catalyst":"反彈成本區出清；Reduce 共識"},
+        {"symbol":"CWVX","name":"2X 槓桿 ETF","bull":42,"base":38,"bear":30,"catalyst":"不攤平；時間衰減"},
+        {"symbol":"2330.TW","name":"台積電（核心）","bull":2600,"base":2500,"bear":2300,"catalyst":"COMPUTEX；永久持有"},
+        {"symbol":"0050.TW","name":"元大台灣50","bull":115,"base":110,"bear":102,"catalyst":"大盤壓艙石；永久持有"},
     ],
 
     # ===== capital_plan（含 status / sources / totals / options 結構）=====
     "capital_plan": {
-        "title": "2026-05-31 美股 4 檔 3 個月變現規劃（10/31 用錢）",
+        "title": "2026-06-04 美股 8 檔變現規劃（10/31 用錢）",
         "sources": [
-            {"src":"美股 SMH/DDOG/CSCO/NVDA 變現","amount_twd":180369,"amount_usd":5752,"status":"conditional","note":"3 個月部位，於 9-10 月分批了結為現金"},
+            {"src":"美股 8 檔變現","amount_twd":207219,"amount_usd":6594,"status":"conditional","note":"槓桿 ETF 先出；SMH 留尾段；9-10 月分批現金化"},
         ],
         "totals": {
             "immediate": 0,
-            "conditional": 180369,
-            "total": 180369
+            "conditional": 207219,
+            "total": 207219
         },
         "context": [
             "核心 0050/00631L/2330 永久持有，不在變現範圍",

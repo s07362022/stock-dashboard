@@ -7,6 +7,18 @@
 
 ---
 
+## 2026-06-04 — 美股庫存改為 8 檔（券商截圖）+ 攤平策略更新
+
+**Commit**: `(待 push)` — `update: US 8 holdings 2026-06-04, no average-down on leveraged ETFs`
+
+### 變更
+- **美股持倉**：SMH×7、ORCX×10、HPQ×20、NBIL×5、VSH×5、CWVX×5、NVDA×1、DRAM×1（移除 DDOG/CSCO）
+- **台股報價**：0050 107.6、00631L 39.22、2330 2425（BigGo 6/3）
+- **匯率**：31.425
+- **操作建議**：槓桿 ETF 不攤平；SMH 續抱等 $650+；NVDA 等反彈 $220-230
+
+---
+
 ## 2026-05-31（四次）— 依券商截圖還原 7 檔庫存 + 全面清除五月過時內容
 
 **Commit**: `(待 push)` — `fix: restore actual 7 holdings, purge stale May content, 3-month liquidation plan`
