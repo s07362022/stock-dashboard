@@ -7,6 +7,19 @@
 
 ---
 
+## 2026-06-06 — 6/8 週一崩盤策略 + 庫存 15 檔更新
+
+**Commit**: `(待 push)` — `update: crash Monday strategy, TW5+US10 holdings 2026-06-06`
+
+### 變更
+- **台股**：0050×3210、00631L×5350、2330×25（核心）+ 2317×170、2356×1000（衛星）
+- **美股 10 檔**：SMH×8、HPQ×27、ORCX×10、ASTS×4、NVDA×1、VSH×5、CWVX×4、DRAM×2、AMZN×1、RKLB×1
+- **大盤**：非農 +17.2 萬、費半 -10%、台指期夜盤 42220（-3006 點）
+- **週一策略**：CWVX/ORCX 出清、SMH 減半、核心不動
+- **總市值** NT$941,443、總損益 +23.58%
+
+---
+
 ## 2026-06-04 — 美股庫存改為 8 檔（券商截圖）+ 攤平策略更新
 
 **Commit**: `(待 push)` — `update: US 8 holdings 2026-06-04, no average-down on leveraged ETFs`
