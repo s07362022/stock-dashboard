@@ -7,6 +7,18 @@
 
 ---
 
+## 2026-08-27 00:40 — 台美財報週：NVDA 盤後＋Jackson Hole；清日槓桿
+
+**Commit**: `(待 push)` — `update: portfolio 2026-08-27 NVDA Jackson Hole`
+
+### 變更
+- 台股改 8/26 收盤：0050 105.9、2330 2415、2317 246.5、2356 66.8、2379 734、3481 46.4
+- 美股改 8/26 盤中：SMH 553.39、SPCX 136.63、日槓桿仍深套
+- 匯率 31.818；策略改為本週清 ORCX/ONDL/SPCH/SNDU/MULL，9/1 起減 SMH
+- 新聞／財報／19 票改為 NVDA、MRVL、Warsh、荷姆茲
+
+---
+
 ## 2026-07-15 21:45 — 券商截圖對帳：台股 6 + 美股 10；清日槓桿＋減群創
 
 **Commit**: `(待 push)` — `update: portfolio 2026-07-15 screenshot sync`

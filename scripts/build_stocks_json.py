@@ -33,8 +33,8 @@ from datetime import datetime
 #  ==== 1. 可變值區（每次更新只改這裡） ====
 # =============================================================================
 
-FX = 32.215                                      # 匯率 USD→TWD（2026/07/15 券商截圖）
-UPDATE_NOTE = "2026/07/15 更新（依券商截圖；台股 6 + 美股 10）。核心 0050/2330 永久不賣；台股衛星加重群創 3481（建議減碼）；美股含多檔日槓桿（ORCX/ONDL/SPCH/MULL/SNDU）優先出清。SMH×4 +27%。10/31 需用錢。7/16 台積電法說為最大催化劑。"
+FX = 31.818                                      # 匯率 USD→TWD（2026/08/26 經濟日報收盤）
+UPDATE_NOTE = "2026/08/27 更新（台股 8/26 收盤＋美股 8/26 12:30 ET 盤中）。核心 0050/2330 永久不賣。優先出清日槓桿 ORCX/ONDL/SPCH/SNDU/MULL。群創減碼。SMH 9/1 起分批。NVDA 今夜盤後、MRVL 8/27 盤後。10/31 需用錢。"
 
 CASH_ON_HAND = 0
 CASH_TO_DEPLOY = 0
@@ -42,26 +42,26 @@ CASH_NEED_DATE = "2026-10-31"
 
 # ---- 1.1 台股持倉（2026/07/15 券商截圖）----
 TW = [
-    {"symbol":"0050.TW","name":"元大台灣50","shares":3360,"buy_price":67.69,"close":106.3,"change":1.90,"pct":1.82,"sector":"ETF（核心，永久持有）","tag":"core"},
-    {"symbol":"2330.TW","name":"台積電","shares":25,"buy_price":2145.6,"close":2440.0,"change":20.0,"pct":0.83,"sector":"半導體（核心永久）","tag":"core"},
-    {"symbol":"2317.TW","name":"鴻海","shares":170,"buy_price":296.09,"close":239.0,"change":3.50,"pct":1.49,"sector":"代工／AI 伺服器","tag":"satellite"},
-    {"symbol":"2356.TW","name":"英業達","shares":1275,"buy_price":70.97,"close":61.1,"change":0.80,"pct":1.33,"sector":"ODM／伺服器","tag":"satellite"},
-    {"symbol":"2379.TW","name":"瑞昱","shares":3,"buy_price":837.0,"close":753.0,"change":5.0,"pct":0.67,"sector":"IC 設計／網通","tag":"satellite"},
-    {"symbol":"3481.TW","name":"群創","shares":2250,"buy_price":68.36,"close":58.5,"change":1.30,"pct":2.27,"sector":"面板（建議減碼）","tag":"satellite"},
+    {"symbol":"0050.TW","name":"元大台灣50","shares":3360,"buy_price":67.69,"close":105.9,"change":1.50,"pct":1.44,"sector":"ETF（核心，永久持有）","tag":"core"},
+    {"symbol":"2330.TW","name":"台積電","shares":25,"buy_price":2145.6,"close":2415.0,"change":15.0,"pct":0.62,"sector":"半導體（核心永久）","tag":"core"},
+    {"symbol":"2317.TW","name":"鴻海","shares":170,"buy_price":296.09,"close":246.5,"change":3.50,"pct":1.44,"sector":"代工／AI 伺服器","tag":"satellite"},
+    {"symbol":"2356.TW","name":"英業達","shares":1275,"buy_price":70.97,"close":66.8,"change":1.40,"pct":2.14,"sector":"ODM／伺服器","tag":"satellite"},
+    {"symbol":"2379.TW","name":"瑞昱","shares":3,"buy_price":837.0,"close":734.0,"change":4.0,"pct":0.55,"sector":"IC 設計／網通","tag":"satellite"},
+    {"symbol":"3481.TW","name":"群創","shares":2250,"buy_price":68.36,"close":46.4,"change":-0.40,"pct":-0.85,"sector":"面板（建議減碼）","tag":"satellite"},
 ]
 
 # ---- 1.2 美股持倉（2026/07/15 券商截圖）----
 US = [
-    {"symbol":"SMH","name":"VanEck Semiconductor ETF","shares":4,"buy_price":471.28,"close":600.31,"change":14.69,"pct":2.51,"sector":"半導體 ETF","tag":"satellite"},
-    {"symbol":"SPCX","name":"SpaceX","shares":12,"buy_price":197.80,"close":136.08,"change":-2.50,"pct":-1.80,"sector":"航太／IPO 後","tag":"speculative"},
-    {"symbol":"MULL","name":"GraniteShares 2x Long MU","shares":58,"buy_price":31.59,"close":25.81,"change":2.29,"pct":9.74,"sector":"日槓桿 ETF（2X MU）","tag":"speculative"},
-    {"symbol":"ON","name":"ON Semiconductor","shares":6,"buy_price":101.10,"close":93.73,"change":3.36,"pct":3.72,"sector":"功率／車用半導","tag":"satellite"},
-    {"symbol":"ONDL","name":"Defiance 2X Long ONDS","shares":59,"buy_price":10.18,"close":6.66,"change":-0.20,"pct":-2.91,"sector":"日槓桿 ETF（2X ONDS）","tag":"speculative"},
-    {"symbol":"BB","name":"BlackBerry","shares":30,"buy_price":12.75,"close":11.01,"change":0.10,"pct":0.92,"sector":"資安／IoT","tag":"satellite"},
-    {"symbol":"ORCX","name":"Defiance 2X Long ORCL","shares":15,"buy_price":54.04,"close":17.55,"change":-0.80,"pct":-4.36,"sector":"日槓桿 ETF（2X ORCL）","tag":"speculative"},
-    {"symbol":"MRVL","name":"Marvell Technology","shares":1,"buy_price":247.10,"close":222.44,"change":3.50,"pct":1.60,"sector":"AI 網通／資料中心","tag":"satellite"},
-    {"symbol":"SNDU","name":"T-REX 2X Long SNDK","shares":4,"buy_price":35.73,"close":36.67,"change":0.50,"pct":1.38,"sector":"日槓桿 ETF（2X SNDK）","tag":"speculative"},
-    {"symbol":"SPCH","name":"Leverage Shares 2X SPCX","shares":5,"buy_price":26.10,"close":9.50,"change":-0.45,"pct":-4.52,"sector":"日槓桿 ETF（2X SpaceX）","tag":"speculative"},
+    {"symbol":"SMH","name":"VanEck Semiconductor ETF","shares":4,"buy_price":471.28,"close":553.385,"change":-2.435,"pct":-0.44,"sector":"半導體 ETF","tag":"satellite"},
+    {"symbol":"SPCX","name":"SpaceX","shares":12,"buy_price":197.80,"close":136.63,"change":-1.32,"pct":-0.96,"sector":"航太／IPO 後","tag":"speculative"},
+    {"symbol":"MULL","name":"GraniteShares 2x Long MU","shares":58,"buy_price":31.59,"close":20.645,"change":0.265,"pct":1.30,"sector":"日槓桿 ETF（2X MU）","tag":"speculative"},
+    {"symbol":"ON","name":"ON Semiconductor","shares":6,"buy_price":101.10,"close":73.00,"change":0.49,"pct":0.68,"sector":"功率／車用半導","tag":"satellite"},
+    {"symbol":"ONDL","name":"Defiance 2X Long ONDS","shares":59,"buy_price":10.18,"close":7.19,"change":0.00,"pct":0.00,"sector":"日槓桿 ETF（2X ONDS）","tag":"speculative"},
+    {"symbol":"BB","name":"BlackBerry","shares":30,"buy_price":12.75,"close":7.685,"change":-0.105,"pct":-1.35,"sector":"資安／IoT","tag":"satellite"},
+    {"symbol":"ORCX","name":"Defiance 2X Long ORCL","shares":15,"buy_price":54.04,"close":22.0167,"change":0.8567,"pct":4.05,"sector":"日槓桿 ETF（2X ORCL）","tag":"speculative"},
+    {"symbol":"MRVL","name":"Marvell Technology","shares":1,"buy_price":247.10,"close":240.87,"change":0.49,"pct":0.20,"sector":"AI 網通／資料中心","tag":"satellite"},
+    {"symbol":"SNDU","name":"T-REX 2X Long SNDK","shares":4,"buy_price":35.73,"close":20.54,"change":0.62,"pct":3.11,"sector":"日槓桿 ETF（2X SNDK）","tag":"speculative"},
+    {"symbol":"SPCH","name":"Leverage Shares 2X SPCX","shares":5,"buy_price":26.10,"close":8.5099,"change":-0.1701,"pct":-1.96,"sector":"日槓桿 ETF（2X SpaceX）","tag":"speculative"},
 ]
 
 # =============================================================================
@@ -113,7 +113,7 @@ data = {
     "fx_rate": FX,
 
     "user_strategy": {
-        "philosophy": "2026/07/15：核心 0050/2330 永久持有；台股衛星 2317/2356/2379/3481（群創建議減碼）；美股 10 檔 10/31 前變現。本週優先出清日槓桿 ORCX/ONDL/SPCH/MULL/SNDU；SMH×4 為美股獲利主體；7/16 台積電法說為最大催化劑。",
+        "philosophy": "2026/08/27：核心 0050/2330 永久持有；台股衛星 2317/2356/2379/3481（群創減碼）；美股 10 檔 10/31 前變現。本週出清日槓桿 ORCX/ONDL/SPCH/MULL/SNDU；SMH×4 為美股獲利主體，9/1 起減。催化劑＝NVDA 今夜盤後＋Jackson Hole。",
         "leverage_map": [
             {"etf":"ORCX","underlying":"ORCL","multiplier":2,"treat_as":"exit_asap"},
             {"etf":"ONDL","underlying":"ONDS","multiplier":2,"treat_as":"exit_asap"},
@@ -159,7 +159,7 @@ data = {
             "pnl_twd": tw_mv - tw_cost,
             "pnl_pct": safe_pct(tw_mv - tw_cost, tw_cost),
             "winners": tw_w, "losers": tw_l,
-            "highlight": "0050 +57.8%、2330 +13.5%（核心）；3481 -14.9% 大倉拖累；2317 -17.8%、2356 -11.9%。",
+            "highlight": "0050 +56.5%、2330 +12.6%（核心）；3481 -32.1% 大倉拖累；2317 -16.7%、2356 -5.9%。",
             "verdict": "0050/2330 永久持有；群創分批減碼；鴻海／英業達不攤平；瑞昱極小部位。"
         },
         "us": {
@@ -171,20 +171,20 @@ data = {
             "cost_usd": round(us_cost_usd, 2),
             "pnl_usd": round(us_mv_usd - us_cost_usd, 2),
             "winners": us_w, "losers": us_l,
-            "highlight": "SMH×4 +27.4% 撐組；ORCX -67.5%、SPCH -63.6%、ONDL -34.6% 日槓桿重傷；SPCX -31.2%。",
+            "highlight": "SMH×4 +17.4% 撐組；ORCX -59%、SPCH -67%、MULL -35% 日槓桿仍重傷；SPCX -31%。",
             "verdict": "本週清日槓桿五檔；SPCX 減碼；SMH 9 月起分批出清；10/25 前全清。"
         }
     },
 
     "indices": [
-        {"name":"S&P 500","code":"SPX","value":7543.89,"change":28.5,"pct":0.38},
-        {"name":"NASDAQ","code":"IXIC","value":26107.01,"change":232.0,"pct":0.90},
-        {"name":"Dow Jones","code":"DJI","value":52513.24,"change":10.0,"pct":0.02},
-        {"name":"費城半導體","code":"SOX","value":6950.0,"change":172.0,"pct":2.54},
-        {"name":"SMH(費半ETF)","code":"SMH","value":600.31,"change":14.69,"pct":2.51},
-        {"name":"VIX","code":"VIX","value":16.5,"change":-0.8,"pct":-4.60},
-        {"name":"台股加權","code":"TWII","value":45631.59,"change":893.64,"pct":2.00},
-        {"name":"台指期","code":"TXF","value":45600.0,"change":880.0,"pct":1.97},
+        {"name":"S&P 500","code":"SPX","value":7652.0,"change":-21.0,"pct":-0.27},
+        {"name":"NASDAQ","code":"IXIC","value":26151.0,"change":-55.0,"pct":-0.21},
+        {"name":"Dow Jones","code":"DJI","value":45300.0,"change":-110.0,"pct":-0.24},
+        {"name":"費城半導體","code":"SOX","value":11588.04,"change":164.87,"pct":1.44},
+        {"name":"SMH(費半ETF)","code":"SMH","value":553.385,"change":-2.435,"pct":-0.44},
+        {"name":"VIX","code":"VIX","value":17.2,"change":0.4,"pct":2.40},
+        {"name":"台股加權","code":"TWII","value":45832.62,"change":663.16,"pct":1.46},
+        {"name":"台指期","code":"TXF","value":45900.0,"change":650.0,"pct":1.44},
     ],
 
     "tw_stocks": TW,
@@ -347,65 +347,65 @@ data = {
     },
 
     "news": [
-        {"date":"2026-07-16","category":"🏭 台積電","title":"台積電法說會：市場聚焦毛利率、Capex 與全年營收展望","impact":"neutral","source":"中時／路透"},
-        {"date":"2026-07-15","category":"台股","title":"加權收 45,632（＋894／＋2%）；半導與記憶體領漲","impact":"positive","source":"工商時報／永豐"},
-        {"date":"2026-07-15","category":"美股","title":"6 月 CPI 低於預期；NASDAQ＋0.9%、費半約＋2.5%；IBM 財報重挫示警軟體","impact":"mixed","source":"Deutsche Bank／TradingKey"},
-        {"date":"2026-07-15","category":"半導體","title":"半導短線歸因「超賣反彈」；AI Capex 疑慮未完全解除","impact":"mixed","source":"朝鮮日報英譯"},
-        {"date":"2026-07-14","category":"美股","title":"ON Semi 法人偏買、目標約 $111–124；AI 資料中心營收成長","impact":"positive","source":"24/7 Wall St.／Yahoo"},
-        {"date":"2026-07-13","category":"台股","title":"台積電 6 月營收約 4,427 億創新高；群創上半年營收近五年同期高","impact":"mixed","source":"經濟日報／UDN"},
-        {"date":"2026-07-15","category":"✅ 對帳","title":"7/15 券商對帳：台股 6＋美股 10；日槓桿待清；群創建議減碼","impact":"mixed","source":"Portfolio 截圖"},
-        {"date":"2026-07-09","category":"台股","title":"日月光外資目標上看 750–835；先進封裝 Capex 上修","impact":"positive","source":"經濟日報／TechNews"},
+        {"date":"2026-08-26","category":"科技","title":"NVDA 今夜盤後財報；共識營收約 $92B、EPS $2.09；Q3 街估約 $104B","impact":"neutral","source":"Finance Calendar／Visible Alpha"},
+        {"date":"2026-08-26","category":"台股","title":"加權收 45,833（＋663／＋1.46%），成交 8,042 億；三大法人回補約 594 億","impact":"positive","source":"經濟日報／中央社"},
+        {"date":"2026-08-26","category":"金融","title":"Jackson Hole 8/27–29；Warsh 週五演說；7 月核心 PCE 3.3%","impact":"mixed","source":"Kansas City Fed／FXEmpire"},
+        {"date":"2026-08-26","category":"地緣","title":"伊朗稱與阿曼就荷姆茲收益分享達成協議；油價週內回落","impact":"mixed","source":"CNBC"},
+        {"date":"2026-08-26","category":"半導體","title":"MRVL 8/27 盤後；共識營收 $2.71B、EPS $0.93；Google ASIC 敘事","impact":"positive","source":"Yahoo Finance 共識"},
+        {"date":"2026-08-26","category":"電子","title":"聯發科收 3,945（+5.6%）；緯穎盤中 6,925 天價；CPO／矽光子強","impact":"positive","source":"經濟日報／鉅亨"},
+        {"date":"2026-08-10","category":"台積電","title":"台積電 7 月營收 4,675.8 億連三月新高；YoY +44.7%","impact":"positive","source":"台積電公告"},
+        {"date":"2026-08-26","category":"外匯","title":"新台幣收 31.818，升值約 5 分","impact":"positive","source":"經濟日報"},
     ],
 
     "earnings": [
-        {"ticker":"2330.TW","name":"台積電（核心）","period":"Q2 法說 7/16","revenue":"6月創高","eps":"TTM ~74","highlight":"關注毛利／Capex／全年指引","rating":"Strong Buy"},
-        {"ticker":"SMH","name":"VanEck SMH（×4）","period":"ETF","revenue":"—","eps":"—","highlight":"+27%；9月起尾段出清","rating":"Buy"},
-        {"ticker":"ON","name":"ON Semi（×6）","period":"Q2 約8/3","revenue":"—","eps":"預估約 $0.71","highlight":"AI 資料中心＋SiC；輕虧","rating":"Moderate Buy"},
-        {"ticker":"3481.TW","name":"群創（×2250）","period":"上半年","revenue":"1,302億","eps":"TTM 薄","highlight":"營收改善但獲利弱；建議減碼","rating":"Reduce"},
-        {"ticker":"ORCX","name":"2X ORCL（×15）","period":"槓桿ETF","revenue":"—","eps":"—","highlight":"-67%；本週出清","rating":"Sell"},
-        {"ticker":"2356.TW","name":"英業達（×1275）","period":"營收追蹤","revenue":"—","eps":"—","highlight":"ODM；-12%；不攤平","rating":"Hold"},
+        {"ticker":"NVDA","name":"輝達（未持有，系統性）","period":"FY27 Q2 8/26 AMC","revenue":"共識 ~$92B","eps":"~$2.09","highlight":"看 Q3 指引與毛利率；連動 SMH／台積／鴻海","rating":"Watch"},
+        {"ticker":"MRVL","name":"Marvell（×1）","period":"FY27 Q2 8/27 AMC","revenue":"$2.71B 共識","eps":"$0.93","highlight":"Google ASIC；選擇權隱含約 ±10%","rating":"Hold"},
+        {"ticker":"2330.TW","name":"台積電（核心）","period":"Q2 已公布＋7月營收","revenue":"7月 4,676億","eps":"Q2 法說已過","highlight":"法人均目標約 3,229；永久持有","rating":"Strong Buy"},
+        {"ticker":"2317.TW","name":"鴻海（×170）","period":"Q2","revenue":"2.53兆","eps":"4.27","highlight":"雲端占比 51%；股價落後成本、不攤平","rating":"Hold"},
+        {"ticker":"3481.TW","name":"群創（×2250）","period":"Q2","revenue":"637億","eps":"0.57","highlight":"獲利回升但 PE 高、倉位過重；減碼","rating":"Reduce"},
+        {"ticker":"ORCX","name":"2X ORCL（×15）","period":"槓桿ETF","revenue":"—","eps":"—","highlight":"-59%；本週出清","rating":"Sell"},
     ],
 
     "analysts": {
         "panel": ["巴菲特","芒格","Cathie Wood","Michael Burry","Peter Lynch","Ray Dalio","Druckenmiller","葛拉漢","索羅斯","科斯托蘭尼","Jim Simons","動能派","價值派","成長派","宏觀策略","風控長","產業專家","量化派","ESG"],
         "votes": [
-            {"symbol":"2330.TW","name":"台積電（核心永久）","sell":0,"hold":3,"buy":16,"label":"法說前 Strong Buy；目標約 2780+"},
-            {"symbol":"0050.TW","name":"元大台灣50（核心永久）","sell":0,"hold":5,"buy":14,"label":"壓艙石 +57.8%"},
-            {"symbol":"SMH","name":"VanEck SMH（×4）","sell":2,"hold":6,"buy":11,"label":"+27%；9 月變現節奏"},
-            {"symbol":"ORCX","name":"2X ORCL（×15）","sell":17,"hold":1,"buy":1,"label":"日槓桿 -67%；立即出清"},
-            {"symbol":"3481.TW","name":"群創（×2250）","sell":10,"hold":6,"buy":3,"label":"倉位過重；減碼"},
-            {"symbol":"ON","name":"ON Semi（×6）","sell":2,"hold":7,"buy":10,"label":"Moderate Buy；目標 ~111"},
+            {"symbol":"2330.TW","name":"台積電（核心永久）","sell":0,"hold":4,"buy":15,"label":"Strong Buy；法人均目標約 3229"},
+            {"symbol":"0050.TW","name":"元大台灣50（核心永久）","sell":0,"hold":5,"buy":14,"label":"壓艙石 +56.5%"},
+            {"symbol":"SMH","name":"VanEck SMH（×4）","sell":3,"hold":10,"buy":6,"label":"+17%；9/1 起規律變現"},
+            {"symbol":"ORCX","name":"2X ORCL（×15）","sell":19,"hold":0,"buy":0,"label":"日槓桿 -59%；立即出清"},
+            {"symbol":"3481.TW","name":"群創（×2250）","sell":13,"hold":5,"buy":1,"label":"倉位過重 -32%；減碼"},
+            {"symbol":"ON","name":"ON Semi（×6）","sell":4,"hold":12,"buy":3,"label":"現價 73；10 月前仍變現"},
         ]
     },
 
     "picks": [
-        {"rank":1,"ticker":"2330","name":"台積電（核心）","market":"TW","price":2440,"target_low":2600,"target_high":2866,"upside_pct":11.0,"thesis":"核心永久；7/16 法說；AI／CoWoS","type":"核心永久"},
-        {"rank":2,"ticker":"0050","name":"元大台灣50（核心）","market":"TW","price":106.3,"target_low":108,"target_high":115,"upside_pct":5.0,"thesis":"+57.8% 壓艙石","type":"核心永久"},
-        {"rank":3,"ticker":"3711","name":"日月光投控（建議新）","market":"TW","price":683,"target_low":750,"target_high":835,"upside_pct":15.7,"thesis":"先進封裝；群創資金可轉；分批勿追漲","type":"建議新增"},
-        {"rank":4,"ticker":"ON","name":"ON Semiconductor","market":"US","price":93.73,"target_low":111,"target_high":124,"upside_pct":21.6,"thesis":"≤300；清槓桿後載體；10月前仍變現","type":"美股≤300短期"},
-        {"rank":5,"ticker":"NVDA","name":"NVIDIA（長線觀察）","market":"US","price":211.74,"target_low":240,"target_high":280,"upside_pct":20.0,"thesis":"≤300；10/31 用錢後再考慮","type":"長期觀察"},
+        {"rank":1,"ticker":"2330","name":"台積電（核心）","market":"TW","price":2415,"target_low":2600,"target_high":3229,"upside_pct":33.7,"thesis":"核心永久；AI／CoWoS；7月營收新高","type":"核心永久"},
+        {"rank":2,"ticker":"0050","name":"元大台灣50（核心）","market":"TW","price":105.9,"target_low":108,"target_high":115,"upside_pct":5.0,"thesis":"+56.5% 壓艙石","type":"核心永久"},
+        {"rank":3,"ticker":"2454","name":"聯發科（觀察不追）","market":"TW","price":3945,"target_low":3800,"target_high":4300,"upside_pct":9.0,"thesis":"8/26 已大漲；回檔再看","type":"建議新增"},
+        {"rank":4,"ticker":"NVDA","name":"NVIDIA（≤300）","market":"US","price":210.29,"target_low":190,"target_high":250,"upside_pct":19.0,"thesis":"今夜財報後再拆；10/31 前不開長倉","type":"美股≤300短期"},
+        {"rank":5,"ticker":"QCOM","name":"高通（≤300）","market":"US","price":162.30,"target_low":170,"target_high":190,"upside_pct":17.0,"thesis":"手機＋邊緣 AI；符合股價門檻","type":"長期觀察"},
     ],
 
     "actions": {
         "A": [
-            {"symbol":"0050","name":"元大台灣50（核心）","price":106.3,"target":"永久持有","stop":98,"strategy":"永久壓艙石；法說前後不操作"},
-            {"symbol":"2330","name":"台積電（核心）","price":2440,"target":"永久持有","stop":2150,"strategy":"核心不動；法說波動忍耐"},
-            {"symbol":"SMH","name":"VanEck SMH（×4）","price":600.31,"target":"620-660","stop":560,"strategy":"美股獲利主體；9/1 起每週減 25–30%"},
+            {"symbol":"0050","name":"元大台灣50（核心）","price":105.9,"target":"永久持有","stop":98,"strategy":"永久壓艙石；NVDA 夜盤不操作"},
+            {"symbol":"2330","name":"台積電（核心）","price":2415,"target":"永久持有","stop":2100,"strategy":"核心不動；財報週波動忍耐"},
+            {"symbol":"SMH","name":"VanEck SMH（×4）","price":553.39,"target":"9月起出清","stop":500,"strategy":"美股獲利主體；9/1 起每週減 25–30%"},
         ],
         "B": [
-            {"symbol":"3711","name":"日月光（建議新建倉）","price":683,"target":"750-835","stop":620,"strategy":"用群創減碼資金分批承接；勿追單日大漲"},
-            {"symbol":"ON","name":"ON Semi（×6）","price":93.73,"target":"111-124","stop":85,"strategy":"優於再開日槓桿；10月前隨變現出清"},
-            {"symbol":"QCOM","name":"高通（觀察≤300）","price":178.81,"target":"200-220","stop":160,"strategy":"手機＋AI PC；小倉可暫代投機部位"},
+            {"symbol":"2317","name":"鴻海（×170）","price":246.5,"target":"持有不攤平","stop":220,"strategy":"Q2 基本面佳；股價落後成本"},
+            {"symbol":"ON","name":"ON Semi（×6）","price":73.00,"target":"10月前變現","stop":65,"strategy":"優於再開日槓桿；10月前出清"},
+            {"symbol":"QCOM","name":"高通（觀察≤300）","price":162.30,"target":"170-190","stop":145,"strategy":"手機＋邊緣 AI；不追 NVDA 當夜"},
         ],
         "C": [
-            {"symbol":"ORCX","name":"2X ORCL（×15）","price":17.55,"action":"本週開盤出清","reason":"-67.5% 日槓桿；複利衰減"},
-            {"symbol":"SPCH","name":"2X SPCX（×5）","price":9.50,"action":"本週開盤出清","reason":"-63.6% 日槓桿"},
-            {"symbol":"ONDL","name":"2X ONDS（×59）","price":6.66,"action":"本週開盤出清","reason":"-34.6% 日槓桿"},
-            {"symbol":"MULL","name":"2X MU（×58）","price":25.81,"action":"本週出清","reason":"-18.3%；改曝險用 SMH"},
-            {"symbol":"SNDU","name":"2X SNDK（×4）","price":36.67,"action":"本週出清","reason":"日槓桿；金額小亦清"},
-            {"symbol":"3481","name":"群創（×2250）","price":58.5,"action":"分批減 30–50%","reason":"倉位過重約 14%；獲利薄"},
-            {"symbol":"SPCX","name":"SpaceX（×12）","price":136.08,"action":"7–8 月優先減碼","reason":"-31.2%；IPO 後高波動"},
-            {"symbol":"2317","name":"鴻海（×170）","price":239,"action":"不攤平；反彈減","reason":"-17.8%"},
+            {"symbol":"ORCX","name":"2X ORCL（×15）","price":22.02,"action":"本週開盤出清","reason":"-59% 日槓桿；複利衰減"},
+            {"symbol":"SPCH","name":"2X SPCX（×5）","price":8.51,"action":"本週開盤出清","reason":"-67% 日槓桿"},
+            {"symbol":"ONDL","name":"2X ONDS（×59）","price":7.19,"action":"本週開盤出清","reason":"-29% 日槓桿"},
+            {"symbol":"MULL","name":"2X MU（×58）","price":20.65,"action":"本週出清","reason":"-35%；改曝險用 SMH"},
+            {"symbol":"SNDU","name":"2X SNDK（×4）","price":20.54,"action":"本週出清","reason":"日槓桿；金額小亦清"},
+            {"symbol":"3481","name":"群創（×2250）","price":46.4,"action":"分批減 30–50%","reason":"倉位過重約 12%；-32%"},
+            {"symbol":"SPCX","name":"SpaceX（×12）","price":136.63,"action":"8–9 月優先減碼","reason":"-31%；IPO 後高波動"},
+            {"symbol":"BB","name":"BlackBerry（×30）","price":7.69,"action":"弱勢或反彈減","reason":"-40%；非主線"},
         ]
     },
 
